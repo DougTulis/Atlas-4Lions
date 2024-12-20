@@ -35,12 +35,28 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
         public void Atualizar(PessoaDTO pessoa)
         {
-            throw new NotImplementedException();
+            using var conexao = new MySqlAdaptadorConexao().ObterConexao();
+            conexao.Open();
+
+            string sql = @" UPDATE pessoa SET Nome = @Nome, Telefone = @Telefone, Email = @Email,  DataAtualizacao = @DataAtualizacao  WHERE Id = @Id";
+
+            using (var comando = new MySqlCommand(sql, conexao))
+            {
+                comando.Parameters.AddWithValue("@Nome", pessoa.Nome);
+                comando.Parameters.AddWithValue("@Telefone", pessoa.Contato);
+                comando.Parameters.AddWithValue("@Email", pessoa.Email);
+                comando.Parameters.AddWithValue("@DataAtualizacao", DateTime.Now);
+                comando.Parameters.AddWithValue("@Id", pessoa.Id);
+            }
         }
 
         public void Deletar(PessoaDTO pessoa)
         {
-            throw new NotImplementedException();
+            using var conexao = new MySqlAdaptadorConexao().ObterConexao();
+            conexao.Open();
+            string sql = $"DELETE FROM pessoa WHERE Id = @id";
+            MySqlCommand cmd = new MySqlCommand(sql, conexao);
+            cmd.Parameters.AddWithValue("@id", pessoa.Id);
         }
 
         public IEnumerable<PessoaDTO> Listar()
@@ -59,7 +75,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 string email = Convert.ToString(dataReader["Email"]);
                 string cpf = Convert.ToString(dataReader["Cpf"]);
                 DateTime nascimento = Convert.ToDateTime(dataReader["Nascimento"]);
-                var pessoa = new PessoaDTO(nome, email, contato, nascimento, cpf) { Id = idPessoa};
+                var pessoa = new PessoaDTO(nome, email, contato, nascimento, cpf) { Id = idPessoa };
                 lista.Add(pessoa);
             }
             return lista;
