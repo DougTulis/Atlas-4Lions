@@ -9,9 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Infra\" />
-    <Folder Include="Aplicacao\" />
-    <Folder Include="Dominio\" />
+    <Folder Include="Aplicacao\DTO\" />
+    <Folder Include="Aplicacao\Interface\" />
+    <Folder Include="Aplicacao\UseCase\" />
+    <Folder Include="Infra\Servicos\" />
+    <Folder Include="Infra\Repositorios\" />
   </ItemGroup>
 
 </Project>
