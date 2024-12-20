@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
+namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface
 {
-    public class PessoaModel
+    public interface ICrud<T>
     {
 
     }
