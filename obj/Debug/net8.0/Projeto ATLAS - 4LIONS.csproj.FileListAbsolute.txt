@@ -1,0 +1,15 @@
+C:\Users\dotul\source\repos\Projeto ATLAS - 4LIONS\Projeto ATLAS - 4LIONS\bin\Debug\net8.0\Projeto ATLAS - 4LIONS.exe
+C:\Users\dotul\source\repos\Projeto ATLAS - 4LIONS\Projeto ATLAS - 4LIONS\bin\Debug\net8.0\Projeto ATLAS - 4LIONS.deps.json
+C:\Users\dotul\source\repos\Projeto ATLAS - 4LIONS\Projeto ATLAS - 4LIONS\bin\Debug\net8.0\Projeto ATLAS - 4LIONS.runtimeconfig.json
+C:\Users\dotul\source\repos\Projeto ATLAS - 4LIONS\Projeto ATLAS - 4LIONS\bin\Debug\net8.0\Projeto ATLAS - 4LIONS.dll
+C:\Users\dotul\source\repos\Projeto ATLAS - 4LIONS\Projeto ATLAS - 4LIONS\bin\Debug\net8.0\Projeto ATLAS - 4LIONS.pdb
+C:\Users\dotul\source\repos\Projeto ATLAS - 4LIONS\Projeto ATLAS - 4LIONS\obj\Debug\net8.0\Projeto ATLAS - 4LIONS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dotul\source\repos\Projeto ATLAS - 4LIONS\Projeto ATLAS - 4LIONS\obj\Debug\net8.0\Projeto ATLAS - 4LIONS.AssemblyInfoInputs.cache
+C:\Users\dotul\source\repos\Projeto ATLAS - 4LIONS\Projeto ATLAS - 4LIONS\obj\Debug\net8.0\Projeto ATLAS - 4LIONS.AssemblyInfo.cs
+C:\Users\dotul\source\repos\Projeto ATLAS - 4LIONS\Projeto ATLAS - 4LIONS\obj\Debug\net8.0\Projeto ATLAS - 4LIONS.csproj.CoreCompileInputs.cache
+C:\Users\dotul\source\repos\Projeto ATLAS - 4LIONS\Projeto ATLAS - 4LIONS\obj\Debug\net8.0\Projeto ATLAS - 4LIONS.sourcelink.json
+C:\Users\dotul\source\repos\Projeto ATLAS - 4LIONS\Projeto ATLAS - 4LIONS\obj\Debug\net8.0\Projeto ATLAS - 4LIONS.dll
+C:\Users\dotul\source\repos\Projeto ATLAS - 4LIONS\Projeto ATLAS - 4LIONS\obj\Debug\net8.0\refint\Projeto ATLAS - 4LIONS.dll
+C:\Users\dotul\source\repos\Projeto ATLAS - 4LIONS\Projeto ATLAS - 4LIONS\obj\Debug\net8.0\Projeto ATLAS - 4LIONS.pdb
+C:\Users\dotul\source\repos\Projeto ATLAS - 4LIONS\Projeto ATLAS - 4LIONS\obj\Debug\net8.0\Projeto ATLAS - 4LIONS.genruntimeconfig.cache
+C:\Users\dotul\source\repos\Projeto ATLAS - 4LIONS\Projeto ATLAS - 4LIONS\obj\Debug\net8.0\ref\Projeto ATLAS - 4LIONS.dll

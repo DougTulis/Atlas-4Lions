@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Projeto ATLAS - 4LIONS/1.0.0": {
+        "runtime": {
+          "Projeto ATLAS - 4LIONS.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Projeto ATLAS - 4LIONS/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
