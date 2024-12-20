@@ -10,8 +10,10 @@
 
   <ItemGroup>
     <Folder Include="Aplicacao\UseCase\" />
-    <Folder Include="Infra\Servicos\" />
-    <Folder Include="Infra\Repositorios\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="8.4.0" />
   </ItemGroup>
 
 </Project>
