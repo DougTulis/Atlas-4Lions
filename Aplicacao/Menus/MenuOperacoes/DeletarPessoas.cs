@@ -11,7 +11,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
 {
     public class DeletarPessoas
     {
-        public static void Exibir()
+        public static void Deletar()
         {
             Console.Clear();
             try

@@ -11,8 +11,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus
     {
         public static void Exibir()
         {
+            Console.Clear();
             LogoTipo.Exibir();
-
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("1. ");
             Console.ForegroundColor = ConsoleColor.White;
@@ -21,6 +21,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus
             Console.Write("2. ");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Gerenciamento de Veículos");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("3. ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Gerenciamento de Locações");
             Console.Write("Escolha uma opção: ");
             int escolha = int.Parse(Console.ReadLine());
             ExecutarEscolha(escolha);
@@ -35,6 +39,9 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus
 
                 case 2:
                     SubMenuVeiculos.Exibir();
+                    break;
+                case 3:
+                    SubMenuLocacoes.Exibir();
                     break;
 
             }

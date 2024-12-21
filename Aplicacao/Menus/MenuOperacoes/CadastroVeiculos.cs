@@ -45,10 +45,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
                 var automovelRepositorio = new AutomovelRepositorio();
                 var useCase = new CadastrarVeiculoUseCase(automovelRepositorio);
                 useCase.Executar(automovel);
-                Console.WriteLine("Veículo CadastradO com sucesso... Voltando ao menu principal");
+                Console.WriteLine("Veículo Cadastrado com sucesso... Voltando ao menu anterior");
                 Thread.Sleep(2500);
                 Console.Clear();
-                MenuInicial.Exibir();
+                SubMenuVeiculos.Exibir();
             }
             catch (MySqlException ex) { Console.WriteLine(ex.StackTrace); }
             catch (FormatException ex) { Console.WriteLine(ex.StackTrace); }

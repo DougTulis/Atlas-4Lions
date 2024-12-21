@@ -28,8 +28,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus
             Console.Write("3. ");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Excluir Pessoas");
-
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("0. ");
             Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Voltar ao menu inicial");
             Console.WriteLine("Escolha uma opção: ");
             int Escolha = int.Parse(Console.ReadLine());
             ExecutarEscolha(Escolha);
@@ -46,7 +48,11 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus
                     HistoricoPessoas.Exibir();
                     break;
                 case 3:
-                    DeletarPessoas.Exibir();
+                    DeletarPessoas.Deletar();
+                    break;
+
+                case 0:
+                    MenuInicial.Exibir();
                     break;
             }
         }
