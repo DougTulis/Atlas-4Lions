@@ -1,4 +1,5 @@
-﻿using Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes;
+﻿using Projeto_ATLAS___4LIONS.Aplicacao.Menus;
+using Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes;
 
 namespace Projeto_ATLAS___4LIONS
 {
@@ -6,8 +7,7 @@ namespace Projeto_ATLAS___4LIONS
     {
         static void Main(string[] args)
         {
-            var rr = new CadastroPessoa();
-            rr.Cadastrar();
+            MenuInicial.Exibir();
         }
     }
 }

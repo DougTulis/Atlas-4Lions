@@ -18,7 +18,6 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
         {
             using var conexao = new MySqlAdaptadorConexao().ObterConexao();
             conexao.Open();
-            Console.WriteLine(conexao.State);
             string sql = @"
                         INSERT INTO pessoa (Nome, Contato, Email, DataCriacao, DataNascimento, Cpf)
                         VALUES (@Nome, @Contato, @Email, @DataCriacao, @DataNascimento, @Cpf)";
@@ -79,7 +78,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 string email = Convert.ToString(dataReader["Email"]);
                 string cpf = Convert.ToString(dataReader["Cpf"]);
                 DateTime nascimento = Convert.ToDateTime(dataReader["Nascimento"]);
-                var pessoa = new PessoaDTO(nome, email, contato, nascimento, cpf) { Id = idPessoa };
+                var pessoa = new PessoaDTO(nome, email, contato, nascimento, cpf) { Id = idPessoa};
                 lista.Add(pessoa);
             }
             return lista;

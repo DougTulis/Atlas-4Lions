@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Projeto ATLAS - 4LIONS")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a10c3d37b3564ce317ec039e977eda525d181a17")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+20021c6fcabcedfb9d94f4fcf9d6c005277d1d78")]
 [assembly: System.Reflection.AssemblyProductAttribute("Projeto ATLAS - 4LIONS")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Projeto ATLAS - 4LIONS")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

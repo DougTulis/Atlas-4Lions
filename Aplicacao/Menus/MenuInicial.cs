@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,17 +9,25 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus
 {
     public class MenuInicial
     {
-        public void Exibir()
+        public static void Exibir()
         {
             LogoTipo.Exibir();
 
-            Console.WriteLine("1. Cadastro de Pessoas");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("1. ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Cadastro de Pessoas");
+            Console.Write("Escolha uma opção: ");
+            int escolha = int.Parse(Console.ReadLine());
+            ExecutarEscolha(escolha);
         }
-        public void ExecutarEscolha(int escolha)
+        static void ExecutarEscolha(int escolha)
         {
             switch (escolha)
             {
-            
+                case 1:
+                    CadastroPessoa.Cadastrar();
+                    break;
             }
         }
 

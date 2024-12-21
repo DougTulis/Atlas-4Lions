@@ -19,11 +19,11 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 
         public void Executar(PessoaDTO _pessoa)
         {
-            try
+
+            if (_pessoa.Validacao())
             {
                 pessoaRepositorio.Adicionar(_pessoa);
             }
-            catch (MySqlException ex) { Console.WriteLine(ex.StackTrace); }
         }
     }
 }
