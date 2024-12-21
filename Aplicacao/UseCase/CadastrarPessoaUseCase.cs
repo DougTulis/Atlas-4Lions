@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Projeto_ATLAS___4LIONS.Aplicacao
+namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 {
     public class CadastrarPessoaUseCase
     {
@@ -22,7 +22,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao
             try
             {
                 pessoaRepositorio.Adicionar(_pessoa);
-            }catch(MySqlException ex) { Console.WriteLine(ex.StackTrace); }
+            }
+            catch (MySqlException ex) { Console.WriteLine(ex.StackTrace); }
         }
     }
 }

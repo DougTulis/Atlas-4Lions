@@ -1,4 +1,5 @@
-﻿using Projeto_ATLAS___4LIONS.Dominio.Entidades;
+﻿using Projeto_ATLAS___4LIONS.Aplicacao.Validacoes;
+using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,15 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public string ExibirDadosBreves()
         {
             return "ID: " + Id + ". " + Nome + ", " + " CPF: " + Cpf; 
+        }
+
+        public override bool Validacao()
+        {
+           if(NomeValidacoes.IsNomeValido(Nome) || )
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
