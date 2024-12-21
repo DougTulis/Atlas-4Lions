@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
 {
-    public class DeletarPessoa
+    public class DeletarPessoas
     {
         public static void Exibir()
         {

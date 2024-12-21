@@ -28,6 +28,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus
             Console.Write("3. ");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Excluir Pessoas");
+
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Escolha uma opção: ");
             int Escolha = int.Parse(Console.ReadLine());
@@ -39,13 +40,13 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus
             switch (escolha)
             {
                 case 1:
-                    CadastroPessoa.Cadastrar();
+                    CadastroPessoas.Cadastrar();
                     break;
                 case 2:
                     HistoricoPessoas.Exibir();
                     break;
                 case 3:
-                    DeletarPessoa.Exibir();
+                    DeletarPessoas.Exibir();
                     break;
             }
         }

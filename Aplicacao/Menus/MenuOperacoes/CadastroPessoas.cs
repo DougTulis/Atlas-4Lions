@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
 {
-    public class CadastroPessoa
+    public class CadastroPessoas
     {
         public static void Cadastrar()
         {
