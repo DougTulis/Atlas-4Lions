@@ -74,14 +74,22 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             {
                 int idPessoa = Convert.ToInt32(dataReader["Id"]);
                 string nome = Convert.ToString(dataReader["Nome"]);
-                string contato = Convert.ToString(dataReader["Telefone"]);
+                string contato = Convert.ToString(dataReader["Contato"]);
                 string email = Convert.ToString(dataReader["Email"]);
                 string cpf = Convert.ToString(dataReader["Cpf"]);
-                DateTime nascimento = Convert.ToDateTime(dataReader["Nascimento"]);
-                var pessoa = new PessoaDTO(nome, email, contato, nascimento, cpf) { Id = idPessoa};
+                DateTime nascimento = Convert.ToDateTime(dataReader["DataNascimento"]);
+                DateTime dataCriacao = Convert.ToDateTime(dataReader["DataCriacao"]);
+                var pessoa = new PessoaDTO(nome, email, contato, nascimento, cpf) { Id = idPessoa, DataCriacao = dataCriacao};
                 lista.Add(pessoa);
             }
             return lista;
+        }
+
+        public PessoaDTO RecuperarPor(Func<PessoaDTO, bool> filtro)
+        {
+            IEnumerable<PessoaDTO> pessoaLista = Listar();
+
+            return pessoaLista.FirstOrDefault(filtro);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
 
         public IReadOnlyCollection<Notificacao> Notificacoes => listaNotificacoes;
         public int Id { get; set; }
-        public DateTime DataCriacao { get; private set; } = DateTime.Now;
+        public DateTime DataCriacao { get;  set; } = DateTime.Now;
 
         protected void SetNotificacoesLista(List<Notificacao> notificacoes)
         {

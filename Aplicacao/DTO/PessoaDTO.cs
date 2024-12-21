@@ -28,17 +28,18 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
 
         public override string? ToString()
         {
-            return "Id: " + Nome + "\n" +
+            return "Id: " + Id + "\n" +
                 "Nome: " + Nome + "\n" +
                 "Contato: " + Contato + "\n" +
                 "Data Nascimento: " + DataNascimento.ToString("dd/MM/yyyy") + "\n" +
                 "Email: " +
-                "Cpf: " + Cpf + "\n";
+                "Cpf: " + Cpf + "\n" +
+                "Adicionado em: " + DataCriacao + "\n";
         }
 
         public string ExibirDadosBreves()
         {
-            return "ID: " + Id + ". " + Nome + ", " + " CPF: " + Cpf;
+            return "ID: " + Id + ", " + Nome + ", " + " CPF: " + Cpf;
         }
 
         public override bool Validacao()
@@ -46,8 +47,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
             var contratos = new ContratoValidacoes<PessoaDTO>()
                 .NomeIsOk(this.Nome, 3, "Nome inválido. Deve conter pelo menos 3 caracteres.", "Nome")
                 .EmailIsOk(this.Email, 2, "Email inválido. Insira um endereço de email válido.", "Email")
-                .ContatoIsOk(this.Contato, 2, "\"Contato inválido. Insira um número com pelo menos 10 dígitos.", "Contato")
-                .DataNascIsOk(this.DataNascimento, "\"Data de nascimento inválida. Não pode ser no futuro.", "DataNascimento")
+                .ContatoIsOk(this.Contato, 2, "\"Contato inválido. informa um número com pelo menos 10 dígitos.", "Contato")
+                .DataNascIsOk(this.DataNascimento, 18,"\"Data de nascimento inválida, a pessoa tem que ser maior de idade", "DataNascimento")
                 .CpfIsOk(this.Cpf, 11, "\"CPF inválido. Insira um CPF com 11 dígitos","Cpf");
             
             if (!contratos.IsValid())

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface
         public void Adicionar(T objeto);
         public void Atualizar(T objeto);
         public void Deletar(T objeto);
+        public T? RecuperarPor(Func<T, bool> resultado);
 
     }
 }

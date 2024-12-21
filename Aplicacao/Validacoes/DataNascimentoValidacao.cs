@@ -1,4 +1,5 @@
-﻿using Projeto_ATLAS___4LIONS.Aplicacao.Notificacoes;
+﻿using Google.Protobuf.WellKnownTypes;
+using Projeto_ATLAS___4LIONS.Aplicacao.Notificacoes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,9 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Validacoes
 {
     public partial class ContratoValidacoes<T>
     {
-        public ContratoValidacoes<T> DataNascIsOk(DateTime dateTime, string mensagem, string propriedadeNome)
+        public ContratoValidacoes<T> DataNascIsOk(DateTime nascimento, int minAno, string mensagem, string propriedadeNome)
         {
-            if (dateTime > DateTime.Now)
+            if (nascimento > DateTime.Now || (DateTime.Now.Year - nascimento.Year) < minAno)
             {
                 AddNotification(new Notificacao(mensagem, propriedadeNome));
             }

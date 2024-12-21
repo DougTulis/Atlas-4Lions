@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Menus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,13 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             if (_pessoa.Validacao())
             {
                 pessoaRepositorio.Adicionar(_pessoa);
+            }
+            else
+            {
+                Console.WriteLine("Tente novamente... Voltando ao menu inicial");
+                Thread.Sleep(2000);
+                Console.Clear();
+                MenuInicial.Exibir();
             }
         }
     }

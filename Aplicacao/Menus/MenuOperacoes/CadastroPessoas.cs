@@ -21,11 +21,11 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
                 string nome = Console.ReadLine();
                 Console.Write("Email: ");
                 string email = Console.ReadLine();
-                Console.Write("Contato: ");
+                Console.Write("Contato (Máximo 10 digitos): ");
                 string contato = Console.ReadLine();
-                Console.Write("Data de nascimento: ");
+                Console.Write("Data de nascimento (dd/MM/yyyy) ");
                 DateTime nascimento = DateTime.Parse(Console.ReadLine());
-                Console.Write("Cpf: ");
+                Console.Write("Cpf: (Máximo 11 dígitos): ");
                 string cpf = Console.ReadLine();
                 var pessoa = new PessoaDTO(nome, email, contato, nascimento, cpf);
                 var pessoaRepositorio = new PessoaRepositorio();

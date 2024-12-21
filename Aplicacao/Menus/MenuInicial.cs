@@ -16,7 +16,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("1. ");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Cadastro de Pessoas");
+            Console.WriteLine("Gerenciamento de Pessoas");
             Console.Write("Escolha uma opção: ");
             int escolha = int.Parse(Console.ReadLine());
             ExecutarEscolha(escolha);
@@ -26,9 +26,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus
             switch (escolha)
             {
                 case 1:
-                    CadastroPessoa.Cadastrar();
+                    SubMenuPessoas.Exibir();
                     break;
             }
+             
         }
 
     }
