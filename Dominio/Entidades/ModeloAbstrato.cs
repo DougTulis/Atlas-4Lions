@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
 {
-    public class ModeloAbstrato
+    public abstract class ModeloAbstrato
     {
 
         public int Id { get; set; }
-        public DateTime DataCriacao { get; set; }
+        public DateTime DataCriacao { get; set; } = DateTime.Now;
     }
 }

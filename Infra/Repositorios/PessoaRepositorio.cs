@@ -11,25 +11,27 @@ using System.Threading.Tasks;
 
 namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 {
-    public class PessoaRespositorio : ICrud<PessoaDTO>
+    public class PessoaRepositorio : ICrud<PessoaDTO>
 
     {
         public void Adicionar(PessoaDTO pessoa)
         {
             using var conexao = new MySqlAdaptadorConexao().ObterConexao();
             conexao.Open();
+            Console.WriteLine(conexao.State);
             string sql = @"
-                        INSERT INTO pessoa (Nome, Telefone, Email, DataCriacao, DataAtualizacao)
-                        VALUES (@Nome, @Telefone, @Email, @DataCriacao, @DataAtualizacao)";
+                        INSERT INTO pessoa (Nome, Contato, Email, DataCriacao, DataNascimento, Cpf)
+                        VALUES (@Nome, @Contato, @Email, @DataCriacao, @DataNascimento, @Cpf)";
 
-            using (var comando = new MySqlCommand(sql, conexao))
+            using (var cmd = new MySqlCommand(sql, conexao))
             {
-                comando.Parameters.AddWithValue("@Nome", pessoa.Nome);
-                comando.Parameters.AddWithValue("@Telefone", pessoa.Contato);
-                comando.Parameters.AddWithValue("@Email", pessoa.Email);
-                comando.Parameters.AddWithValue("@DataCriacao", DateTime.Now);
-                comando.Parameters.AddWithValue("@DataAtualizacao", DateTime.Now);
-                comando.ExecuteNonQuery();
+                cmd.Parameters.AddWithValue("@Nome", pessoa.Nome);
+                cmd.Parameters.AddWithValue("@Contato", pessoa.Contato);
+                cmd.Parameters.AddWithValue("@Email", pessoa.Email);
+                cmd.Parameters.AddWithValue("@DataCriacao", pessoa.DataCriacao);
+                cmd.Parameters.AddWithValue("@DataNascimento", pessoa.DataNascimento);
+                cmd.Parameters.AddWithValue("@Cpf", pessoa.Cpf);
+                cmd.ExecuteNonQuery();
             }
         }
 
@@ -40,13 +42,14 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
             string sql = @" UPDATE pessoa SET Nome = @Nome, Telefone = @Telefone, Email = @Email,  DataAtualizacao = @DataAtualizacao  WHERE Id = @Id";
 
-            using (var comando = new MySqlCommand(sql, conexao))
+            using (var cmd = new MySqlCommand(sql, conexao))
             {
-                comando.Parameters.AddWithValue("@Nome", pessoa.Nome);
-                comando.Parameters.AddWithValue("@Telefone", pessoa.Contato);
-                comando.Parameters.AddWithValue("@Email", pessoa.Email);
-                comando.Parameters.AddWithValue("@DataAtualizacao", DateTime.Now);
-                comando.Parameters.AddWithValue("@Id", pessoa.Id);
+                cmd.Parameters.AddWithValue("@Nome", pessoa.Nome);
+                cmd.Parameters.AddWithValue("@Telefone", pessoa.Contato);
+                cmd.Parameters.AddWithValue("@Email", pessoa.Email);
+                cmd.Parameters.AddWithValue("@DataAtualizacao", DateTime.Now);
+                cmd.Parameters.AddWithValue("@Id", pessoa.Id);
+                cmd.ExecuteNonQuery();
             }
         }
 
@@ -57,6 +60,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             string sql = $"DELETE FROM pessoa WHERE Id = @id";
             MySqlCommand cmd = new MySqlCommand(sql, conexao);
             cmd.Parameters.AddWithValue("@id", pessoa.Id);
+            cmd.ExecuteNonQuery();
         }
 
         public IEnumerable<PessoaDTO> Listar()
