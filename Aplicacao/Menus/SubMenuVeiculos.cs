@@ -34,8 +34,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Voltar ao menu inicial");
             Console.WriteLine("Escolha uma opção: ");
-            int Escolha = int.Parse(Console.ReadLine());
-            ExecutarEscolha(Escolha);
+            int escolha = int.Parse(Console.ReadLine());
+            ExecutarEscolha(escolha);
 
         }
         static void ExecutarEscolha(int escolha)

@@ -19,7 +19,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         public void Executar(AutomovelDTO automovelDTO)
         {
 
-            if (automovelDTO.ValidarParaDelecao())
+            if (automovelDTO.ValidarPraDeletar())
             {
                 automovelRepositorio.Deletar(automovelDTO);
             }

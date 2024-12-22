@@ -50,7 +50,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus
                 case 3:
                     DeletarPessoas.Deletar();
                     break;
-
                 case 0:
                     MenuInicial.Exibir();
                     break;

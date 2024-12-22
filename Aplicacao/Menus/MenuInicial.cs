@@ -36,7 +36,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus
                 case 1:
                     SubMenuPessoas.Exibir();
                     break;
-
                 case 2:
                     SubMenuVeiculos.Exibir();
                     break;

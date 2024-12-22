@@ -1,6 +1,7 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Validacoes;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
+using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,16 +17,29 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public string Contato { get; set; }
         public DateTime DataNascimento { get; set; }
         public string Cpf { get; set; }
+        public CnhValida CnhValida { get; set; }
+        public ETipoPessoa TipoPessoa { get; set; }
+
 
         public PessoaDTO(string nome, string email, string contato, DateTime dataNascimento, string cpf)
         {
+            TipoPessoa = ETipoPessoa.LOCATARIO;
             Nome = nome;
             Email = email;
             Contato = contato;
             DataNascimento = dataNascimento;
             Cpf = cpf;
         }
-
+        public PessoaDTO(PessoaDTO pessoa, CnhValidaDTO cnhValida) // sobrecarga para definir a cnh em pessoa
+        {
+            this.Nome = pessoa.Nome;
+            this.Email = pessoa.Email;
+            this.Contato = pessoa.Contato;
+            this.DataNascimento = pessoa.DataNascimento;
+            this.Cpf = pessoa.Cpf;
+            this.CnhValida = pessoa.CnhValida;
+            TipoPessoa = ETipoPessoa.CONDUTOR;
+        }
         public override string? ToString()
         {
             return "Id: " + Id + "\n" +
@@ -49,7 +63,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
                 .EmailIsOk(this.Email, 2, "Email inválido. Insira um endereço de email válido.", "Email")
                 .ContatoIsOk(this.Contato, 2, "\"Contato inválido. informa um número com pelo menos 10 dígitos.", "Contato")
                 .DataNascIsOk(this.DataNascimento, 18,"\"Data de nascimento inválida, a pessoa tem que ser maior de idade", "DataNascimento")
-                .CpfIsOk(this.Cpf, 11, "\"CPF inválido. Insira um CPF com 11 dígitos","Cpf");
+                .CpfIsOk(this.Cpf, 11, "CPF inválido. Insira um CPF com 11 dígitos","Cpf");
             
             if (!contratos.IsValid())
             {

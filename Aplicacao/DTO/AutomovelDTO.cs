@@ -15,7 +15,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public string Modelo { get; private set; }
         public string Placa { get; private set; }
         public string Cor { get; private set; }
-        public EStatusVeiculo Status { get; private set; }
+        public EStatusVeiculo Status { get;  set; }
         public decimal ValorDiaria { get; private set; }
         public string? Chassi { get; private set; }
         public string? Renavam { get; private set; }
@@ -34,13 +34,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
             Oleokm = oleokm;
             PastilhaFreioKm = pastilhaFreioKm;
         }
-
-
         public override bool Validacao()
         {
             var contratos = new ContratoValidacoes<AutomovelDTO>()
                 .ModeloIsOk(this.Modelo, "Insira um modelo válido", "Modelo");
-
 
             if (!contratos.IsValid())
             {
@@ -54,7 +51,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
             return true;
         }
 
-        public bool ValidarParaDelecao()
+        public bool ValidarPraDeletar()
         {
             var contratos = new ContratoValidacoes<AutomovelDTO>().isCarroALugado(this.Status, "O automóvel está alugado e não pode ser deletado.", "Status");
 
@@ -73,21 +70,21 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public override string ToString()
         {
             return $@"
-Id: {Id}
-Modelo: {Modelo}
-Placa: {Placa}
-Cor: {Cor}
-Status: {Status}
-Valor Diária: {ValorDiaria:C}
-Chassi: {(string.IsNullOrWhiteSpace(Chassi) ? "Não informado" : Chassi)}
-Renavam: {(string.IsNullOrWhiteSpace(Renavam) ? "Não informado" : Renavam)}
-Quilometragem do Óleo: {(Oleokm.HasValue ? Oleokm + " km" : "Não informado")}
-Quilometragem das Pastilhas de Freio: {(PastilhaFreioKm.HasValue ? PastilhaFreioKm + " km" : "Não informado")}
-Adicionado em: {DataCriacao}";
+        Id: {Id}
+        Modelo: {Modelo}
+        Placa: {Placa}
+        Cor: {Cor}
+        Status: {Status}
+        Valor Diária: {ValorDiaria:C}
+        Chassi: {(string.IsNullOrWhiteSpace(Chassi) ? "Não informado" : Chassi)}
+        Renavam: {(string.IsNullOrWhiteSpace(Renavam) ? "Não informado" : Renavam)}
+        Quilometragem do Óleo: {(Oleokm.HasValue ? Oleokm + " km" : "Não informado")}
+        Quilometragem das Pastilhas de Freio: {(PastilhaFreioKm.HasValue ? PastilhaFreioKm + " km" : "Não informado")}
+        Adicionado em: {DataCriacao}"; //condicao ternaria..
         }
         public string ExibirDadosBreves()
         {
-            return $"Id: {Id} | Modelo: {Modelo} | Placa: {Placa} | Valor Diária: {ValorDiaria:C}";
+            return $"Id: {Id} | Modelo: {Modelo} | Placa: {Placa} | Valor Diária: {ValorDiaria}";
         }
 
     }
