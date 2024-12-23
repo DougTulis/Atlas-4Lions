@@ -8,23 +8,29 @@ using System.Threading.Tasks;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
 {
-    public class PendenciaFinanceiraDTO
+    public class PendenciaFinanceiraDTO : ModeloAbstrato
     {
         public decimal ValorTotal { get; set; }
-        public IEnumerable<Parcela> PendenciaFinanceira { get; set; } = new List<Parcela>();
+        public int LocacaoId { get; set; }
+        public IEnumerable<Parcela> Parcelas { get; set; } = new List<Parcela>();
 
         public override string? ToString()
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("Valor Total:" + ValorTotal.ToString("F2", CultureInfo.InvariantCulture));
             sb.AppendLine("Parcelas: ");
-            foreach (var item in PendenciaFinanceira)
+            foreach (var item in Parcelas)
             {
                 sb.AppendLine("Valor da parcela: " + item.ValorParcela);
                 sb.AppendLine("Data Vencimento: " + item.DataVencimento);
             }
             return sb.ToString();
 
+        }
+
+        public override bool Validacao()
+        {
+            throw new NotImplementedException();
         }
     }
 }

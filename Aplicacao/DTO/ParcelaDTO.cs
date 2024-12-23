@@ -12,12 +12,16 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public decimal ValorParcela { get; set; }
         public DateTime DataVencimento { get; set; }
 
+        public int PendenciaFinanceiraId { get; set; }
 
-        public ParcelaDTO(decimal valorParcela, DateTime dataVencimento)
+        public ParcelaDTO(decimal valorParcela, DateTime dataVencimento,int PendenciaFinanceiraId)
         {
+            this.PendenciaFinanceiraId = PendenciaFinanceiraId;
             ValorParcela = valorParcela;
             DataVencimento = dataVencimento;
         }
+
+        public ParcelaDTO() { }
         public override bool Validacao()
         {
             throw new NotImplementedException();

@@ -14,12 +14,12 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public DateTime Saida { get; set; }
         public DateTime Retorno { get; set; }
         public ETipoLocacao TipoLocacao { get; set; }
-        public Guid TransacaoID { get; set; } 
-        public decimal ValorTotal { get; set; }
-        public int LocatarioId { get; set; } 
-        public int CondutorId { get; set; }  
-        public int AutomovelId { get; set; } 
-        public int PagamentoId { get; set; }
+        public Guid TransacaoID { get; private set; } 
+        public decimal ValorTotal { get; private set; }
+        public int LocatarioId { get; private set; }
+        public int CondutorId { get; private set; }  
+        public int AutomovelId { get; private set; } 
+        public int PagamentoId { get; private set; }
         public LocacaoDTO(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, Guid transacaoID, decimal valorTotal, int locatarioId, int condutorId, int automovelId, int pagamentoId)
         {
             

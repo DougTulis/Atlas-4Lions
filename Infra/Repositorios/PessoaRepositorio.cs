@@ -33,7 +33,6 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 cmd.ExecuteNonQuery();
             }
         }
-
         public void Atualizar(PessoaDTO pessoa)
         {
             using var conexao = new MySqlAdaptadorConexao().ObterConexao();

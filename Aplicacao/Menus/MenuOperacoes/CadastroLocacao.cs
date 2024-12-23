@@ -22,6 +22,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
             var automovelRepositorio = new AutomovelRepositorio();
             var locacaorepositorio = new LocacaoRepositorio();
             var pagamentoRepositorio = new PagamentoRepositorio();
+            var parcelaRepositorio = new ParcelaRepositorio();
+            var pendenciaRepositorio = new PendenciaFinanceiraRepositorio();
             var useCaseListarPessoa = new ListarPessoaUseCase(pessoaRepositorio);
             var useCaseListarAutomovel = new ListarAutomovelUseCase(automovelRepositorio);
             var useCaseAdicionarLocacao = new CadastrarLocacaoUseCase(locacaorepositorio);
@@ -51,42 +53,26 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
             Console.Write("Selecione o ID do automovel que será locado:  ");
             int escolhaAutomovel = int.Parse(Console.ReadLine());
             var automovel = automovelRepositorio.RecuperarPor(a => a.Id == escolhaAutomovel);
-
             automovel.Status = EStatusVeiculo.ALUGADO;
 
             var tipoLocacao = DefinirContratoLocacao.Definir();
-
-            Console.Clear();
+            var especie = MenuEspecie.Exibir();
+            var parcelas = MenuParcelas.Exibir(tipoLocacao, especie);
 
             Console.Write("Informe a data saída (dd/MM/yyyy): ");
             DateTime saida = DateTime.Parse(Console.ReadLine());
             Console.Write("Informe a data retorno (dd/MM/yyyy): ");
             DateTime retorno = DateTime.Parse(Console.ReadLine());
-            Console.Clear();
-
-            Console.WriteLine("1. PIX");
-            Console.WriteLine("2. DINHEIRO");
-            Console.WriteLine("3. DEBITO");
-            Console.WriteLine("4. CRÉDITO ");
-            Console.Write("Selecione o método de pagamento: ");
-            int escolha = int.Parse(Console.ReadLine());
-            EEspecie especie = (EEspecie)escolha;
-            short parcelas;
-            if (especie == EEspecie.CREDITO)
-            {
-                Console.Write("Parcelas: ");
-                parcelas = short.Parse(Console.ReadLine());
-            }
-            decimal valorTotal = CalcularPrecoServico.Calcular(tipoLocacao, automovel.ValorDiaria);
+            decimal valorTotal = CalcularPrecoServico.CalcularPreco(tipoLocacao, automovel.ValorDiaria);
             Console.WriteLine(valorTotal);
             var pagamento = new PagamentoDTO(especie, valorTotal, DateTime.Now);
             useCasePersistirPag.Executar(pagamento);
-
             var locacao = new LocacaoDTO(saida, retorno, tipoLocacao, Guid.NewGuid(), valorTotal, locatario.Id, condutor.Id, automovel.Id, pagamento.Id);
-            
-
+            var useCasePersistirPendFin = new PersistirPendenciaFinanceiraUseCase(pendenciaRepositorio, parcelaRepositorio,locacao);
+            var pendfin = LançarPendenciaFinanceira.GerarPendencia(valorTotal,parcelas,saida,tipoLocacao,locacao);
             useCaseAdicionarLocacao.Executar(locacao);
-            Console.WriteLine("Persistido com sucesso!");
+            pendfin.LocacaoId = locacao.Id;
+            useCasePersistirPendFin.Executar(pendfin);
         }
     }
 }

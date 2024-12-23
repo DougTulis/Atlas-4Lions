@@ -36,6 +36,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 cmd.Parameters.AddWithValue("@PagamentoId", objeto.PagamentoId);
                 cmd.Parameters.AddWithValue("@DataCriacao", objeto.DataCriacao);
                 cmd.ExecuteNonQuery();
+                objeto.Id = (int)cmd.LastInsertedId;
             }
         }
 

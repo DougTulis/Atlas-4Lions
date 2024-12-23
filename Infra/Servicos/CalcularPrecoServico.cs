@@ -9,7 +9,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Servicos
 {
     public class CalcularPrecoServico
     {
-        public static decimal Calcular(ETipoLocacao tipoLocacao, decimal valorDiaria)
+        public static decimal CalcularPreco(ETipoLocacao tipoLocacao, decimal valorDiaria)
         {
             switch (tipoLocacao)
             {
@@ -30,6 +30,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Servicos
                 default:
                     throw new ArgumentException("Tipo de locação invalido", nameof(tipoLocacao));
             }
+
         }
     }
 }

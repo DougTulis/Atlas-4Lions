@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
 {
-    public class Parcela
+    public class Parcela : ModeloAbstrato
     {
         public decimal ValorParcela { get; set; }
         public DateTime DataVencimento { get; set; }
 
+        public override bool Validacao()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
