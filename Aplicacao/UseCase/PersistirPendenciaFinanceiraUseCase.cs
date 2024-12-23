@@ -31,9 +31,10 @@ public class PersistirPendenciaFinanceiraUseCase
 
         foreach (var parcela in pendencia.Parcelas)
         {
-            var parcelaDto = new ParcelaDTO(parcela.ValorParcela, parcela.DataVencimento,locacao.Id)
+            var parcelaDto = new ParcelaDTO(parcela.ValorParcela, parcela.DataVencimento)
             {
-                DataCriacao = parcela.DataCriacao
+                DataCriacao = parcela.DataCriacao,
+                PendenciaFinanceiraId = parcela.Id
             };
 
             parcelaRepositorio.Adicionar(parcelaDto);

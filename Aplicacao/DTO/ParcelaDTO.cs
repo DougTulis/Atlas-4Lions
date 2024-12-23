@@ -14,9 +14,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
 
         public int PendenciaFinanceiraId { get; set; }
 
-        public ParcelaDTO(decimal valorParcela, DateTime dataVencimento,int PendenciaFinanceiraId)
+        public ParcelaDTO(decimal valorParcela, DateTime dataVencimento)
         {
-            this.PendenciaFinanceiraId = PendenciaFinanceiraId;
             ValorParcela = valorParcela;
             DataVencimento = dataVencimento;
         }
