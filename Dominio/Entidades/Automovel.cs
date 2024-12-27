@@ -10,17 +10,21 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
 {
     public class Automovel : ModeloAbstrato
     {
-        public string Modelo { get; private set; }
-        public string Placa { get; private set; }
-        public string Cor { get; private  set; }
-        public EStatusVeiculo Status { get; private set; }
-        public decimal ValorDiaria { get; private set; }
-        public string? Chassi { get; private set; }
-        public string? Renavam { get; private set; }
-        public int? Oleokm { get; private set; }
-        public int? PastilhaFreioKm { get; private set; }
-        public int? CorreiaDentadaKm { get; private set; }
-        public int? KmAtual { get; private set; }
+        public string Modelo { get;  set; }
+        public string Placa { get;  set; }
+        public string Cor { get;   set; }
+        public EStatusVeiculo Status { get;  set; }
+        public decimal ValorDiaria { get;  set; }
+        public string? Chassi { get;  set; }
+        public string? Renavam { get;  set; }
+        public int? Oleokm { get;  set; }
+        public int? PastilhaFreioKm { get;  set; }
+        public int? CorreiaDentadaKm { get;  set; }
+        public int? KmAtual { get;  set; }
+
+        public Automovel()
+        {
+        }
 
         public override bool Validacao()
         {

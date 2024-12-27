@@ -16,8 +16,11 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
     {
         public void Adicionar(LocacaoDTO objeto)
         {
+
             using var conexao = new MySqlAdaptadorConexao().ObterConexao();
             conexao.Open();
+
+
             string sql = @"
                         INSERT INTO locacao (Saida, Retorno, TipoLocacao, TransacaoID, ValorTotal, LocatarioId,CondutorId,AutomovelId,PagamentoId, DataCriacao)
                         VALUES (@Saida, @Retorno, @TipoLocacao, @TransacaoID, @ValorTotal, @LocatarioId,@CondutorId, @AutomovelId,@PagamentoId, @DataCriacao)"

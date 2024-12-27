@@ -21,6 +21,9 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         public CnhValida CnhValida { get; set; }
         public ETipoPessoa TipoPessoa { get; set; }
 
+        public Pessoa()
+        {
+        }
 
         public Pessoa(string nome, string email, string contato, DateTime dataNascimento, string cpf)
         {

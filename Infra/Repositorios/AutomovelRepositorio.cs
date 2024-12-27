@@ -14,27 +14,43 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 {
     public class AutomovelRepositorio : ICrud<AutomovelDTO>
     {
-        public void Adicionar(AutomovelDTO automovelDTO)
+        public void Adicionar(AutomovelDTO automovelDto)
         {
             using var conexao = new MySqlAdaptadorConexao().ObterConexao();
             conexao.Open();
+
+
+            var automovel = new Automovel
+            {
+                Modelo = automovelDto.Modelo,
+                Placa = automovelDto.Placa,
+                Cor = automovelDto.Cor,
+                Status = automovelDto.Status,
+                ValorDiaria = automovelDto.ValorDiaria,
+                Chassi = automovelDto.Chassi,
+                Renavam = automovelDto.Renavam,
+                Oleokm = automovelDto.Oleokm,
+                DataCriacao = automovelDto.DataCriacao,
+                PastilhaFreioKm = automovelDto.PastilhaFreioKm
+
+            };
+
             string sql = @"
                         INSERT INTO automovel (Modelo, Placa, Cor, Status, ValorDiaria, Chassi,Renavam,OleoKm,DataCriacao, PastilhaFreioKm)
                         VALUES (@Modelo, @Placa, @Cor, @Status, @ValorDiaria, @Chassi, @Renavam,@OleoKm, @DataCriacao, @PastilhaFreioKm)"
             ;
-
             using (var cmd = new MySqlCommand(sql, conexao))
             {
-                cmd.Parameters.AddWithValue("@Modelo", automovelDTO.Modelo);
-                cmd.Parameters.AddWithValue("@Placa", automovelDTO.Placa);
-                cmd.Parameters.AddWithValue("@Cor", automovelDTO.Cor);
-                cmd.Parameters.AddWithValue("@Status", automovelDTO.Status);
-                cmd.Parameters.AddWithValue("@ValorDiaria", automovelDTO.ValorDiaria);
-                cmd.Parameters.AddWithValue("@Chassi", automovelDTO.Chassi);
-                cmd.Parameters.AddWithValue("@Renavam", automovelDTO.Renavam);
-                cmd.Parameters.AddWithValue("@OleoKm", automovelDTO.Oleokm);
-                cmd.Parameters.AddWithValue("@DataCriacao", automovelDTO.DataCriacao);
-                cmd.Parameters.AddWithValue("@PastilhaFreioKm", automovelDTO.PastilhaFreioKm);
+                cmd.Parameters.AddWithValue("@Modelo", automovel.Modelo);
+                cmd.Parameters.AddWithValue("@Placa", automovel.Placa);
+                cmd.Parameters.AddWithValue("@Cor", automovel.Cor);
+                cmd.Parameters.AddWithValue("@Status", automovel.Status);
+                cmd.Parameters.AddWithValue("@ValorDiaria", automovel.ValorDiaria);
+                cmd.Parameters.AddWithValue("@Chassi", automovel.Chassi);
+                cmd.Parameters.AddWithValue("@Renavam", automovel.Renavam);
+                cmd.Parameters.AddWithValue("@OleoKm", automovel.Oleokm);
+                cmd.Parameters.AddWithValue("@DataCriacao", automovel.DataCriacao);
+                cmd.Parameters.AddWithValue("@PastilhaFreioKm", automovel.PastilhaFreioKm);
                 cmd.ExecuteNonQuery();
             }
         }
@@ -44,10 +60,24 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             throw new NotImplementedException();
         }
 
-        public void Deletar(AutomovelDTO automovel)
+        public void Deletar(AutomovelDTO automovelDto)
         {
             using var conexao = new MySqlAdaptadorConexao().ObterConexao();
             conexao.Open();
+
+            var automovel = new Automovel
+            {
+                Modelo = automovelDto.Modelo,
+                Placa = automovelDto.Placa,
+                Cor = automovelDto.Cor,
+                Status = automovelDto.Status,
+                ValorDiaria = automovelDto.ValorDiaria,
+                Chassi = automovelDto.Chassi,
+                Renavam = automovelDto.Renavam,
+                Oleokm = automovelDto.Oleokm,
+                DataCriacao = automovelDto.DataCriacao,
+                PastilhaFreioKm = automovelDto.PastilhaFreioKm
+            };
             string sql = $"DELETE FROM automovel WHERE Id = @id";
             MySqlCommand cmd = new MySqlCommand(sql, conexao);
             cmd.Parameters.AddWithValue("@id", automovel.Id);

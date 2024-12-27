@@ -33,7 +33,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
             AutomovelId = automovelId;
             PagamentoId = pagamentoId;
         }
-        public IEnumerable<PendenciaFinanceiraDTO> PendenciaFinanceira { get; private set; } = new List<PendenciaFinanceiraDTO>();
 
 
         public override bool Validacao()
