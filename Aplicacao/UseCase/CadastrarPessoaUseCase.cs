@@ -21,17 +21,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         public void Executar(PessoaDTO _pessoa)
         {
 
-            if (_pessoa.Validacao())
-            {
-                pessoaRepositorio.Adicionar(_pessoa);
-            }
-            else
-            {
-                Console.WriteLine("Tente novamente... Voltando ao menu inicial");
-                Thread.Sleep(2000);
-                Console.Clear();
-                MenuInicial.Exibir();
-            }
+            pessoaRepositorio.Adicionar(_pessoa);
         }
     }
 }

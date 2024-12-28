@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Menus;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using Projeto_ATLAS___4LIONS.Infra.Servicos;
 using System;
@@ -22,6 +23,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             
             var _pessoa = new Pessoa
             {
+                Id = pessoaDto.Id,
                 Nome = pessoaDto.Nome,
                 Email = pessoaDto.Email,
                 Contato = pessoaDto.Contato,
@@ -29,6 +31,12 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 Cpf = pessoaDto.Cpf,
                 DataCriacao = pessoaDto.DataCriacao
             };
+
+            if (!_pessoa.Validacao())
+            {
+                Thread.Sleep(2000);
+                MenuInicial.Exibir();
+            }
 
             string sql = @"
                         INSERT INTO pessoa (Nome, Contato, Email, DataCriacao, DataNascimento, Cpf)
@@ -51,6 +59,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             conexao.Open();
             var _pessoa = new Pessoa
             {
+                Id = pessoaDto.Id,
                 Nome = pessoaDto.Nome,
                 Email = pessoaDto.Email,
                 Contato = pessoaDto.Contato,
@@ -58,6 +67,12 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 Cpf = pessoaDto.Cpf,
                 DataCriacao = pessoaDto.DataCriacao
             };
+
+            if (!_pessoa.Validacao())
+            {
+                Thread.Sleep(2000);
+                MenuInicial.Exibir();
+            }
 
             string sql = @" UPDATE pessoa SET Nome = @Nome, Telefone = @Telefone, Email = @Email,  DataAtualizacao = @DataAtualizacao  WHERE Id = @Id";
 
@@ -78,6 +93,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
             var _pessoa = new Pessoa
             {
+                Id = pessoaDto.Id,
                 Nome = pessoaDto.Nome,
                 Email = pessoaDto.Email,
                 Contato = pessoaDto.Contato,
@@ -85,6 +101,12 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 Cpf = pessoaDto.Cpf,
                 DataCriacao = pessoaDto.DataCriacao
             };
+
+            if (!_pessoa.Validacao())
+            {
+                Thread.Sleep(2000);
+                MenuInicial.Exibir();
+            }
             string sql = $"DELETE FROM pessoa WHERE Id = @id";
             MySqlCommand cmd = new MySqlCommand(sql, conexao);
             cmd.Parameters.AddWithValue("@id", _pessoa.Id);

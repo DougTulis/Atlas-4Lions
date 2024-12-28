@@ -11,15 +11,15 @@ using System.Threading.Tasks;
 
 namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
 {
+
     public class Pessoa : ModeloAbstrato, IContrato
-    { 
+    {
         public string Nome { get; set; }
-        public string  Email { get; set; }
+        public string Email { get; set; }
         public string Contato { get; set; }
         public DateTime DataNascimento { get; set; }
         public string Cpf { get; set; }
         public CnhValida CnhValida { get; set; }
-        public ETipoPessoa TipoPessoa { get; set; }
 
         public Pessoa()
         {
@@ -27,7 +27,6 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
 
         public Pessoa(string nome, string email, string contato, DateTime dataNascimento, string cpf)
         {
-            TipoPessoa = ETipoPessoa.LOCATARIO;
             Nome = nome;
             Email = email;
             Contato = contato;
@@ -42,7 +41,6 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
             this.DataNascimento = pessoa.DataNascimento;
             this.Cpf = pessoa.Cpf;
             this.CnhValida = pessoa.CnhValida;
-            TipoPessoa = ETipoPessoa.CONDUTOR;
         }
         public override string? ToString()
         {

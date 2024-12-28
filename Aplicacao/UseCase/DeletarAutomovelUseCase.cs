@@ -18,19 +18,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         }
         public void Executar(AutomovelDTO automovelDTO)
         {
-
-            if (automovelDTO.ValidarPraDeletar())
-            {
                 automovelRepositorio.Deletar(automovelDTO);
-            }
-            else
-            {
-                Console.WriteLine("Tente novamente... Voltando ao menu inicial");
-                Thread.Sleep(2000);
-                Console.Clear();
-                MenuInicial.Exibir();
-            }
-
         }
 
     }

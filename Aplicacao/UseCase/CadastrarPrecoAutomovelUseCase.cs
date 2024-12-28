@@ -9,20 +9,17 @@ using System.Threading.Tasks;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 {
-    public class CadastrarVeiculoUseCase
+    public class CadastrarPrecoAutomovelUseCase
     {
-        private readonly ICrud<AutomovelDTO> automovelRepositorio;
-        public CadastrarVeiculoUseCase(ICrud<AutomovelDTO> automovelRepositorio)
+        private readonly ICrud<TabelaPrecoDTO> tabelaRepositorio;
+        public CadastrarPrecoAutomovelUseCase(ICrud<TabelaPrecoDTO> tabelaRepositorio)
         {
-            this.automovelRepositorio = automovelRepositorio;
+            this.tabelaRepositorio = tabelaRepositorio;
         }
-
-        public void Executar(AutomovelDTO _automovel)
+        public void Executar(TabelaPrecoDTO _preco)
         {
-
-            automovelRepositorio.Adicionar(_automovel);
+            tabelaRepositorio.Adicionar(_preco);
 
         }
-
     }
 }

@@ -27,24 +27,35 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
                 string cor = Console.ReadLine();
                 Console.Write("Placa: ");
                 string placa = Console.ReadLine();
-                Console.WriteLine(" Selecione o Status inicial do automóvel: ");
-                Console.WriteLine("1. GARAGEM");
-                Console.WriteLine("2. ALUGADO");
-                var status = (EStatusVeiculo)int.Parse(Console.ReadLine());
-                Console.Write("Valor Diária: ");
-                decimal valorDiaria = decimal.Parse(Console.ReadLine());
+                var status = EStatusVeiculo.GARAGEM;
+
                 Console.Write("Chassi (campo não obrigatório): ");
-                string? chassi = string.IsNullOrWhiteSpace(Console.ReadLine()) ? null :Console.ReadLine();
+                string? chassi = string.IsNullOrWhiteSpace(Console.ReadLine()) ? null : Console.ReadLine();
                 Console.Write("Reanavan (campo não obrigatório): ");
                 string? renavam = string.IsNullOrWhiteSpace(Console.ReadLine()) ? null : Console.ReadLine();
                 Console.Write("Quilometragem da última troca de óleo (Não obrigatório): ");
                 int? oleoKm = string.IsNullOrWhiteSpace(Console.ReadLine()) ? null : int.Parse(Console.ReadLine()); ;
                 Console.Write("Informe a quilometragem da última troca das pastilhas de freio(km) (Não obrigatório): ");
                 int? pastilhaFreioKm = string.IsNullOrWhiteSpace(Console.ReadLine()) ? null : int.Parse(Console.ReadLine());
-                var automovel = new AutomovelDTO(modelo, placa, cor, status, valorDiaria, chassi, renavam, oleoKm, pastilhaFreioKm);
+                var automovel = new AutomovelDTO(modelo, placa, cor, status, chassi, renavam, oleoKm, pastilhaFreioKm);
+
                 var automovelRepositorio = new AutomovelRepositorio();
-                var useCase = new CadastrarVeiculoUseCase(automovelRepositorio);
-                useCase.Executar(automovel);
+                var useCaseAdicionarAutomovel = new CadastrarVeiculoUseCase(automovelRepositorio);
+                useCaseAdicionarAutomovel.Executar(automovel);
+
+       
+                int automovelId = automovel.Id;
+
+                var listaPreco = DefinirPrecos.Definir(automovelId);
+                var tabelaPrecoRepositorio = new TabelaPrecoRepositorio();
+                var cadastrarPrecoUseCase = new CadastrarPrecoAutomovelUseCase(tabelaPrecoRepositorio);
+
+                foreach (var preco in listaPreco)
+                {
+                    var tabelaPrecoDTO = new TabelaPrecoDTO(preco.Descricao, preco.Valor, automovel.Id);
+                    cadastrarPrecoUseCase.Executar(tabelaPrecoDTO);
+                }
+          
                 Console.WriteLine("Veículo Cadastrado com sucesso... Voltando ao menu anterior");
                 Thread.Sleep(2500);
                 Console.Clear();
@@ -52,11 +63,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
             }
             catch (MySqlException ex) { Console.WriteLine(ex.StackTrace); }
             catch (FormatException ex) { Console.WriteLine(ex.StackTrace); }
-
-
-
-
-
 
         }
     }

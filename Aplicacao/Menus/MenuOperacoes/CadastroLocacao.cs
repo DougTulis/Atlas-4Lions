@@ -53,17 +53,17 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
 
             var tipoLocacao = DefinirContratoLocacao.Definir();
             var especie = MenuEspecie.Exibir();
-            var parcelas = MenuParcelas.Exibir(tipoLocacao, especie);
+            //var parcelas = MenuParcelas.Exibir(tipoLocacao, especie);
 
             Console.Write("Informe a data saída (dd/MM/yyyy): ");
             DateTime saida = DateTime.Parse(Console.ReadLine());
             Console.Write("Informe a data retorno (dd/MM/yyyy): ");
             DateTime retorno = DateTime.Parse(Console.ReadLine());
-            decimal valorTotal = CalcularPrecoServico.CalcularPreco(tipoLocacao, automovel.ValorDiaria);
-            Console.WriteLine(valorTotal);
-            var pagamento = new PagamentoDTO(especie, valorTotal, DateTime.Now);
-            var locacao = new LocacaoDTO(saida, retorno, tipoLocacao, Guid.NewGuid(), valorTotal, locatario.Id, condutor.Id, automovel.Id, pagamento.Id);
-            useCaseAdicionarLocacao.Executar(locacao);
+           // decimal valorTotal = CalcularPrecoServico.CalcularPreco(tipoLocacao, automovel);
+           // Console.WriteLine(valorTotal);
+          //  var pagamento = new PagamentoDTO(especie, valorTotal, DateTime.Now);
+           // var locacao = new LocacaoDTO(saida, retorno, tipoLocacao, Guid.NewGuid(), valorTotal, locatario.Id, condutor.Id, automovel.Id, pagamento.Id);
+           // useCaseAdicionarLocacao.Executar(locacao);
         }
     }
 }

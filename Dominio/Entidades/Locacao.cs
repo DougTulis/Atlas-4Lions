@@ -18,8 +18,6 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         public Pessoa Locatario { get; set; }
         public Pessoa Condutor { get; set; }
         public Automovel Automovel { get; set; }
-        public IEnumerable<Parcela> Parcelas { get; set; } = new List<Parcela>();
-        public Pagamento Pagamento { get; set; }
         public override bool Validacao()
         {
             throw new NotImplementedException();
