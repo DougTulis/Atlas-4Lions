@@ -21,5 +21,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             tabelaRepositorio.Adicionar(_preco);
 
         }
+
     }
 }

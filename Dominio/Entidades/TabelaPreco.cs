@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
 {
-    public class TabelaPreco : ModeloAbstrato
+    public class TabelaPreco : ModeloAbstrato, IContrato
     {
         public string Descricao { get; set; }
         public decimal Valor { get; set; }

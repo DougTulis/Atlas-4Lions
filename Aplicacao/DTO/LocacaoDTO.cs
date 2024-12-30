@@ -9,35 +9,29 @@ using System.Threading.Tasks;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
 {
-    public class LocacaoDTO : ModeloAbstrato ,IValidacoes, IContrato
+    public class LocacaoDTO 
     {
+        public int Id { get; set; }
+        public DateTime DataCriacao { get; set; }
         public DateTime Saida { get; set; }
         public DateTime Retorno { get; set; }
         public ETipoLocacao TipoLocacao { get; set; }
-        public Guid TransacaoID { get; private set; } 
-        public decimal ValorTotal { get; private set; }
-        public int LocatarioId { get; private set; }
-        public int CondutorId { get; private set; }  
-        public int AutomovelId { get; private set; } 
-        public int PagamentoId { get; private set; }
-        public LocacaoDTO(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, Guid transacaoID, decimal valorTotal, int locatarioId, int condutorId, int automovelId, int pagamentoId)
+        public decimal ValorTotal { get; set; }
+        public Pessoa Locatario { get; set; }
+        public Pessoa Condutor { get; set; }
+        public Automovel Automovel { get; set; }
+        public PendenciaFinanceira PendenciaFinanceira { get; set; }
+
+        public LocacaoDTO(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, decimal valorTotal, Pessoa locatario, Pessoa condutor, Automovel automovel, PendenciaFinanceira pendenciaFinanceira)
         {
-            
             Saida = saida;
             Retorno = retorno;
             TipoLocacao = tipoLocacao;
-            TransacaoID = transacaoID;
             ValorTotal = valorTotal;
-            LocatarioId = locatarioId;
-            CondutorId = condutorId;
-            AutomovelId = automovelId;
-            PagamentoId = pagamentoId;
-        }
-
-
-        public override bool Validacao()
-        {
-            throw new NotImplementedException();
+            Locatario = locatario;
+            Condutor = condutor;
+            Automovel = automovel;
+            PendenciaFinanceira = pendenciaFinanceira;
         }
     }
 }

@@ -26,8 +26,6 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         public Automovel()
         {
         }
-
-
         public Automovel(string modelo, string placa, string cor, EStatusVeiculo status, string? chassi, string? renavam, int? oleokm, int? pastilhaFreioKm)
         {
             Modelo = modelo;
@@ -69,6 +67,11 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
                 return false;
             }
             return true;
+        }
+
+        public decimal CalcularValor(TimeSpan periodo, decimal valorAutomovel)
+        {
+            return valorAutomovel * periodo.Days;
         }
     }
 }

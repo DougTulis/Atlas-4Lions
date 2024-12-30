@@ -24,7 +24,6 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         public Pessoa()
         {
         }
-
         public Pessoa(string nome, string email, string contato, DateTime dataNascimento, string cpf)
         {
             Nome = nome;

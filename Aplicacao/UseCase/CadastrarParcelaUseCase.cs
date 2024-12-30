@@ -1,7 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
-using Projeto_ATLAS___4LIONS.Aplicacao.Menus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,25 +9,21 @@ using System.Threading.Tasks;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 {
-    public class CadastrarPessoaUseCase
+    public class CadastrarParcelaUseCase
     {
-        private readonly ICrud<PessoaDTO> pessoaRepositorio;
-        public CadastrarPessoaUseCase(ICrud<PessoaDTO> pessoaRepositorio)
+        private readonly ICrud<ParcelaDTO> parcelaRepositorio;
+        public CadastrarParcelaUseCase(ICrud<ParcelaDTO> parcelaRepositorio)
         {
-            this.pessoaRepositorio = pessoaRepositorio;
+            this.parcelaRepositorio = parcelaRepositorio;
         }
-
-        public void Executar(PessoaDTO _pessoa)
+        public void Executar(ParcelaDTO _parcela)
         {
-
             try
             {
-
-                pessoaRepositorio.Adicionar(_pessoa);
+                parcelaRepositorio.Adicionar(_parcela);
             }
-            catch (MySqlException ex) { 
-
-
+            catch (MySqlException ex)
+            {
                 Console.WriteLine(ex.StackTrace);
             }
         }

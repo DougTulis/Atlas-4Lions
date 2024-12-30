@@ -111,5 +111,12 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             var lista = Listar();
             return lista.FirstOrDefault(filtro);
         }
+
+        public IEnumerable<TabelaPrecoDTO> ListarPor(Func<TabelaPrecoDTO, bool> filtro)
+        {
+            var lista = Listar();
+            return lista.Where(filtro);
+        }
+
     }
 }

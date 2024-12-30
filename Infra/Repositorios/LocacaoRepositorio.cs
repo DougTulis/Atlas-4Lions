@@ -1,60 +1,79 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Menus;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
+using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 using Projeto_ATLAS___4LIONS.Infra.Servicos;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 {
     public class LocacaoRepositorio : ICrud<LocacaoDTO>
     {
-        public void Adicionar(LocacaoDTO objeto)
+        public void Adicionar(LocacaoDTO locacaoDto)
         {
-
             using var conexao = new MySqlAdaptadorConexao().ObterConexao();
             conexao.Open();
 
+            if (locacaoDto.PendenciaFinanceira == null || locacaoDto.PendenciaFinanceira.Id == 0)
+            {
+                throw new InvalidOperationException("A Pendência Financeira deve ser criada antes de associá-la à Locação.");
+            }
+
+            var locacao = new Locacao
+            {
+                Saida = locacaoDto.Saida,
+                Retorno = locacaoDto.Retorno,
+                TipoLocacao = locacaoDto.TipoLocacao,
+                ValorTotal = locacaoDto.ValorTotal,
+                Locatario = new Pessoa { Id = locacaoDto.Locatario.Id },
+                Condutor = new Pessoa { Id = locacaoDto.Condutor.Id },
+                Automovel = new Automovel { Id = locacaoDto.Automovel.Id },
+                PendenciaFinanceira = new PendenciaFinanceira { Id = locacaoDto.PendenciaFinanceira.Id }
+            };
 
             string sql = @"
-                        INSERT INTO locacao (Saida, Retorno, TipoLocacao, TransacaoID, ValorTotal, LocatarioId,CondutorId,AutomovelId,PagamentoId, DataCriacao)
-                        VALUES (@Saida, @Retorno, @TipoLocacao, @TransacaoID, @ValorTotal, @LocatarioId,@CondutorId, @AutomovelId,@PagamentoId, @DataCriacao)"
-            ;
+                INSERT INTO Locacao (Saida, Retorno, TipoLocacao, ValorTotal, LocatarioId, CondutorId, AutomovelId, PendenciaFinanceiraId)
+                VALUES (@Saida, @Retorno, @TipoLocacao, @ValorTotal, @LocatarioId, @CondutorId, @AutomovelId, @PendenciaFinanceiraId);
+            ";
 
-            using (var cmd = new MySqlCommand(sql, conexao))
-            {
-                cmd.Parameters.AddWithValue("@Saida", objeto.Saida);
-                cmd.Parameters.AddWithValue("@Retorno", objeto.Retorno);
-                cmd.Parameters.AddWithValue("@TipoLocacao", objeto.TipoLocacao);
-                cmd.Parameters.AddWithValue("@TransacaoID", objeto.TransacaoID);
-                cmd.Parameters.AddWithValue("@ValorTotal", objeto.ValorTotal.ToString("F2",CultureInfo.InvariantCulture));
-                cmd.Parameters.AddWithValue("@LocatarioId", objeto.LocatarioId);
-                cmd.Parameters.AddWithValue("@CondutorId", objeto.CondutorId);
-                cmd.Parameters.AddWithValue("@AutomovelId", objeto.AutomovelId);
-                cmd.Parameters.AddWithValue("@PagamentoId", objeto.PagamentoId);
-                cmd.Parameters.AddWithValue("@DataCriacao", objeto.DataCriacao);
-                cmd.ExecuteNonQuery();
-                objeto.Id = (int)cmd.LastInsertedId;
-            }
+            using var cmd = new MySqlCommand(sql, conexao);
+            cmd.Parameters.AddWithValue("@Saida", locacao.Saida);
+            cmd.Parameters.AddWithValue("@Retorno", locacao.Retorno);
+            cmd.Parameters.AddWithValue("@TipoLocacao", (int)locacao.TipoLocacao);
+            cmd.Parameters.AddWithValue("@ValorTotal", locacao.ValorTotal);
+            cmd.Parameters.AddWithValue("@LocatarioId", locacao.Locatario.Id);
+            cmd.Parameters.AddWithValue("@CondutorId", locacao.Condutor.Id);
+            cmd.Parameters.AddWithValue("@AutomovelId", locacao.Automovel.Id);
+            cmd.Parameters.AddWithValue("@PendenciaFinanceiraId", locacao.PendenciaFinanceira.Id);
+
+            cmd.ExecuteNonQuery();
+            locacaoDto.Id = (int)cmd.LastInsertedId;
         }
 
-        public void Atualizar(LocacaoDTO objeto)
+        public void Atualizar(LocacaoDTO locacaoDto)
         {
             throw new NotImplementedException();
         }
 
-        public void Deletar(LocacaoDTO objeto)
+        public void Deletar(LocacaoDTO locacaoDto)
         {
             using var conexao = new MySqlAdaptadorConexao().ObterConexao();
             conexao.Open();
-            string sql = $"DELETE FROM locacao WHERE Id = @id";
-            MySqlCommand cmd = new MySqlCommand(sql, conexao);
-            cmd.Parameters.AddWithValue("@id", objeto.Id);
+
+            // Popular o modelo com os dados do DTO
+            var locacao = new Locacao
+            {
+                Id = locacaoDto.Id
+            };
+
+            string sql = "DELETE FROM Locacao WHERE Id = @Id";
+
+            using var cmd = new MySqlCommand(sql, conexao);
+            cmd.Parameters.AddWithValue("@Id", locacao.Id);
+
             cmd.ExecuteNonQuery();
         }
 
@@ -63,7 +82,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             throw new NotImplementedException();
         }
 
-        public LocacaoDTO? RecuperarPor(Func<LocacaoDTO, bool> resultado)
+        public LocacaoDTO? RecuperarPor(Func<LocacaoDTO, bool> filtro)
         {
             throw new NotImplementedException();
         }

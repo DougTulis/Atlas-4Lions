@@ -48,10 +48,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
             sb.AppendLine("Renavam: " + (string.IsNullOrEmpty(Renavam) ? "Não informado" : Renavam));
             sb.AppendLine("Oleo: " + (Oleokm.HasValue ? Oleokm.ToString() : "Não informado"));
             sb.AppendLine("Pastilha Freio: " + (PastilhaFreioKm.HasValue ? PastilhaFreioKm.ToString() : "Não informado"));
-            /*foreach (var item in TabelaPrecos)
-            {
-                sb.AppendLine("Descrição: " + item.Descricao + " | " + "Preço: " + item.Valor.ToString("F2",CultureInfo.InvariantCulture));
-            }*/
+
             return sb.ToString();   
         }
         public string ExibirDadosBreves()

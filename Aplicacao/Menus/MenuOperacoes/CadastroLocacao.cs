@@ -20,22 +20,29 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
             Console.Clear();
             var pessoaRepositorio = new PessoaRepositorio();
             var automovelRepositorio = new AutomovelRepositorio();
-            var locacaorepositorio = new LocacaoRepositorio();
+            var precoRepositorio = new TabelaPrecoRepositorio();
+            var parcelaRepositorio = new ParcelaRepositorio();
+            var pendfinRepositorio = new PendenciaFinanceiraRepositorio();
+            var locacaoRepositorio = new LocacaoRepositorio();
             var useCaseListarPessoa = new ListarPessoaUseCase(pessoaRepositorio);
             var useCaseListarAutomovel = new ListarAutomovelUseCase(automovelRepositorio);
-            var useCaseAdicionarLocacao = new CadastrarLocacaoUseCase(locacaorepositorio);
+            var useCaseListarPrecos = new ListarTabelaPrecoUseCase(precoRepositorio);
+            var useCaseCadastrarParcela = new CadastrarParcelaUseCase(parcelaRepositorio);
+            var useCaseCadastrarPendfin = new CadastrarPendenciaFinanceiraUseCase(pendfinRepositorio);
+            var useCaseCdastrarLocacao = new CadastrarLocacaoUseCase(locacaoRepositorio);
 
             useCaseListarPessoa.ExecutarDadosBreves();
             Console.WriteLine();
             Console.Write("Selecione o Id do locatário: ");
             int escolhaLocatario = int.Parse(Console.ReadLine());
-            var locatario = pessoaRepositorio.RecuperarPor(a => a.Id == escolhaLocatario);
+            var locatarioDto = pessoaRepositorio.RecuperarPor(a => a.Id == escolhaLocatario);
+
             Console.Clear();
             useCaseListarPessoa.ExecutarDadosBreves();
             Console.WriteLine();
             Console.Write("Selecione o Id do condutor do veículo: ");
             int escolhaCondutor = int.Parse(Console.ReadLine());
-            var condutor = pessoaRepositorio.RecuperarPor(a => a.Id == escolhaCondutor);
+            var condutorDto = pessoaRepositorio.RecuperarPor(a => a.Id == escolhaCondutor);
 
             Console.Write("Digite o numero da CNH definitiva/provisória: ");
             string numeroCnh = Console.ReadLine();
@@ -44,26 +51,122 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
             CnhValidaDTO cnh = new CnhValidaDTO(numeroCnh, vencimento);
 
             Console.Clear();
-            useCaseListarAutomovel.ExecutarDadosBreves();
-            Console.WriteLine();
-            Console.Write("Selecione o ID do automovel que será locado:  ");
-            int escolhaAutomovel = int.Parse(Console.ReadLine());
-            var automovel = automovelRepositorio.RecuperarPor(a => a.Id == escolhaAutomovel);
-            automovel.Status = EStatusVeiculo.ALUGADO;
+            int escolhaPreco = 0;
+            do
+            {
+                useCaseListarAutomovel.ExecutarDadosBreves();
+                Console.WriteLine();
+                Console.Write("Selecione o ID do automovel que será locado:  ");
+                int escolhaAutomovel = int.Parse(Console.ReadLine());
+                var automovelDto = automovelRepositorio.RecuperarPor(a => a.Id == escolhaAutomovel);
 
-            var tipoLocacao = DefinirContratoLocacao.Definir();
-            var especie = MenuEspecie.Exibir();
-            //var parcelas = MenuParcelas.Exibir(tipoLocacao, especie);
+                Console.WriteLine("\nTabela de Preços para este Automóvel:");
+                useCaseListarPrecos.ExecutarListarPor(a => a.AutomovelId == automovelDto.Id);
+                Console.Write("Selecione o preço: (ou Digite 0 para optar outro veículo): ");
+                escolhaPreco = int.Parse(Console.ReadLine());
+                TabelaPrecoDTO tabelaPreco = useCaseListarPrecos.ExecutarRecuperarPor(a => a.Id == escolhaPreco);
+                automovelDto.Status = EStatusVeiculo.ALUGADO;
 
-            Console.Write("Informe a data saída (dd/MM/yyyy): ");
-            DateTime saida = DateTime.Parse(Console.ReadLine());
-            Console.Write("Informe a data retorno (dd/MM/yyyy): ");
-            DateTime retorno = DateTime.Parse(Console.ReadLine());
-           // decimal valorTotal = CalcularPrecoServico.CalcularPreco(tipoLocacao, automovel);
-           // Console.WriteLine(valorTotal);
-          //  var pagamento = new PagamentoDTO(especie, valorTotal, DateTime.Now);
-           // var locacao = new LocacaoDTO(saida, retorno, tipoLocacao, Guid.NewGuid(), valorTotal, locatario.Id, condutor.Id, automovel.Id, pagamento.Id);
-           // useCaseAdicionarLocacao.Executar(locacao);
+                if (escolhaPreco == 0) continue;
+
+                var tipoLocacao = DefinirContratoLocacao.Definir();
+         
+
+                Console.Write("Quantidade de parcelas: ");
+                int n = int .Parse(Console.ReadLine());
+
+                Console.Write("Informe a data saída (dd/MM/yyyy): ");
+                DateTime saida = DateTime.Parse(Console.ReadLine());
+                Console.Write("Informe a data retorno (dd/MM/yyyy): ");
+                DateTime retorno = DateTime.Parse(Console.ReadLine());
+                TimeSpan periodo = retorno.Subtract(saida);
+
+                decimal valorTotal = CalcularValor(periodo.Days, tabelaPreco.Valor);
+                decimal valorParcela = Math.Round(valorTotal / n, 2);
+                Guid guid = Guid.NewGuid();
+                var pendencia = new PendenciaFinanceira(guid, valorTotal);
+
+                var pendenciaDto = new PendenciaFinanceiraDTO
+                {
+
+                    TransacaoId = pendencia.TransacaoId,
+                    ValorTotal = pendencia.ValorTotal,
+                    DataCriacao = pendencia.DataCriacao,
+                    Parcelas = new List<Parcela>()
+
+                };
+
+                useCaseCadastrarPendfin.Executar(pendenciaDto);
+                int pendenciaId = pendenciaDto.Id;
+
+                for (int i = 1; i <= n; i++)
+                {
+                    var parcela = new Parcela
+                    {
+                        Sequencia = i,
+                        Valor = valorParcela,
+                        DataVencimento = DateTime.Now.AddMonths(i - 1),
+
+                    };
+
+                    var parcelaDto = new ParcelaDTO
+                    {
+                        Sequencia = parcela.Sequencia,
+                        Valor = parcela.Valor,
+                        DataVencimento = parcela.DataVencimento,
+                        PendenciaFinanceiraId = pendenciaDto.Id
+                    };
+                    useCaseCadastrarParcela.Executar(parcelaDto);
+                }
+
+                var locatario = new Pessoa
+                {
+                    Id = locatarioDto.Id,
+                    Contato = locatarioDto.Contato,
+                    Cpf = locatarioDto.Cpf,
+                    Nome = locatarioDto.Nome,
+                    Email = locatarioDto.Email,
+                    DataNascimento = locatarioDto.DataNascimento,
+                    DataCriacao = locatarioDto.DataCriacao,
+                };
+
+
+                var condutor = new Pessoa
+                {
+                    Id = condutorDto.Id,
+                    Contato = condutorDto.Contato,
+                    Cpf = condutorDto.Cpf,
+                    Nome = condutorDto.Nome,
+                    Email = condutorDto.Email,
+                    DataNascimento = condutorDto.DataNascimento,
+                    CnhValida = condutorDto.CnhValida,
+                    DataCriacao = condutorDto.DataCriacao,
+                };
+
+                var automovel = new Automovel
+                {
+                    Id = automovelDto.Id,
+                    Status = automovelDto.Status,
+                    Cor = automovelDto.Cor,
+                    Chassi = automovelDto.Chassi,
+                    Modelo = automovelDto.Modelo,
+                    DataCriacao = automovelDto.DataCriacao,
+                    PastilhaFreioKm = automovelDto.PastilhaFreioKm,
+                    Oleokm = automovelDto.Oleokm,
+                    Placa = automovelDto.Placa,
+                    Renavam = automovelDto.Renavam,
+                    TabelaPrecos = automovelDto.TabelaPrecos
+                };
+
+                LocacaoDTO locacaoDto = new LocacaoDTO(saida, retorno, tipoLocacao, valorTotal, locatario, condutor, automovel, pendencia) { Id = pendencia.Id };
+                useCaseCdastrarLocacao.Executar(locacaoDto);
+
+                decimal CalcularValor(int dias, decimal valorAutomovel)
+                {
+                    return valorAutomovel * dias;
+                }
+            } while (escolhaPreco == 0);
         }
+
     }
 }
