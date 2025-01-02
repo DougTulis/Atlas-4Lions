@@ -16,7 +16,7 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
     {
         public Guid TransacaoId { get; set; }     
         public decimal ValorTotal { get; set; }
-        public IList<Parcela> Parcelas { get; set; } = new List<Parcela>();
+        public IList<Parcela> Parcelas { get; private set; } = new List<Parcela>();
 
         public PendenciaFinanceira(Guid transacaoId, decimal valorTotal)
         {

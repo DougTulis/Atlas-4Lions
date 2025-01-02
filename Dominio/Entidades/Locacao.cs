@@ -1,4 +1,6 @@
-﻿using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Validacoes;
 using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 using System;
 using System.Collections.Generic;
@@ -18,6 +20,7 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         public Pessoa Condutor { get; set; }
         public Automovel Automovel { get; set; }
         public PendenciaFinanceira PendenciaFinanceira { get; set; }
+        public EStatusLocacao Status { get; set; }
 
         public Locacao()
         {
@@ -37,7 +40,21 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
 
         public override bool Validacao()
         {
-            throw new NotImplementedException();
+            var contratos = new ContratoValidacoes<AutomovelDTO>().PossuiCnh(Condutor, "A pessoa escolhida precisa ter uma CNH vinculada", "Condutor")
+                .SaidaIsOk(this.Saida, this.Retorno, "Data de saída inválida.", "Saida")
+                .RetornoIsOk(this.Retorno, this.Saida, "Data de retorno inválida", "Retorno");
+
+
+            if(!contratos.IsValid())
+            {
+                foreach (var notificacao in contratos.Notificacoes)
+                {
+                    Console.WriteLine($"Erro em {notificacao.NomePropriedade}: {notificacao.Mensagem}");
+                }
+                return false;
+            }
+
+            return true;
         }
     }
 }

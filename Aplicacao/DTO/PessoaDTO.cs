@@ -20,7 +20,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public string Contato { get; set; }
         public DateTime DataNascimento { get; set; }
         public string Cpf { get; set; }
-        public CnhValida CnhValida { get; set; }
+        public string? NumeroCnh { get; set; }
+        public DateTime? VencimentoCnh { get; set; }
 
 
         public PessoaDTO(string nome, string email, string contato, DateTime dataNascimento, string cpf)
@@ -31,15 +32,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
             DataNascimento = dataNascimento;
             Cpf = cpf;
         }
-        public PessoaDTO(PessoaDTO pessoa, CnhValidaDTO cnhValida) // sobrecarga para definir a cnh em pessoa
-        {
-            this.Nome = pessoa.Nome;
-            this.Email = pessoa.Email;
-            this.Contato = pessoa.Contato;
-            this.DataNascimento = pessoa.DataNascimento;
-            this.Cpf = pessoa.Cpf;
-            this.CnhValida = pessoa.CnhValida;
-        }
+   
         public override string? ToString()
         {
             return "Id: " + Id + "\n" +
@@ -48,7 +41,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
                 "Data Nascimento: " + DataNascimento.ToString("dd/MM/yyyy") + "\n" +
                 "Email: " +
                 "Cpf: " + Cpf + "\n" +
-                "Adicionado em: " + DataCriacao + "\n";
+                "Adicionado em: " + DataCriacao.ToString("dd/MM/yyyy") + "\n";
         }
 
         public string ExibirDadosBreves()

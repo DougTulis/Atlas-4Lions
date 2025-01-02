@@ -32,5 +32,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 Console.WriteLine(ex.StackTrace);
             }
         }
+ 
     }
 }

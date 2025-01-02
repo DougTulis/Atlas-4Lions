@@ -27,6 +27,11 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 Console.WriteLine(item.ExibirDadosBreves());
             }
         }
+        public PessoaDTO ExecutarRecuperarPor(Func<PessoaDTO, bool> filtro)
+        {
+            var lista = pessoaRepositorio.Listar();
+            return lista.FirstOrDefault(filtro);
+        }
 
     }
 }

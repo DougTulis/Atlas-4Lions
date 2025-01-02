@@ -30,7 +30,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("3. ");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Baixar Locação");
+            Console.WriteLine("Registrar Pagamento");
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("0. ");
             Console.ForegroundColor = ConsoleColor.White;
@@ -51,7 +51,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus
                     HistoricoPessoas.Exibir();
                     break;
                 case 3:
-                    DeletarPessoas.Deletar();
+                   // DeletarPessoas.Deletar();
                     break;
                 case 0:
                     MenuInicial.Exibir();

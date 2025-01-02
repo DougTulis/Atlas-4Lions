@@ -20,7 +20,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
             using var conexao = new MySqlAdaptadorConexao().ObterConexao();
             conexao.Open();
-            
+
             var _pessoa = new Pessoa
             {
                 Id = pessoaDto.Id,
@@ -29,7 +29,9 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 Contato = pessoaDto.Contato,
                 DataNascimento = pessoaDto.DataNascimento,
                 Cpf = pessoaDto.Cpf,
-                DataCriacao = pessoaDto.DataCriacao
+                DataCriacao = pessoaDto.DataCriacao,
+                VencimentoCnh = pessoaDto.VencimentoCnh,
+                NumeroCnh = pessoaDto.NumeroCnh
             };
 
             if (!_pessoa.Validacao())
@@ -39,8 +41,8 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             }
 
             string sql = @"
-                        INSERT INTO pessoa (Nome, Contato, Email, DataCriacao, DataNascimento, Cpf)
-                        VALUES (@Nome, @Contato, @Email, @DataCriacao, @DataNascimento, @Cpf)";
+                        INSERT INTO pessoa (Nome, Contato, Email, DataCriacao, DataNascimento, Cpf, NumeroCnh, VencimentoCnh)
+                        VALUES (@Nome, @Contato, @Email, @DataCriacao, @DataNascimento, @Cpf, @NumeroCnh, @VencimentoCnh)";
 
             using (var cmd = new MySqlCommand(sql, conexao))
             {
@@ -50,6 +52,8 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 cmd.Parameters.AddWithValue("@DataCriacao", _pessoa.DataCriacao);
                 cmd.Parameters.AddWithValue("@DataNascimento", _pessoa.DataNascimento);
                 cmd.Parameters.AddWithValue("@Cpf", _pessoa.Cpf);
+                cmd.Parameters.AddWithValue("@NumeroCnh", _pessoa.NumeroCnh);
+                cmd.Parameters.AddWithValue("@VencimentoCnh", _pessoa.VencimentoCnh);
                 cmd.ExecuteNonQuery();
             }
         }
@@ -65,7 +69,9 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 Contato = pessoaDto.Contato,
                 DataNascimento = pessoaDto.DataNascimento,
                 Cpf = pessoaDto.Cpf,
-                DataCriacao = pessoaDto.DataCriacao
+                DataCriacao = pessoaDto.DataCriacao,
+                VencimentoCnh = pessoaDto.VencimentoCnh,
+                NumeroCnh = pessoaDto.NumeroCnh
             };
 
             if (!_pessoa.Validacao())
@@ -99,7 +105,9 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 Contato = pessoaDto.Contato,
                 DataNascimento = pessoaDto.DataNascimento,
                 Cpf = pessoaDto.Cpf,
-                DataCriacao = pessoaDto.DataCriacao
+                DataCriacao = pessoaDto.DataCriacao,
+                VencimentoCnh = pessoaDto.VencimentoCnh,
+                NumeroCnh = pessoaDto.NumeroCnh
             };
 
             if (!_pessoa.Validacao())
@@ -112,7 +120,6 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             cmd.Parameters.AddWithValue("@id", _pessoa.Id);
             cmd.ExecuteNonQuery();
         }
-
         public IEnumerable<PessoaDTO> Listar()
         {
             using var conexao = new MySqlAdaptadorConexao().ObterConexao();
@@ -131,7 +138,9 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 string cpf = Convert.ToString(dataReader["Cpf"]);
                 DateTime nascimento = Convert.ToDateTime(dataReader["DataNascimento"]);
                 DateTime dataCriacao = Convert.ToDateTime(dataReader["DataCriacao"]);
-                var pessoa = new PessoaDTO(nome, email, contato, nascimento, cpf) { Id = idPessoa, DataCriacao = dataCriacao};
+                DateTime? vencimentoCnh = dataReader["VencimentoCnh"] != DBNull.Value ? Convert.ToDateTime(dataReader["VencimentoCnh"]) : null ;
+                string? numeroCnh = dataReader["NumeroCnh"] != DBNull.Value ? Convert.ToString(dataReader["NumeroCnh"]) : null;
+                var pessoa = new PessoaDTO(nome, email, contato, nascimento, cpf) { Id = idPessoa, DataCriacao = dataCriacao, VencimentoCnh = vencimentoCnh, NumeroCnh = numeroCnh};
                 lista.Add(pessoa);
             }
             return lista;

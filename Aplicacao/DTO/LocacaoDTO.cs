@@ -21,6 +21,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public Pessoa Condutor { get; set; }
         public Automovel Automovel { get; set; }
         public PendenciaFinanceira PendenciaFinanceira { get; set; }
+        public EStatusLocacao Status { get; set; }
 
         public LocacaoDTO(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, decimal valorTotal, Pessoa locatario, Pessoa condutor, Automovel automovel, PendenciaFinanceira pendenciaFinanceira)
         {

@@ -31,11 +31,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
             var useCaseCadastrarPendfin = new CadastrarPendenciaFinanceiraUseCase(pendfinRepositorio);
             var useCaseCdastrarLocacao = new CadastrarLocacaoUseCase(locacaoRepositorio);
 
-            useCaseListarPessoa.ExecutarDadosBreves();
-            Console.WriteLine();
-            Console.Write("Selecione o Id do locatário: ");
-            int escolhaLocatario = int.Parse(Console.ReadLine());
-            var locatarioDto = pessoaRepositorio.RecuperarPor(a => a.Id == escolhaLocatario);
+
+            var locatarioDto = DefinirLocatario.Definir(pessoaRepositorio, useCaseListarPessoa);
 
             Console.Clear();
             useCaseListarPessoa.ExecutarDadosBreves();
@@ -43,12 +40,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
             Console.Write("Selecione o Id do condutor do veículo: ");
             int escolhaCondutor = int.Parse(Console.ReadLine());
             var condutorDto = pessoaRepositorio.RecuperarPor(a => a.Id == escolhaCondutor);
-
-            Console.Write("Digite o numero da CNH definitiva/provisória: ");
-            string numeroCnh = Console.ReadLine();
-            Console.Write("Vencimento CNH definitiva/provisória: (dd/MM/yyyy): ");
-            DateTime vencimento = DateTime.Parse(Console.ReadLine());
-            CnhValidaDTO cnh = new CnhValidaDTO(numeroCnh, vencimento);
 
             Console.Clear();
             int escolhaPreco = 0;
@@ -70,10 +61,9 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
                 if (escolhaPreco == 0) continue;
 
                 var tipoLocacao = DefinirContratoLocacao.Definir();
-         
 
                 Console.Write("Quantidade de parcelas: ");
-                int n = int .Parse(Console.ReadLine());
+                int n = int.Parse(Console.ReadLine());
 
                 Console.Write("Informe a data saída (dd/MM/yyyy): ");
                 DateTime saida = DateTime.Parse(Console.ReadLine());
@@ -83,6 +73,50 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
 
                 decimal valorTotal = CalcularValor(periodo.Days, tabelaPreco.Valor);
                 decimal valorParcela = Math.Round(valorTotal / n, 2);
+
+                var locatario = new Pessoa
+                {
+                    Id = locatarioDto.Id,
+                    Contato = locatarioDto.Contato,
+                    Cpf = locatarioDto.Cpf,
+                    Nome = locatarioDto.Nome,
+                    Email = locatarioDto.Email,
+                    DataNascimento = locatarioDto.DataNascimento,
+                    DataCriacao = locatarioDto.DataCriacao,
+                    NumeroCnh = locatarioDto.NumeroCnh,
+                    VencimentoCnh = locatarioDto.VencimentoCnh,
+                };
+
+
+                var condutor = new Pessoa
+                {
+                    Id = condutorDto.Id,
+                    Contato = condutorDto.Contato,
+                    Cpf = condutorDto.Cpf,
+                    Nome = condutorDto.Nome,
+                    Email = condutorDto.Email,
+                    DataNascimento = condutorDto.DataNascimento,
+                    VencimentoCnh = condutorDto.VencimentoCnh,
+                    NumeroCnh = condutorDto.NumeroCnh,
+                    DataCriacao = condutorDto.DataCriacao,
+                };
+
+
+
+                var automovel = new Automovel
+                {
+                    Id = automovelDto.Id,
+                    Status = automovelDto.Status,
+                    Cor = automovelDto.Cor,
+                    Chassi = automovelDto.Chassi,
+                    Modelo = automovelDto.Modelo,
+                    DataCriacao = automovelDto.DataCriacao,
+                    PastilhaFreioKm = automovelDto.PastilhaFreioKm,
+                    Oleokm = automovelDto.Oleokm,
+                    Placa = automovelDto.Placa,
+                    Renavam = automovelDto.Renavam,
+                    TabelaPrecos = automovelDto.TabelaPrecos
+                };
                 Guid guid = Guid.NewGuid();
                 var pendencia = new PendenciaFinanceira(guid, valorTotal);
 
@@ -92,12 +126,15 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
                     TransacaoId = pendencia.TransacaoId,
                     ValorTotal = pendencia.ValorTotal,
                     DataCriacao = pendencia.DataCriacao,
-                    Parcelas = new List<Parcela>()
 
                 };
 
+                pendencia.Id = pendenciaDto.Id;
+
+                LocacaoDTO locacaoDto = new LocacaoDTO(saida, retorno, tipoLocacao, valorTotal, locatario, condutor, automovel, pendencia);
+
+                useCaseCdastrarLocacao.Executar(locacaoDto);
                 useCaseCadastrarPendfin.Executar(pendenciaDto);
-                int pendenciaId = pendenciaDto.Id;
 
                 for (int i = 1; i <= n; i++)
                 {
@@ -118,54 +155,14 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
                     };
                     useCaseCadastrarParcela.Executar(parcelaDto);
                 }
-
-                var locatario = new Pessoa
-                {
-                    Id = locatarioDto.Id,
-                    Contato = locatarioDto.Contato,
-                    Cpf = locatarioDto.Cpf,
-                    Nome = locatarioDto.Nome,
-                    Email = locatarioDto.Email,
-                    DataNascimento = locatarioDto.DataNascimento,
-                    DataCriacao = locatarioDto.DataCriacao,
-                };
-
-
-                var condutor = new Pessoa
-                {
-                    Id = condutorDto.Id,
-                    Contato = condutorDto.Contato,
-                    Cpf = condutorDto.Cpf,
-                    Nome = condutorDto.Nome,
-                    Email = condutorDto.Email,
-                    DataNascimento = condutorDto.DataNascimento,
-                    CnhValida = condutorDto.CnhValida,
-                    DataCriacao = condutorDto.DataCriacao,
-                };
-
-                var automovel = new Automovel
-                {
-                    Id = automovelDto.Id,
-                    Status = automovelDto.Status,
-                    Cor = automovelDto.Cor,
-                    Chassi = automovelDto.Chassi,
-                    Modelo = automovelDto.Modelo,
-                    DataCriacao = automovelDto.DataCriacao,
-                    PastilhaFreioKm = automovelDto.PastilhaFreioKm,
-                    Oleokm = automovelDto.Oleokm,
-                    Placa = automovelDto.Placa,
-                    Renavam = automovelDto.Renavam,
-                    TabelaPrecos = automovelDto.TabelaPrecos
-                };
-
-                LocacaoDTO locacaoDto = new LocacaoDTO(saida, retorno, tipoLocacao, valorTotal, locatario, condutor, automovel, pendencia) { Id = pendencia.Id };
-                useCaseCdastrarLocacao.Executar(locacaoDto);
+                break;
 
                 decimal CalcularValor(int dias, decimal valorAutomovel)
                 {
                     return valorAutomovel * dias;
                 }
             } while (escolhaPreco == 0);
+            MenuInicial.Exibir();
         }
 
     }

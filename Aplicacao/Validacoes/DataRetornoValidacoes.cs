@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.Validacoes
 {
-   public partial class ContratoValidacoes<T>
-    { 
-        public ContratoValidacoes<T> EmailIsOk(string email, short minLength, string mensagem, string propriedadeNome)
+    public partial class ContratoValidacoes<T>
+    {
+        public ContratoValidacoes<T> RetornoIsOk(DateTime retorno, DateTime saida, string mensagem, string propriedadeNome)
         {
-            if (string.IsNullOrWhiteSpace(email) || !email.Contains("@") || !email.Contains(".") || email.Length < minLength)
+            if (retorno < saida || retorno == null)
             {
                 AddNotification(new Notificacao(mensagem, propriedadeNome));
             }

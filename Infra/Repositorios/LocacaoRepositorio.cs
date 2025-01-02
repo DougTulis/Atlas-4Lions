@@ -17,11 +17,6 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             using var conexao = new MySqlAdaptadorConexao().ObterConexao();
             conexao.Open();
 
-            if (locacaoDto.PendenciaFinanceira == null || locacaoDto.PendenciaFinanceira.Id == 0)
-            {
-                throw new InvalidOperationException("A Pendência Financeira deve ser criada antes de associá-la à Locação.");
-            }
-
             var locacao = new Locacao
             {
                 Saida = locacaoDto.Saida,
@@ -33,6 +28,12 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 Automovel = new Automovel { Id = locacaoDto.Automovel.Id },
                 PendenciaFinanceira = new PendenciaFinanceira { Id = locacaoDto.PendenciaFinanceira.Id }
             };
+
+            if (!locacao.Validacao())
+            {
+                Thread.Sleep(2000);
+                MenuInicial.Exibir();
+            }
 
             string sql = @"
                 INSERT INTO Locacao (Saida, Retorno, TipoLocacao, ValorTotal, LocatarioId, CondutorId, AutomovelId, PendenciaFinanceiraId)

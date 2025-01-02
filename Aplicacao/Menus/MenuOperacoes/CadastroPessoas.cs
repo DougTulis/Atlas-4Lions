@@ -27,7 +27,12 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
                 DateTime nascimento = DateTime.Parse(Console.ReadLine());
                 Console.Write("Cpf: (Máximo 11 dígitos): ");
                 string cpf = Console.ReadLine();
-                var pessoa = new PessoaDTO(nome, email, contato, nascimento, cpf);
+
+                var pessoa = new PessoaDTO(nome, email, contato, nascimento, cpf)
+                {
+                    DataCriacao = DateTime.Now,
+                };
+                CadastroCnh.Cadastrar(pessoa);
                 var pessoaRepositorio = new PessoaRepositorio();
                 var UseCase = new CadastrarPessoaUseCase(pessoaRepositorio);
                 UseCase.Executar(pessoa);
