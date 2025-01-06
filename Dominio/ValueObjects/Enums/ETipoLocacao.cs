@@ -8,7 +8,7 @@ namespace Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums
 {
     public enum ETipoLocacao
     {
-       DIARIA,
-       CONTRATO
+       DIARIA = 1,
+       CONTRATO = 2
     }
 }

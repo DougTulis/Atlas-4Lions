@@ -55,12 +55,12 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             string sql = @"
                 UPDATE tabela_preco
                 SET Descricao = @Descricao, Valor = @Valor
-                WHERE Id = @Id"; // Usando ID único do preço para a atualização
+                WHERE Id = @Id"; //
 
             using var cmd = new MySqlCommand(sql, conexao);
             cmd.Parameters.AddWithValue("@Descricao", objeto.Descricao);
             cmd.Parameters.AddWithValue("@Valor", objeto.Valor);
-            cmd.Parameters.AddWithValue("@Id", objeto.Id); // Adicione `Id` ao DTO para suporte
+            cmd.Parameters.AddWithValue("@Id", objeto.Id); 
 
             cmd.ExecuteNonQuery();
         }
@@ -70,10 +70,10 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             using var conexao = new MySqlAdaptadorConexao().ObterConexao();
             conexao.Open();
 
-            string sql = "DELETE FROM tabela_preco WHERE Id = @Id"; // Usando o ID único do preço
+            string sql = "DELETE FROM tabela_preco WHERE Id = @Id";
 
             using var cmd = new MySqlCommand(sql, conexao);
-            cmd.Parameters.AddWithValue("@Id", objeto.Id); // Adicione `Id` ao DTO para suporte
+            cmd.Parameters.AddWithValue("@Id", objeto.Id);
 
             cmd.ExecuteNonQuery();
         }

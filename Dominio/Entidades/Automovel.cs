@@ -40,7 +40,8 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         public override bool Validacao()
         {
             var contratos = new ContratoValidacoes<AutomovelDTO>()
-                .ModeloIsOk(this.Modelo, "Insira um modelo válido", "Modelo");
+                .ModeloIsOk(this.Modelo, "Insira um modelo válido", "Modelo")
+                .PlacaIsOk(this.Placa, "Placa inválida", "Placa");
 
             if (!contratos.IsValid())
             {
@@ -68,10 +69,15 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
             }
             return true;
         }
-
-        public decimal CalcularValor(TimeSpan periodo, decimal valorAutomovel)
+        public void AlterarParaGaragem()
         {
-            return valorAutomovel * periodo.Days;
+            Status = EStatusVeiculo.GARAGEM;
         }
+
+        public void AlterarParaAlugado()
+        {
+            Status = EStatusVeiculo.ALUGADO;
+        }
+
     }
 }

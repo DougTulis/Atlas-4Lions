@@ -85,6 +85,12 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 DataCriacao = automovelDto.DataCriacao,
                 PastilhaFreioKm = automovelDto.PastilhaFreioKm
             };
+            if (!automovel.ValidarPraDeletar())
+            {
+                Thread.Sleep(2500);
+                MenuInicial.Exibir();
+            } 
+
             string sql = $"DELETE FROM automovel WHERE Id = @id";
             MySqlCommand cmd = new MySqlCommand(sql, conexao);
             cmd.Parameters.AddWithValue("@id", automovel.Id);
@@ -121,6 +127,17 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 lista.Add(automovel);
             }
             return lista;
+        }
+
+        public void AtualizarStatus(int automovelId, EStatusVeiculo novoStatus)
+        {
+            using var conexao = new MySqlAdaptadorConexao().ObterConexao();
+            conexao.Open();
+            string sql = "UPDATE automovel SET Status = @Status WHERE Id = @Id";
+            using var cmd = new MySqlCommand(sql, conexao);
+            cmd.Parameters.AddWithValue("@Status", (int)novoStatus);
+            cmd.Parameters.AddWithValue("@Id", automovelId);
+            cmd.ExecuteNonQuery();
         }
 
         public AutomovelDTO? RecuperarPor(Func<AutomovelDTO, bool> resultado)

@@ -48,10 +48,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus
                     CadastroLocacao.Cadastrar();
                     break;
                 case 2:
-                    HistoricoPessoas.Exibir();
+                    HistoricoLocacao.Exibir();
                     break;
                 case 3:
-                   // DeletarPessoas.Deletar();
+                    //
                     break;
                 case 0:
                     MenuInicial.Exibir();

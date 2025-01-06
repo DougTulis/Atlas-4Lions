@@ -25,8 +25,7 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         public Locacao()
         {
         }
-
-        public Locacao(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, decimal valorTotal, Pessoa locatario, Pessoa condutor, Automovel automovel, PendenciaFinanceira pendenciaFinanceira)
+        public Locacao(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, decimal valorTotal, Pessoa locatario, Pessoa condutor, Automovel automovel, PendenciaFinanceira pendenciaFinanceira, EStatusLocacao status)
         {
             Saida = saida;
             Retorno = retorno;
@@ -36,11 +35,12 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
             Condutor = condutor;
             Automovel = automovel;
             PendenciaFinanceira = pendenciaFinanceira;
+            Status = status;
         }
 
         public override bool Validacao()
         {
-            var contratos = new ContratoValidacoes<AutomovelDTO>().PossuiCnh(Condutor, "A pessoa escolhida precisa ter uma CNH vinculada", "Condutor")
+            var contratos = new ContratoValidacoes<LocacaoDTO>().PossuiCnh(Condutor, "A pessoa escolhida precisa ter uma CNH vinculada", "Condutor")
                 .SaidaIsOk(this.Saida, this.Retorno, "Data de saída inválida.", "Saida")
                 .RetornoIsOk(this.Retorno, this.Saida, "Data de retorno inválida", "Retorno");
 
@@ -56,5 +56,16 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
 
             return true;
         }
+
+        public void AlterarStatusAndamento()
+        {
+            Status = EStatusLocacao.ANDAMENTO;
+        }
+
+        public void AlterarStatusFinalizado()
+        {
+            Status = EStatusLocacao.FINALIZADO;
+        }
+
     }
 }

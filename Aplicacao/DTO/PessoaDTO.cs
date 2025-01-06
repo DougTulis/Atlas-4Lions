@@ -23,6 +23,15 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public string? NumeroCnh { get; set; }
         public DateTime? VencimentoCnh { get; set; }
 
+        public PessoaDTO()
+        {
+        }
+
+        public PessoaDTO(int id)
+        {
+            Id = id;
+        }
+
 
         public PessoaDTO(string nome, string email, string contato, DateTime dataNascimento, string cpf)
         {

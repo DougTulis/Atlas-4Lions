@@ -1,4 +1,5 @@
-﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
+﻿using MySql.Data.MySqlClient;
+using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,18 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             this.tabelaRepositorio = tabelaRepositorio;
         }
 
+
         public void Executar()
         {
-            foreach (var item in tabelaRepositorio.Listar())
+            try
             {
-                Console.WriteLine(item);
+                foreach (var item in tabelaRepositorio.Listar())
+                {
+                    Console.WriteLine(item);
+                }
+            }catch(MySqlException ex)
+            {
+                Console.WriteLine(ex.StackTrace);
             }
         }
         public void ExecutarListarPor(Func<TabelaPrecoDTO, bool> filtro)

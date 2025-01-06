@@ -24,7 +24,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
                 Console.Write("Insira a descrição (ex: popular 2 portas): ");
                 string descricao = Console.ReadLine();
                 Console.Write("Valor em R$: ");
-                decimal valor = int.Parse(Console.ReadLine(),CultureInfo.InvariantCulture);
+                decimal valor = decimal.Parse(Console.ReadLine());
                 var preco = new TabelaPreco(descricao,valor,automovelId);
                 lista.Add(preco);
             }

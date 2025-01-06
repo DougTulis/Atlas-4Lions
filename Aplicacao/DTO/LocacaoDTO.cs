@@ -23,6 +23,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public PendenciaFinanceira PendenciaFinanceira { get; set; }
         public EStatusLocacao Status { get; set; }
 
+        public LocacaoDTO()
+        {
+        }
+
         public LocacaoDTO(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, decimal valorTotal, Pessoa locatario, Pessoa condutor, Automovel automovel, PendenciaFinanceira pendenciaFinanceira)
         {
             Saida = saida;
@@ -33,6 +37,16 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
             Condutor = condutor;
             Automovel = automovel;
             PendenciaFinanceira = pendenciaFinanceira;
+
+        }
+
+        public override string? ToString()
+        {
+            return "ID: " + Id + "\n" +
+                "Id do Condutor: " + Condutor.Id + "\n" +
+                "Id do Automovel: " + Automovel.Id + "\n" +
+                "Valor Total: " + ValorTotal.ToString("F2") + "\n" +
+                "Status: " + Status + "\n";
         }
     }
 }
