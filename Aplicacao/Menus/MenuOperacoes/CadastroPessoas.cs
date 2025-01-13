@@ -35,7 +35,7 @@ public static class CadastroPessoas
             cnpj = Console.ReadLine();
         }
 
-        var pessoa = new PessoaDTO(nome, email, contato, nascimento)
+        var pessoa = new PessoaDTO(nome, email, contato, nascimento,cpf)
         {
             Cpf = cpf,
             Cnpj = cnpj,

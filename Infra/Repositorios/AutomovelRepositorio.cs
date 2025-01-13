@@ -166,44 +166,48 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 }
             }
         }
-    }
 
-    public IEnumerable<AutomovelDTO> ListarStatusGaragem()
-    {
-        using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+
+        public IEnumerable<AutomovelDTO> ListarStatusGaragem()
         {
-            conexao.Open();
-
-            var lista = new List<AutomovelDTO>();
-            string sql = "SELECT * FROM automovel WHERE Status = 1";
-            using (var cmd = new MySqlCommand(sql, conexao))
+            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
             {
+                conexao.Open();
 
-                using (var dataReader = cmd.ExecuteReader())
+                var lista = new List<AutomovelDTO>();
+                string sql = "SELECT * FROM automovel WHERE Status = 1";
+                using (var cmd = new MySqlCommand(sql, conexao))
                 {
 
-                    while (dataReader.Read())
+                    using (var dataReader = cmd.ExecuteReader())
                     {
-                        var automovel = new AutomovelDTO
+
+                        while (dataReader.Read())
                         {
-                            Id = Convert.ToInt32(dataReader["Id"]),
-                            Modelo = dataReader["Modelo"].ToString(),
-                            Placa = dataReader["Placa"].ToString(),
-                            Cor = dataReader["Cor"].ToString(),
-                            Status = (EStatusVeiculo)Convert.ToInt32(dataReader["Status"]),
-                            Chassi = dataReader["Chassi"] != DBNull.Value ? dataReader["Chassi"].ToString() : null,
-                            Renavam = dataReader["Renavam"] != DBNull.Value ? dataReader["Renavam"].ToString() : null,
-                            Oleokm = dataReader["OleoKm"] != DBNull.Value ? (int?)Convert.ToInt32(dataReader["OleoKm"]) : null,
-                            PastilhaFreioKm = dataReader["PastilhaFreioKm"] != DBNull.Value ? (int?)Convert.ToInt32(dataReader["PastilhaFreioKm"]) : null,
-                            DataCriacao = Convert.ToDateTime(dataReader["DataCriacao"])
-                        };
-                        lista.Add(automovel);
+                            var automovel = new AutomovelDTO
+                            {
+                                Id = Convert.ToInt32(dataReader["Id"]),
+                                Modelo = dataReader["Modelo"].ToString(),
+                                Placa = dataReader["Placa"].ToString(),
+                                Cor = dataReader["Cor"].ToString(),
+                                Status = (EStatusVeiculo)Convert.ToInt32(dataReader["Status"]),
+                                Chassi = dataReader["Chassi"] != DBNull.Value ? dataReader["Chassi"].ToString() : null,
+                                Renavam = dataReader["Renavam"] != DBNull.Value ? dataReader["Renavam"].ToString() : null,
+                                Oleokm = dataReader["OleoKm"] != DBNull.Value ? (int?)Convert.ToInt32(dataReader["OleoKm"]) : null,
+                                PastilhaFreioKm = dataReader["PastilhaFreioKm"] != DBNull.Value ? (int?)Convert.ToInt32(dataReader["PastilhaFreioKm"]) : null,
+                                DataCriacao = Convert.ToDateTime(dataReader["DataCriacao"])
+                            };
+                            lista.Add(automovel);
+                        }
+
+                        return lista;
+
                     }
-
-                    return lista;
-
                 }
             }
         }
     }
 }
+    
+
+

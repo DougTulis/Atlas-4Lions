@@ -33,13 +33,15 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
             Id = id;
         }
 
-        public PessoaDTO(string nome, string email, string contato, DateTime dataNascimento)
+        public PessoaDTO(string nome, string email, string contato, DateTime dataNascimento, string? cpf)
         {
             Nome = nome;
             Email = email;
             Contato = contato;
             DataNascimento = dataNascimento;
+            Cpf = cpf; //
         }
+
 
         public override string? ToString()
         {
