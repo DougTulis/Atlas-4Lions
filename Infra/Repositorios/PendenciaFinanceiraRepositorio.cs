@@ -12,100 +12,79 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
     {
         public void Adicionar(PendenciaFinanceiraDTO pendenciaDto)
         {
-            using var conexao = new MySqlAdaptadorConexao().ObterConexao();
-            conexao.Open();
-
-            var pendencia = new PendenciaFinanceira(
-                pendenciaDto.TransacaoId,
-                pendenciaDto.ValorTotal
-            )
+            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
             {
-                DataCriacao = DateTime.Now
-            };
+                conexao.Open();
 
-            string sql = @"
+                var pendencia = new PendenciaFinanceira(
+                    pendenciaDto.TransacaoId,
+                    pendenciaDto.ValorTotal
+                )
+                {
+                    DataCriacao = pendenciaDto.DataCriacao
+                };
+
+                string sql = @"
                 INSERT INTO PendenciaFinanceira (TransacaoId, ValorTotal, DataCriacao)
                 VALUES (@TransacaoId, @ValorTotal, @DataCriacao)";
 
-            using var cmd = new MySqlCommand(sql, conexao);
-            cmd.Parameters.AddWithValue("@TransacaoId", pendencia.TransacaoId);
-            cmd.Parameters.AddWithValue("@ValorTotal", pendencia.ValorTotal);
-            cmd.Parameters.AddWithValue("@DataCriacao", pendencia.DataCriacao);
-            cmd.ExecuteNonQuery();
+                using (var cmd = new MySqlCommand(sql, conexao))
+                {
 
-            pendenciaDto.Id = (int)cmd.LastInsertedId;
 
-            foreach (var parcela in pendenciaDto.Parcelas)
-            {
-                parcela.PendenciaFinanceiraId = pendenciaDto.Id;
-                AdicionarParcela(parcela, pendenciaDto.Id, conexao);
+                    cmd.Parameters.AddWithValue("@TransacaoId", pendencia.TransacaoId);
+                    cmd.Parameters.AddWithValue("@ValorTotal", pendencia.ValorTotal);
+                    cmd.Parameters.AddWithValue("@DataCriacao", pendencia.DataCriacao);
+                    cmd.ExecuteNonQuery();
+
+                    pendenciaDto.Id = (int)cmd.LastInsertedId;
+                }
             }
-        }
-
-        private void AdicionarParcela(Parcela parcela, int pendenciaId, MySqlConnection conexao)
-        {
-            string sql = @"
-                INSERT INTO Parcela (PendenciaFinanceiraId, Sequencia, DataVencimento, Valor, DataPagamento, ValorPago, EspeciePagamento)
-                VALUES (@PendenciaFinanceiraId, @Sequencia, @DataVencimento, @Valor, @DataPagamento, @ValorPago, @EspeciePagamento)";
-
-            using var cmd = new MySqlCommand(sql, conexao);
-            cmd.Parameters.AddWithValue("@PendenciaFinanceiraId", pendenciaId);
-            cmd.Parameters.AddWithValue("@Sequencia", parcela.Sequencia);
-            cmd.Parameters.AddWithValue("@DataVencimento", parcela.DataVencimento);
-            cmd.Parameters.AddWithValue("@Valor", parcela.Valor);
-            cmd.Parameters.AddWithValue("@DataPagamento", parcela.DataPagamento ?? (object)DBNull.Value);
-            cmd.Parameters.AddWithValue("@ValorPago", parcela.ValorPago ?? (object)DBNull.Value);
-            cmd.Parameters.AddWithValue("@EspeciePagamento", parcela.EspeciePagamento?.ToString() ?? (object)DBNull.Value);
-            cmd.ExecuteNonQuery();
-        }
-
-        public void Atualizar(PendenciaFinanceiraDTO pendenciaDto)
-        {
-            using var conexao = new MySqlAdaptadorConexao().ObterConexao();
-            conexao.Open();
-
-            var pendencia = new PendenciaFinanceira(
-                pendenciaDto.TransacaoId,
-                pendenciaDto.ValorTotal
-            )
-            {
-                Id = pendenciaDto.Id
-            };
-
-            string sql = @"
-                UPDATE PendenciaFinanceira
-                SET TransacaoId = @TransacaoId, ValorTotal = @ValorTotal
-                WHERE Id = @Id";
-
-            using var cmd = new MySqlCommand(sql, conexao);
-            cmd.Parameters.AddWithValue("@TransacaoId", pendencia.TransacaoId);
-            cmd.Parameters.AddWithValue("@ValorTotal", pendencia.ValorTotal);
-            cmd.Parameters.AddWithValue("@Id", pendencia.Id);
-            cmd.ExecuteNonQuery();
         }
 
         public void Deletar(PendenciaFinanceiraDTO pendenciaDto)
         {
-            using var conexao = new MySqlAdaptadorConexao().ObterConexao();
-            conexao.Open();
+            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            {
 
-            string sql = "DELETE FROM PendenciaFinanceira WHERE Id = @Id";
+                conexao.Open();
 
-            using var cmd = new MySqlCommand(sql, conexao);
-            cmd.Parameters.AddWithValue("@Id", pendenciaDto.Id);
-            cmd.ExecuteNonQuery();
+                string sql = "DELETE FROM PendenciaFinanceira WHERE Id = @Id";
+
+                using (var cmd = new MySqlCommand(sql, conexao))
+                {
+                    cmd.Parameters.AddWithValue("@Id", pendenciaDto.Id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
-        public IEnumerable<PendenciaFinanceiraDTO> Listar()
+        public IEnumerable<PendenciaFinanceiraDTO> ListarTodos()
         {
-            using var conexao = new MySqlAdaptadorConexao().ObterConexao();
-            conexao.Open();
+            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            {
 
+
+                conexao.Open();
+
+                string sql = "SELECT * FROM PendenciaFinanceira";
+                using (var cmd = new MySqlCommand(sql, conexao))
+                {
+
+
+                    using (var dataReader = cmd.ExecuteReader())
+                    {
+
+
+                        return PopularLista(dataReader);
+                    }
+                }
+            }
+        }
+
+        public IEnumerable<PendenciaFinanceiraDTO> PopularLista(MySqlDataReader dataReader)
+        {
             var lista = new List<PendenciaFinanceiraDTO>();
-            string sql = "SELECT * FROM PendenciaFinanceira";
-
-            using var cmd = new MySqlCommand(sql, conexao);
-            using var dataReader = cmd.ExecuteReader();
 
             while (dataReader.Read())
             {
@@ -123,10 +102,27 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
             return lista;
         }
-        public PendenciaFinanceiraDTO RecuperarPor(Func<PendenciaFinanceiraDTO, bool> filtro)
+
+        public PendenciaFinanceiraDTO? RecuperarPorId(int id)
         {
-            var lista = Listar();
-            return lista.FirstOrDefault(filtro);
+            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            {
+                conexao.Open();
+
+                string sql = "SELECT * FROM PendenciaFinanceira WHERE Id = @Id";
+                using (var cmd = new MySqlCommand(sql, conexao))
+                {
+                    cmd.Parameters.AddWithValue("@Id", id);
+
+                    using (var dataReader = cmd.ExecuteReader())
+                    {
+                        var lista = PopularLista(dataReader);
+
+                        return lista.FirstOrDefault();
+                    }
+                }
+            }
         }
+
     }
 }

@@ -13,8 +13,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
     {
         public static void Exibir()
         {
-            try
-            {
+
                 Console.Clear();
                 var automovelRepositorio = new AutomovelRepositorio();
                 var useCase = new ListarAutomovelUseCase(automovelRepositorio);
@@ -25,11 +24,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
                 SubMenuVeiculos.Exibir();
 
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine(ex.StackTrace);
-            }
         }
 
     }
-}

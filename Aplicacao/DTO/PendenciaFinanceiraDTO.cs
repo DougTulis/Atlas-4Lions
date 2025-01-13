@@ -28,7 +28,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
 
         public override string? ToString()
         {
-            return "Valor: " + ValorTotal + ", " + "Transação ID: " + TransacaoId + Parcelas;
+            return "Valor: " + ValorTotal + ", " + "Transação ID: " + TransacaoId;
             
         }
     }

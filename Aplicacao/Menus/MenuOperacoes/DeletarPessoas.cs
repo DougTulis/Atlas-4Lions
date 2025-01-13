@@ -14,8 +14,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
         public static void Deletar()
         {
             Console.Clear();
-            try
-            {
                 var repositorioPessoa = new PessoaRepositorio();
                 var useCaseListar = new ListarPessoaUseCase(repositorioPessoa);
                 var useCaseDeletar = new DeletarPessoaUseCase(repositorioPessoa);
@@ -23,17 +21,12 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
                 useCaseListar.ExecutarDadosBreves();
                 Console.Write("Informe o ID da pessoa que você deseja deletar: ");
                 int escolha  = int.Parse(Console.ReadLine());
-                var pessoaFiltrada = repositorioPessoa.RecuperarPor(a => a.Id == escolha);
+                var pessoaFiltrada = repositorioPessoa.RecuperarPorId(escolha);
                 useCaseDeletar.Executar(pessoaFiltrada);
-                Console.WriteLine("Pessoa deletada com sucesso! Voltando ao menu anterior....");
+            // "Pessoa adicionada com sucesso!"
                 Thread.Sleep(2500);
                 Console.Clear();
-                SubMenuPessoas.Exibir();
-            }catch (MySqlException ex)
-            {
-                Console.WriteLine(ex.StackTrace);
-            }
-            
+            SubMenuPessoas.Exibir(); 
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Infra.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,17 +20,28 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 
             public void ExecutarDadosCompletos()
             {
-                foreach (var item in automovelRepositorio.Listar())
+                foreach (var item in automovelRepositorio.ListarTodos())
                 {
                     Console.WriteLine(item);
                 }
             }
             public void ExecutarDadosBreves()
             {
-                foreach (var item in automovelRepositorio.Listar())
+                foreach (var item in automovelRepositorio.ListarTodos())
                 {
                     Console.WriteLine(item.ExibirDadosBreves());
                 }
             }
+
+        public void ExecutarStatusGaragem()
+        {
+            AutomovelRepositorio automovelRepositorio = new AutomovelRepositorio();
+            var lista = automovelRepositorio.ListarStatusGaragem();
+            foreach (var item in lista)
+            {
+                Console.WriteLine(item.ExibirDadosBreves());
+            }
+
         }
+    }
 }

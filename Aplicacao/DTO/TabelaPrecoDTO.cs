@@ -24,6 +24,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
             AutomovelId = automovelId;
         }
 
+        public TabelaPrecoDTO()
+        {
+        }
+
         public override string? ToString()
         {
             return "ID: " + Id + "\n" + 

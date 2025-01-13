@@ -1,5 +1,7 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
+using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
+using Projeto_ATLAS___4LIONS.Infra.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,23 +13,25 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
     public class CadastroCnh
     {
 
-        public static void Cadastrar(PessoaDTO pessoa)
+        public static void Cadastrar()
         {
-            Console.WriteLine("Deseja vincular CNH? ");
-            Console.WriteLine("1. Sim");
-            Console.WriteLine("2. Não");
-            int escolha = int.Parse(Console.ReadLine());
+            Console.Clear();
+            PessoaRepositorio pessoaRepositorio = new PessoaRepositorio();
+            ListarPessoaUseCase useCaseListarPessoa = new ListarPessoaUseCase(pessoaRepositorio);
+            IncluirCnhUseCase useCaseIncluirCnh = new IncluirCnhUseCase(pessoaRepositorio);
 
-            if (escolha == 1)
-            {
-                Console.Clear();
-                Console.Write(" Numero da CNH: ");
-                string numeroCnh = Console.ReadLine();
-                Console.Write("Vencimento da CNH: ");
-                DateTime vencimento = DateTime.Parse(Console.ReadLine());
-                pessoa.NumeroCnh = numeroCnh;
-                pessoa.VencimentoCnh = vencimento;
-            }
+            useCaseListarPessoa.ExecutarRecuperacaoSemCnh();
+            Console.Write("Escolha o ID da pessoa: ");
+            int escolha = int.Parse(Console.ReadLine());
+            var pessoaFiltrada = pessoaRepositorio.RecuperarPorId(escolha);
+            Console.Write("Numero da CNH: ");
+            string numero = Console.ReadLine();
+            Console.Write("Vencimento: ");
+            DateTime vencimento = DateTime.Parse(Console.ReadLine());
+
+            useCaseIncluirCnh.Executar(pessoaFiltrada,numero,vencimento);
+            Console.Clear();
+            MenuInicial.Exibir();
         }
     }
 }

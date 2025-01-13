@@ -15,15 +15,19 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
     {
         public int Id { get; set; }
         public DateTime DataCriacao { get; set; }
-        public string Modelo { get; private set; }
-        public string Placa { get; private set; }
-        public string Cor { get; private set; }
+        public string Modelo { get;  set; }
+        public string Placa { get;  set; }
+        public string Cor { get;  set; }
         public EStatusVeiculo Status { get; set; }
-        public string? Chassi { get; private set; }
+        public string? Chassi { get;  set; }
         public IList<TabelaPreco> TabelaPrecos { get; set; }
-        public string? Renavam { get; private set; }
-        public int? Oleokm { get; private set; }
-        public int? PastilhaFreioKm { get; private set; }
+        public string? Renavam { get;  set; }
+        public int? Oleokm { get;  set; }
+        public int? PastilhaFreioKm { get;  set; }
+
+        public AutomovelDTO()
+        {
+        }
 
         public AutomovelDTO(string modelo, string placa, string cor, EStatusVeiculo status, string? chassi, string? renavam, int? oleokm, int? pastilhaFreioKm)
         {

@@ -32,6 +32,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Registrar Pagamento");
             Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("4. ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Processar Locação");
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("0. ");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Voltar ao menu inicial");
@@ -51,7 +55,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus
                     HistoricoLocacao.Exibir();
                     break;
                 case 3:
-                    //
+                    RegistroPagamento.Exibir();
+                    break;
+                case 4:
+                    ProcessamentoLocacao.Exibir();
                     break;
                 case 0:
                     MenuInicial.Exibir();

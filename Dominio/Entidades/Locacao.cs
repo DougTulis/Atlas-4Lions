@@ -42,7 +42,8 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         {
             var contratos = new ContratoValidacoes<LocacaoDTO>().PossuiCnh(Condutor, "A pessoa escolhida precisa ter uma CNH vinculada", "Condutor")
                 .SaidaIsOk(this.Saida, this.Retorno, "Data de saída inválida.", "Saida")
-                .RetornoIsOk(this.Retorno, this.Saida, "Data de retorno inválida", "Retorno");
+                .RetornoIsOk(this.Retorno, this.Saida, "Data de retorno inválida", "Retorno")
+;
 
 
             if(!contratos.IsValid())

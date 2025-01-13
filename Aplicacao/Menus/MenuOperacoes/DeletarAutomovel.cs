@@ -15,27 +15,20 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
         public static void Deletar()
         {
             Console.Clear();
-            try
-            {
                 var repositorioAutomovel = new AutomovelRepositorio();
                 var useCaseListar = new ListarAutomovelUseCase(repositorioAutomovel);
                 var useCaseDeletar = new DeletarAutomovelUseCase(repositorioAutomovel);
                 useCaseListar.ExecutarDadosBreves();
                 Console.Write("Informe o ID do veiculo que você deseja deletar: ");
                 int escolha = int.Parse(Console.ReadLine());
-                var veiculoFiltrado = repositorioAutomovel.RecuperarPor(a => a.Id == escolha);
+                var veiculoFiltrado = repositorioAutomovel.RecuperarPorId(escolha);
                 useCaseDeletar.Executar(veiculoFiltrado);
                 Console.WriteLine("Automovel deletado com sucesso! Voltando ao menu anterior....");
                 Thread.Sleep(2500);
                 Console.Clear();
                 SubMenuVeiculos.Exibir();
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine(ex.StackTrace);
-            }
 
         }
    
     }
-}

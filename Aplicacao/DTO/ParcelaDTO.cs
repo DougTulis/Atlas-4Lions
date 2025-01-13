@@ -29,5 +29,15 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public ParcelaDTO()
         {
         }
+
+        public override string? ToString()
+        {
+
+            return $"Id: {Id}, Sequência: {Sequencia}, Valor: {Valor:C}, Vencimento: {DataVencimento:dd/MM/yyyy}";
+        }
+
+
     }
 }
+
+

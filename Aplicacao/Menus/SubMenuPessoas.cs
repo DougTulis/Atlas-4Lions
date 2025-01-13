@@ -29,6 +29,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Excluir Pessoas");
             Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("4. ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Vincular CNH");
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("0. ");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Voltar ao menu inicial");
@@ -49,6 +53,9 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus
                     break;
                 case 3:
                     DeletarPessoas.Deletar();
+                    break;
+                case 4:
+                    CadastroCnh.Cadastrar();
                     break;
                 case 0:
                     MenuInicial.Exibir();

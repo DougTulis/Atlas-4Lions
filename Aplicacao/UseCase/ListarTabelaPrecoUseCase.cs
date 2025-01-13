@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Infra.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             try
             {
-                foreach (var item in tabelaRepositorio.Listar())
+                foreach (var item in tabelaRepositorio.ListarTodos())
                 {
                     Console.WriteLine(item);
                 }
@@ -32,18 +33,9 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 Console.WriteLine(ex.StackTrace);
             }
         }
-        public void ExecutarListarPor(Func<TabelaPrecoDTO, bool> filtro)
+        public TabelaPrecoDTO? ExecutarRecuperarPorId(int id)
         {
-            foreach (var item in tabelaRepositorio.Listar().Where(filtro))
-            {
-                Console.WriteLine(item);
-            }
+           return tabelaRepositorio.RecuperarPorId(id);
         }
-        public TabelaPrecoDTO ExecutarRecuperarPor (Func<TabelaPrecoDTO, bool> filtro)
-        {
-            var lista = tabelaRepositorio.Listar();
-            return lista.FirstOrDefault(filtro);
-        }
-
     }
 }

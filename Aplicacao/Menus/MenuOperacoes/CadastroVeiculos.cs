@@ -56,12 +56,11 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
                     cadastrarPrecoUseCase.Executar(tabelaPrecoDTO);
                 }
           
-                Console.WriteLine("Veículo Cadastrado com sucesso... Voltando ao menu anterior");
+               // Veiculo cadastrado
                 Thread.Sleep(2500);
                 Console.Clear();
                 SubMenuVeiculos.Exibir();
             }
-            catch (MySqlException ex) { Console.WriteLine(ex.StackTrace); }
             catch (FormatException ex) { Console.WriteLine(ex.StackTrace); }
 
         }

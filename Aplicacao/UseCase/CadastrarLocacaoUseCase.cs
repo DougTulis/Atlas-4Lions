@@ -22,6 +22,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             try
             {
+
+
              locacaoRepositorio.Adicionar(_locacao);
             }
             catch (MySqlException ex)

@@ -3,6 +3,7 @@ using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Menus;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
+using Projeto_ATLAS___4LIONS.Infra.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,10 @@ using System.Threading.Tasks;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 {
-    public class CadastrarParcelaUseCase
+    public class IncluirPagamentoUseCase
     {
-        private readonly ICrud<ParcelaDTO> parcelaRepositorio;
-        public CadastrarParcelaUseCase(ICrud<ParcelaDTO> parcelaRepositorio)
+        private readonly ParcelaRepositorio parcelaRepositorio;
+        public IncluirPagamentoUseCase(ParcelaRepositorio parcelaRepositorio)
         {
             this.parcelaRepositorio = parcelaRepositorio;
         }
@@ -38,7 +39,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                     Thread.Sleep(2000);
                     MenuInicial.Exibir();
                 }
-                parcelaRepositorio.Adicionar(parcelaDto);
+                parcelaRepositorio.Atualizar(parcelaDto);
             }
             catch (MySqlException ex)
             {

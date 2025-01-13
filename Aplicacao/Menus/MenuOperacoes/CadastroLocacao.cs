@@ -33,20 +33,18 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
             int escolhaPreco = 0;
             do
             {
-                useCaseListarAutomovel.ExecutarDadosBreves();
-                Console.WriteLine();
-                Console.Write("Selecione o ID do automovel que será locado:  ");
-                int escolhaAutomovel = int.Parse(Console.ReadLine());
-                var automovelDto = automovelRepositorio.RecuperarPor(a => a.Id == escolhaAutomovel );
+
+                var automovelDto = DefinirAutomovel.Definir(automovelRepositorio, useCaseListarAutomovel);
 
                 Console.WriteLine("\nTabela de Preços para este Automóvel:");
-                useCaseListarPrecos.ExecutarListarPor(a => a.AutomovelId == automovelDto.Id);
-                Console.Write("Selecione o preço: (ou Digite 0 para optar outro veículo): ");
+                useCaseListarPrecos.ExecutarRecuperarPorId(automovelDto.Id);
+                Console.WriteLine("Deseja continuar? ");
+                Console.WriteLine("1. Sim");
+                Console.WriteLine("0. Não");
                 escolhaPreco = int.Parse(Console.ReadLine());
-                TabelaPrecoDTO tabelaPreco = useCaseListarPrecos.ExecutarRecuperarPor(a => a.Id == escolhaPreco);
-                
-
+      
                 if (escolhaPreco == 0) continue;
+                TabelaPrecoDTO tabelaPreco = useCaseListarPrecos.ExecutarRecuperarPorId(automovelDto.Id);
 
                 var tipoLocacao = DefinirContratoLocacao.Definir();
 
@@ -112,6 +110,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
                     TabelaPrecos = automovelDto.TabelaPrecos
                 };
                 automovel.AlterarParaAlugado();
+
+
                 UseCaseAlterarStatusVeiculo.Executar(automovel.Id,automovel.Status);
                 
                 var pendencia = new PendenciaFinanceira(Guid.NewGuid(), valorTotal);
@@ -124,8 +124,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
                     DataCriacao = pendencia.DataCriacao,
 
                 };
-
                 useCaseCadastrarPendfin.Executar(pendenciaDto);
+
                 pendencia.Id = pendenciaDto.Id;
         
                 LocacaoDTO locacaoDto = new LocacaoDTO(saida, retorno, tipoLocacao, valorTotal, locatario, condutor, automovel, pendencia)
@@ -134,6 +134,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
                 };
 
                 useCaseCdastrarLocacao.Executar(locacaoDto);
+
                 for (int i = 1; i <= n; i++)
                 {
                     var parcela = new Parcela

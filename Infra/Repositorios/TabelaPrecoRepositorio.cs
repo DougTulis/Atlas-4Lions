@@ -1,103 +1,97 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
-using Projeto_ATLAS___4LIONS.Aplicacao.Menus;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using Projeto_ATLAS___4LIONS.Infra.Servicos;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 {
     public class TabelaPrecoRepositorio : ICrud<TabelaPrecoDTO>
     {
-        public void Adicionar(TabelaPrecoDTO objeto)
+        public void Adicionar(TabelaPrecoDTO tabelaPrecoDto)
         {
-            using var conexao = new MySqlAdaptadorConexao().ObterConexao();
-            conexao.Open();
-
-
-            var tabelaPreco = new TabelaPreco
+            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
             {
-                Id = objeto.Id,
-                AutomovelId = objeto.AutomovelId,
-                Descricao = objeto.Descricao,
-                Valor = objeto.Valor,
+                conexao.Open();
 
-            };
+                var tabelaPreco = new TabelaPreco
+                {
+                    Id = tabelaPrecoDto.Id,
+                    Valor = tabelaPrecoDto.Valor,
+                    Descricao = tabelaPrecoDto.Descricao,
+                    AutomovelId = tabelaPrecoDto.AutomovelId,
+                    DataCriacao = DateTime.Now
+                };
 
-            if (!tabelaPreco.Validacao())
-            {
-                Thread.Sleep(2000);
-                MenuInicial.Exibir();
-            }
-            
-            string sql = @"
+                string sql = @"
                 INSERT INTO tabela_preco (Descricao, Valor, AutomovelId)
                 VALUES (@Descricao, @Valor, @AutomovelId)";
 
-            using var cmd = new MySqlCommand(sql, conexao);
-            cmd.Parameters.AddWithValue("@Descricao", objeto.Descricao);
-            cmd.Parameters.AddWithValue("@Valor", objeto.Valor);
-            cmd.Parameters.AddWithValue("@AutomovelId", objeto.AutomovelId);
+                using var cmd = new MySqlCommand(sql, conexao);
+                cmd.Parameters.AddWithValue("@Descricao", tabelaPrecoDto.Descricao);
+                cmd.Parameters.AddWithValue("@Valor", tabelaPrecoDto.Valor);
+                cmd.Parameters.AddWithValue("@AutomovelId", tabelaPrecoDto.AutomovelId);
 
-            cmd.ExecuteNonQuery();
-            objeto.Id = (int)cmd.LastInsertedId;
-
+                cmd.ExecuteNonQuery();
+                tabelaPrecoDto.Id = (int)cmd.LastInsertedId;
+            }
         }
 
-        public void Atualizar(TabelaPrecoDTO objeto)
+        public void Deletar(TabelaPrecoDTO tabelaPrecoDto)
         {
-            using var conexao = new MySqlAdaptadorConexao().ObterConexao();
-            conexao.Open();
+            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            {
+                var tabelaPreco = new TabelaPreco
+                {
+                    Id = tabelaPrecoDto.Id,
+                    Valor = tabelaPrecoDto.Valor,
+                    Descricao = tabelaPrecoDto.Descricao,
+                    AutomovelId = tabelaPrecoDto.AutomovelId,
+                    DataCriacao = DateTime.Now
+                };
 
-            string sql = @"
-                UPDATE tabela_preco
-                SET Descricao = @Descricao, Valor = @Valor
-                WHERE Id = @Id"; //
+                conexao.Open();
 
-            using var cmd = new MySqlCommand(sql, conexao);
-            cmd.Parameters.AddWithValue("@Descricao", objeto.Descricao);
-            cmd.Parameters.AddWithValue("@Valor", objeto.Valor);
-            cmd.Parameters.AddWithValue("@Id", objeto.Id); 
+                string sql = "DELETE FROM tabela_preco WHERE Id = @Id";
 
-            cmd.ExecuteNonQuery();
+                using (var cmd = new MySqlCommand(sql, conexao))
+                {
+
+
+                    cmd.Parameters.AddWithValue("@Id", tabelaPrecoDto.Id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
-        public void Deletar(TabelaPrecoDTO objeto)
+        public IEnumerable<TabelaPrecoDTO> ListarTodos()
         {
-            using var conexao = new MySqlAdaptadorConexao().ObterConexao();
-            conexao.Open();
+            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            {
+                conexao.Open();
 
-            string sql = "DELETE FROM tabela_preco WHERE Id = @Id";
+                string sql = "SELECT * FROM tabela_preco";
+                using var cmd = new MySqlCommand(sql, conexao);
+                using var dataReader = cmd.ExecuteReader();
 
-            using var cmd = new MySqlCommand(sql, conexao);
-            cmd.Parameters.AddWithValue("@Id", objeto.Id);
-
-            cmd.ExecuteNonQuery();
+                return PopularLista(dataReader);
+            }
         }
 
-        public IEnumerable<TabelaPrecoDTO> Listar()
+        public IEnumerable<TabelaPrecoDTO> PopularLista(MySqlDataReader dataReader)
         {
-            using var conexao = new MySqlAdaptadorConexao().ObterConexao();
-            conexao.Open();
-
             var lista = new List<TabelaPrecoDTO>();
-            string sql = "SELECT * FROM tabela_preco";
-
-            using var cmd = new MySqlCommand(sql, conexao);
-            using var dataReader = cmd.ExecuteReader();
 
             while (dataReader.Read())
             {
-                var tabelaPreco = new TabelaPrecoDTO(
-                    Convert.ToString(dataReader["Descricao"]),
-                    Convert.ToDecimal(dataReader["Valor"]),
-                    Convert.ToInt32(dataReader["AutomovelId"])
-                )
+                var tabelaPreco = new TabelaPrecoDTO
                 {
-                    Id = Convert.ToInt32(dataReader["Id"]) // Captura o ID único do preço
+                    Id = Convert.ToInt32(dataReader["Id"]),
+                    Descricao = Convert.ToString(dataReader["Descricao"]),
+                    Valor = Convert.ToDecimal(dataReader["Valor"]),
+                    AutomovelId = Convert.ToInt32(dataReader["AutomovelId"])
                 };
 
                 lista.Add(tabelaPreco);
@@ -106,17 +100,24 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             return lista;
         }
 
-        public TabelaPrecoDTO RecuperarPor(Func<TabelaPrecoDTO, bool> filtro)
+        public TabelaPrecoDTO? RecuperarPorId(int idAutomovel)
         {
-            var lista = Listar();
-            return lista.FirstOrDefault(filtro);
-        }
+            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            {
+                conexao.Open();
 
-        public IEnumerable<TabelaPrecoDTO> ListarPor(Func<TabelaPrecoDTO, bool> filtro)
-        {
-            var lista = Listar();
-            return lista.Where(filtro);
-        }
+                string sql = "SELECT * FROM tabela_preco WHERE AutomovelId = @AutomovelId";
+                using var cmd = new MySqlCommand(sql, conexao);
+                cmd.Parameters.AddWithValue("@AutomovelId", idAutomovel);
 
+                using (var dataReader = cmd.ExecuteReader())
+                {
+                    var lista = PopularLista(dataReader);
+
+                    return lista.FirstOrDefault();
+                }
+            }
+        }
     }
+
 }

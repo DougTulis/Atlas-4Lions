@@ -20,8 +20,7 @@ pessoaRepositorio, ListarPessoaUseCase useCaseListarPessoa)
             Console.WriteLine();
             Console.Write("Selecione o Id do condutor: ");
             int escolhaCondutor = int.Parse(Console.ReadLine());
-            var condutorDto =
-useCaseListarPessoa.ExecutarRecuperarPor(a => a.Id == escolhaCondutor);
+            var condutorDto = useCaseListarPessoa.ExecutarRecuperarPorId(escolhaCondutor);
             return condutorDto;
         }
     }

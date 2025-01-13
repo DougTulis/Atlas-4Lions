@@ -18,7 +18,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
             Console.WriteLine();
             Console.Write("Selecione o Id do locatário: ");
             int escolhaLocatario = int.Parse(Console.ReadLine());
-            var locatarioDto = useCaseListarPessoa.ExecutarRecuperarPor(a => a.Id == escolhaLocatario);
+            var locatarioDto = useCaseListarPessoa.ExecutarRecuperarPorId(escolhaLocatario);
             return locatarioDto;
         }
 

@@ -19,7 +19,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public string Email { get; set; }
         public string Contato { get; set; }
         public DateTime DataNascimento { get; set; }
-        public string Cpf { get; set; }
+        public string? Cpf { get; set; } 
+        public string? Cnpj { get; set; } 
         public string? NumeroCnh { get; set; }
         public DateTime? VencimentoCnh { get; set; }
 
@@ -32,16 +33,14 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
             Id = id;
         }
 
-
-        public PessoaDTO(string nome, string email, string contato, DateTime dataNascimento, string cpf)
+        public PessoaDTO(string nome, string email, string contato, DateTime dataNascimento)
         {
             Nome = nome;
             Email = email;
             Contato = contato;
             DataNascimento = dataNascimento;
-            Cpf = cpf;
         }
-   
+
         public override string? ToString()
         {
             return "Id: " + Id + "\n" +
