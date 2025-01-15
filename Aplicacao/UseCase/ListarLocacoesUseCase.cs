@@ -34,6 +34,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 Console.WriteLine(item);
             }
 
+        }
+        public LocacaoDTO? ExecutarRecuperarPorId(int id)
+        {
+            return locacaoRepositorio.RecuperarPorId(id);
 
 
         }

@@ -17,9 +17,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
             var lista = new List<TabelaPreco>();
             Console.Clear();
             Console.WriteLine("TABELA DE PREÇOS");
-            Console.Write("Quantos preços você deseja definir ao automovel? ");
-            int quantidade = int.Parse(Console.ReadLine());
-            for (int i = 0; i < quantidade; i++)
+            for (int i = 0; i < 1; i++)
             {
                 Console.Write("Insira a descrição (ex: popular 2 portas): ");
                 string descricao = Console.ReadLine();

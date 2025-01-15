@@ -26,7 +26,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
                 case 2:
                     return ETipoLocacao.DIARIA;
                 default:
-                    Console.WriteLine("Opção invalida. tente novamente.");
                     Thread.Sleep(2000);
                     return Definir();
             }

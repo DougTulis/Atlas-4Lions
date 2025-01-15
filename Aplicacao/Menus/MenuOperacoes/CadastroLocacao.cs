@@ -66,7 +66,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
                 }
                 decimal valorTotal = periodo.Days * tabelaPreco.Valor;
 
-                decimal valorParcela = Math.Round(valorTotal / n, 2);
+                decimal valorParcela = Math.Floor(valorTotal / n);
 
                 var locatario = new Pessoa
                 {

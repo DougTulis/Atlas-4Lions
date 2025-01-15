@@ -13,61 +13,68 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
     {
         public void Adicionar(LocacaoDTO locacaoDto)
         {
-            using var conexao = new MySqlAdaptadorConexao().ObterConexao();
-            conexao.Open();
-
-            // Populando o modelo
-            var locacao = new Locacao
+            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
             {
-                Saida = locacaoDto.Saida,
-                Retorno = locacaoDto.Retorno,
-                TipoLocacao = locacaoDto.TipoLocacao,
-                ValorTotal = locacaoDto.ValorTotal,
-                Locatario = new Pessoa { Id = locacaoDto.Locatario.Id },
-                Condutor = new Pessoa { Id = locacaoDto.Condutor.Id },
-                Automovel = new Automovel { Id = locacaoDto.Automovel.Id },
-                PendenciaFinanceira = new PendenciaFinanceira { Id = locacaoDto.PendenciaFinanceira.Id },
-                Status = locacaoDto.Status
-            };
+                conexao.Open();
 
-            string sql = @"
+                var locacao = new Locacao
+                {
+                    Saida = locacaoDto.Saida,
+                    Retorno = locacaoDto.Retorno,
+                    TipoLocacao = locacaoDto.TipoLocacao,
+                    ValorTotal = locacaoDto.ValorTotal,
+                    Locatario = new Pessoa { Id = locacaoDto.Locatario.Id },
+                    Condutor = new Pessoa { Id = locacaoDto.Condutor.Id },
+                    Automovel = new Automovel { Id = locacaoDto.Automovel.Id },
+                    PendenciaFinanceira = new PendenciaFinanceira { Id = locacaoDto.PendenciaFinanceira.Id },
+                    Status = locacaoDto.Status
+                };
+
+                string sql = @"
                 INSERT INTO Locacao (Saida, Retorno, TipoLocacao, ValorTotal, LocatarioId, CondutorId, AutomovelId, PendenciaFinanceiraId, StatusLocacao)
                 VALUES (@Saida, @Retorno, @TipoLocacao, @ValorTotal, @LocatarioId, @CondutorId, @AutomovelId, @PendenciaFinanceiraId, @StatusLocacao)";
 
-            using var cmd = new MySqlCommand(sql, conexao);
-            cmd.Parameters.AddWithValue("@Saida", locacao.Saida);
-            cmd.Parameters.AddWithValue("@Retorno", locacao.Retorno);
-            cmd.Parameters.AddWithValue("@TipoLocacao", (int)locacao.TipoLocacao);
-            cmd.Parameters.AddWithValue("@ValorTotal", locacao.ValorTotal);
-            cmd.Parameters.AddWithValue("@LocatarioId", locacao.Locatario.Id);
-            cmd.Parameters.AddWithValue("@CondutorId", locacao.Condutor.Id);
-            cmd.Parameters.AddWithValue("@AutomovelId", locacao.Automovel.Id);
-            cmd.Parameters.AddWithValue("@PendenciaFinanceiraId", locacao.PendenciaFinanceira.Id);
-            cmd.Parameters.AddWithValue("@StatusLocacao", (int)locacao.Status);
+                using (var cmd = new MySqlCommand(sql, conexao))
+                {
 
-            cmd.ExecuteNonQuery();
-            locacaoDto.Id = (int)cmd.LastInsertedId;
+                    cmd.Parameters.AddWithValue("@Saida", locacao.Saida);
+                    cmd.Parameters.AddWithValue("@Retorno", locacao.Retorno);
+                    cmd.Parameters.AddWithValue("@TipoLocacao", (int)locacao.TipoLocacao);
+                    cmd.Parameters.AddWithValue("@ValorTotal", locacao.ValorTotal);
+                    cmd.Parameters.AddWithValue("@LocatarioId", locacao.Locatario.Id);
+                    cmd.Parameters.AddWithValue("@CondutorId", locacao.Condutor.Id);
+                    cmd.Parameters.AddWithValue("@AutomovelId", locacao.Automovel.Id);
+                    cmd.Parameters.AddWithValue("@PendenciaFinanceiraId", locacao.PendenciaFinanceira.Id);
+                    cmd.Parameters.AddWithValue("@StatusLocacao", (int)locacao.Status);
+
+                    cmd.ExecuteNonQuery();
+                    locacaoDto.Id = (int)cmd.LastInsertedId;
+                }
+            }
         }
 
         public void Deletar(LocacaoDTO locacaoDto)
         {
-            using var conexao = new MySqlAdaptadorConexao().ObterConexao();
-            conexao.Open();
-
-            var locacao = new Locacao
-            {
-                Id = locacaoDto.Id
-            };
-
-            string sql = "DELETE FROM Locacao WHERE Id = @Id";
-
-            using (var cmd = new MySqlCommand(sql, conexao))
+            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
             {
 
-                cmd.Parameters.AddWithValue("@Id", locacao.Id);
-                cmd.ExecuteNonQuery();
+                conexao.Open();
+
+                var locacao = new Locacao
+                {
+                    Id = locacaoDto.Id
+                };
+
+                string sql = "DELETE FROM Locacao WHERE Id = @Id";
+
+                using (var cmd = new MySqlCommand(sql, conexao))
+                {
+
+                    cmd.Parameters.AddWithValue("@Id", locacao.Id);
+                    cmd.ExecuteNonQuery();
+                }
+
             }
-
         }
 
         public IEnumerable<LocacaoDTO> ListarTodos()
@@ -141,17 +148,20 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
         public IEnumerable<LocacaoDTO> ListarPorStatusAndamento()
         {
-            using var conexao = new MySqlAdaptadorConexao().ObterConexao();
-            conexao.Open();
-
-            string sql = "SELECT * FROM Locacao WHERE statusLocacao = @statusLocacao";
-            using (var cmd = new MySqlCommand(sql, conexao))
+            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
             {
-                cmd.Parameters.AddWithValue("@statusLocacao", (int)EStatusLocacao.ANDAMENTO);
-                using (var dataReader = cmd.ExecuteReader())
+
+                conexao.Open();
+
+                string sql = "SELECT * FROM Locacao WHERE statusLocacao = @statusLocacao";
+                using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    var lista = PopularLista(dataReader);
-                    return lista;
+                    cmd.Parameters.AddWithValue("@statusLocacao", (int)EStatusLocacao.ANDAMENTO);
+                    using (var dataReader = cmd.ExecuteReader())
+                    {
+                        var lista = PopularLista(dataReader);
+                        return lista;
+                    }
                 }
             }
         }

@@ -128,24 +128,34 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 }
             }
         }
-
         public IEnumerable<PessoaDTO> PopularLista(MySqlDataReader dataReader)
         {
             var lista = new List<PessoaDTO>();
 
             while (dataReader.Read())
             {
-                var pessoa = new PessoaDTO(
-                    Convert.ToString(dataReader["Nome"]),
-                    Convert.ToString(dataReader["Email"]),
-                    Convert.ToString(dataReader["Contato"]),
-                    Convert.ToDateTime(dataReader["DataNascimento"]),
-                    dataReader["Cpf"] != DBNull.Value ? Convert.ToString(dataReader["Cpf"]) : null)
+                var nome = Convert.ToString(dataReader["Nome"]);
+                var email = Convert.ToString(dataReader["Email"]);
+                var contato = Convert.ToString(dataReader["Contato"]);
+                var dataNascimento = dataReader["DataNascimento"] != DBNull.Value
+                    ? Convert.ToDateTime(dataReader["DataNascimento"])
+                    : (DateTime?)null; // Opcional para pessoa jurídica
+                var cpf = dataReader["Cpf"] != DBNull.Value
+                    ? Convert.ToString(dataReader["Cpf"])
+                    : null;
+                var cnpj = dataReader["Cnpj"] != DBNull.Value
+                    ? Convert.ToString(dataReader["Cnpj"])
+                    : null;
+
+                var pessoa = new PessoaDTO(nome, email, contato, cpf, cnpj)
                 {
                     Id = Convert.ToInt32(dataReader["Id"]),
-                    Cnpj = dataReader["Cnpj"] != DBNull.Value ? Convert.ToString(dataReader["Cnpj"]) : null,
-                    NumeroCnh = dataReader["NumeroCnh"] != DBNull.Value ? Convert.ToString(dataReader["NumeroCnh"]) : null,
-                    VencimentoCnh = dataReader["VencimentoCnh"] != DBNull.Value ? Convert.ToDateTime(dataReader["VencimentoCnh"]) : null,
+                    NumeroCnh = dataReader["NumeroCnh"] != DBNull.Value
+                        ? Convert.ToString(dataReader["NumeroCnh"])
+                        : null,
+                    VencimentoCnh = dataReader["VencimentoCnh"] != DBNull.Value
+                        ? Convert.ToDateTime(dataReader["VencimentoCnh"])
+                        : (DateTime?)null,
                     DataCriacao = Convert.ToDateTime(dataReader["DataCriacao"])
                 };
 
@@ -154,5 +164,6 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
             return lista;
         }
+
     }
 }
