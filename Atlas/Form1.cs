@@ -6,6 +6,8 @@ namespace Atlas
     public partial class Form1 : Form
     {
         private FrmCadPessoas frmCadPessoas = new FrmCadPessoas();
+        private FrmCadAutomovel frmCadAutomovel = new FrmCadAutomovel();
+
 
         public Form1()
         {
@@ -96,7 +98,8 @@ namespace Atlas
 
         private void itmGerenciamentoPessoasCadPessoas_Click(object sender, EventArgs e)
         {
-            frmCadPessoas.ShowDialog();
+            frmCadPessoas.MdiParent = this;
+            frmCadPessoas.Show();
         }
 
         private void itmGerenciamentoPessoasExcluirPessoas_Click(object sender, EventArgs e)
@@ -116,7 +119,8 @@ namespace Atlas
 
         private void itmGerenciamentoVeiculosCadVeiculo_Click(object sender, EventArgs e)
         {
-
+            frmCadAutomovel.MdiParent = this;
+            frmCadAutomovel.Show();
         }
 
         private void itmGerenciamentoVeiculosHistVeiculo_Click(object sender, EventArgs e)
