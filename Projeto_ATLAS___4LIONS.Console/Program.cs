@@ -7,7 +7,7 @@ namespace Projeto_ATLAS___4LIONS
     {
         static void Main(string[] args)
         {
-
+            Console.WriteLine("teste");
             var pessoaRepositorio = new PessoaRepositorio();
             var automovelRepositorio = new AutomovelRepositorio();
             var locacaoRepositorio = new LocacaoRepositorio();
