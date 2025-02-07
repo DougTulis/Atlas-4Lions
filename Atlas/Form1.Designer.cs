@@ -76,7 +76,7 @@
             lblTitulo.BackColor = Color.Transparent;
             lblTitulo.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             lblTitulo.ForeColor = Color.FromArgb(76, 76, 77);
-            lblTitulo.Location = new Point(53, 10);
+            lblTitulo.Location = new Point(56, 10);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(195, 20);
             lblTitulo.TabIndex = 3;
