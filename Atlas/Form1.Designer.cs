@@ -28,19 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             panel1 = new Panel();
             dungeonHeaderLabel1 = new ReaLTaiizor.Controls.DungeonHeaderLabel();
             nightControlBox1 = new ReaLTaiizor.Controls.NightControlBox();
             pictureBox1 = new PictureBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
-            button2 = new Button();
-            button1 = new Button();
-            button3 = new Button();
-            flowLayoutPanel2 = new FlowLayoutPanel();
+            timer1 = new System.Windows.Forms.Timer(components);
+            menuStrip1 = new MenuStrip();
+            cadastroToolStripMenuItem = new ToolStripMenuItem();
+            veículosToolStripMenuItem = new ToolStripMenuItem();
+            históricoDePessoasToolStripMenuItem = new ToolStripMenuItem();
+            excluirPessoasCadastradasToolStripMenuItem = new ToolStripMenuItem();
+            vincularCNHToolStripMenuItem = new ToolStripMenuItem();
+            gerenciamentoToolStripMenuItem = new ToolStripMenuItem();
+            gerenciamentoDeLocaçõesToolStripMenuItem = new ToolStripMenuItem();
+            cadastrarVeículoToolStripMenuItem = new ToolStripMenuItem();
+            históricoDeVeículosToolStripMenuItem = new ToolStripMenuItem();
+            excluirVeículoToolStripMenuItem = new ToolStripMenuItem();
+            cadastrarLocaçãoToolStripMenuItem = new ToolStripMenuItem();
+            históricoDeLocaçõesToolStripMenuItem = new ToolStripMenuItem();
+            rehistrarPagamentoToolStripMenuItem = new ToolStripMenuItem();
+            finalizarLocaçãoToolStripMenuItem = new ToolStripMenuItem();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            flowLayoutPanel1.SuspendLayout();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -50,10 +63,10 @@
             panel1.Controls.Add(nightControlBox1);
             panel1.Controls.Add(pictureBox1);
             panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 0);
+            panel1.Location = new Point(0, 24);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(897, 37);
+            panel1.Size = new Size(737, 37);
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint;
             // 
@@ -84,7 +97,7 @@
             nightControlBox1.EnableMaximizeColor = Color.FromArgb(160, 160, 160);
             nightControlBox1.EnableMinimizeButton = true;
             nightControlBox1.EnableMinimizeColor = Color.FromArgb(160, 160, 160);
-            nightControlBox1.Location = new Point(775, 0);
+            nightControlBox1.Location = new Point(598, 0);
             nightControlBox1.MaximizeHoverColor = Color.FromArgb(15, 255, 255, 255);
             nightControlBox1.MaximizeHoverForeColor = Color.White;
             nightControlBox1.MinimizeHoverColor = Color.FromArgb(15, 255, 255, 255);
@@ -108,79 +121,128 @@
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.BackColor = Color.Black;
-            flowLayoutPanel1.Controls.Add(button2);
-            flowLayoutPanel1.Controls.Add(button1);
             flowLayoutPanel1.Dock = DockStyle.Left;
             flowLayoutPanel1.ForeColor = SystemColors.Control;
-            flowLayoutPanel1.Location = new Point(0, 37);
+            flowLayoutPanel1.Location = new Point(0, 61);
             flowLayoutPanel1.Margin = new Padding(3, 2, 3, 2);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(220, 391);
+            flowLayoutPanel1.Size = new Size(228, 367);
             flowLayoutPanel1.TabIndex = 2;
             flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
             // 
-            // button2
+            // menuStrip1
             // 
-            button2.BackColor = Color.Black;
-            button2.ForeColor = Color.White;
-            button2.Image = Projeto_ATLAS___4LIONS.Forms.Properties.Resources.icons8_usuário_30;
-            button2.Location = new Point(3, 2);
-            button2.Margin = new Padding(3, 2, 3, 2);
-            button2.Name = "button2";
-            button2.Size = new Size(217, 59);
-            button2.TabIndex = 3;
-            button2.Text = "Gerenciamento de automóveis";
-            button2.UseVisualStyleBackColor = false;
-            button2.Click += button2_Click;
+            menuStrip1.Items.AddRange(new ToolStripItem[] { cadastroToolStripMenuItem, gerenciamentoToolStripMenuItem, gerenciamentoDeLocaçõesToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(737, 24);
+            menuStrip1.TabIndex = 5;
+            menuStrip1.Text = "menuStrip1";
             // 
-            // button1
+            // cadastroToolStripMenuItem
             // 
-            button1.BackColor = Color.Black;
-            button1.ForeColor = Color.White;
-            button1.Image = Projeto_ATLAS___4LIONS.Forms.Properties.Resources.icons8_usuário_30;
-            button1.Location = new Point(3, 65);
-            button1.Margin = new Padding(3, 2, 3, 2);
-            button1.Name = "button1";
-            button1.Size = new Size(217, 59);
-            button1.TabIndex = 0;
-            button1.Text = "Gerenciamento de clientes";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click_1;
+            cadastroToolStripMenuItem.BackColor = SystemColors.AppWorkspace;
+            cadastroToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { veículosToolStripMenuItem, históricoDePessoasToolStripMenuItem, excluirPessoasCadastradasToolStripMenuItem, vincularCNHToolStripMenuItem });
+            cadastroToolStripMenuItem.Name = "cadastroToolStripMenuItem";
+            cadastroToolStripMenuItem.Size = new Size(160, 20);
+            cadastroToolStripMenuItem.Text = "Gerenciamento de pessoas";
+            cadastroToolStripMenuItem.Click += cadastroToolStripMenuItem_Click;
             // 
-            // button3
+            // veículosToolStripMenuItem
             // 
-            button3.BackColor = Color.Black;
-            button3.ForeColor = Color.White;
-            button3.Image = Projeto_ATLAS___4LIONS.Forms.Properties.Resources.icons8_usuário_30;
-            button3.Location = new Point(263, 218);
-            button3.Margin = new Padding(3, 2, 3, 2);
-            button3.Name = "button3";
-            button3.Size = new Size(217, 59);
-            button3.TabIndex = 4;
-            button3.Text = "Gerenciamento de locações - teste";
-            button3.UseVisualStyleBackColor = false;
-            button3.Click += button3_Click;
+            veículosToolStripMenuItem.Name = "veículosToolStripMenuItem";
+            veículosToolStripMenuItem.Size = new Size(218, 22);
+            veículosToolStripMenuItem.Text = "Cadastro de pessoas";
+            veículosToolStripMenuItem.Click += veículosToolStripMenuItem_Click;
             // 
-            // flowLayoutPanel2
+            // históricoDePessoasToolStripMenuItem
             // 
-            flowLayoutPanel2.BackColor = Color.Black;
-            flowLayoutPanel2.Location = new Point(263, 50);
-            flowLayoutPanel2.Margin = new Padding(3, 2, 3, 2);
-            flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(217, 151);
-            flowLayoutPanel2.TabIndex = 5;
-            flowLayoutPanel2.Paint += flowLayoutPanel2_Paint;
+            históricoDePessoasToolStripMenuItem.Name = "históricoDePessoasToolStripMenuItem";
+            históricoDePessoasToolStripMenuItem.Size = new Size(218, 22);
+            históricoDePessoasToolStripMenuItem.Text = "Histórico de pessoas";
+            // 
+            // excluirPessoasCadastradasToolStripMenuItem
+            // 
+            excluirPessoasCadastradasToolStripMenuItem.Name = "excluirPessoasCadastradasToolStripMenuItem";
+            excluirPessoasCadastradasToolStripMenuItem.Size = new Size(218, 22);
+            excluirPessoasCadastradasToolStripMenuItem.Text = "Excluir pessoas cadastradas";
+            // 
+            // vincularCNHToolStripMenuItem
+            // 
+            vincularCNHToolStripMenuItem.Name = "vincularCNHToolStripMenuItem";
+            vincularCNHToolStripMenuItem.Size = new Size(218, 22);
+            vincularCNHToolStripMenuItem.Text = "Vincular CNH";
+            // 
+            // gerenciamentoToolStripMenuItem
+            // 
+            gerenciamentoToolStripMenuItem.BackColor = SystemColors.AppWorkspace;
+            gerenciamentoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { cadastrarVeículoToolStripMenuItem, históricoDeVeículosToolStripMenuItem, excluirVeículoToolStripMenuItem });
+            gerenciamentoToolStripMenuItem.Name = "gerenciamentoToolStripMenuItem";
+            gerenciamentoToolStripMenuItem.Size = new Size(162, 20);
+            gerenciamentoToolStripMenuItem.Text = "Gerenciamento de veículos";
+            gerenciamentoToolStripMenuItem.Click += gerenciamentoToolStripMenuItem_Click;
+            // 
+            // gerenciamentoDeLocaçõesToolStripMenuItem
+            // 
+            gerenciamentoDeLocaçõesToolStripMenuItem.BackColor = SystemColors.AppWorkspace;
+            gerenciamentoDeLocaçõesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { cadastrarLocaçãoToolStripMenuItem, históricoDeLocaçõesToolStripMenuItem, rehistrarPagamentoToolStripMenuItem, finalizarLocaçãoToolStripMenuItem });
+            gerenciamentoDeLocaçõesToolStripMenuItem.Name = "gerenciamentoDeLocaçõesToolStripMenuItem";
+            gerenciamentoDeLocaçõesToolStripMenuItem.Size = new Size(168, 20);
+            gerenciamentoDeLocaçõesToolStripMenuItem.Text = "Gerenciamento de Locações";
+            // 
+            // cadastrarVeículoToolStripMenuItem
+            // 
+            cadastrarVeículoToolStripMenuItem.Name = "cadastrarVeículoToolStripMenuItem";
+            cadastrarVeículoToolStripMenuItem.Size = new Size(184, 22);
+            cadastrarVeículoToolStripMenuItem.Text = "Cadastrar veículo";
+            // 
+            // históricoDeVeículosToolStripMenuItem
+            // 
+            históricoDeVeículosToolStripMenuItem.Name = "históricoDeVeículosToolStripMenuItem";
+            históricoDeVeículosToolStripMenuItem.Size = new Size(184, 22);
+            históricoDeVeículosToolStripMenuItem.Text = "Histórico de veículos";
+            // 
+            // excluirVeículoToolStripMenuItem
+            // 
+            excluirVeículoToolStripMenuItem.Name = "excluirVeículoToolStripMenuItem";
+            excluirVeículoToolStripMenuItem.Size = new Size(184, 22);
+            excluirVeículoToolStripMenuItem.Text = "Excluir veículo";
+            // 
+            // cadastrarLocaçãoToolStripMenuItem
+            // 
+            cadastrarLocaçãoToolStripMenuItem.Name = "cadastrarLocaçãoToolStripMenuItem";
+            cadastrarLocaçãoToolStripMenuItem.Size = new Size(187, 22);
+            cadastrarLocaçãoToolStripMenuItem.Text = "Cadastrar Locação";
+            // 
+            // históricoDeLocaçõesToolStripMenuItem
+            // 
+            históricoDeLocaçõesToolStripMenuItem.Name = "históricoDeLocaçõesToolStripMenuItem";
+            históricoDeLocaçõesToolStripMenuItem.Size = new Size(187, 22);
+            históricoDeLocaçõesToolStripMenuItem.Text = "Histórico de locações";
+            // 
+            // rehistrarPagamentoToolStripMenuItem
+            // 
+            rehistrarPagamentoToolStripMenuItem.Name = "rehistrarPagamentoToolStripMenuItem";
+            rehistrarPagamentoToolStripMenuItem.Size = new Size(187, 22);
+            rehistrarPagamentoToolStripMenuItem.Text = "Registrar pagamento";
+            rehistrarPagamentoToolStripMenuItem.Click += rehistrarPagamentoToolStripMenuItem_Click;
+            // 
+            // finalizarLocaçãoToolStripMenuItem
+            // 
+            finalizarLocaçãoToolStripMenuItem.Name = "finalizarLocaçãoToolStripMenuItem";
+            finalizarLocaçãoToolStripMenuItem.Size = new Size(187, 22);
+            finalizarLocaçãoToolStripMenuItem.Text = "Baixa de locações";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(897, 428);
-            Controls.Add(button3);
+            ClientSize = new Size(737, 428);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(panel1);
-            Controls.Add(flowLayoutPanel2);
+            Controls.Add(menuStrip1);
             FormBorderStyle = FormBorderStyle.None;
+            MainMenuStrip = menuStrip1;
             Margin = new Padding(3, 2, 3, 2);
             Name = "Form1";
             Text = "Form1";
@@ -188,8 +250,10 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            flowLayoutPanel1.ResumeLayout(false);
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -199,9 +263,21 @@
         private ReaLTaiizor.Controls.NightControlBox nightControlBox1;
         private FlowLayoutPanel flowLayoutPanel1;
         private ReaLTaiizor.Controls.DungeonHeaderLabel dungeonHeaderLabel1;
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Timer timer1;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem cadastroToolStripMenuItem;
+        private ToolStripMenuItem veículosToolStripMenuItem;
+        private ToolStripMenuItem gerenciamentoToolStripMenuItem;
+        private ToolStripMenuItem gerenciamentoDeLocaçõesToolStripMenuItem;
+        private ToolStripMenuItem históricoDePessoasToolStripMenuItem;
+        private ToolStripMenuItem excluirPessoasCadastradasToolStripMenuItem;
+        private ToolStripMenuItem vincularCNHToolStripMenuItem;
+        private ToolStripMenuItem cadastrarVeículoToolStripMenuItem;
+        private ToolStripMenuItem históricoDeVeículosToolStripMenuItem;
+        private ToolStripMenuItem excluirVeículoToolStripMenuItem;
+        private ToolStripMenuItem cadastrarLocaçãoToolStripMenuItem;
+        private ToolStripMenuItem históricoDeLocaçõesToolStripMenuItem;
+        private ToolStripMenuItem rehistrarPagamentoToolStripMenuItem;
+        private ToolStripMenuItem finalizarLocaçãoToolStripMenuItem;
     }
 }

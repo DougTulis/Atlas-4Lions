@@ -1,3 +1,5 @@
+using Projeto_ATLAS___4LIONS.Forms.Properties;
+
 namespace Atlas
 {
     public partial class Form1 : Form
@@ -58,7 +60,32 @@ namespace Atlas
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void airButton1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void flowLayoutPanel2_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void cadastroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gerenciamentoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void veículosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rehistrarPagamentoToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
