@@ -31,26 +31,26 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             panel1 = new Panel();
-            dungeonHeaderLabel1 = new ReaLTaiizor.Controls.DungeonHeaderLabel();
+            lblTitulo = new ReaLTaiizor.Controls.DungeonHeaderLabel();
             nightControlBox1 = new ReaLTaiizor.Controls.NightControlBox();
             pictureBox1 = new PictureBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
             timer1 = new System.Windows.Forms.Timer(components);
             menuStrip1 = new MenuStrip();
-            cadastroToolStripMenuItem = new ToolStripMenuItem();
-            veículosToolStripMenuItem = new ToolStripMenuItem();
-            históricoDePessoasToolStripMenuItem = new ToolStripMenuItem();
-            excluirPessoasCadastradasToolStripMenuItem = new ToolStripMenuItem();
-            vincularCNHToolStripMenuItem = new ToolStripMenuItem();
-            gerenciamentoToolStripMenuItem = new ToolStripMenuItem();
-            gerenciamentoDeLocaçõesToolStripMenuItem = new ToolStripMenuItem();
-            cadastrarVeículoToolStripMenuItem = new ToolStripMenuItem();
-            históricoDeVeículosToolStripMenuItem = new ToolStripMenuItem();
-            excluirVeículoToolStripMenuItem = new ToolStripMenuItem();
-            cadastrarLocaçãoToolStripMenuItem = new ToolStripMenuItem();
-            históricoDeLocaçõesToolStripMenuItem = new ToolStripMenuItem();
-            rehistrarPagamentoToolStripMenuItem = new ToolStripMenuItem();
-            finalizarLocaçãoToolStripMenuItem = new ToolStripMenuItem();
+            mnuGerenciamentoPessoas = new ToolStripMenuItem();
+            itmGerenciamentoPessoasCadPessoas = new ToolStripMenuItem();
+            itmGerenciamentoPessoasHistPessoas = new ToolStripMenuItem();
+            itmGerenciamentoPessoasExcluirPessoas = new ToolStripMenuItem();
+            itmGerenciamentoPessoasVincularCnh = new ToolStripMenuItem();
+            mnuGerenciamentoVeiculos = new ToolStripMenuItem();
+            itmGerenciamentoVeiculosCadVeiculo = new ToolStripMenuItem();
+            itmGerenciamentoVeiculosHistVeiculo = new ToolStripMenuItem();
+            itmGerenciamentoVeiculosExcluirVeiculo = new ToolStripMenuItem();
+            mnuGerenciamentoLocacoes = new ToolStripMenuItem();
+            itmGerenciamentoLocacoesCadLocacoes = new ToolStripMenuItem();
+            itmGerenciamentoLocacoesHistLocacoes = new ToolStripMenuItem();
+            itmGerenciamentoLocacoesRegPagamento = new ToolStripMenuItem();
+            itmGerenciamentoLocacoesBaixaLocacao = new ToolStripMenuItem();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             menuStrip1.SuspendLayout();
@@ -59,7 +59,7 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
-            panel1.Controls.Add(dungeonHeaderLabel1);
+            panel1.Controls.Add(lblTitulo);
             panel1.Controls.Add(nightControlBox1);
             panel1.Controls.Add(pictureBox1);
             panel1.Dock = DockStyle.Top;
@@ -70,18 +70,18 @@
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint;
             // 
-            // dungeonHeaderLabel1
+            // lblTitulo
             // 
-            dungeonHeaderLabel1.AutoSize = true;
-            dungeonHeaderLabel1.BackColor = Color.Transparent;
-            dungeonHeaderLabel1.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            dungeonHeaderLabel1.ForeColor = Color.FromArgb(76, 76, 77);
-            dungeonHeaderLabel1.Location = new Point(53, 10);
-            dungeonHeaderLabel1.Name = "dungeonHeaderLabel1";
-            dungeonHeaderLabel1.Size = new Size(195, 20);
-            dungeonHeaderLabel1.TabIndex = 3;
-            dungeonHeaderLabel1.Text = "ATLAS - Locação de Carros";
-            dungeonHeaderLabel1.Click += dungeonHeaderLabel1_Click;
+            lblTitulo.AutoSize = true;
+            lblTitulo.BackColor = Color.Transparent;
+            lblTitulo.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            lblTitulo.ForeColor = Color.FromArgb(76, 76, 77);
+            lblTitulo.Location = new Point(53, 10);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(195, 20);
+            lblTitulo.TabIndex = 3;
+            lblTitulo.Text = "ATLAS - Locação de Carros";
+            lblTitulo.Click += lblTitulo_Click;
             // 
             // nightControlBox1
             // 
@@ -105,6 +105,7 @@
             nightControlBox1.Name = "nightControlBox1";
             nightControlBox1.Size = new Size(139, 31);
             nightControlBox1.TabIndex = 1;
+            nightControlBox1.Click += nightControlBox1_Click;
             // 
             // pictureBox1
             // 
@@ -126,126 +127,142 @@
             flowLayoutPanel1.Location = new Point(0, 61);
             flowLayoutPanel1.Margin = new Padding(3, 2, 3, 2);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(228, 367);
+            flowLayoutPanel1.Size = new Size(99, 367);
             flowLayoutPanel1.TabIndex = 2;
             flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { cadastroToolStripMenuItem, gerenciamentoToolStripMenuItem, gerenciamentoDeLocaçõesToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { mnuGerenciamentoPessoas, mnuGerenciamentoVeiculos, mnuGerenciamentoLocacoes });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(737, 24);
             menuStrip1.TabIndex = 5;
             menuStrip1.Text = "menuStrip1";
             // 
-            // cadastroToolStripMenuItem
+            // mnuGerenciamentoPessoas
             // 
-            cadastroToolStripMenuItem.BackColor = SystemColors.AppWorkspace;
-            cadastroToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { veículosToolStripMenuItem, históricoDePessoasToolStripMenuItem, excluirPessoasCadastradasToolStripMenuItem, vincularCNHToolStripMenuItem });
-            cadastroToolStripMenuItem.Name = "cadastroToolStripMenuItem";
-            cadastroToolStripMenuItem.Size = new Size(160, 20);
-            cadastroToolStripMenuItem.Text = "Gerenciamento de pessoas";
-            cadastroToolStripMenuItem.Click += cadastroToolStripMenuItem_Click;
+            mnuGerenciamentoPessoas.BackColor = SystemColors.AppWorkspace;
+            mnuGerenciamentoPessoas.DropDownItems.AddRange(new ToolStripItem[] { itmGerenciamentoPessoasCadPessoas, itmGerenciamentoPessoasHistPessoas, itmGerenciamentoPessoasExcluirPessoas, itmGerenciamentoPessoasVincularCnh });
+            mnuGerenciamentoPessoas.Name = "mnuGerenciamentoPessoas";
+            mnuGerenciamentoPessoas.Size = new Size(160, 20);
+            mnuGerenciamentoPessoas.Text = "Gerenciamento de pessoas";
+            mnuGerenciamentoPessoas.Click += mnuGerenciamentoPessoas_Click;
             // 
-            // veículosToolStripMenuItem
+            // itmGerenciamentoPessoasCadPessoas
             // 
-            veículosToolStripMenuItem.Name = "veículosToolStripMenuItem";
-            veículosToolStripMenuItem.Size = new Size(218, 22);
-            veículosToolStripMenuItem.Text = "Cadastro de pessoas";
-            veículosToolStripMenuItem.Click += veículosToolStripMenuItem_Click;
+            itmGerenciamentoPessoasCadPessoas.Name = "itmGerenciamentoPessoasCadPessoas";
+            itmGerenciamentoPessoasCadPessoas.Size = new Size(218, 22);
+            itmGerenciamentoPessoasCadPessoas.Text = "Cadastro de pessoas";
+            itmGerenciamentoPessoasCadPessoas.Click += itmGerenciamentoPessoasCadPessoas_Click;
             // 
-            // históricoDePessoasToolStripMenuItem
+            // itmGerenciamentoPessoasHistPessoas
             // 
-            históricoDePessoasToolStripMenuItem.Name = "históricoDePessoasToolStripMenuItem";
-            históricoDePessoasToolStripMenuItem.Size = new Size(218, 22);
-            históricoDePessoasToolStripMenuItem.Text = "Histórico de pessoas";
+            itmGerenciamentoPessoasHistPessoas.Name = "itmGerenciamentoPessoasHistPessoas";
+            itmGerenciamentoPessoasHistPessoas.Size = new Size(218, 22);
+            itmGerenciamentoPessoasHistPessoas.Text = "Historico de Pessoas";
+            itmGerenciamentoPessoasHistPessoas.Click += itmGerenciamentoPessoasHistPessoas_Click;
             // 
-            // excluirPessoasCadastradasToolStripMenuItem
+            // itmGerenciamentoPessoasExcluirPessoas
             // 
-            excluirPessoasCadastradasToolStripMenuItem.Name = "excluirPessoasCadastradasToolStripMenuItem";
-            excluirPessoasCadastradasToolStripMenuItem.Size = new Size(218, 22);
-            excluirPessoasCadastradasToolStripMenuItem.Text = "Excluir pessoas cadastradas";
+            itmGerenciamentoPessoasExcluirPessoas.Name = "itmGerenciamentoPessoasExcluirPessoas";
+            itmGerenciamentoPessoasExcluirPessoas.Size = new Size(218, 22);
+            itmGerenciamentoPessoasExcluirPessoas.Text = "Excluir pessoas cadastradas";
+            itmGerenciamentoPessoasExcluirPessoas.Click += itmGerenciamentoPessoasExcluirPessoas_Click;
             // 
-            // vincularCNHToolStripMenuItem
+            // itmGerenciamentoPessoasVincularCnh
             // 
-            vincularCNHToolStripMenuItem.Name = "vincularCNHToolStripMenuItem";
-            vincularCNHToolStripMenuItem.Size = new Size(218, 22);
-            vincularCNHToolStripMenuItem.Text = "Vincular CNH";
+            itmGerenciamentoPessoasVincularCnh.Name = "itmGerenciamentoPessoasVincularCnh";
+            itmGerenciamentoPessoasVincularCnh.Size = new Size(218, 22);
+            itmGerenciamentoPessoasVincularCnh.Text = "Vincular CNH";
+            itmGerenciamentoPessoasVincularCnh.Click += itmGerenciamentoPessoasVincularCnh_Click;
             // 
-            // gerenciamentoToolStripMenuItem
+            // mnuGerenciamentoVeiculos
             // 
-            gerenciamentoToolStripMenuItem.BackColor = SystemColors.AppWorkspace;
-            gerenciamentoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { cadastrarVeículoToolStripMenuItem, históricoDeVeículosToolStripMenuItem, excluirVeículoToolStripMenuItem });
-            gerenciamentoToolStripMenuItem.Name = "gerenciamentoToolStripMenuItem";
-            gerenciamentoToolStripMenuItem.Size = new Size(162, 20);
-            gerenciamentoToolStripMenuItem.Text = "Gerenciamento de veículos";
-            gerenciamentoToolStripMenuItem.Click += gerenciamentoToolStripMenuItem_Click;
+            mnuGerenciamentoVeiculos.BackColor = SystemColors.AppWorkspace;
+            mnuGerenciamentoVeiculos.DropDownItems.AddRange(new ToolStripItem[] { itmGerenciamentoVeiculosCadVeiculo, itmGerenciamentoVeiculosHistVeiculo, itmGerenciamentoVeiculosExcluirVeiculo });
+            mnuGerenciamentoVeiculos.Name = "mnuGerenciamentoVeiculos";
+            mnuGerenciamentoVeiculos.Size = new Size(162, 20);
+            mnuGerenciamentoVeiculos.Text = "Gerenciamento de veículos";
+            mnuGerenciamentoVeiculos.Click += mnuGerenciamentoVeiculos_Click;
             // 
-            // gerenciamentoDeLocaçõesToolStripMenuItem
+            // itmGerenciamentoVeiculosCadVeiculo
             // 
-            gerenciamentoDeLocaçõesToolStripMenuItem.BackColor = SystemColors.AppWorkspace;
-            gerenciamentoDeLocaçõesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { cadastrarLocaçãoToolStripMenuItem, históricoDeLocaçõesToolStripMenuItem, rehistrarPagamentoToolStripMenuItem, finalizarLocaçãoToolStripMenuItem });
-            gerenciamentoDeLocaçõesToolStripMenuItem.Name = "gerenciamentoDeLocaçõesToolStripMenuItem";
-            gerenciamentoDeLocaçõesToolStripMenuItem.Size = new Size(168, 20);
-            gerenciamentoDeLocaçõesToolStripMenuItem.Text = "Gerenciamento de Locações";
+            itmGerenciamentoVeiculosCadVeiculo.Name = "itmGerenciamentoVeiculosCadVeiculo";
+            itmGerenciamentoVeiculosCadVeiculo.Size = new Size(184, 22);
+            itmGerenciamentoVeiculosCadVeiculo.Text = "Cadastrar veículo";
+            itmGerenciamentoVeiculosCadVeiculo.Click += itmGerenciamentoVeiculosCadVeiculo_Click;
             // 
-            // cadastrarVeículoToolStripMenuItem
+            // itmGerenciamentoVeiculosHistVeiculo
             // 
-            cadastrarVeículoToolStripMenuItem.Name = "cadastrarVeículoToolStripMenuItem";
-            cadastrarVeículoToolStripMenuItem.Size = new Size(184, 22);
-            cadastrarVeículoToolStripMenuItem.Text = "Cadastrar veículo";
+            itmGerenciamentoVeiculosHistVeiculo.Name = "itmGerenciamentoVeiculosHistVeiculo";
+            itmGerenciamentoVeiculosHistVeiculo.Size = new Size(184, 22);
+            itmGerenciamentoVeiculosHistVeiculo.Text = "Histórico de veículos";
+            itmGerenciamentoVeiculosHistVeiculo.Click += itmGerenciamentoVeiculosHistVeiculo_Click;
             // 
-            // históricoDeVeículosToolStripMenuItem
+            // itmGerenciamentoVeiculosExcluirVeiculo
             // 
-            históricoDeVeículosToolStripMenuItem.Name = "históricoDeVeículosToolStripMenuItem";
-            históricoDeVeículosToolStripMenuItem.Size = new Size(184, 22);
-            históricoDeVeículosToolStripMenuItem.Text = "Histórico de veículos";
+            itmGerenciamentoVeiculosExcluirVeiculo.Name = "itmGerenciamentoVeiculosExcluirVeiculo";
+            itmGerenciamentoVeiculosExcluirVeiculo.Size = new Size(184, 22);
+            itmGerenciamentoVeiculosExcluirVeiculo.Text = "Excluir veículo";
+            itmGerenciamentoVeiculosExcluirVeiculo.Click += itmGerenciamentoVeiculosExcluirVeiculo_Click;
             // 
-            // excluirVeículoToolStripMenuItem
+            // mnuGerenciamentoLocacoes
             // 
-            excluirVeículoToolStripMenuItem.Name = "excluirVeículoToolStripMenuItem";
-            excluirVeículoToolStripMenuItem.Size = new Size(184, 22);
-            excluirVeículoToolStripMenuItem.Text = "Excluir veículo";
+            mnuGerenciamentoLocacoes.BackColor = SystemColors.AppWorkspace;
+            mnuGerenciamentoLocacoes.DropDownItems.AddRange(new ToolStripItem[] { itmGerenciamentoLocacoesCadLocacoes, itmGerenciamentoLocacoesHistLocacoes, itmGerenciamentoLocacoesRegPagamento, itmGerenciamentoLocacoesBaixaLocacao });
+            mnuGerenciamentoLocacoes.Name = "mnuGerenciamentoLocacoes";
+            mnuGerenciamentoLocacoes.Size = new Size(168, 20);
+            mnuGerenciamentoLocacoes.Text = "Gerenciamento de Locações";
+            mnuGerenciamentoLocacoes.Click += mnuGerenciamentoLocacoes_Click;
             // 
-            // cadastrarLocaçãoToolStripMenuItem
+            // itmGerenciamentoLocacoesCadLocacoes
             // 
-            cadastrarLocaçãoToolStripMenuItem.Name = "cadastrarLocaçãoToolStripMenuItem";
-            cadastrarLocaçãoToolStripMenuItem.Size = new Size(187, 22);
-            cadastrarLocaçãoToolStripMenuItem.Text = "Cadastrar Locação";
+            itmGerenciamentoLocacoesCadLocacoes.Name = "itmGerenciamentoLocacoesCadLocacoes";
+            itmGerenciamentoLocacoesCadLocacoes.Size = new Size(187, 22);
+            itmGerenciamentoLocacoesCadLocacoes.Text = "Cadastrar Locação";
+            itmGerenciamentoLocacoesCadLocacoes.Click += itmGerenciamentoLocacoesCadLocacoes_Click;
             // 
-            // históricoDeLocaçõesToolStripMenuItem
+            // itmGerenciamentoLocacoesHistLocacoes
             // 
-            históricoDeLocaçõesToolStripMenuItem.Name = "históricoDeLocaçõesToolStripMenuItem";
-            históricoDeLocaçõesToolStripMenuItem.Size = new Size(187, 22);
-            históricoDeLocaçõesToolStripMenuItem.Text = "Histórico de locações";
+            itmGerenciamentoLocacoesHistLocacoes.Name = "itmGerenciamentoLocacoesHistLocacoes";
+            itmGerenciamentoLocacoesHistLocacoes.Size = new Size(187, 22);
+            itmGerenciamentoLocacoesHistLocacoes.Text = "Histórico de locações";
+            itmGerenciamentoLocacoesHistLocacoes.Click += itmGerenciamentoLocacoesHistLocacoes_Click;
             // 
-            // rehistrarPagamentoToolStripMenuItem
+            // itmGerenciamentoLocacoesRegPagamento
             // 
-            rehistrarPagamentoToolStripMenuItem.Name = "rehistrarPagamentoToolStripMenuItem";
-            rehistrarPagamentoToolStripMenuItem.Size = new Size(187, 22);
-            rehistrarPagamentoToolStripMenuItem.Text = "Registrar pagamento";
-            rehistrarPagamentoToolStripMenuItem.Click += rehistrarPagamentoToolStripMenuItem_Click;
+            itmGerenciamentoLocacoesRegPagamento.Name = "itmGerenciamentoLocacoesRegPagamento";
+            itmGerenciamentoLocacoesRegPagamento.Size = new Size(187, 22);
+            itmGerenciamentoLocacoesRegPagamento.Text = "Registrar pagamento";
+            itmGerenciamentoLocacoesRegPagamento.Click += itmGerenciamentoLocacoesRegPagamento_Click;
             // 
-            // finalizarLocaçãoToolStripMenuItem
+            // itmGerenciamentoLocacoesBaixaLocacao
             // 
-            finalizarLocaçãoToolStripMenuItem.Name = "finalizarLocaçãoToolStripMenuItem";
-            finalizarLocaçãoToolStripMenuItem.Size = new Size(187, 22);
-            finalizarLocaçãoToolStripMenuItem.Text = "Baixa de locações";
+            itmGerenciamentoLocacoesBaixaLocacao.Name = "itmGerenciamentoLocacoesBaixaLocacao";
+            itmGerenciamentoLocacoesBaixaLocacao.Size = new Size(187, 22);
+            itmGerenciamentoLocacoesBaixaLocacao.Text = "Baixa de locações";
+            itmGerenciamentoLocacoesBaixaLocacao.Click += itmGerenciamentoLocacoesBaixaLocacao_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(737, 428);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(panel1);
             Controls.Add(menuStrip1);
             FormBorderStyle = FormBorderStyle.None;
+            IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
             Margin = new Padding(3, 2, 3, 2);
+            MaximumSize = new Size(1366, 728);
+            MinimumSize = new Size(190, 40);
             Name = "Form1";
-            Text = "Form1";
+            ShowIcon = false;
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "dungeonForm1";
             Load += Form1_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -262,22 +279,22 @@
         private PictureBox pictureBox1;
         private ReaLTaiizor.Controls.NightControlBox nightControlBox1;
         private FlowLayoutPanel flowLayoutPanel1;
-        private ReaLTaiizor.Controls.DungeonHeaderLabel dungeonHeaderLabel1;
+        private ReaLTaiizor.Controls.DungeonHeaderLabel lblTitulo;
         private System.Windows.Forms.Timer timer1;
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem cadastroToolStripMenuItem;
-        private ToolStripMenuItem veículosToolStripMenuItem;
-        private ToolStripMenuItem gerenciamentoToolStripMenuItem;
-        private ToolStripMenuItem gerenciamentoDeLocaçõesToolStripMenuItem;
-        private ToolStripMenuItem históricoDePessoasToolStripMenuItem;
-        private ToolStripMenuItem excluirPessoasCadastradasToolStripMenuItem;
-        private ToolStripMenuItem vincularCNHToolStripMenuItem;
-        private ToolStripMenuItem cadastrarVeículoToolStripMenuItem;
-        private ToolStripMenuItem históricoDeVeículosToolStripMenuItem;
-        private ToolStripMenuItem excluirVeículoToolStripMenuItem;
-        private ToolStripMenuItem cadastrarLocaçãoToolStripMenuItem;
-        private ToolStripMenuItem históricoDeLocaçõesToolStripMenuItem;
-        private ToolStripMenuItem rehistrarPagamentoToolStripMenuItem;
-        private ToolStripMenuItem finalizarLocaçãoToolStripMenuItem;
+        private ToolStripMenuItem mnuGerenciamentoPessoas;
+        private ToolStripMenuItem itmGerenciamentoPessoasCadPessoas;
+        private ToolStripMenuItem mnuGerenciamentoVeiculos;
+        private ToolStripMenuItem mnuGerenciamentoLocacoes;
+        private ToolStripMenuItem itmGerenciamentoPessoasHistPessoas;
+        private ToolStripMenuItem itmGerenciamentoPessoasExcluirPessoas;
+        private ToolStripMenuItem itmGerenciamentoPessoasVincularCnh;
+        private ToolStripMenuItem itmGerenciamentoVeiculosCadVeiculo;
+        private ToolStripMenuItem itmGerenciamentoVeiculosHistVeiculo;
+        private ToolStripMenuItem itmGerenciamentoVeiculosExcluirVeiculo;
+        private ToolStripMenuItem itmGerenciamentoLocacoesCadLocacoes;
+        private ToolStripMenuItem itmGerenciamentoLocacoesHistLocacoes;
+        private ToolStripMenuItem itmGerenciamentoLocacoesRegPagamento;
+        private ToolStripMenuItem itmGerenciamentoLocacoesBaixaLocacao;
     }
 }

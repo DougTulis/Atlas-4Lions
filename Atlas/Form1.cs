@@ -1,9 +1,12 @@
+using Projeto_ATLAS___4LIONS.Forms;
 using Projeto_ATLAS___4LIONS.Forms.Properties;
 
 namespace Atlas
 {
     public partial class Form1 : Form
     {
+        private FrmCadPessoas frmCadPessoas = new FrmCadPessoas();
+
         public Form1()
         {
             InitializeComponent();
@@ -29,7 +32,7 @@ namespace Atlas
 
         }
 
-        private void dungeonHeaderLabel1_Click(object sender, EventArgs e)
+        private void lblTitulo_Click(object sender, EventArgs e)
         {
 
         }
@@ -70,22 +73,78 @@ namespace Atlas
 
         }
 
-        private void cadastroToolStripMenuItem_Click(object sender, EventArgs e)
+        private void mnuGerenciamentoPessoas_Click(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void mnuGerenciamentoVeiculos_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void gerenciamentoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void itmGerenciamentoLocacoesRegPagamento_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void veículosToolStripMenuItem_Click(object sender, EventArgs e)
+        private void nightControlBox1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void rehistrarPagamentoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void itmGerenciamentoPessoasCadPessoas_Click(object sender, EventArgs e)
+        {
+            frmCadPessoas.ShowDialog();
+        }
+
+        private void itmGerenciamentoPessoasExcluirPessoas_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void itmGerenciamentoPessoasVincularCnh_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void itmGerenciamentoPessoasHistPessoas_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void itmGerenciamentoVeiculosCadVeiculo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void itmGerenciamentoVeiculosHistVeiculo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void itmGerenciamentoVeiculosExcluirVeiculo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mnuGerenciamentoLocacoes_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void itmGerenciamentoLocacoesCadLocacoes_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void itmGerenciamentoLocacoesHistLocacoes_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void itmGerenciamentoLocacoesBaixaLocacao_Click(object sender, EventArgs e)
         {
 
         }
