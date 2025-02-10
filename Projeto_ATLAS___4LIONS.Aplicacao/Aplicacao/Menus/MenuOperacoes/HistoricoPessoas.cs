@@ -16,7 +16,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
         public void Exibir()
         {
             var useCase = new ListarPessoaUseCase(pessoaRepositorio);
-            useCase.ExecutarDadosCompletos();
+            foreach (var item in useCase.ExecutarDadosCompletos())
+            {
+                Console.WriteLine(item);
+            }
             Console.WriteLine("Digite uma tecla para voltar ao menu anterior");
             Console.ReadKey();
             SubMenuPessoas subPessoas = new SubMenuPessoas(pessoaRepositorio);

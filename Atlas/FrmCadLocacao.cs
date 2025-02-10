@@ -16,5 +16,25 @@ namespace Projeto_ATLAS___4LIONS.Forms
         {
             InitializeComponent();
         }
+
+        private void lblDataSaida_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblDataRetorno_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbTipoLocacao_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblLocatario_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

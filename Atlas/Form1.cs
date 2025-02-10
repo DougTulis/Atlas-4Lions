@@ -1,5 +1,7 @@
+using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Forms;
 using Projeto_ATLAS___4LIONS.Forms.Properties;
+using Projeto_ATLAS___4LIONS.Infra.Servicos;
 
 namespace Atlas
 {
@@ -7,10 +9,15 @@ namespace Atlas
     {
         private FrmCadPessoas frmCadPessoas = new FrmCadPessoas();
         private FrmCadAutomovel frmCadAutomovel = new FrmCadAutomovel();
+        private FrmCadLocacao frmCadLocacao = new FrmCadLocacao();
+        private FrmHistoricoPessoas frmHistoricoPessoas = new FrmHistoricoPessoas();
+        private FrmExclusaoPessoas frmExclusaoPessoas = new FrmExclusaoPessoas();
+
 
 
         public Form1()
         {
+
             InitializeComponent();
         }
 
@@ -104,6 +111,8 @@ namespace Atlas
 
         private void itmGerenciamentoPessoasExcluirPessoas_Click(object sender, EventArgs e)
         {
+            frmExclusaoPessoas.MdiParent = this;    
+            frmExclusaoPessoas.Show();
 
         }
 
@@ -114,7 +123,8 @@ namespace Atlas
 
         private void itmGerenciamentoPessoasHistPessoas_Click(object sender, EventArgs e)
         {
-
+            frmHistoricoPessoas.MdiParent = this;
+            frmHistoricoPessoas.Show();
         }
 
         private void itmGerenciamentoVeiculosCadVeiculo_Click(object sender, EventArgs e)
@@ -140,7 +150,8 @@ namespace Atlas
 
         private void itmGerenciamentoLocacoesCadLocacoes_Click(object sender, EventArgs e)
         {
-
+            frmCadLocacao.MdiParent = this;
+            frmCadLocacao.Show();
         }
 
         private void itmGerenciamentoLocacoesHistLocacoes_Click(object sender, EventArgs e)

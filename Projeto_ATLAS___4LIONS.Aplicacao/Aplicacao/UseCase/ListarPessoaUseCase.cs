@@ -12,12 +12,9 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             this.pessoaRepositorio = pessoaRepositorio;
         }
 
-        public void ExecutarDadosCompletos()
+        public IEnumerable<PessoaDTO> ExecutarDadosCompletos()
         {
-            foreach (var item in pessoaRepositorio.ListarTodos())
-            {
-                Console.WriteLine(item);
-            }
+            return pessoaRepositorio.ListarTodos();
         }
         public void ExecutarDadosBreves()
         {
