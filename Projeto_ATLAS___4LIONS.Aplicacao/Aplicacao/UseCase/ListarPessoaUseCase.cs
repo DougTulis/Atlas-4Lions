@@ -29,13 +29,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 
 
         }
-        public void ExecutarRecuperacaoSemCnh()
-        {;
-            var lista = pessoaRepositorio.ListarSemCNH();
-            foreach (var item in lista)
-            {
-                Console.WriteLine(item.ExibirDadosBreves());
-            }
+        public IEnumerable<PessoaDTO> ExecutarRecuperacaoSemCnh()
+        {
+          return pessoaRepositorio.ListarSemCNH();
+
 
         }
 

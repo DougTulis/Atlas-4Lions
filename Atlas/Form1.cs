@@ -12,7 +12,7 @@ namespace Atlas
         private FrmCadLocacao frmCadLocacao = new FrmCadLocacao();
         private FrmHistoricoPessoas frmHistoricoPessoas = new FrmHistoricoPessoas();
         private FrmExclusaoPessoas frmExclusaoPessoas = new FrmExclusaoPessoas();
-
+        private FrmVinculacaoCnh frmVinculacaoCnh = new FrmVinculacaoCnh();
 
 
         public Form1()
@@ -118,7 +118,8 @@ namespace Atlas
 
         private void itmGerenciamentoPessoasVincularCnh_Click(object sender, EventArgs e)
         {
-
+            frmVinculacaoCnh.MdiParent = this;
+            frmVinculacaoCnh.Show();
         }
 
         private void itmGerenciamentoPessoasHistPessoas_Click(object sender, EventArgs e)

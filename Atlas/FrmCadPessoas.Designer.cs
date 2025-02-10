@@ -45,58 +45,64 @@
             // 
             // textNome
             // 
-            textNome.Location = new Point(103, 126);
+            textNome.Location = new Point(90, 94);
+            textNome.Margin = new Padding(3, 2, 3, 2);
             textNome.Name = "textNome";
-            textNome.Size = new Size(268, 27);
+            textNome.Size = new Size(235, 23);
             textNome.TabIndex = 0;
             textNome.TextChanged += textNome_TextChanged;
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(392, 126);
+            txtEmail.Location = new Point(343, 94);
+            txtEmail.Margin = new Padding(3, 2, 3, 2);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(268, 27);
+            txtEmail.Size = new Size(235, 23);
             txtEmail.TabIndex = 1;
             txtEmail.TextChanged += txtEmail_TextChanged;
             // 
             // txtContato
             // 
-            txtContato.Location = new Point(103, 192);
+            txtContato.Location = new Point(90, 144);
+            txtContato.Margin = new Padding(3, 2, 3, 2);
             txtContato.Name = "txtContato";
-            txtContato.Size = new Size(268, 27);
+            txtContato.Size = new Size(235, 23);
             txtContato.TabIndex = 2;
             txtContato.TextChanged += txtContato_TextChanged;
             // 
             // txtDataNascimento
             // 
-            txtDataNascimento.Location = new Point(392, 192);
+            txtDataNascimento.Location = new Point(343, 144);
+            txtDataNascimento.Margin = new Padding(3, 2, 3, 2);
             txtDataNascimento.Name = "txtDataNascimento";
-            txtDataNascimento.Size = new Size(268, 27);
+            txtDataNascimento.Size = new Size(235, 23);
             txtDataNascimento.TabIndex = 3;
             txtDataNascimento.TextChanged += txtDataNascimento_TextChanged;
             // 
             // txtCpf
             // 
-            txtCpf.Location = new Point(103, 261);
+            txtCpf.Location = new Point(90, 196);
+            txtCpf.Margin = new Padding(3, 2, 3, 2);
             txtCpf.Name = "txtCpf";
-            txtCpf.Size = new Size(268, 27);
+            txtCpf.Size = new Size(235, 23);
             txtCpf.TabIndex = 4;
             txtCpf.TextChanged += txtCpf_TextChanged;
             // 
             // txtCnpj
             // 
-            txtCnpj.Location = new Point(392, 261);
+            txtCnpj.Location = new Point(343, 196);
+            txtCnpj.Margin = new Padding(3, 2, 3, 2);
             txtCnpj.Name = "txtCnpj";
-            txtCnpj.Size = new Size(268, 27);
+            txtCnpj.Size = new Size(235, 23);
             txtCnpj.TabIndex = 5;
             txtCnpj.TextChanged += txtCnpj_TextChanged;
             // 
             // lblNome
             // 
             lblNome.AutoSize = true;
-            lblNome.Location = new Point(103, 103);
+            lblNome.Location = new Point(90, 77);
             lblNome.Name = "lblNome";
-            lblNome.Size = new Size(170, 20);
+            lblNome.Size = new Size(136, 15);
             lblNome.TabIndex = 6;
             lblNome.Text = "Insira o nome completo:";
             lblNome.Click += lblNome_Click;
@@ -104,9 +110,9 @@
             // lblEmail
             // 
             lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(392, 103);
+            lblEmail.Location = new Point(343, 77);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(101, 20);
+            lblEmail.Size = new Size(80, 15);
             lblEmail.TabIndex = 7;
             lblEmail.Text = "Insira o email:";
             lblEmail.Click += lblEmail_Click;
@@ -114,9 +120,9 @@
             // lblContato
             // 
             lblContato.AutoSize = true;
-            lblContato.Location = new Point(103, 169);
+            lblContato.Location = new Point(90, 127);
             lblContato.Name = "lblContato";
-            lblContato.Size = new Size(191, 20);
+            lblContato.Size = new Size(153, 15);
             lblContato.TabIndex = 8;
             lblContato.Text = "Insira o numero de contato:";
             lblContato.Click += lblContato_Click;
@@ -124,9 +130,9 @@
             // lblDataNascimento
             // 
             lblDataNascimento.AutoSize = true;
-            lblDataNascimento.Location = new Point(392, 169);
+            lblDataNascimento.Location = new Point(343, 127);
             lblDataNascimento.Name = "lblDataNascimento";
-            lblDataNascimento.Size = new Size(194, 20);
+            lblDataNascimento.Size = new Size(154, 15);
             lblDataNascimento.TabIndex = 9;
             lblDataNascimento.Text = "Insira a data de nascimento:";
             lblDataNascimento.Click += lblDataNascimento_Click;
@@ -134,9 +140,9 @@
             // lblCnpj
             // 
             lblCnpj.AutoSize = true;
-            lblCnpj.Location = new Point(392, 238);
+            lblCnpj.Location = new Point(343, 178);
             lblCnpj.Name = "lblCnpj";
-            lblCnpj.Size = new Size(264, 20);
+            lblCnpj.Size = new Size(210, 15);
             lblCnpj.TabIndex = 10;
             lblCnpj.Text = "Insira o CPNJ (caso for pessoa jurídica)";
             lblCnpj.Click += lblCnpj_Click;
@@ -144,27 +150,29 @@
             // lblCpf
             // 
             lblCpf.AutoSize = true;
-            lblCpf.Location = new Point(103, 238);
+            lblCpf.Location = new Point(90, 178);
             lblCpf.Name = "lblCpf";
-            lblCpf.Size = new Size(240, 20);
+            lblCpf.Size = new Size(191, 15);
             lblCpf.TabIndex = 11;
             lblCpf.Text = "Insira o CPF (caso for pessoa física)";
             // 
             // btnCadastrarPessoa
             // 
-            btnCadastrarPessoa.Location = new Point(267, 326);
+            btnCadastrarPessoa.Location = new Point(234, 244);
+            btnCadastrarPessoa.Margin = new Padding(3, 2, 3, 2);
             btnCadastrarPessoa.Name = "btnCadastrarPessoa";
-            btnCadastrarPessoa.Size = new Size(233, 62);
+            btnCadastrarPessoa.Size = new Size(204, 46);
             btnCadastrarPessoa.TabIndex = 12;
             btnCadastrarPessoa.Text = "Cadastrar Pessoa";
             btnCadastrarPessoa.UseVisualStyleBackColor = true;
+            btnCadastrarPessoa.Click += btnCadastrarPessoa_Click;
             // 
             // FrmCadPessoas
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
             Controls.Add(btnCadastrarPessoa);
             Controls.Add(lblCpf);
             Controls.Add(lblCnpj);
@@ -178,6 +186,7 @@
             Controls.Add(txtContato);
             Controls.Add(txtEmail);
             Controls.Add(textNome);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "FrmCadPessoas";
             Text = "FrmCadPessoas";
             Load += FrmCadPessoas_Load;

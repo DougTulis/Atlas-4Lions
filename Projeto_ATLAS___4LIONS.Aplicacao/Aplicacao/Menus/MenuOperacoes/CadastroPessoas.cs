@@ -54,7 +54,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
             }
 
 
-            var pessoa = new PessoaDTO(nome, email, contato, cpf, cnpj)
+            var pessoa = new PessoaDTO(nome, email, contato, cpf, cnpj,dataNascimento)
             {
                 DataCriacao = DateTime.Now,
             };

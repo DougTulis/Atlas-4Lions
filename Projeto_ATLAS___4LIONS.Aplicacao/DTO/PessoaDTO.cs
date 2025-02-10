@@ -13,13 +13,18 @@
         public DateTime? VencimentoCnh { get; set; }
         public DateTime DataCriacao { get; set; }
 
-        public PessoaDTO(string nome, string email, string contato, string? cpf, string? cnpj)
+        public PessoaDTO()
+        {
+        }
+
+        public PessoaDTO(string nome, string email, string contato, string? cpf, string? cnpj, DateTime? dataNascimento)
         {
             Nome = nome;
             Email = email;
             Contato = contato;
             Cpf = cpf;
             Cnpj = cnpj;
+            DataNascimento = dataNascimento;
         }
 
 

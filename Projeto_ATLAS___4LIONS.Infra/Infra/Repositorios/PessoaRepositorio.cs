@@ -159,7 +159,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     ? Convert.ToString(dataReader["Cnpj"])
                     : null;
 
-                var pessoa = new PessoaDTO(nome, email, contato, cpf, cnpj)
+                var pessoa = new PessoaDTO(nome, email, contato, cpf, cnpj,dataNascimento)
                 {
                     Id = Convert.ToInt32(dataReader["Id"]),
                     NumeroCnh = dataReader["NumeroCnh"] != DBNull.Value

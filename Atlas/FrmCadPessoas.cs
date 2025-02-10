@@ -1,4 +1,10 @@
-﻿using System;
+﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
+using Projeto_ATLAS___4LIONS.Dominio.Entidades;
+using Projeto_ATLAS___4LIONS.Dominio.Notificacoes;
+using Projeto_ATLAS___4LIONS.Infra.Repositorios;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,8 +18,16 @@ namespace Projeto_ATLAS___4LIONS.Forms
 {
     public partial class FrmCadPessoas : Form
     {
+        private readonly CadastrarPessoaUseCase cadastrarPessoaUseCase;
+        private readonly IPessoaRepositorio pessoaRepositorio;
+        private readonly List<Notificacao> _notificacoes;
+
+
         public FrmCadPessoas()
         {
+            pessoaRepositorio = new PessoaRepositorio();
+            cadastrarPessoaUseCase = new CadastrarPessoaUseCase(pessoaRepositorio);
+
             InitializeComponent();
         }
 
@@ -75,6 +89,23 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private void lblCnpj_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnCadastrarPessoa_Click(object sender, EventArgs e)
+        {
+
+            var pessoaDto = new PessoaDTO
+            {
+                Nome = textNome.Text,
+                Email = txtEmail.Text,
+                Contato = txtContato.Text,
+                Cpf = txtCpf.Text,
+                Cnpj = txtCnpj.Text,
+                DataNascimento = Convert.ToDateTime(txtDataNascimento.Text),
+            };
+
+            cadastrarPessoaUseCase.Executar(pessoaDto);
+            MessageBox.Show("Pessoa cadastrada");
         }
     }
 }
