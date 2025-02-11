@@ -19,8 +19,6 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private readonly IPessoaRepositorio pessoaRepositorio;
         private readonly ListarPessoaUseCase pessoaUseCase;
-        private FrmVinculacaoCnh2 frmVinculacaoCnh2 = new FrmVinculacaoCnh2();
-
         public FrmVinculacaoCnh()
         {
             pessoaRepositorio = new PessoaRepositorio();
@@ -46,7 +44,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void txtPessoa_TextChanged(object sender, EventArgs e)
         {
-          
+
 
         }
         private void AtualizarGridView()
@@ -56,13 +54,37 @@ namespace Projeto_ATLAS___4LIONS.Forms
             dgvVinculacaoCnh.Refresh();
         }
 
-        private void btnVincularCnh_Click(object sender, EventArgs e)
+        private void btnSelecionarPessoa_Click(object sender, EventArgs e)
         {
             int idPessoa = Convert.ToInt32(txtPessoa.Text);
             var PessoaDto = pessoaUseCase.ExecutarRecuperarPorId(idPessoa);
             pessoaUseCase.ExecutarRecuperarPorId(idPessoa);
-            frmVinculacaoCnh2.MdiParent = this;
-            frmVinculacaoCnh2.Show();
+
+        }
+
+        private void txtVencimentoCnh_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblVencimentoCnh_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtVencimentoCnh_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblNumeroCnh_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtNumeroCnh_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

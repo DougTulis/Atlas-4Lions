@@ -53,7 +53,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void btnExcluirPessoa_Click(object sender, EventArgs e)
         {
-            int.TryParse(txtIdPessoaExclusao.Text, out int _idPessoa);
+           int _idPessoa = Convert.ToInt32(txtIdPessoaExclusao.Text);
             var pessoaDto = listarPessoaUseCase.ExecutarRecuperarPorId(_idPessoa);            
             deletarPessoaUseCase.Executar(pessoaDto);
             AtualizarGridView();

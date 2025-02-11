@@ -22,8 +22,5 @@
     <Compile Update="FrmVinculacaoCnh.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="FrmVinculacaoCnh2.cs">
-      <SubType>Form</SubType>
-    </Compile>
   </ItemGroup>
 </Project>
