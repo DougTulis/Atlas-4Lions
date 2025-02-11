@@ -15,8 +15,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
         {
             Console.Clear();
             var useCase = new ListarAutomovelUseCase(_automovelRepositorio);
-            useCase.ExecutarDadosCompletos();
-            Console.WriteLine();
+            foreach (var item in useCase.ExecutarDadosCompletos())
+            {
+                Console.WriteLine(item);
+            }
             Console.WriteLine("Digite uma tecla para voltar ao menu anterior");
             Console.ReadKey();
             MenuInicial menuInicial = new MenuInicial();

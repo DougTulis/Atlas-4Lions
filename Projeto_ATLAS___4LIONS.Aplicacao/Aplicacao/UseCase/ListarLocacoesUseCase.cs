@@ -19,6 +19,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 Console.WriteLine(item);
             }
         }
+
         public void ExecutarRecuperacaoStatusAndamento()
         {
             var lista = locacaoRepositorio.ListarPorStatusAndamento();

@@ -16,6 +16,9 @@
     <Compile Update="FrmExclusaoPessoas.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FrmHistoricoAutomovel.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="FrmHistoricoPessoas.cs">
       <SubType>Form</SubType>
     </Compile>

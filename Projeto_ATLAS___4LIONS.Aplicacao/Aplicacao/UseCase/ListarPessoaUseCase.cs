@@ -26,8 +26,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         public PessoaDTO? ExecutarRecuperarPorId(int id)
         {
             return pessoaRepositorio.RecuperarPorId(id);
-
-
         }
         public IEnumerable<PessoaDTO> ExecutarRecuperacaoSemCnh()
         {

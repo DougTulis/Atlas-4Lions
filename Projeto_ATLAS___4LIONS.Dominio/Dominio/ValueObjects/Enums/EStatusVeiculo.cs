@@ -4,6 +4,5 @@
     {
         GARAGEM = 1,
         ALUGADO = 2
-
     }
 }

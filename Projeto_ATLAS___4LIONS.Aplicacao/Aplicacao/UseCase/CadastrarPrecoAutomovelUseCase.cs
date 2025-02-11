@@ -39,6 +39,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             catch (MySqlException ex)
             {
                 Console.WriteLine(ex.StackTrace);
+
+
             }
         }
 

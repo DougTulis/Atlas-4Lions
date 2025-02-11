@@ -9,6 +9,7 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         public string Modelo { get; set; }
         public string Placa { get; set; }
         public string Cor { get; set; }
+        public string Ano { get; set; }
         public EStatusVeiculo Status { get; set; }
         public string? Chassi { get; set; }
         public IList<TabelaPreco> TabelaPrecos { get; set; }
@@ -19,7 +20,7 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         public Automovel()
         {
         }
-        public Automovel(string modelo, string placa, string cor, EStatusVeiculo status, string? chassi, string? renavam, int? oleokm, int? pastilhaFreioKm)
+        public Automovel(string modelo, string placa, string cor, EStatusVeiculo status,string ano, string? chassi, string? renavam, int? oleokm, int? pastilhaFreioKm)
         {
             Modelo = modelo;
             Placa = placa;
@@ -29,6 +30,7 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
             Renavam = renavam;
             Oleokm = oleokm;
             PastilhaFreioKm = pastilhaFreioKm;
+            Ano = ano;
         }
         public override bool Validacao()
         {

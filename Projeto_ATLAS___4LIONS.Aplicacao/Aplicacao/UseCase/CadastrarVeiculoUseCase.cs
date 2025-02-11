@@ -24,6 +24,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                     Modelo = automovelDto.Modelo,
                     Placa = automovelDto.Placa,
                     Cor = automovelDto.Cor,
+                    Ano = automovelDto.Ano,
                     Status = automovelDto.Status,
                     Chassi = automovelDto.Chassi,
                     Renavam = automovelDto.Renavam,

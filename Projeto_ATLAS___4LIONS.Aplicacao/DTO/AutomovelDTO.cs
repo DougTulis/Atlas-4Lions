@@ -12,6 +12,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public string Modelo { get; set; }
         public string Placa { get; set; }
         public string Cor { get; set; }
+        public string Ano { get; set; }
         public EStatusVeiculo Status { get; set; }
         public string? Chassi { get; set; }
         public IList<TabelaPreco> TabelaPrecos { get; set; }
@@ -23,7 +24,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         {
         }
 
-        public AutomovelDTO(string modelo, string placa, string cor, EStatusVeiculo status, string? chassi, string? renavam, int? oleokm, int? pastilhaFreioKm)
+        public AutomovelDTO(string modelo, string placa, string cor, EStatusVeiculo status,string ano, string? chassi, string? renavam, int? oleokm, int? pastilhaFreioKm)
         {
             Modelo = modelo;
             Placa = placa;
@@ -33,7 +34,9 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
             Renavam = renavam;
             Oleokm = oleokm;
             PastilhaFreioKm = pastilhaFreioKm;
+            Ano = ano;
         }
+
         public override string? ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -41,6 +44,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
             sb.AppendLine("Modelo: " + Modelo);
             sb.AppendLine("Placa: " + Placa);
             sb.AppendLine("Cor: " + Cor);
+            sb.AppendLine("Ano: " + Ano);
             sb.AppendLine("Status: " + Status);
             sb.AppendLine("Chassi: " + (string.IsNullOrEmpty(Chassi) ? "Não informado" : Chassi));
             sb.AppendLine("Renavam: " + (string.IsNullOrEmpty(Renavam) ? "Não informado" : Renavam));

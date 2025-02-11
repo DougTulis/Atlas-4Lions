@@ -12,14 +12,16 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             this.automovelRepositorio = automovelRepositorio;
         }
 
-        public void ExecutarDadosCompletos()
+        public IEnumerable<AutomovelDTO> ExecutarDadosCompletos()
         {
-            foreach (var item in 
-                automovelRepositorio.ListarTodos())
-            {
-                Console.WriteLine(item);
-            }
+            return automovelRepositorio.ListarTodos();
         }
+
+        public AutomovelDTO? ExecutarRecuperarPorId(int id)
+        {
+            return automovelRepositorio.RecuperarPorId(id);
+        }
+
         public void ExecutarDadosBreves()
         {
             foreach (var item in automovelRepositorio.ListarTodos())

@@ -28,9 +28,9 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 VALUES (@Descricao, @Valor, @AutomovelId)";
 
                 using var cmd = new MySqlCommand(sql, conexao);
-                cmd.Parameters.AddWithValue("@Descricao", tabelaPrecoDto.Descricao);
-                cmd.Parameters.AddWithValue("@Valor", tabelaPrecoDto.Valor);
-                cmd.Parameters.AddWithValue("@AutomovelId", tabelaPrecoDto.AutomovelId);
+                cmd.Parameters.AddWithValue("@Descricao", tabelaPreco.Descricao);
+                cmd.Parameters.AddWithValue("@Valor", tabelaPreco.Valor);
+                cmd.Parameters.AddWithValue("@AutomovelId", tabelaPreco.AutomovelId);
 
                 cmd.ExecuteNonQuery();
                 tabelaPrecoDto.Id = (int)cmd.LastInsertedId;

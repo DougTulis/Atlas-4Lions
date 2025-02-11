@@ -40,7 +40,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
                 int? oleoKm = string.IsNullOrWhiteSpace(Console.ReadLine()) ? null : int.Parse(Console.ReadLine()); ;
                 Console.Write("Informe a quilometragem da última troca das pastilhas de freio(km) (Não obrigatório): ");
                 int? pastilhaFreioKm = string.IsNullOrWhiteSpace(Console.ReadLine()) ? null : int.Parse(Console.ReadLine());
-                var automovel = new AutomovelDTO(modelo, placa, cor, status, chassi, renavam, oleoKm, pastilhaFreioKm);
+                var automovel = new AutomovelDTO(modelo, placa, cor, status, ano ,chassi, renavam, oleoKm, pastilhaFreioKm);
 
                 var useCaseAdicionarAutomovel = new CadastrarVeiculoUseCase(_automovelRepositorio);
                 useCaseAdicionarAutomovel.Executar(automovel);

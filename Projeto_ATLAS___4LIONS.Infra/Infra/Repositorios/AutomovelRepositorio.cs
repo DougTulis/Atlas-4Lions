@@ -112,7 +112,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     Modelo = dataReader["Modelo"].ToString(),
                     Placa = dataReader["Placa"].ToString(),
                     Cor = dataReader["Cor"].ToString(),
-                    Status = (EStatusVeiculo)Convert.ToInt32(dataReader["Status"]),
+                    Status = Enum.Parse<EStatusVeiculo>(dataReader["Status"].ToString()),
                     Chassi = dataReader["Chassi"] != DBNull.Value ? dataReader["Chassi"].ToString() : null,
                     Renavam = dataReader["Renavam"] != DBNull.Value ? dataReader["Renavam"].ToString() : null,
                     Oleokm = dataReader["OleoKm"] != DBNull.Value ? (int?)Convert.ToInt32(dataReader["OleoKm"]) : null,

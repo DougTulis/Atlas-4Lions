@@ -105,6 +105,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
             };
 
             cadastrarPessoaUseCase.Executar(pessoaDto);
+
             MessageBox.Show("Pessoa cadastrada");
         }
     }

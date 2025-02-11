@@ -33,7 +33,10 @@ namespace Projeto_ATLAS___4LIONS.Forms
         {
 
         }
+        private void FrmHistoricoPessoas_Load(object sender, EventArgs e)
+        {
 
+        }
         private void AtualizarGridView()
         {
             var dados = listarPessoaUseCase.ExecutarDadosCompletos();
@@ -41,10 +44,6 @@ namespace Projeto_ATLAS___4LIONS.Forms
             dgvHistoricoPessoas.Refresh();
         }
 
-        private void FrmHistoricoPessoas_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
 
