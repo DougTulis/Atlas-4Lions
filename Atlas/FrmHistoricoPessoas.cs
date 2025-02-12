@@ -25,7 +25,6 @@ namespace Projeto_ATLAS___4LIONS.Forms
             InitializeComponent();
             repositorio = new PessoaRepositorio();
             listarPessoaUseCase = new ListarPessoaUseCase(repositorio);
-            dgvHistoricoPessoas.AutoGenerateColumns = false;
             AtualizarGridView();
         }
 
@@ -39,6 +38,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
         }
         private void AtualizarGridView()
         {
+            dgvHistoricoPessoas.AutoGenerateColumns = false;
             var dados = listarPessoaUseCase.ExecutarDadosCompletos();
             dgvHistoricoPessoas.DataSource = dados.ToList();
             dgvHistoricoPessoas.Refresh();

@@ -36,5 +36,10 @@ namespace Projeto_ATLAS___4LIONS.Forms
         {
 
         }
+
+        private void FrmCadLocacao_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

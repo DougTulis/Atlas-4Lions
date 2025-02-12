@@ -22,6 +22,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void AtualizarGridView()
         {
+            dgvHistoricoLocacao.AutoGenerateColumns = false;
             var dados = listarLocacoesUseCase.Executar();
             dgvHistoricoLocacao.DataSource = dados.ToList();
             dgvHistoricoLocacao.Refresh();

@@ -63,7 +63,7 @@
             // lblOleoKm
             // 
             lblOleoKm.AutoSize = true;
-            lblOleoKm.Location = new Point(328, 124);
+            lblOleoKm.Location = new Point(328, 164);
             lblOleoKm.Name = "lblOleoKm";
             lblOleoKm.Size = new Size(311, 15);
             lblOleoKm.TabIndex = 22;
@@ -74,11 +74,11 @@
             // lblChassi
             // 
             lblChassi.AutoSize = true;
-            lblChassi.Location = new Point(328, 72);
+            lblChassi.Location = new Point(75, 164);
             lblChassi.Name = "lblChassi";
-            lblChassi.Size = new Size(83, 15);
+            lblChassi.Size = new Size(140, 15);
             lblChassi.TabIndex = 21;
-            lblChassi.Text = "Insira o chassi:";
+            lblChassi.Text = "Insira o chassi (opcional):";
             lblChassi.Click += lblChassi_Click;
             // 
             // lblCor
@@ -113,7 +113,7 @@
             // 
             // txtOleoKm
             // 
-            txtOleoKm.Location = new Point(328, 141);
+            txtOleoKm.Location = new Point(328, 181);
             txtOleoKm.Margin = new Padding(3, 2, 3, 2);
             txtOleoKm.Name = "txtOleoKm";
             txtOleoKm.Size = new Size(235, 23);
@@ -131,7 +131,7 @@
             // 
             // txtChassi
             // 
-            txtChassi.Location = new Point(328, 89);
+            txtChassi.Location = new Point(75, 181);
             txtChassi.Margin = new Padding(3, 2, 3, 2);
             txtChassi.Name = "txtChassi";
             txtChassi.Size = new Size(235, 23);
@@ -187,7 +187,7 @@
             // lblDescricaoPreco
             // 
             lblDescricaoPreco.AutoSize = true;
-            lblDescricaoPreco.Location = new Point(75, 173);
+            lblDescricaoPreco.Location = new Point(75, 120);
             lblDescricaoPreco.Name = "lblDescricaoPreco";
             lblDescricaoPreco.Size = new Size(150, 15);
             lblDescricaoPreco.TabIndex = 27;
@@ -196,7 +196,7 @@
             // 
             // txtDescricaoPreco
             // 
-            txtDescricaoPreco.Location = new Point(75, 190);
+            txtDescricaoPreco.Location = new Point(75, 137);
             txtDescricaoPreco.Margin = new Padding(3, 2, 3, 2);
             txtDescricaoPreco.Name = "txtDescricaoPreco";
             txtDescricaoPreco.Size = new Size(235, 23);
@@ -206,7 +206,7 @@
             // lblPreco
             // 
             lblPreco.AutoSize = true;
-            lblPreco.Location = new Point(328, 173);
+            lblPreco.Location = new Point(328, 120);
             lblPreco.Name = "lblPreco";
             lblPreco.Size = new Size(218, 15);
             lblPreco.TabIndex = 29;
@@ -215,7 +215,7 @@
             // 
             // txtPreco
             // 
-            txtPreco.Location = new Point(328, 190);
+            txtPreco.Location = new Point(328, 137);
             txtPreco.Margin = new Padding(3, 2, 3, 2);
             txtPreco.Name = "txtPreco";
             txtPreco.Size = new Size(235, 23);
@@ -224,7 +224,7 @@
             // 
             // btnCadastrarAutomovel
             // 
-            btnCadastrarAutomovel.Location = new Point(224, 281);
+            btnCadastrarAutomovel.Location = new Point(217, 297);
             btnCadastrarAutomovel.Margin = new Padding(3, 2, 3, 2);
             btnCadastrarAutomovel.Name = "btnCadastrarAutomovel";
             btnCadastrarAutomovel.Size = new Size(204, 46);
@@ -236,7 +236,7 @@
             // lblAno
             // 
             lblAno.AutoSize = true;
-            lblAno.Location = new Point(75, 124);
+            lblAno.Location = new Point(328, 72);
             lblAno.Name = "lblAno";
             lblAno.Size = new Size(71, 15);
             lblAno.TabIndex = 32;
@@ -245,7 +245,7 @@
             // 
             // txtAno
             // 
-            txtAno.Location = new Point(75, 141);
+            txtAno.Location = new Point(328, 89);
             txtAno.Margin = new Padding(3, 2, 3, 2);
             txtAno.Name = "txtAno";
             txtAno.Size = new Size(235, 23);
@@ -257,7 +257,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
-            ClientSize = new Size(715, 338);
+            ClientSize = new Size(723, 378);
             Controls.Add(lblAno);
             Controls.Add(txtAno);
             Controls.Add(btnCadastrarAutomovel);

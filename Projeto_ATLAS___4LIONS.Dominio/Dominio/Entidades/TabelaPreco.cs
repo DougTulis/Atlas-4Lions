@@ -20,6 +20,13 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         {
         }
 
+
+
+
+
+
+
+
         public override bool Validacao()
         {
             return true; // por enquanto

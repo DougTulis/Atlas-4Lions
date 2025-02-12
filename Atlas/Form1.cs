@@ -16,6 +16,8 @@ namespace Atlas
         private FrmHistoricoAutomovel frmHistoricoAutomovel = new FrmHistoricoAutomovel();
         private FrmExclusaoAutomovel frmExclusaoAutomovel = new FrmExclusaoAutomovel();
         private FrmHistoricoLocacao frmHistoricoLocacao = new FrmHistoricoLocacao();
+        private FrmBaixaLocacao frmBaixaLocacao = new FrmBaixaLocacao();
+        private FrmRegistroPagamento frmRegistroPagamento = new FrmRegistroPagamento();
         public Form1()
         {
 
@@ -94,9 +96,15 @@ namespace Atlas
 
         }
 
-        private void itmGerenciamentoLocacoesRegPagamento_Click(object sender, EventArgs e)
+        private void mnuGerenciamentoLocacoes_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void itmGerenciamentoLocacoesRegPagamento_Click(object sender, EventArgs e)
+        {
+            frmRegistroPagamento.MdiParent = this;
+            frmRegistroPagamento.Show();
         }
 
         private void nightControlBox1_Click(object sender, EventArgs e)
@@ -111,7 +119,7 @@ namespace Atlas
 
         private void itmGerenciamentoPessoasExcluirPessoas_Click(object sender, EventArgs e)
         {
-            frmExclusaoPessoas.MdiParent = this;    
+            frmExclusaoPessoas.MdiParent = this;
             frmExclusaoPessoas.Show();
 
         }
@@ -142,15 +150,9 @@ namespace Atlas
 
         private void itmGerenciamentoVeiculosExcluirVeiculo_Click(object sender, EventArgs e)
         {
-            frmExclusaoAutomovel.MdiParent= this;
+            frmExclusaoAutomovel.MdiParent = this;
             frmExclusaoAutomovel.Show();
         }
-
-        private void mnuGerenciamentoLocacoes_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void itmGerenciamentoLocacoesCadLocacoes_Click(object sender, EventArgs e)
         {
             frmCadLocacao.MdiParent = this;
@@ -165,7 +167,8 @@ namespace Atlas
 
         private void itmGerenciamentoLocacoesBaixaLocacao_Click(object sender, EventArgs e)
         {
-
+            frmBaixaLocacao.MdiParent = this;
+            frmBaixaLocacao.Show();
         }
     }
 }

@@ -42,10 +42,11 @@
             // 
             dgvHistoricoLocacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvHistoricoLocacao.Columns.AddRange(new DataGridViewColumn[] { saida, retorno, tipoLocacao, valorTotal, idCondutor, idLocatario });
-            dgvHistoricoLocacao.Location = new Point(-26, 9);
+            dgvHistoricoLocacao.Location = new Point(-23, 7);
+            dgvHistoricoLocacao.Margin = new Padding(3, 2, 3, 2);
             dgvHistoricoLocacao.Name = "dgvHistoricoLocacao";
             dgvHistoricoLocacao.RowHeadersWidth = 51;
-            dgvHistoricoLocacao.Size = new Size(853, 432);
+            dgvHistoricoLocacao.Size = new Size(711, 324);
             dgvHistoricoLocacao.TabIndex = 1;
             dgvHistoricoLocacao.CellContentClick += dgvHistoricoLocacao_CellContentClick;
             // 
@@ -83,8 +84,8 @@
             // 
             // idCondutor
             // 
-            idCondutor.DataPropertyName = "Condutor";
-            idCondutor.HeaderText = "ID Condutor";
+            idCondutor.DataPropertyName = "Condutor[Nome]";
+            idCondutor.HeaderText = "Condutor";
             idCondutor.MinimumWidth = 6;
             idCondutor.Name = "idCondutor";
             idCondutor.Width = 125;
@@ -92,17 +93,18 @@
             // idLocatario
             // 
             idLocatario.DataPropertyName = "Locatario";
-            idLocatario.HeaderText = "ID Locatario";
+            idLocatario.HeaderText = "Locatario";
             idLocatario.MinimumWidth = 6;
             idLocatario.Name = "idLocatario";
             idLocatario.Width = 125;
             // 
             // FrmHistoricoLocacao
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
             Controls.Add(dgvHistoricoLocacao);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "FrmHistoricoLocacao";
             Text = "FrmHistoricoLocacao";
             ((System.ComponentModel.ISupportInitialize)dgvHistoricoLocacao).EndInit();

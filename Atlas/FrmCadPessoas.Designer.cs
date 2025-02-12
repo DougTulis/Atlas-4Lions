@@ -142,9 +142,9 @@
             lblCnpj.AutoSize = true;
             lblCnpj.Location = new Point(343, 178);
             lblCnpj.Name = "lblCnpj";
-            lblCnpj.Size = new Size(210, 15);
+            lblCnpj.Size = new Size(209, 15);
             lblCnpj.TabIndex = 10;
-            lblCnpj.Text = "Insira o CPNJ (caso for pessoa jurídica)";
+            lblCnpj.Text = "Insira o CNPJ (caso for pessoa jurídica)";
             lblCnpj.Click += lblCnpj_Click;
             // 
             // lblCpf

@@ -54,6 +54,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void AtualizarGridView()
         {
+            dgvHistoricoAutomovelExclusaoAutomovel.AutoGenerateColumns = false;
             var dados = listarAutomovelUseCase.ExecutarDadosCompletos();
             dgvHistoricoAutomovelExclusaoAutomovel.DataSource = dados.ToList();
             dgvHistoricoAutomovelExclusaoAutomovel.Refresh();

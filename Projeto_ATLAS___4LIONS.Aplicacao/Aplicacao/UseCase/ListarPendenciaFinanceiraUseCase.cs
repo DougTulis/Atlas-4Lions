@@ -11,13 +11,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             this.pendenciaRepositorio = pendenciaRepositorio;
         }
-        public void Executar()
+        public IEnumerable<PendenciaFinanceiraDTO> Executar()
         {
-            var lista = pendenciaRepositorio.ListarTodos();
-            foreach (var item in lista)
-            {
-                Console.WriteLine(item);
-            }
+            return pendenciaRepositorio.ListarTodos();
+      
         }
         public PendenciaFinanceiraDTO? ExecutarRecuperarPorId(int id)
         {

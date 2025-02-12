@@ -12,7 +12,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
 
         public PendenciaFinanceiraDTO(Guid transacaoId, decimal valorTotal)
         {
-
             TransacaoId = transacaoId;
             ValorTotal = valorTotal;
         }

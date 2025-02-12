@@ -1,17 +1,8 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
-using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using Projeto_ATLAS___4LIONS.Infra.Repositorios;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
 
 namespace Projeto_ATLAS___4LIONS.Forms
 {
@@ -136,6 +127,8 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
             var automovelDto = new AutomovelDTO
             { 
+                Status = Dominio.ValueObjects.Enums.EStatusVeiculo.GARAGEM,
+                DataCriacao = DateTime.Now,
                 Modelo = txtModelo.Text,
                 Ano = txtAno.Text,
                 Cor = txtCor.Text,

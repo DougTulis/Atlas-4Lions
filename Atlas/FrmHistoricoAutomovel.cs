@@ -33,10 +33,11 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private void dgvHistoricoAutomovel_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
-      
+
         }
         private void AtualizarGridView()
         {
+            dgvHistoricoAutomovel.AutoGenerateColumns = false;
             var dados = listarAutomovelUseCase.ExecutarDadosCompletos();
             dgvHistoricoAutomovel.DataSource = dados.ToList();
             dgvHistoricoAutomovel.Refresh();

@@ -10,13 +10,9 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             this.parcelaRepositorio = parcelaRepositorio;
         }
-        public void Executar(int id)
+        public IEnumerable<ParcelaDTO> Executar(int id)
         {
-            var lista = parcelaRepositorio.ListarPorPendFin(id);
-            foreach (var item in lista)
-            {
-                Console.WriteLine(item);
-            }
+          return parcelaRepositorio.ListarPorPendFin(id);
         }
     }
 }

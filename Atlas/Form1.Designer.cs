@@ -66,7 +66,7 @@
             panel1.Location = new Point(0, 24);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(737, 37);
+            panel1.Size = new Size(816, 37);
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint;
             // 
@@ -97,7 +97,7 @@
             nightControlBox1.EnableMaximizeColor = Color.FromArgb(160, 160, 160);
             nightControlBox1.EnableMinimizeButton = true;
             nightControlBox1.EnableMinimizeColor = Color.FromArgb(160, 160, 160);
-            nightControlBox1.Location = new Point(615, 0);
+            nightControlBox1.Location = new Point(677, 0);
             nightControlBox1.MaximizeHoverColor = Color.FromArgb(15, 255, 255, 255);
             nightControlBox1.MaximizeHoverForeColor = Color.White;
             nightControlBox1.MinimizeHoverColor = Color.FromArgb(15, 255, 255, 255);
@@ -127,7 +127,7 @@
             flowLayoutPanel1.Location = new Point(0, 61);
             flowLayoutPanel1.Margin = new Padding(3, 2, 3, 2);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(99, 367);
+            flowLayoutPanel1.Size = new Size(99, 430);
             flowLayoutPanel1.TabIndex = 2;
             flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
             // 
@@ -137,7 +137,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { mnuGerenciamentoPessoas, mnuGerenciamentoVeiculos, mnuGerenciamentoLocacoes });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(737, 24);
+            menuStrip1.Size = new Size(816, 24);
             menuStrip1.TabIndex = 5;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -250,7 +250,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(224, 224, 224);
-            ClientSize = new Size(737, 428);
+            ClientSize = new Size(816, 491);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(panel1);
             Controls.Add(menuStrip1);

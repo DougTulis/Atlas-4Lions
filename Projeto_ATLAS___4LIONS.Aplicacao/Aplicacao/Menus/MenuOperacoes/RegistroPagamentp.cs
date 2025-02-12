@@ -20,12 +20,19 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
         {
             var useCaseListarPendFin = new ListarPendenciaFinanceiraUseCase(_pendFinRepositorio);
             var useCaseListarParcelarPorPendFin = new ListarParcelaPorPendFinUseCase(_parcelaRepositorio);
-            useCaseListarPendFin.Executar();
+            foreach(var item in useCaseListarPendFin.Executar())
+            {
+                Console.WriteLine(item);
+            }
+
             Console.Write("\nDigite o ID da Pendência ou 0 para voltar: ");
             int escolhaPendencia = int.Parse(Console.ReadLine());
             if (escolhaPendencia == 0) return;
             var pendFin = useCaseListarPendFin.ExecutarRecuperarPorId(escolhaPendencia);
-            useCaseListarParcelarPorPendFin.Executar(escolhaPendencia);
+            foreach (var item in useCaseListarParcelarPorPendFin.Executar(escolhaPendencia))
+            {
+                Console.WriteLine(item);
+            }
 
             Console.Write("\nDigite o número da sequência da parcela que deseja dar baixa ou 0 para voltar: ");
             int escolhaSequencia = int.Parse(Console.ReadLine());

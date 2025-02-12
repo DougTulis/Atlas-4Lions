@@ -25,7 +25,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
             listarPessoaUseCase = new ListarPessoaUseCase(repositorio);
             deletarPessoaUseCase = new DeletarPessoaUseCase(repositorio);
             InitializeComponent();
-            dgvHistoricoPessoasExclusaoPessoas.AutoGenerateColumns = false;
+
             AtualizarGridView();
 
         }
@@ -36,6 +36,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
         }
         private void AtualizarGridView()
         {
+            dgvHistoricoPessoasExclusaoPessoas.AutoGenerateColumns = false;
             var dados = listarPessoaUseCase.ExecutarDadosCompletos();
             dgvHistoricoPessoasExclusaoPessoas.DataSource = dados.ToList();
             dgvHistoricoPessoasExclusaoPessoas.Refresh();
@@ -48,13 +49,13 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void txtIdPessoaExclusao_TextChanged(object sender, EventArgs e)
         {
-           
+
         }
 
         private void btnExcluirPessoa_Click(object sender, EventArgs e)
         {
-           int _idPessoa = Convert.ToInt32(txtIdPessoaExclusao.Text);
-            var pessoaDto = listarPessoaUseCase.ExecutarRecuperarPorId(_idPessoa);            
+            int _idPessoa = Convert.ToInt32(txtIdPessoaExclusao.Text);
+            var pessoaDto = listarPessoaUseCase.ExecutarRecuperarPorId(_idPessoa);
             deletarPessoaUseCase.Executar(pessoaDto);
             AtualizarGridView();
         }
@@ -63,6 +64,6 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         }
 
-      
+
     }
 }
