@@ -12,12 +12,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             this.locacaoRepositorio = locacaoRepositorio;
         }
 
-        public void Executar()
+        public IEnumerable<LocacaoDTO> Executar()
         {
-            foreach (var item in locacaoRepositorio.ListarTodos())
-            {
-                Console.WriteLine(item);
-            }
+           return locacaoRepositorio.ListarTodos();
+        
         }
 
         public void ExecutarRecuperacaoStatusAndamento()

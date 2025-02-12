@@ -14,8 +14,8 @@ namespace Atlas
         private FrmExclusaoPessoas frmExclusaoPessoas = new FrmExclusaoPessoas();
         private FrmVinculacaoCnh frmVinculacaoCnh = new FrmVinculacaoCnh();
         private FrmHistoricoAutomovel frmHistoricoAutomovel = new FrmHistoricoAutomovel();
-
-
+        private FrmExclusaoAutomovel frmExclusaoAutomovel = new FrmExclusaoAutomovel();
+        private FrmHistoricoLocacao frmHistoricoLocacao = new FrmHistoricoLocacao();
         public Form1()
         {
 
@@ -142,7 +142,8 @@ namespace Atlas
 
         private void itmGerenciamentoVeiculosExcluirVeiculo_Click(object sender, EventArgs e)
         {
-
+            frmExclusaoAutomovel.MdiParent= this;
+            frmExclusaoAutomovel.Show();
         }
 
         private void mnuGerenciamentoLocacoes_Click(object sender, EventArgs e)
@@ -158,7 +159,8 @@ namespace Atlas
 
         private void itmGerenciamentoLocacoesHistLocacoes_Click(object sender, EventArgs e)
         {
-
+            frmHistoricoLocacao.MdiParent = this;
+            frmHistoricoLocacao.Show();
         }
 
         private void itmGerenciamentoLocacoesBaixaLocacao_Click(object sender, EventArgs e)

@@ -16,12 +16,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             return pessoaRepositorio.ListarTodos();
         }
-        public void ExecutarDadosBreves()
+        public IEnumerable<PessoaDTO> ExecutarDadosBreves()
         {
-            foreach (var item in pessoaRepositorio.ListarTodos())
-            {
-                Console.WriteLine(item.ExibirDadosBreves());
-            }
+            return pessoaRepositorio.ListarTodos();
+   
         }
         public PessoaDTO? ExecutarRecuperarPorId(int id)
         {

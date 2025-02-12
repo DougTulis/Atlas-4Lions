@@ -9,7 +9,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
         public static PessoaDTO Definir(IPessoaRepositorio pessoaRepositorio, ListarPessoaUseCase useCaseListarPessoa)
         {
             Console.Clear();
-            useCaseListarPessoa.ExecutarDadosBreves();
+            foreach (var item in useCaseListarPessoa.ExecutarDadosBreves())
+            {
+                Console.WriteLine(item);
+            }
             Console.WriteLine();
             Console.Write("Selecione o Id do condutor: ");
             int escolhaCondutor = int.Parse(Console.ReadLine());
