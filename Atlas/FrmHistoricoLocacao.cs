@@ -9,7 +9,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private readonly ILocacaoRepositorio locacaoRepositorio;
         public FrmHistoricoLocacao()
         {
-            locacaoRepositorio = new LocacaoRepositorio();
+            locacaoRepositorio = new Infra.Repositorios.LocacaoRepositorio();
             listarLocacoesUseCase = new ListarLocacoesUseCase(locacaoRepositorio);
             InitializeComponent();
             AtualizarGridView();

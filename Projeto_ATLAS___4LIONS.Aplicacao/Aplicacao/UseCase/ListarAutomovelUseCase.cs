@@ -22,22 +22,16 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             return automovelRepositorio.RecuperarPorId(id);
         }
 
-        public void ExecutarDadosBreves()
+        public IEnumerable<AutomovelDTO> ExecutarDadosBreves()
         {
-            foreach (var item in automovelRepositorio.ListarTodos())
-            {
-                Console.WriteLine(item.ExibirDadosBreves());
-            }
+            return automovelRepositorio.ListarTodos();
+            
         }
 
-        public void ExecutarStatusGaragem()
+        public IEnumerable<AutomovelDTO> ExecutarStatusGaragem()
         {
-            var lista = automovelRepositorio.ListarStatusGaragem();
-            foreach (var item in lista)
-            {
-                Console.WriteLine(item.ExibirDadosBreves());
-            }
-
+           return automovelRepositorio.ListarStatusGaragem();
+       
         }
     }
 }
