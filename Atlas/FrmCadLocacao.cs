@@ -25,6 +25,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private readonly ListarPessoaUseCase listarPessoaUseCase;
         private readonly ListarLocacoesUseCase listarLocacoesUseCase;
         private readonly ListarAutomovelUseCase listarAutomovelUseCase;
+        private readonly AlterarStatusVeiculoUseCase alterarStatusVeiculoUseCase;
 
         public FrmCadLocacao()
         {
@@ -34,9 +35,14 @@ namespace Projeto_ATLAS___4LIONS.Forms
             listarLocacoesUseCase = new ListarLocacoesUseCase(locacaoRepositorio);
             listarPessoaUseCase = new ListarPessoaUseCase(pessoaRepositorio);
             listarAutomovelUseCase = new ListarAutomovelUseCase(automovelRepositorio);
+            alterarStatusVeiculoUseCase = new AlterarStatusVeiculoUseCase(automovelRepositorio);
 
             InitializeComponent();
             carregarComboBox();
+            cmbTipoLocacao.DataSource = Enum.GetValues(typeof(ETipoLocacao));
+            cmbTipoLocacao.SelectedIndex = -1;
+            lblParcelas.Visible = false;
+            cmbParcelas.Visible = false;
 
         }
 
@@ -49,6 +55,11 @@ namespace Projeto_ATLAS___4LIONS.Forms
         {
 
         }
+        private void lblParcelas_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void txtSaida_TextChanged(object sender, EventArgs e)
         {
 
@@ -61,7 +72,16 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void cmbTipoLocacao_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cmbTipoLocacao.DataSource = Enum.GetValues(typeof(ETipoLocacao));
+
+            if (cmbTipoLocacao.SelectedItem == null)
+                return;
+
+            ETipoLocacao tipoSelecionado = (ETipoLocacao)cmbTipoLocacao.SelectedItem;
+
+            bool exibirParcelas = tipoSelecionado == ETipoLocacao.CONTRATO;
+            lblParcelas.Visible = exibirParcelas;
+            cmbParcelas.Visible = exibirParcelas;
+       
 
         }
         private void cmbLocatario_SelectedIndexChanged(object sender, EventArgs e)
@@ -86,6 +106,10 @@ namespace Projeto_ATLAS___4LIONS.Forms
         {
 
         }
+        private void cmbParcelas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
         private void btnCadastrarLocacao_Click(object sender, EventArgs e)
         {
             var locacaoDto = new LocacaoDTO
@@ -96,11 +120,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
                 Condutor = (Pessoa)cmbCondutor.SelectedItem,
                 Locatario = (Pessoa)cmbLocatario.SelectedItem,
                 Automovel = (Automovel)cmbLocatario.SelectedItem
-
-
-
             };
-
         }
 
         private void carregarComboBox()
@@ -121,11 +141,13 @@ namespace Projeto_ATLAS___4LIONS.Forms
             cmbLocatario.SelectedIndex = -1;
             cmbCondutor.SelectedIndex = -1;
             cmbAutomovel.SelectedIndex = -1;
+          
 
             cmbLocatario.Refresh();
             cmbCondutor.Refresh();
             cmbAutomovel.Refresh();
         }
+
 
     
     }

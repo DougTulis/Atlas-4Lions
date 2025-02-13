@@ -11,34 +11,30 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public DateTime Retorno { get; set; }
         public ETipoLocacao TipoLocacao { get; set; }
         public decimal ValorTotal { get; set; }
-        public Pessoa Locatario { get; set; }
-        public Pessoa Condutor { get; set; }
-        public Automovel Automovel { get; set; }
-        public PendenciaFinanceira PendenciaFinanceira { get; set; }
+        public int IdLocatario { get; set; }
+        public int IdCondutor { get; set; }
+        public int IdAutomovel { get; set; }
         public EStatusLocacao Status { get; set; }
 
         public LocacaoDTO()
         {
         }
 
-        public LocacaoDTO(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, decimal valorTotal, Pessoa locatario, Pessoa condutor, Automovel automovel, PendenciaFinanceira pendenciaFinanceira)
+        public LocacaoDTO(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, decimal valorTotal, int idLocatario, int idCondutor, int idAutomovel)
         {
             Saida = saida;
             Retorno = retorno;
             TipoLocacao = tipoLocacao;
             ValorTotal = valorTotal;
-            Locatario = locatario;
-            Condutor = condutor;
-            Automovel = automovel;
-            PendenciaFinanceira = pendenciaFinanceira;
-
+            IdLocatario = idLocatario;
+            IdCondutor = idCondutor;
         }
 
         public override string? ToString()
         {
             return "ID: " + Id + "\n" +
-                "Id do Condutor: " + Condutor.Id + "\n" +
-                "Id do Automovel: " + Automovel.Id + "\n" +
+                "Id do Condutor: " + IdCondutor+ "\n" +
+                "Id do Automovel: " + IdAutomovel + "\n" +
                 "Valor Total: " + ValorTotal.ToString("F2") + "\n" +
                 "Status: " + Status + "\n";
         }

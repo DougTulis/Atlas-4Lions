@@ -8,12 +8,15 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public DateTime DataCriacao { get; set; }
         public Guid TransacaoId { get; set; }
         public decimal ValorTotal { get; set; }
+        public int IdLocacao { get; set; }
         public IList<Parcela> Parcelas { get; private set; } = new List<Parcela>();
 
-        public PendenciaFinanceiraDTO(Guid transacaoId, decimal valorTotal)
+        public PendenciaFinanceiraDTO(Guid transacaoId, decimal valorTotal, int locacao)
         {
             TransacaoId = transacaoId;
             ValorTotal = valorTotal;
+            IdLocacao = locacao;
+
         }
         public PendenciaFinanceiraDTO()
         {

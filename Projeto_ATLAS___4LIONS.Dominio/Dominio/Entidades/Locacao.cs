@@ -13,13 +13,12 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         public Pessoa Locatario { get; set; }
         public Pessoa Condutor { get; set; }
         public Automovel Automovel { get; set; }
-        public PendenciaFinanceira PendenciaFinanceira { get; set; }
         public EStatusLocacao Status { get; set; }
 
         public Locacao()
         {
         }
-        public Locacao(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, decimal valorTotal, Pessoa locatario, Pessoa condutor, Automovel automovel, PendenciaFinanceira pendenciaFinanceira, EStatusLocacao status)
+        public Locacao(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, decimal valorTotal, Pessoa locatario, Pessoa condutor, Automovel automovel, EStatusLocacao status)
         {
             Saida = saida;
             Retorno = retorno;
@@ -28,7 +27,6 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
             Locatario = locatario;
             Condutor = condutor;
             Automovel = automovel;
-            PendenciaFinanceira = pendenciaFinanceira;
             Status = status;
         }
 

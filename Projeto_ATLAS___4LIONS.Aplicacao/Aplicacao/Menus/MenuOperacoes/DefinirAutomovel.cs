@@ -9,7 +9,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
         public static AutomovelDTO? Definir(IAutomovelRepositorio automovelRepositorio, ListarAutomovelUseCase useCaseListarAutomovel)
         {
             Console.Clear();
-            useCaseListarAutomovel.ExecutarStatusGaragem();
+            foreach (var item in useCaseListarAutomovel.ExecutarStatusGaragem())
+            {
+                Console.WriteLine(item);
+            }
             Console.Write("Selecione o ID do automovel que será locado:  ");
             int escolhaAutomovel = int.Parse(Console.ReadLine());
             return automovelRepositorio.RecuperarPorId(escolhaAutomovel);

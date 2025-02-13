@@ -9,7 +9,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 {
     public class LocacaoRepositorio : ILocacaoRepositorio
     {
-        public void Adicionar(LocacaoDTO locacaoDto)
+        public int Adicionar(LocacaoDTO locacaoDto,Pessoa condutor, Pessoa locatario,Automovel automovel)
         {
             using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
             {
@@ -21,20 +21,19 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     Retorno = locacaoDto.Retorno,
                     TipoLocacao = locacaoDto.TipoLocacao,
                     ValorTotal = locacaoDto.ValorTotal,
-                    Locatario = new Pessoa { Id = locacaoDto.Locatario.Id },
-                    Condutor = new Pessoa { Id = locacaoDto.Condutor.Id },
-                    Automovel = new Automovel { Id = locacaoDto.Automovel.Id },
-                    PendenciaFinanceira = new PendenciaFinanceira { Id = locacaoDto.PendenciaFinanceira.Id },
+                    Locatario = locatario,
+                    Condutor = condutor,
+                    Automovel = automovel,
                     Status = locacaoDto.Status
                 };
 
                 string sql = @"
-                INSERT INTO Locacao (Saida, Retorno, TipoLocacao, ValorTotal, LocatarioId, CondutorId, AutomovelId, PendenciaFinanceiraId, StatusLocacao)
-                VALUES (@Saida, @Retorno, @TipoLocacao, @ValorTotal, @LocatarioId, @CondutorId, @AutomovelId, @PendenciaFinanceiraId, @StatusLocacao)";
+    INSERT INTO Locacao (Saida, Retorno, TipoLocacao, ValorTotal, LocatarioId, CondutorId, AutomovelId, StatusLocacao)
+    VALUES (@Saida, @Retorno, @TipoLocacao, @ValorTotal, @LocatarioId, @CondutorId, @AutomovelId, @statusLocacao);
+    SELECT LAST_INSERT_ID();"; // Retorna o ID gerado
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-
                     cmd.Parameters.AddWithValue("@Saida", locacao.Saida);
                     cmd.Parameters.AddWithValue("@Retorno", locacao.Retorno);
                     cmd.Parameters.AddWithValue("@TipoLocacao", (int)locacao.TipoLocacao);
@@ -42,15 +41,12 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     cmd.Parameters.AddWithValue("@LocatarioId", locacao.Locatario.Id);
                     cmd.Parameters.AddWithValue("@CondutorId", locacao.Condutor.Id);
                     cmd.Parameters.AddWithValue("@AutomovelId", locacao.Automovel.Id);
-                    cmd.Parameters.AddWithValue("@PendenciaFinanceiraId", locacao.PendenciaFinanceira.Id);
-                    cmd.Parameters.AddWithValue("@StatusLocacao", (int)locacao.Status);
+                    cmd.Parameters.AddWithValue("@statusLocacao", (int)locacao.Status);
 
-                    cmd.ExecuteNonQuery();
-                    locacaoDto.Id = (int)cmd.LastInsertedId;
+                    return Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
         }
-
         public void Deletar(LocacaoDTO locacaoDto)
         {
             using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
@@ -94,7 +90,6 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             }
         }
 
-
         public IEnumerable<LocacaoDTO> PopularLista(MySqlDataReader dataReader)
         {
             var lista = new List<LocacaoDTO>();
@@ -108,10 +103,10 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     Retorno = Convert.ToDateTime(dataReader["Retorno"]),
                     TipoLocacao = (ETipoLocacao)Convert.ToInt32(dataReader["TipoLocacao"]),
                     ValorTotal = Convert.ToDecimal(dataReader["ValorTotal"]),
-                    Locatario = new Pessoa { Id = Convert.ToInt32(dataReader["LocatarioId"]) },
-                    Condutor = new Pessoa { Id = Convert.ToInt32(dataReader["CondutorId"]) },
-                    Automovel = new Automovel { Id = Convert.ToInt32(dataReader["AutomovelId"]) },
-                    PendenciaFinanceira = new PendenciaFinanceira { Id = Convert.ToInt32(dataReader["PendenciaFinanceiraId"]) },
+                   // Locatario = new Pessoa { Id = Convert.ToInt32(dataReader["LocatarioId"]) },
+                    //Condutor = new Pessoa { Id = Convert.ToInt32(dataReader["CondutorId"]) },
+                    //Automovel = new Automovel { Id = Convert.ToInt32(dataReader["AutomovelId"]) },
+                    //PendenciaFinanceira = new PendenciaFinanceira { Id = Convert.ToInt32(dataReader["PendenciaFinanceiraId"]) },
                     Status = (EStatusLocacao)Convert.ToInt32(dataReader["StatusLocacao"])
                 };
 

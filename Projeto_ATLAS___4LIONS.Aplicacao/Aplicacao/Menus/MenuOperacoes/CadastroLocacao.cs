@@ -27,14 +27,16 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
         {
             Console.Clear();
             var useCaseListarPessoa = new ListarPessoaUseCase(_pessoaRepositorio);
+            var useCaseListarPendenciaFinanceira = new ListarPendenciaFinanceiraUseCase(_pendenciaFinanceiraRepositorio);
             var useCaseListarAutomovel = new ListarAutomovelUseCase(_automovelRepositorio);
             var useCaseListarPrecos = new ListarTabelaPrecoUseCase(_tabelaPrecoRepositorio);
             var useCaseCadastrarParcela = new CadastrarParcelaUseCase(_parcelaRepositorio);
             var useCaseCadastrarPendfin = new CadastrarPendenciaFinanceiraUseCase(_pendenciaFinanceiraRepositorio);
-            var useCaseCdastrarLocacao = new CadastrarLocacaoUseCase(_locacaoRepositorio);
+            var useCaseCdastrarLocacao = new CadastrarLocacaoUseCase(_locacaoRepositorio,_pessoaRepositorio,_automovelRepositorio,_pendenciaFinanceiraRepositorio);
             var UseCaseAlterarStatusVeiculo = new AlterarStatusVeiculoUseCase(_automovelRepositorio);
             var locatarioDto = DefinirLocatario.Definir(_pessoaRepositorio, useCaseListarPessoa);
             var condutorDto = DefinirCondutor.Definir(_pessoaRepositorio, useCaseListarPessoa);
+
 
             Console.Clear();
             int escolhaPreco = 0;
@@ -116,36 +118,28 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
                     Renavam = automovelDto.Renavam,
                     TabelaPrecos = automovelDto.TabelaPrecos
                 };
-                automovel.AlterarParaAlugado();
 
-
-                UseCaseAlterarStatusVeiculo.Executar(automovel.Id, automovel.Status);
-
-                var pendencia = new PendenciaFinanceira(Guid.NewGuid(), valorTotal);
-
-                var pendenciaDto = new PendenciaFinanceiraDTO
-                {
-
-                    TransacaoId = pendencia.TransacaoId,
-                    ValorTotal = pendencia.ValorTotal,
-                    DataCriacao = pendencia.DataCriacao,
-
-                };
-                useCaseCadastrarPendfin.Executar(pendenciaDto);
-
-                pendencia.Id = pendenciaDto.Id;
-
-                LocacaoDTO locacaoDto = new LocacaoDTO(saida, retorno, tipoLocacao, valorTotal, locatario, condutor, automovel, pendencia)
+                LocacaoDTO locacaoDto = new LocacaoDTO(saida, retorno, tipoLocacao, valorTotal, locatario.Id, condutor.Id, automovel.Id)
                 {
                     Status = Dominio.ValueObjects.Enums.EStatusLocacao.ANDAMENTO
                 };
 
-                useCaseCdastrarLocacao.Executar(locacaoDto);
+                UseCaseAlterarStatusVeiculo.Executar(automovel.Id, automovel.Status);
+               
+                var pendenciaDto = new PendenciaFinanceiraDTO
+                {
+                    TransacaoId = Guid.NewGuid(),
+                    ValorTotal = valorTotal,
+                    DataCriacao = DateTime.Now,
+                    IdLocacao = useCaseCdastrarLocacao.Executar(locacaoDto),
+                };
+
+                useCaseCadastrarPendfin.Executar(pendenciaDto);
 
                 for (int i = 1; i <= n; i++)
-                {
-                    var parcela = new Parcela
+                {                    var parcela = new Parcela
                     {
+
                         Sequencia = i,
                         Valor = valorParcela,
                         DataVencimento = DateTime.Now.AddMonths(i - 1),
