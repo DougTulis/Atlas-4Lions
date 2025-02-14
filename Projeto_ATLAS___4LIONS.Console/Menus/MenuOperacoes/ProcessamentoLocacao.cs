@@ -31,7 +31,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
             var locacao = useCaseRecuperarPorId.ExecutarRecuperarPorId(escolhaLocacao);
 
             useCaseAtualizarStatus.Executar(escolhaLocacao, Dominio.ValueObjects.Enums.EStatusLocacao.FINALIZADO);
-            alterarStatusAutomovel.Executar(locacao.Automovel.Id, Dominio.ValueObjects.Enums.EStatusVeiculo.GARAGEM);
+            alterarStatusAutomovel.Executar(locacao.IdAutomovel, Dominio.ValueObjects.Enums.EStatusVeiculo.GARAGEM);
         }
     }
 }

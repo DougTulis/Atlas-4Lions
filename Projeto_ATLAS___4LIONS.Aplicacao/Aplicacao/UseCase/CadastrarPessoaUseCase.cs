@@ -1,7 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
-using Projeto_ATLAS___4LIONS.Aplicacao.Menus;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
@@ -33,9 +32,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 
                 if (!pessoa.Validacao())
                 {
-                    Thread.Sleep(2000);
-                    MenuInicial menuInicial = new MenuInicial();
-                    menuInicial.Exibir();
+                    return;
                 }
 
                 pessoaRepositorio.Adicionar(pessoaDto);

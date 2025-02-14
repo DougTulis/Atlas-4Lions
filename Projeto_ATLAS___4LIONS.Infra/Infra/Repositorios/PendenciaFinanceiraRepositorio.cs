@@ -14,27 +14,18 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             {
                 conexao.Open();
 
-                var pendencia = new PendenciaFinanceira(
-                    pendenciaDto.TransacaoId,
-                    pendenciaDto.ValorTotal
-                )
-                {
-                    DataCriacao = pendenciaDto.DataCriacao
-                };
-
                 string sql = @"
-                INSERT INTO PendenciaFinanceira (TransacaoId, ValorTotal, DataCriacao)
-                VALUES (@TransacaoId, @ValorTotal, @DataCriacao)";
+                INSERT INTO PendenciaFinanceira (TransacaoId, ValorTotal, DataCriacao, IdLocacao)
+                VALUES (@TransacaoId, @ValorTotal, @DataCriacao, @IdLocacao)";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
+                    cmd.Parameters.AddWithValue("@TransacaoId", pendenciaDto.TransacaoId);
+                    cmd.Parameters.AddWithValue("@ValorTotal", pendenciaDto.ValorTotal);
+                    cmd.Parameters.AddWithValue("@DataCriacao", pendenciaDto.DataCriacao);
+                    cmd.Parameters.AddWithValue("@IdLocacao", pendenciaDto.IdLocacao);
 
-
-                    cmd.Parameters.AddWithValue("@TransacaoId", pendencia.TransacaoId);
-                    cmd.Parameters.AddWithValue("@ValorTotal", pendencia.ValorTotal);
-                    cmd.Parameters.AddWithValue("@DataCriacao", pendencia.DataCriacao);
                     cmd.ExecuteNonQuery();
-
                     pendenciaDto.Id = (int)cmd.LastInsertedId;
                 }
             }
@@ -44,9 +35,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
         {
             using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
             {
-
                 conexao.Open();
-
                 string sql = "DELETE FROM PendenciaFinanceira WHERE Id = @Id";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
@@ -61,19 +50,13 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
         {
             using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
             {
-
-
                 conexao.Open();
-
                 string sql = "SELECT * FROM PendenciaFinanceira";
+
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-
-
                     using (var dataReader = cmd.ExecuteReader())
                     {
-
-
                         return PopularLista(dataReader);
                     }
                 }
@@ -86,13 +69,13 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
             while (dataReader.Read())
             {
-                var pendencia = new PendenciaFinanceiraDTO(
-                    Guid.Parse(dataReader["TransacaoId"].ToString()),
-                    Convert.ToDecimal(dataReader["ValorTotal"])
-                )
+                var pendencia = new PendenciaFinanceiraDTO
                 {
                     Id = Convert.ToInt32(dataReader["Id"]),
-                    DataCriacao = Convert.ToDateTime(dataReader["DataCriacao"])
+                    TransacaoId = Guid.Parse(dataReader["TransacaoId"].ToString()),
+                    ValorTotal = Convert.ToDecimal(dataReader["ValorTotal"]),
+                    DataCriacao = Convert.ToDateTime(dataReader["DataCriacao"]),
+                    IdLocacao = Convert.ToInt32(dataReader["LocacaoId"]) 
                 };
 
                 lista.Add(pendencia);
@@ -106,8 +89,8 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
             {
                 conexao.Open();
-
                 string sql = "SELECT * FROM PendenciaFinanceira WHERE Id = @Id";
+
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
                     cmd.Parameters.AddWithValue("@Id", id);
@@ -115,12 +98,10 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     using (var dataReader = cmd.ExecuteReader())
                     {
                         var lista = PopularLista(dataReader);
-
                         return lista.FirstOrDefault();
                     }
                 }
             }
         }
-
     }
 }

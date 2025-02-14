@@ -1,7 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
-using Projeto_ATLAS___4LIONS.Aplicacao.Menus;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
@@ -11,28 +10,25 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         private readonly ILocacaoRepositorio locacaoRepositorio;
         private readonly IPessoaRepositorio pessoaRepositorio;
         private readonly IAutomovelRepositorio automovelRepositorio;
-        private readonly IPendenciaFinanceiraRepositorio pendenciaRepositorio;
 
         public CadastrarLocacaoUseCase(
             ILocacaoRepositorio locacaoRepositorio,
             IPessoaRepositorio pessoaRepositorio,
-            IAutomovelRepositorio automovelRepositorio,
-            IPendenciaFinanceiraRepositorio pendenciaRepositorio)
+            IAutomovelRepositorio automovelRepositorio)
         {
             this.locacaoRepositorio = locacaoRepositorio;
             this.pessoaRepositorio = pessoaRepositorio;
             this.automovelRepositorio = automovelRepositorio;
-            this.pendenciaRepositorio = pendenciaRepositorio;
         }
 
         public int Executar(LocacaoDTO locacaoDto)
         {
             try
-            { 
+            {
                 PessoaDTO locatarioDto = pessoaRepositorio.RecuperarPorId(locacaoDto.IdLocatario);
                 PessoaDTO condutorDto = pessoaRepositorio.RecuperarPorId(locacaoDto.IdCondutor);
                 AutomovelDTO automovelDto = automovelRepositorio.RecuperarPorId(locacaoDto.IdAutomovel);
-        
+
                 Pessoa locatario = new Pessoa
                 {
                     Id = locatarioDto.Id,
@@ -63,7 +59,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                     Modelo = automovelDto.Modelo,
                     Placa = automovelDto.Placa,
                     Cor = automovelDto.Cor,
-                    Status = Dominio.ValueObjects.Enums.EStatusVeiculo.ALUGADO,
                     Chassi = automovelDto.Chassi,
                     Renavam = automovelDto.Renavam
                 };
@@ -77,21 +72,18 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                     Locatario = locatario,
                     Condutor = condutor,
                     Automovel = automovel,
-                    Status = locacaoDto.Status
+                    Status = Dominio.ValueObjects.Enums.EStatusLocacao.ANDAMENTO,
                 };
-
-
                 if (!locacao.Validacao())
                 {
-                    Console.WriteLine("Erro na validação da locação.");
                     return -1;
                 }
+                automovel.AlterarParaAlugado();
 
-                return locacaoRepositorio.Adicionar(locacaoDto,condutor,locatario,automovel);
+                return locacaoRepositorio.Adicionar(locacaoDto, condutor, locatario, automovel);
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine(ex.StackTrace);
                 return -1;
             }
         }

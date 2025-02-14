@@ -26,6 +26,8 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private readonly ListarLocacoesUseCase listarLocacoesUseCase;
         private readonly ListarAutomovelUseCase listarAutomovelUseCase;
         private readonly AlterarStatusVeiculoUseCase alterarStatusVeiculoUseCase;
+        private readonly CadastrarLocacaoUseCase cadastrarLocacaoUseCase;
+        private readonly AlterarStatusLocacaoUseCase alterarStatusLocacaoUseCase;
 
         public FrmCadLocacao()
         {
@@ -36,6 +38,8 @@ namespace Projeto_ATLAS___4LIONS.Forms
             listarPessoaUseCase = new ListarPessoaUseCase(pessoaRepositorio);
             listarAutomovelUseCase = new ListarAutomovelUseCase(automovelRepositorio);
             alterarStatusVeiculoUseCase = new AlterarStatusVeiculoUseCase(automovelRepositorio);
+            cadastrarLocacaoUseCase = new CadastrarLocacaoUseCase(locacaoRepositorio, pessoaRepositorio, automovelRepositorio);
+            alterarStatusLocacaoUseCase = new AlterarStatusLocacaoUseCase(locacaoRepositorio);
 
             InitializeComponent();
             carregarComboBox();
@@ -112,17 +116,58 @@ namespace Projeto_ATLAS___4LIONS.Forms
         }
         private void btnCadastrarLocacao_Click(object sender, EventArgs e)
         {
+            var locatarioDto = (PessoaDTO)cmbLocatario.SelectedItem;
+            var condutorDto = (PessoaDTO)cmbCondutor.SelectedItem;
+            var automovelDto = (AutomovelDTO)cmbAutomovel.SelectedItem;
+
+            var locatario = new Pessoa
+            {
+                Id = locatarioDto.Id,
+                Nome = locatarioDto.Nome,
+                Cpf = locatarioDto.Cpf,
+                Contato = locatarioDto.Contato,
+                Email = locatarioDto.Email,
+                NumeroCnh = locatarioDto.NumeroCnh,
+                VencimentoCnh = locatarioDto.VencimentoCnh,
+                DataNascimento = locatarioDto.DataNascimento
+            };
+
+            var condutor = new Pessoa
+            {
+                Id = condutorDto.Id,
+                Nome = condutorDto.Nome,
+                Cpf = condutorDto.Cpf,
+                Contato = condutorDto.Contato,
+                Email = condutorDto.Email,
+                NumeroCnh = condutorDto.NumeroCnh,
+                VencimentoCnh = condutorDto.VencimentoCnh,
+                DataNascimento = condutorDto.DataNascimento
+            };
+
+            var automovel = new Automovel
+            {
+                Id = automovelDto.Id,
+                Modelo = automovelDto.Modelo,
+                Placa = automovelDto.Placa,
+                Cor = automovelDto.Cor,
+                Status = automovelDto.Status,
+                Chassi = automovelDto.Chassi,
+                Renavam = automovelDto.Renavam
+            };
             var locacaoDto = new LocacaoDTO
             {
                 Saida = DateTime.Parse(txtSaida.Text),
                 Retorno = DateTime.Parse(txtRetorno.Text),
                 TipoLocacao = (ETipoLocacao)cmbTipoLocacao.SelectedItem,
-                Condutor = (Pessoa)cmbCondutor.SelectedItem,
-                Locatario = (Pessoa)cmbLocatario.SelectedItem,
-                Automovel = (Automovel)cmbLocatario.SelectedItem
+                IdCondutor = condutorDto.Id,
+                Status = EStatusLocacao.ANDAMENTO,
+                IdAutomovel = automovelDto.Id,
+                IdLocatario = locatarioDto.Id,
             };
-        }
+            cadastrarLocacaoUseCase.Executar(locacaoDto);
 
+            alterarStatusVeiculoUseCase.Executar(automovel.Id, EStatusVeiculo.ALUGADO);
+        }
         private void carregarComboBox()
         {
             cmbLocatario.DataSource = listarPessoaUseCase.ExecutarDadosBreves().ToList();
@@ -147,8 +192,5 @@ namespace Projeto_ATLAS___4LIONS.Forms
             cmbCondutor.Refresh();
             cmbAutomovel.Refresh();
         }
-
-
-    
     }
 }

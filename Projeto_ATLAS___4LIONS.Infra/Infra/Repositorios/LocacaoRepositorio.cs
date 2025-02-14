@@ -103,11 +103,12 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     Retorno = Convert.ToDateTime(dataReader["Retorno"]),
                     TipoLocacao = (ETipoLocacao)Convert.ToInt32(dataReader["TipoLocacao"]),
                     ValorTotal = Convert.ToDecimal(dataReader["ValorTotal"]),
-                   // Locatario = new Pessoa { Id = Convert.ToInt32(dataReader["LocatarioId"]) },
-                    //Condutor = new Pessoa { Id = Convert.ToInt32(dataReader["CondutorId"]) },
-                    //Automovel = new Automovel { Id = Convert.ToInt32(dataReader["AutomovelId"]) },
-                    //PendenciaFinanceira = new PendenciaFinanceira { Id = Convert.ToInt32(dataReader["PendenciaFinanceiraId"]) },
+                    IdLocatario = Convert.ToInt32(dataReader["LocatarioId"]),
+                    IdCondutor = Convert.ToInt32(dataReader["CondutorId"]),
+                    IdAutomovel = Convert.ToInt32(dataReader["AutomovelId"]),
                     Status = (EStatusLocacao)Convert.ToInt32(dataReader["StatusLocacao"])
+
+
                 };
 
                 lista.Add(locacao);
@@ -158,9 +159,6 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 }
             }
         }
-
-
-
         public void AtualizarStatus(int locacaoId, EStatusLocacao novoStatus)
         {
             using (var conexao = new MySqlAdaptadorConexao().ObterConexao())

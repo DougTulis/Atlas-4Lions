@@ -103,10 +103,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
                 Cnpj = txtCnpj.Text,
                 DataNascimento = Convert.ToDateTime(txtDataNascimento.Text),
             };
-
             cadastrarPessoaUseCase.Executar(pessoaDto);
-
-         
         }
     }
 }
