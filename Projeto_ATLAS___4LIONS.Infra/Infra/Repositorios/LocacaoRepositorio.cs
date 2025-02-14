@@ -107,8 +107,6 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     IdCondutor = Convert.ToInt32(dataReader["CondutorId"]),
                     IdAutomovel = Convert.ToInt32(dataReader["AutomovelId"]),
                     Status = (EStatusLocacao)Convert.ToInt32(dataReader["StatusLocacao"])
-
-
                 };
 
                 lista.Add(locacao);

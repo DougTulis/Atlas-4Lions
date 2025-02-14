@@ -46,6 +46,8 @@
             cmbAutomovel = new ComboBox();
             cmbParcelas = new ComboBox();
             lblParcelas = new Label();
+            label1 = new Label();
+            txtPreco = new TextBox();
             ((System.ComponentModel.ISupportInitialize)locacaoDTOBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pessoaDTOBindingSource).BeginInit();
             SuspendLayout();
@@ -81,7 +83,7 @@
             // lblTipoLocacao
             // 
             lblTipoLocacao.AutoSize = true;
-            lblTipoLocacao.Location = new Point(362, 126);
+            lblTipoLocacao.Location = new Point(362, 176);
             lblTipoLocacao.Name = "lblTipoLocacao";
             lblTipoLocacao.Size = new Size(144, 15);
             lblTipoLocacao.TabIndex = 32;
@@ -129,7 +131,7 @@
             // 
             cmbTipoLocacao.FormattingEnabled = true;
             cmbTipoLocacao.Items.AddRange(new object[] { "Diária", "Contrato" });
-            cmbTipoLocacao.Location = new Point(362, 143);
+            cmbTipoLocacao.Location = new Point(362, 193);
             cmbTipoLocacao.Margin = new Padding(3, 2, 3, 2);
             cmbTipoLocacao.Name = "cmbTipoLocacao";
             cmbTipoLocacao.Size = new Size(235, 23);
@@ -209,12 +211,32 @@
             lblParcelas.Text = "Escolha a quantidade de parcelas:";
             lblParcelas.Click += lblParcelas_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(362, 126);
+            label1.Name = "label1";
+            label1.Size = new Size(85, 15);
+            label1.TabIndex = 43;
+            label1.Text = "Preço da diária";
+            // 
+            // txtPreco
+            // 
+            txtPreco.Location = new Point(362, 143);
+            txtPreco.Name = "txtPreco";
+            txtPreco.ReadOnly = true;
+            txtPreco.Size = new Size(235, 23);
+            txtPreco.TabIndex = 44;
+            txtPreco.TextChanged += txtPreco_TextChanged;
+            // 
             // FrmCadLocacao
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
             ClientSize = new Size(700, 338);
+            Controls.Add(txtPreco);
+            Controls.Add(label1);
             Controls.Add(cmbParcelas);
             Controls.Add(lblParcelas);
             Controls.Add(cmbAutomovel);
@@ -259,5 +281,7 @@
         private ComboBox cmbAutomovel;
         private ComboBox cmbParcelas;
         private Label lblParcelas;
+        private Label label1;
+        private TextBox txtPreco;
     }
 }

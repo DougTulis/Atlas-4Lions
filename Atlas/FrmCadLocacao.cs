@@ -22,24 +22,30 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private readonly ILocacaoRepositorio locacaoRepositorio;
         private readonly IPessoaRepositorio pessoaRepositorio;
         private readonly IAutomovelRepositorio automovelRepositorio;
+        private readonly IPendenciaFinanceiraRepositorio pendenciaFinanceiraRepositorio;
+        private readonly ITabelaPrecoRepositorio precoRepositorio;
         private readonly ListarPessoaUseCase listarPessoaUseCase;
         private readonly ListarLocacoesUseCase listarLocacoesUseCase;
         private readonly ListarAutomovelUseCase listarAutomovelUseCase;
         private readonly AlterarStatusVeiculoUseCase alterarStatusVeiculoUseCase;
         private readonly CadastrarLocacaoUseCase cadastrarLocacaoUseCase;
         private readonly AlterarStatusLocacaoUseCase alterarStatusLocacaoUseCase;
+        private readonly CadastrarPendenciaFinanceiraUseCase cadastrarPendenciaFinanceiraUseCase;
 
         public FrmCadLocacao()
         {
             locacaoRepositorio = new LocacaoRepositorio();
             pessoaRepositorio = new PessoaRepositorio();
             automovelRepositorio = new AutomovelRepositorio();
+            precoRepositorio = new TabelaPrecoRepositorio();
+            pendenciaFinanceiraRepositorio = new PendenciaFinanceiraRepositorio();
             listarLocacoesUseCase = new ListarLocacoesUseCase(locacaoRepositorio);
             listarPessoaUseCase = new ListarPessoaUseCase(pessoaRepositorio);
             listarAutomovelUseCase = new ListarAutomovelUseCase(automovelRepositorio);
             alterarStatusVeiculoUseCase = new AlterarStatusVeiculoUseCase(automovelRepositorio);
             cadastrarLocacaoUseCase = new CadastrarLocacaoUseCase(locacaoRepositorio, pessoaRepositorio, automovelRepositorio);
             alterarStatusLocacaoUseCase = new AlterarStatusLocacaoUseCase(locacaoRepositorio);
+            cadastrarPendenciaFinanceiraUseCase = new CadastrarPendenciaFinanceiraUseCase(pendenciaFinanceiraRepositorio, locacaoRepositorio, pessoaRepositorio, automovelRepositorio,precoRepositorio);
 
             InitializeComponent();
             carregarComboBox();
@@ -52,7 +58,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void lblDataSaida_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void lblDataRetorno_Click(object sender, EventArgs e)
@@ -66,12 +72,12 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void txtSaida_TextChanged(object sender, EventArgs e)
         {
-
+           
         }
 
         private void txtRetorno_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         private void cmbTipoLocacao_SelectedIndexChanged(object sender, EventArgs e)
@@ -85,7 +91,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
             bool exibirParcelas = tipoSelecionado == ETipoLocacao.CONTRATO;
             lblParcelas.Visible = exibirParcelas;
             cmbParcelas.Visible = exibirParcelas;
-       
+
 
         }
         private void cmbLocatario_SelectedIndexChanged(object sender, EventArgs e)
@@ -108,9 +114,13 @@ namespace Projeto_ATLAS___4LIONS.Forms
         }
         private void cmbAutomovel_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+        
         }
         private void cmbParcelas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void txtPreco_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -164,8 +174,17 @@ namespace Projeto_ATLAS___4LIONS.Forms
                 IdAutomovel = automovelDto.Id,
                 IdLocatario = locatarioDto.Id,
             };
-            cadastrarLocacaoUseCase.Executar(locacaoDto);
 
+            int idLocacao = cadastrarLocacaoUseCase.Executar(locacaoDto);
+
+            var pendenciaDto = new PendenciaFinanceiraDTO
+            {
+                TransacaoId = Guid.NewGuid(),
+                ValorTotal = 40,
+                DataCriacao = DateTime.Now,
+                IdLocacao = idLocacao,
+            };
+            cadastrarPendenciaFinanceiraUseCase.Executar(pendenciaDto);
             alterarStatusVeiculoUseCase.Executar(automovel.Id, EStatusVeiculo.ALUGADO);
         }
         private void carregarComboBox()
@@ -186,11 +205,12 @@ namespace Projeto_ATLAS___4LIONS.Forms
             cmbLocatario.SelectedIndex = -1;
             cmbCondutor.SelectedIndex = -1;
             cmbAutomovel.SelectedIndex = -1;
-          
 
             cmbLocatario.Refresh();
             cmbCondutor.Refresh();
             cmbAutomovel.Refresh();
         }
+
+       
     }
 }

@@ -76,6 +76,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
 
                 decimal valorParcela = Math.Floor(valorTotal / n);
 
+                // vou precisar do período e da tabelapreco. porém preciso arrumar ela(tabelapreco)
+
                 var locatario = new Pessoa
                 {
                     Id = locatarioDto.Id,
@@ -144,7 +146,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
                         DataVencimento = DateTime.Now.AddMonths(i - 1),
 
                     };
-
                     var parcelaDto = new ParcelaDTO
                     {
                         Sequencia = parcela.Sequencia,
@@ -160,6 +161,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
             MenuInicial menuInicial = new MenuInicial();
             menuInicial.Exibir();
         }
+
+
 
     }
 }

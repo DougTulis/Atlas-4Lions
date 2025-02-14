@@ -19,12 +19,13 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public string? Renavam { get; set; }
         public int? Oleokm { get; set; }
         public int? PastilhaFreioKm { get; set; }
+        public int? IdPreco { get; set; }
 
         public AutomovelDTO()
         {
         }
 
-        public AutomovelDTO(string modelo, string placa, string cor, EStatusVeiculo status,string ano, string? chassi, string? renavam, int? oleokm, int? pastilhaFreioKm)
+        public AutomovelDTO(string modelo, string placa, string cor, EStatusVeiculo status,string ano, string? chassi, string? renavam, int? oleokm, int? pastilhaFreioKm, int? idPreco)
         {
             Modelo = modelo;
             Placa = placa;
@@ -35,6 +36,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
             Oleokm = oleokm;
             PastilhaFreioKm = pastilhaFreioKm;
             Ano = ano;
+            IdPreco = idPreco;
         }
 
         public override string? ToString()

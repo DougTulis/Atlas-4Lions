@@ -159,7 +159,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     ? Convert.ToString(dataReader["Cnpj"])
                     : null;
 
-                var pessoa = new PessoaDTO(nome, email, contato, cpf, cnpj,dataNascimento)
+                var pessoaDto = new PessoaDTO(nome, email, contato, cpf, cnpj,dataNascimento)
                 {
                     Id = Convert.ToInt32(dataReader["Id"]),
                     NumeroCnh = dataReader["NumeroCnh"] != DBNull.Value
@@ -171,7 +171,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     DataCriacao = Convert.ToDateTime(dataReader["DataCriacao"])
                 };
 
-                lista.Add(pessoa);
+                lista.Add(pessoaDto);
             }
 
             return lista;

@@ -99,24 +99,24 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             return lista;
         }
 
-        public TabelaPrecoDTO? RecuperarPorId(int idAutomovel)
+        public TabelaPrecoDTO? RecuperarPorId(int idPreco)
         {
             using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
             {
                 conexao.Open();
 
-                string sql = "SELECT * FROM tabela_preco WHERE AutomovelId = @AutomovelId";
-                using var cmd = new MySqlCommand(sql, conexao);
-                cmd.Parameters.AddWithValue("@AutomovelId", idAutomovel);
-
-                using (var dataReader = cmd.ExecuteReader())
+                string sql = "SELECT * FROM tabela_preco WHERE Id = @IdPreco";
+                using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    var lista = PopularLista(dataReader);
+                    cmd.Parameters.AddWithValue("@IdPreco", idPreco);
 
-                    return lista.FirstOrDefault();
+                    using (var dataReader = cmd.ExecuteReader())
+                    {
+                        var lista = PopularLista(dataReader);
+                        return lista.FirstOrDefault();
+                    }
                 }
             }
         }
     }
-
 }

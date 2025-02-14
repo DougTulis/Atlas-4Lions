@@ -15,15 +15,15 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 conexao.Open();
 
                 string sql = @"
-                INSERT INTO PendenciaFinanceira (TransacaoId, ValorTotal, DataCriacao, IdLocacao)
-                VALUES (@TransacaoId, @ValorTotal, @DataCriacao, @IdLocacao)";
+                INSERT INTO PendenciaFinanceira (TransacaoId, ValorTotal, DataCriacao, LocacaoId)
+                VALUES (@TransacaoId, @ValorTotal, @DataCriacao, @LocacaoId)";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
                     cmd.Parameters.AddWithValue("@TransacaoId", pendenciaDto.TransacaoId);
                     cmd.Parameters.AddWithValue("@ValorTotal", pendenciaDto.ValorTotal);
                     cmd.Parameters.AddWithValue("@DataCriacao", pendenciaDto.DataCriacao);
-                    cmd.Parameters.AddWithValue("@IdLocacao", pendenciaDto.IdLocacao);
+                    cmd.Parameters.AddWithValue("@LocacaoId", pendenciaDto.IdLocacao);
 
                     cmd.ExecuteNonQuery();
                     pendenciaDto.Id = (int)cmd.LastInsertedId;
@@ -75,7 +75,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     TransacaoId = Guid.Parse(dataReader["TransacaoId"].ToString()),
                     ValorTotal = Convert.ToDecimal(dataReader["ValorTotal"]),
                     DataCriacao = Convert.ToDateTime(dataReader["DataCriacao"]),
-                    IdLocacao = Convert.ToInt32(dataReader["LocacaoId"]) 
+                    IdLocacao = dataReader["LocacaoId"] != DBNull.Value ? Convert.ToInt32(dataReader["LocacaoId"]) : Convert.ToInt16(null)
                 };
 
                 lista.Add(pendencia);
@@ -83,7 +83,6 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
             return lista;
         }
-
         public PendenciaFinanceiraDTO? RecuperarPorId(int id)
         {
             using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
