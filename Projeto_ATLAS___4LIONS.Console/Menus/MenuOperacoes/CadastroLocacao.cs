@@ -31,8 +31,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
             var useCaseListarAutomovel = new ListarAutomovelUseCase(_automovelRepositorio);
             var useCaseListarPrecos = new ListarTabelaPrecoUseCase(_tabelaPrecoRepositorio);
             var useCaseCadastrarParcela = new CadastrarParcelaUseCase(_parcelaRepositorio);
-            var useCaseCadastrarPendfin = new CadastrarPendenciaFinanceiraUseCase(_pendenciaFinanceiraRepositorio,_locacaoRepositorio,_pessoaRepositorio,_automovelRepositorio);
-            var useCaseCdastrarLocacao = new CadastrarLocacaoUseCase(_locacaoRepositorio,_pessoaRepositorio,_automovelRepositorio);
+  
+            var useCaseCdastrarLocacao = new CadastrarLocacaoUseCase(_locacaoRepositorio,_tabelaPrecoRepositorio,_pessoaRepositorio,_automovelRepositorio);
             var UseCaseAlterarStatusVeiculo = new AlterarStatusVeiculoUseCase(_automovelRepositorio);
             var locatarioDto = DefinirLocatario.Definir(_pessoaRepositorio, useCaseListarPessoa);
             var condutorDto = DefinirCondutor.Definir(_pessoaRepositorio, useCaseListarPessoa);
@@ -135,7 +135,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus.MenuOperacoes
                     IdLocacao = useCaseCdastrarLocacao.Executar(locacaoDto),
                 };
 
-                useCaseCadastrarPendfin.Executar(pendenciaDto);
+            //    useCaseCadastrarPendfin.Executar(pendenciaDto);
 
                 for (int i = 1; i <= n; i++)
                 {                    var parcela = new Parcela

@@ -3,27 +3,62 @@ using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using Projeto_ATLAS___4LIONS.Infra.Servicos;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 {
     public class PendenciaFinanceiraRepositorio : IPendenciaFinanceiraRepositorio
     {
+        private readonly ILocacaoRepositorio _locacaoRepositorio;
+
+        public PendenciaFinanceiraRepositorio(ILocacaoRepositorio locacaoRepositorio)
+        {
+            _locacaoRepositorio = locacaoRepositorio;
+        }
+
         public void Adicionar(PendenciaFinanceiraDTO pendenciaDto)
         {
             using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
             {
                 conexao.Open();
 
+                // 🔥 Buscar a locação COMPLETA pelo Id
+                var locacaoDto = _locacaoRepositorio.RecuperarPorId(pendenciaDto.IdLocacao)
+                    ?? throw new Exception("Locação não encontrada.");
+
+                // Criar um objeto Locacao COMPLETO com os dados recuperados
+                var locacao = new Locacao
+                {
+                    Id = locacaoDto.Id,
+                    Saida = locacaoDto.Saida,
+                    Retorno = locacaoDto.Retorno,
+                    TipoLocacao = locacaoDto.TipoLocacao,
+                    ValorTotal = locacaoDto.ValorTotal,
+                    Status = locacaoDto.Status
+                };
+
+                // Criar a pendência financeira associada à locação
+                var pendencia = new PendenciaFinanceira
+                {
+                    TransacaoId = pendenciaDto.TransacaoId,
+                    ValorTotal = pendenciaDto.ValorTotal,
+                    DataCriacao = DateTime.Now,
+                    Locacao = locacao // ✅ Associação correta da locação
+                };
+
+                // Persistindo a pendência no banco
                 string sql = @"
                 INSERT INTO PendenciaFinanceira (TransacaoId, ValorTotal, DataCriacao, LocacaoId)
                 VALUES (@TransacaoId, @ValorTotal, @DataCriacao, @LocacaoId)";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    cmd.Parameters.AddWithValue("@TransacaoId", pendenciaDto.TransacaoId);
-                    cmd.Parameters.AddWithValue("@ValorTotal", pendenciaDto.ValorTotal);
-                    cmd.Parameters.AddWithValue("@DataCriacao", pendenciaDto.DataCriacao);
-                    cmd.Parameters.AddWithValue("@LocacaoId", pendenciaDto.IdLocacao);
+                    cmd.Parameters.AddWithValue("@TransacaoId", pendencia.TransacaoId);
+                    cmd.Parameters.AddWithValue("@ValorTotal", pendencia.ValorTotal);
+                    cmd.Parameters.AddWithValue("@DataCriacao", pendencia.DataCriacao);
+                    cmd.Parameters.AddWithValue("@LocacaoId", locacao.Id);
 
                     cmd.ExecuteNonQuery();
                     pendenciaDto.Id = (int)cmd.LastInsertedId;
@@ -83,6 +118,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
             return lista;
         }
+
         public PendenciaFinanceiraDTO? RecuperarPorId(int id)
         {
             using (var conexao = new MySqlAdaptadorConexao().ObterConexao())

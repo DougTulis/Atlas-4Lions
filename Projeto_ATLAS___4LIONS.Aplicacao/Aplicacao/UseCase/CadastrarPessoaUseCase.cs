@@ -1,7 +1,10 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Servicos;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
+using Projeto_ATLAS___4LIONS.Dominio.Notificacoes;
+using System.Text;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 {
@@ -32,14 +35,19 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 
                 if (!pessoa.Validacao())
                 {
-                    return;
+                    string erros = "";
+                    foreach (Notificacao notificacao in pessoa.Notificacoes)
+                    {
+                        erros += $"{notificacao.NomePropriedade}: {notificacao.Mensagem}\n";
+                    }
+                    throw new Exception(erros); // 🔥 Lançando exceção com todas as mensagens
                 }
 
                 pessoaRepositorio.Adicionar(pessoaDto);
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine(ex.StackTrace);
+                return;
             }
         }
 

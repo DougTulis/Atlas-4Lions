@@ -69,13 +69,9 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
                 contratos.DataNascIsOk(DataNascimento.Value, 18, "Data de nascimento inválida. A pessoa precisa ser maior de idade.", "DataNascimento");
             }
 
+
             if (!contratos.IsValid())
             {
-                foreach (var notificacao in contratos.Notificacoes)
-                {
-                    Console.WriteLine($"Erro em {notificacao.NomePropriedade}: {notificacao.Mensagem}");
-                    Thread.Sleep(3000);
-                }
                 return false;
             }
 
@@ -90,11 +86,6 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
 
             if (!contratos.IsValid())
             {
-                foreach (var notificacao in contratos.Notificacoes)
-                {
-                    Console.WriteLine($"Erro em {notificacao.NomePropriedade}: {notificacao.Mensagem}");
-                    Thread.Sleep(3000);
-                }
                 return false;
             }
 

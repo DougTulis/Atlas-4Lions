@@ -34,30 +34,40 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         }
 
-        private void txtIdAutomovelExclusao_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblIdAutomovelExclusao_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnExcluirAutomovel_Click(object sender, EventArgs e)
-        {
-            int automovelId = int.Parse(txtIdAutomovelExclusao.Text);
-            var automovelDto = listarAutomovelUseCase.ExecutarRecuperarPorId(automovelId);
-            deletarAutomovelUseCase.Executar(automovelDto);
-            AtualizarGridView();
-        }
 
         private void AtualizarGridView()
         {
             dgvHistoricoAutomovelExclusaoAutomovel.AutoGenerateColumns = false;
-            var dados = listarAutomovelUseCase.ExecutarDadosCompletos();
+            dgvHistoricoAutomovelExclusaoAutomovel.DataSource = null;
+            var dados = listarAutomovelUseCase.ExecutarStatusGaragem();
             dgvHistoricoAutomovelExclusaoAutomovel.DataSource = dados.ToList();
+            dgvHistoricoAutomovelExclusaoAutomovel.Update();
             dgvHistoricoAutomovelExclusaoAutomovel.Refresh();
+        }
+
+   
+        private void dgvHistoricoAutomovelExclusaoAutomovel_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0) 
+            {
+                DataGridViewRow row = dgvHistoricoAutomovelExclusaoAutomovel.Rows[e.RowIndex];
+                int automovelId = Convert.ToInt32(row.Cells[0].Value);
+
+                DialogResult resultado = MessageBox.Show(
+                    "Deseja realmente excluir este automóvel?",
+                    "Confirmação",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                );
+
+                if (resultado == DialogResult.Yes)
+                {
+                    var automovelDto = listarAutomovelUseCase.ExecutarRecuperarPorId(automovelId);
+                    deletarAutomovelUseCase.Executar(automovelDto);
+                    MessageBox.Show("Automóvel excluído com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    AtualizarGridView();
+                }
+            }
         }
     }
 }

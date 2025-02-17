@@ -1,5 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
+using Projeto_ATLAS___4LIONS.Dominio.Entidades;
+using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +12,11 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface
 {
     public interface IParcelaRepositorio
     {
-        public IEnumerable<ParcelaDTO> ListarTodos();
+        void Adicionar(ParcelaDTO parcelaDto);
+        void AdicionarVarias(IEnumerable<ParcelaDTO> parcelasDto);
+        IEnumerable<ParcelaDTO> ListarPorPendencia(int pendenciaId);
+        void AtualizarPagamentoParcela(int idPendenciaFinanceira, int sequencia, decimal valorPago, DateTime dataPagamento, EEspecie especiePagamento);
 
-        public IEnumerable<ParcelaDTO> PopularLista(MySqlDataReader dataReader);
-        public void Adicionar(ParcelaDTO objeto);
-        public void Deletar(ParcelaDTO objeto);
         public ParcelaDTO? RecuperarPorId(int id);
-        public IEnumerable<ParcelaDTO> ListarPorPendFin(int id);
-        public void Atualizar(ParcelaDTO parcelaDto);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Servicos;
 using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using Projeto_ATLAS___4LIONS.Dominio.Notificacoes;
@@ -20,7 +21,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
     {
         private readonly CadastrarPessoaUseCase cadastrarPessoaUseCase;
         private readonly IPessoaRepositorio pessoaRepositorio;
-        private readonly List<Notificacao> _notificacoes;
+        private readonly List<Notificacao> _notificacoes = new();
 
 
         public FrmCadPessoas()
@@ -29,6 +30,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
             cadastrarPessoaUseCase = new CadastrarPessoaUseCase(pessoaRepositorio);
 
             InitializeComponent();
+
         }
 
         private void textNome_TextChanged(object sender, EventArgs e)
@@ -37,7 +39,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
         }
 
         private void txtEmail_TextChanged(object sender, EventArgs e)
-        {
+       {
 
         }
 
@@ -93,17 +95,26 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void btnCadastrarPessoa_Click(object sender, EventArgs e)
         {
-
-            var pessoaDto = new PessoaDTO
+            try
             {
-                Nome = textNome.Text,
-                Email = txtEmail.Text,
-                Contato = txtContato.Text,
-                Cpf = txtCpf.Text,
-                Cnpj = txtCnpj.Text,
-                DataNascimento = Convert.ToDateTime(txtDataNascimento.Text),
-            };
-            cadastrarPessoaUseCase.Executar(pessoaDto);
+
+                var pessoaDto = new PessoaDTO
+                {
+                    Nome = textNome.Text,
+                    Email = txtEmail.Text,
+                    Contato = txtContato.Text,
+                    Cpf = txtCpf.Text,
+                    Cnpj = txtCnpj.Text,
+                    DataNascimento = Convert.ToDateTime(txtDataNascimento.Text),
+                };
+                cadastrarPessoaUseCase.Executar(pessoaDto);
+
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
+        
     }
 }

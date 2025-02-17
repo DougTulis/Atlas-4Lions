@@ -3,6 +3,7 @@ using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
+using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 {
@@ -19,6 +20,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             {
                 var parcela = new Parcela
                 {
+                    Id = parcelaDto.Id,
                     PendenciaFinanceiraId = parcelaDto.PendenciaFinanceiraId,
                     Sequencia = parcelaDto.Sequencia,
                     Valor = parcelaDto.Valor,
@@ -32,7 +34,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 {
                     return;
                 }
-                parcelaRepositorio.Atualizar(parcelaDto);
+                parcelaRepositorio.AtualizarPagamentoParcela(parcelaDto.PendenciaFinanceiraId, parcela.Sequencia, Convert.ToDecimal(parcelaDto.ValorPago), Convert.ToDateTime(parcelaDto.DataPagamento), (EEspecie)parcelaDto.EspeciePagamento);
             }
             catch (MySqlException ex)
             {

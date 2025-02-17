@@ -1,216 +1,133 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Servicos;
 using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
-using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 using Projeto_ATLAS___4LIONS.Infra.Repositorios;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Projeto_ATLAS___4LIONS.Forms
 {
     public partial class FrmCadLocacao : Form
     {
+        private readonly LocacaoService _locacaoService;
+        private readonly PendenciaFinanceiraServico _pendenciaService;
+        private readonly ListarPessoaUseCase _listarPessoaUseCase;
+        private readonly ListarAutomovelUseCase _listarAutomovelUseCase;
+        private readonly ITabelaPrecoRepositorio _tabelaPrecoRepositorio;
 
-        private readonly ILocacaoRepositorio locacaoRepositorio;
-        private readonly IPessoaRepositorio pessoaRepositorio;
-        private readonly IAutomovelRepositorio automovelRepositorio;
-        private readonly IPendenciaFinanceiraRepositorio pendenciaFinanceiraRepositorio;
-        private readonly ITabelaPrecoRepositorio precoRepositorio;
-        private readonly ListarPessoaUseCase listarPessoaUseCase;
-        private readonly ListarLocacoesUseCase listarLocacoesUseCase;
-        private readonly ListarAutomovelUseCase listarAutomovelUseCase;
-        private readonly AlterarStatusVeiculoUseCase alterarStatusVeiculoUseCase;
-        private readonly CadastrarLocacaoUseCase cadastrarLocacaoUseCase;
-        private readonly AlterarStatusLocacaoUseCase alterarStatusLocacaoUseCase;
-        private readonly CadastrarPendenciaFinanceiraUseCase cadastrarPendenciaFinanceiraUseCase;
-
-        public FrmCadLocacao()
+        public FrmCadLocacao(
+            LocacaoService locacaoService,
+            PendenciaFinanceiraServico pendenciaFinanceiraService,
+            ListarPessoaUseCase listarPessoaUseCase,
+            ListarAutomovelUseCase listarAutomovelUseCase,
+            ITabelaPrecoRepositorio tabelaPrecoRepositorio)
         {
-            locacaoRepositorio = new LocacaoRepositorio();
-            pessoaRepositorio = new PessoaRepositorio();
-            automovelRepositorio = new AutomovelRepositorio();
-            precoRepositorio = new TabelaPrecoRepositorio();
-            pendenciaFinanceiraRepositorio = new PendenciaFinanceiraRepositorio();
-            listarLocacoesUseCase = new ListarLocacoesUseCase(locacaoRepositorio);
-            listarPessoaUseCase = new ListarPessoaUseCase(pessoaRepositorio);
-            listarAutomovelUseCase = new ListarAutomovelUseCase(automovelRepositorio);
-            alterarStatusVeiculoUseCase = new AlterarStatusVeiculoUseCase(automovelRepositorio);
-            cadastrarLocacaoUseCase = new CadastrarLocacaoUseCase(locacaoRepositorio, pessoaRepositorio, automovelRepositorio);
-            alterarStatusLocacaoUseCase = new AlterarStatusLocacaoUseCase(locacaoRepositorio);
-            cadastrarPendenciaFinanceiraUseCase = new CadastrarPendenciaFinanceiraUseCase(pendenciaFinanceiraRepositorio, locacaoRepositorio, pessoaRepositorio, automovelRepositorio,precoRepositorio);
+            _locacaoService = locacaoService;
+            _pendenciaService = pendenciaFinanceiraService;
+            _listarPessoaUseCase = listarPessoaUseCase;
+            _listarAutomovelUseCase = listarAutomovelUseCase;
+            _tabelaPrecoRepositorio = tabelaPrecoRepositorio;
 
             InitializeComponent();
-            carregarComboBox();
+            ConfigurarFormulario();
+        }
+
+        private void ConfigurarFormulario()
+        {
             cmbTipoLocacao.DataSource = Enum.GetValues(typeof(ETipoLocacao));
             cmbTipoLocacao.SelectedIndex = -1;
             lblParcelas.Visible = false;
             cmbParcelas.Visible = false;
-
+            CarregarCombos();
         }
 
-        private void lblDataSaida_Click(object sender, EventArgs e)
+        private void CarregarCombos()
         {
-            
-        }
+            cmbLocatario.DataSource = _listarPessoaUseCase.ExecutarDadosBreves().ToList();
+            cmbLocatario.DisplayMember = "Nome";
+            cmbLocatario.SelectedIndex = -1;
 
-        private void lblDataRetorno_Click(object sender, EventArgs e)
-        {
+            cmbCondutor.DataSource = _listarPessoaUseCase.ExecutarDadosBreves().ToList();
+            cmbCondutor.DisplayMember = "Nome";
+            cmbCondutor.SelectedIndex = -1;
 
-        }
-        private void lblParcelas_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtSaida_TextChanged(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void txtRetorno_TextChanged(object sender, EventArgs e)
-        {
-            
+            cmbAutomovel.DataSource = _listarAutomovelUseCase.ExecutarStatusGaragem().ToList();
+            cmbAutomovel.DisplayMember = "Modelo";
+            cmbAutomovel.SelectedIndex = -1;
         }
 
         private void cmbTipoLocacao_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            if (cmbTipoLocacao.SelectedItem == null)
-                return;
-
-            ETipoLocacao tipoSelecionado = (ETipoLocacao)cmbTipoLocacao.SelectedItem;
-
-            bool exibirParcelas = tipoSelecionado == ETipoLocacao.CONTRATO;
-            lblParcelas.Visible = exibirParcelas;
-            cmbParcelas.Visible = exibirParcelas;
-
-
+            if (cmbTipoLocacao.SelectedItem == null) return;
+            lblParcelas.Visible = cmbTipoLocacao.SelectedItem.Equals(ETipoLocacao.CONTRATO);
+            cmbParcelas.Visible = lblParcelas.Visible;
         }
-        private void cmbLocatario_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void btnCadastrarLocacao_Click(object sender, EventArgs e)
         {
+            try
+            {
+                var locatarioDto = (PessoaDTO)cmbLocatario.SelectedItem;
+                var condutorDto = (PessoaDTO)cmbCondutor.SelectedItem;
+                var automovelDto = (AutomovelDTO)cmbAutomovel.SelectedItem;
 
+                if (locatarioDto == null || condutorDto == null || automovelDto == null)
+                {
+                    MessageBox.Show("Todos os campos são obrigatórios!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                int numeroParcelas = cmbParcelas.SelectedItem != null ? Convert.ToInt32(cmbParcelas.SelectedItem) : 1;
+                DateTime dataSaida = DateTime.Parse(txtSaida.Text);
+                DateTime dataRetorno = DateTime.Parse(txtRetorno.Text);
+
+                int idLocacao = _locacaoService.CadastrarLocacao(locatarioDto, condutorDto, automovelDto, dataSaida, dataRetorno, (ETipoLocacao)cmbTipoLocacao.SelectedItem);
+
+                int idPreco = automovelDto.IdPreco ?? throw new Exception("Preço não encontrado.");
+
+                _pendenciaService.CriarPendenciaFinanceira(idLocacao, idPreco, numeroParcelas);
+
+                MessageBox.Show("Locação cadastrada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao cadastrar locação: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void lblLocatario_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FrmCadLocacao_Load(object sender, EventArgs e)
-        {
-
-        }
-        private void cmbCondutor_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        // 🔹 Mantendo TODOS os métodos de eventos para botões e labels
+        private void lblDataSaida_Click(object sender, EventArgs e) { }
+        private void lblDataRetorno_Click(object sender, EventArgs e) { }
+        private void lblParcelas_Click(object sender, EventArgs e) { }
+        private void txtSaida_TextChanged(object sender, EventArgs e) { }
+        private void txtRetorno_TextChanged(object sender, EventArgs e) { }
+        private void cmbLocatario_SelectedIndexChanged(object sender, EventArgs e) { }
+        private void lblLocatario_Click(object sender, EventArgs e) { }
+        private void FrmCadLocacao_Load(object sender, EventArgs e) { }
+        private void cmbCondutor_SelectedIndexChanged(object sender, EventArgs e) { }
         private void cmbAutomovel_SelectedIndexChanged(object sender, EventArgs e)
         {
-        
-        }
-        private void cmbParcelas_SelectedIndexChanged(object sender, EventArgs e)
-        {
+            if (cmbAutomovel.SelectedItem is AutomovelDTO automovelSelecionado)
+            {
 
+                var precoDiaria = _tabelaPrecoRepositorio.RecuperarPorId(automovelSelecionado.IdPreco.Value);
+                txtPreco.Text = precoDiaria.Valor.ToString("C");
+            }
+            else
+            {
+                txtPreco.Text = "";
+            }
         }
+
+        private void cmbParcelas_SelectedIndexChanged(object sender, EventArgs e) { }
         private void txtPreco_TextChanged(object sender, EventArgs e)
         {
 
         }
-        private void btnCadastrarLocacao_Click(object sender, EventArgs e)
-        {
-            var locatarioDto = (PessoaDTO)cmbLocatario.SelectedItem;
-            var condutorDto = (PessoaDTO)cmbCondutor.SelectedItem;
-            var automovelDto = (AutomovelDTO)cmbAutomovel.SelectedItem;
-
-            var locatario = new Pessoa
-            {
-                Id = locatarioDto.Id,
-                Nome = locatarioDto.Nome,
-                Cpf = locatarioDto.Cpf,
-                Contato = locatarioDto.Contato,
-                Email = locatarioDto.Email,
-                NumeroCnh = locatarioDto.NumeroCnh,
-                VencimentoCnh = locatarioDto.VencimentoCnh,
-                DataNascimento = locatarioDto.DataNascimento
-            };
-
-            var condutor = new Pessoa
-            {
-                Id = condutorDto.Id,
-                Nome = condutorDto.Nome,
-                Cpf = condutorDto.Cpf,
-                Contato = condutorDto.Contato,
-                Email = condutorDto.Email,
-                NumeroCnh = condutorDto.NumeroCnh,
-                VencimentoCnh = condutorDto.VencimentoCnh,
-                DataNascimento = condutorDto.DataNascimento
-            };
-
-            var automovel = new Automovel
-            {
-                Id = automovelDto.Id,
-                Modelo = automovelDto.Modelo,
-                Placa = automovelDto.Placa,
-                Cor = automovelDto.Cor,
-                Status = automovelDto.Status,
-                Chassi = automovelDto.Chassi,
-                Renavam = automovelDto.Renavam
-            };
-            var locacaoDto = new LocacaoDTO
-            {
-                Saida = DateTime.Parse(txtSaida.Text),
-                Retorno = DateTime.Parse(txtRetorno.Text),
-                TipoLocacao = (ETipoLocacao)cmbTipoLocacao.SelectedItem,
-                IdCondutor = condutorDto.Id,
-                Status = EStatusLocacao.ANDAMENTO,
-                IdAutomovel = automovelDto.Id,
-                IdLocatario = locatarioDto.Id,
-            };
-
-            int idLocacao = cadastrarLocacaoUseCase.Executar(locacaoDto);
-
-            var pendenciaDto = new PendenciaFinanceiraDTO
-            {
-                TransacaoId = Guid.NewGuid(),
-                ValorTotal = 40,
-                DataCriacao = DateTime.Now,
-                IdLocacao = idLocacao,
-            };
-            cadastrarPendenciaFinanceiraUseCase.Executar(pendenciaDto);
-            alterarStatusVeiculoUseCase.Executar(automovel.Id, EStatusVeiculo.ALUGADO);
-        }
-        private void carregarComboBox()
-        {
-            cmbLocatario.DataSource = listarPessoaUseCase.ExecutarDadosBreves().ToList();
-            cmbCondutor.DataSource = listarPessoaUseCase.ExecutarDadosBreves().ToList();
-            cmbAutomovel.DataSource = listarAutomovelUseCase.ExecutarStatusGaragem().ToList();
-
-            cmbLocatario.DisplayMember = "Nome";
-            cmbLocatario.ValueMember = "";
-
-            cmbCondutor.DisplayMember = "Nome";
-            cmbCondutor.ValueMember = "";
-
-            cmbAutomovel.DisplayMember = "Modelo";
-            cmbAutomovel.ValueMember = "";
-
-            cmbLocatario.SelectedIndex = -1;
-            cmbCondutor.SelectedIndex = -1;
-            cmbAutomovel.SelectedIndex = -1;
-
-            cmbLocatario.Refresh();
-            cmbCondutor.Refresh();
-            cmbAutomovel.Refresh();
-        }
-
-       
     }
 }

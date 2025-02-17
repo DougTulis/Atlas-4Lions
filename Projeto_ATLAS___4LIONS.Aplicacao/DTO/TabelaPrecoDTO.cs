@@ -8,14 +8,12 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public int Id { get; set; }
         public string Descricao { get; set; }
         public decimal Valor { get; set; }
-        public int AutomovelId { get; set; }
 
 
-        public TabelaPrecoDTO(string descricao, decimal valor, int automovelId)
+        public TabelaPrecoDTO(string descricao, decimal valor)
         {
             Descricao = descricao;
             Valor = valor;
-            AutomovelId = automovelId;
         }
 
         public TabelaPrecoDTO()
@@ -24,8 +22,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
 
         public override string? ToString()
         {
-            return "ID: " + Id + "\n" +
-                "Descrição : " + Descricao + ", Valor: R$" + Valor.ToString("F2", CultureInfo.InvariantCulture);
+            return Descricao + " - R$" + Valor.ToString("F2", CultureInfo.InvariantCulture);
         }
     }
 }

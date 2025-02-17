@@ -28,12 +28,82 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "FrmBaixaLocacao";
+            dgvBaixaLocacao = new DataGridView();
+            saida = new DataGridViewTextBoxColumn();
+            retorno = new DataGridViewTextBoxColumn();
+            status = new DataGridViewTextBoxColumn();
+            tipoLocacao = new DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)dgvBaixaLocacao).BeginInit();
+            SuspendLayout();
+            // 
+            // dgvBaixaLocacao
+            // 
+            dgvBaixaLocacao.AllowUserToAddRows = false;
+            dgvBaixaLocacao.AllowUserToDeleteRows = false;
+            dgvBaixaLocacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvBaixaLocacao.Columns.AddRange(new DataGridViewColumn[] { saida, retorno, status, tipoLocacao });
+            dgvBaixaLocacao.Location = new Point(12, 14);
+            dgvBaixaLocacao.Name = "dgvBaixaLocacao";
+            dgvBaixaLocacao.ReadOnly = true;
+            dgvBaixaLocacao.RowHeadersWidth = 51;
+            dgvBaixaLocacao.Size = new Size(768, 424);
+            dgvBaixaLocacao.TabIndex = 0;
+          
+            // 
+            // saida
+            // 
+            saida.DataPropertyName = "Saida";
+            saida.HeaderText = "Saida";
+            saida.MinimumWidth = 6;
+            saida.Name = "saida";
+            saida.ReadOnly = true;
+            saida.Width = 125;
+            // 
+            // retorno
+            // 
+            retorno.DataPropertyName = "Retorno";
+            retorno.HeaderText = "Retorno";
+            retorno.MinimumWidth = 6;
+            retorno.Name = "retorno";
+            retorno.ReadOnly = true;
+            retorno.Width = 125;
+            // 
+            // status
+            // 
+            status.DataPropertyName = "Status";
+            status.HeaderText = "Status";
+            status.MinimumWidth = 6;
+            status.Name = "status";
+            status.ReadOnly = true;
+            status.Width = 125;
+            // 
+            // tipoLocacao
+            // 
+            tipoLocacao.DataPropertyName = "TipoLocacao";
+            tipoLocacao.HeaderText = "Tipo Locacao";
+            tipoLocacao.MinimumWidth = 6;
+            tipoLocacao.Name = "tipoLocacao";
+            tipoLocacao.ReadOnly = true;
+            tipoLocacao.Width = 125;
+            // 
+            // FrmBaixaLocacao
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(dgvBaixaLocacao);
+            Name = "FrmBaixaLocacao";
+            Text = "FrmBaixaLocacao";
+            ((System.ComponentModel.ISupportInitialize)dgvBaixaLocacao).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private DataGridView dgvBaixaLocacao;
+        private DataGridViewTextBoxColumn saida;
+        private DataGridViewTextBoxColumn retorno;
+        private DataGridViewTextBoxColumn status;
+        private DataGridViewTextBoxColumn tipoLocacao;
     }
 }

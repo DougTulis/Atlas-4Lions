@@ -38,34 +38,32 @@
             txtRenavam = new TextBox();
             txtChassi = new TextBox();
             txtCor = new TextBox();
-            txtPlaca = new TextBox();
-            txtModelo = new TextBox();
             txtFreioKm = new TextBox();
             lblFreioKm = new Label();
             lblDescricaoPreco = new Label();
-            txtDescricaoPreco = new TextBox();
-            lblPreco = new Label();
-            txtPreco = new TextBox();
             btnCadastrarAutomovel = new Button();
             lblAno = new Label();
             txtAno = new TextBox();
+            cbmDescricaoPreco = new ComboBox();
+            txtModelo = new TextBox();
+            txtPlaca = new TextBox();
             SuspendLayout();
             // 
             // lblRenavam
             // 
             lblRenavam.AutoSize = true;
-            lblRenavam.Location = new Point(75, 216);
+            lblRenavam.Location = new Point(86, 220);
             lblRenavam.Name = "lblRenavam";
-            lblRenavam.Size = new Size(154, 15);
+            lblRenavam.Size = new Size(193, 20);
             lblRenavam.TabIndex = 23;
             lblRenavam.Text = "Insira o renavam (opcional):";
             // 
             // lblOleoKm
             // 
             lblOleoKm.AutoSize = true;
-            lblOleoKm.Location = new Point(328, 164);
+            lblOleoKm.Location = new Point(375, 221);
             lblOleoKm.Name = "lblOleoKm";
-            lblOleoKm.Size = new Size(311, 15);
+            lblOleoKm.Size = new Size(394, 20);
             lblOleoKm.TabIndex = 22;
             lblOleoKm.Text = "Insira a quilometragem da útima troca de óleo (opcional):";
             lblOleoKm.TextAlign = ContentAlignment.MiddleCenter;
@@ -74,9 +72,9 @@
             // lblChassi
             // 
             lblChassi.AutoSize = true;
-            lblChassi.Location = new Point(75, 164);
+            lblChassi.Location = new Point(375, 162);
             lblChassi.Name = "lblChassi";
-            lblChassi.Size = new Size(140, 15);
+            lblChassi.Size = new Size(175, 20);
             lblChassi.TabIndex = 21;
             lblChassi.Text = "Insira o chassi (opcional):";
             lblChassi.Click += lblChassi_Click;
@@ -84,9 +82,9 @@
             // lblCor
             // 
             lblCor.AutoSize = true;
-            lblCor.Location = new Point(75, 72);
+            lblCor.Location = new Point(86, 96);
             lblCor.Name = "lblCor";
-            lblCor.Size = new Size(67, 15);
+            lblCor.Size = new Size(84, 20);
             lblCor.TabIndex = 20;
             lblCor.Text = "Insira a cor:";
             lblCor.Click += lblCor_Click;
@@ -94,9 +92,9 @@
             // lblPlaca
             // 
             lblPlaca.AutoSize = true;
-            lblPlaca.Location = new Point(328, 22);
+            lblPlaca.Location = new Point(375, 29);
             lblPlaca.Name = "lblPlaca";
-            lblPlaca.Size = new Size(78, 15);
+            lblPlaca.Size = new Size(99, 20);
             lblPlaca.TabIndex = 19;
             lblPlaca.Text = "Insira a placa:";
             lblPlaca.Click += lblPlaca_Click;
@@ -104,82 +102,59 @@
             // lblModelo
             // 
             lblModelo.AutoSize = true;
-            lblModelo.Location = new Point(75, 22);
+            lblModelo.Location = new Point(86, 29);
             lblModelo.Name = "lblModelo";
-            lblModelo.Size = new Size(169, 15);
+            lblModelo.Size = new Size(213, 20);
             lblModelo.TabIndex = 18;
             lblModelo.Text = "Insira o modelo do automóvel:";
             lblModelo.Click += lblModelo_Click;
             // 
             // txtOleoKm
             // 
-            txtOleoKm.Location = new Point(328, 181);
-            txtOleoKm.Margin = new Padding(3, 2, 3, 2);
+            txtOleoKm.Location = new Point(375, 243);
             txtOleoKm.Name = "txtOleoKm";
-            txtOleoKm.Size = new Size(235, 23);
+            txtOleoKm.Size = new Size(268, 27);
             txtOleoKm.TabIndex = 17;
             txtOleoKm.TextChanged += txtOleoKm_TextChanged;
             // 
             // txtRenavam
             // 
-            txtRenavam.Location = new Point(75, 233);
-            txtRenavam.Margin = new Padding(3, 2, 3, 2);
+            txtRenavam.Location = new Point(86, 243);
             txtRenavam.Name = "txtRenavam";
-            txtRenavam.Size = new Size(235, 23);
+            txtRenavam.Size = new Size(268, 27);
             txtRenavam.TabIndex = 16;
             txtRenavam.TextChanged += txtRenavam_TextChanged;
             // 
             // txtChassi
             // 
-            txtChassi.Location = new Point(75, 181);
-            txtChassi.Margin = new Padding(3, 2, 3, 2);
+            txtChassi.Location = new Point(375, 184);
             txtChassi.Name = "txtChassi";
-            txtChassi.Size = new Size(235, 23);
+            txtChassi.Size = new Size(268, 27);
             txtChassi.TabIndex = 15;
             txtChassi.TextChanged += txtChassi_TextChanged;
             // 
             // txtCor
             // 
-            txtCor.Location = new Point(75, 89);
-            txtCor.Margin = new Padding(3, 2, 3, 2);
+            txtCor.Location = new Point(86, 119);
             txtCor.Name = "txtCor";
-            txtCor.Size = new Size(235, 23);
+            txtCor.Size = new Size(268, 27);
             txtCor.TabIndex = 14;
             txtCor.TextChanged += txtCor_TextChanged;
             // 
-            // txtPlaca
-            // 
-            txtPlaca.Location = new Point(328, 40);
-            txtPlaca.Margin = new Padding(3, 2, 3, 2);
-            txtPlaca.Name = "txtPlaca";
-            txtPlaca.Size = new Size(235, 23);
-            txtPlaca.TabIndex = 13;
-            txtPlaca.TextChanged += txtPlaca_TextChanged;
-            // 
-            // txtModelo
-            // 
-            txtModelo.Location = new Point(75, 40);
-            txtModelo.Margin = new Padding(3, 2, 3, 2);
-            txtModelo.Name = "txtModelo";
-            txtModelo.Size = new Size(235, 23);
-            txtModelo.TabIndex = 12;
-            txtModelo.TextChanged += txtModelo_TextChanged;
-            // 
             // txtFreioKm
             // 
-            txtFreioKm.Location = new Point(328, 233);
-            txtFreioKm.Margin = new Padding(3, 2, 3, 2);
+            txtFreioKm.Location = new Point(86, 307);
             txtFreioKm.Name = "txtFreioKm";
-            txtFreioKm.Size = new Size(235, 23);
+            txtFreioKm.Size = new Size(268, 27);
             txtFreioKm.TabIndex = 24;
             txtFreioKm.TextChanged += txtFreioKm_TextChanged;
             // 
             // lblFreioKm
             // 
             lblFreioKm.AutoSize = true;
-            lblFreioKm.Location = new Point(328, 216);
+            lblFreioKm.Location = new Point(86, 284);
             lblFreioKm.Name = "lblFreioKm";
-            lblFreioKm.Size = new Size(385, 15);
+            lblFreioKm.Size = new Size(488, 20);
             lblFreioKm.TabIndex = 25;
             lblFreioKm.Text = "Insira a quilometragem da última troca das pastilhas de freio (opcional):";
             lblFreioKm.Click += lblFreioKm_Click;
@@ -187,47 +162,18 @@
             // lblDescricaoPreco
             // 
             lblDescricaoPreco.AutoSize = true;
-            lblDescricaoPreco.Location = new Point(75, 120);
+            lblDescricaoPreco.Location = new Point(86, 160);
             lblDescricaoPreco.Name = "lblDescricaoPreco";
-            lblDescricaoPreco.Size = new Size(150, 15);
+            lblDescricaoPreco.Size = new Size(190, 20);
             lblDescricaoPreco.TabIndex = 27;
             lblDescricaoPreco.Text = "insira a descrição do preço:";
             lblDescricaoPreco.Click += lblDescricaoPreco_Click;
             // 
-            // txtDescricaoPreco
-            // 
-            txtDescricaoPreco.Location = new Point(75, 137);
-            txtDescricaoPreco.Margin = new Padding(3, 2, 3, 2);
-            txtDescricaoPreco.Name = "txtDescricaoPreco";
-            txtDescricaoPreco.Size = new Size(235, 23);
-            txtDescricaoPreco.TabIndex = 26;
-            txtDescricaoPreco.TextChanged += txtDescricaoPreco_TextChanged;
-            // 
-            // lblPreco
-            // 
-            lblPreco.AutoSize = true;
-            lblPreco.Location = new Point(328, 120);
-            lblPreco.Name = "lblPreco";
-            lblPreco.Size = new Size(218, 15);
-            lblPreco.TabIndex = 29;
-            lblPreco.Text = "Insira o preço de locação do automóvel:";
-            lblPreco.Click += lblPreco_Click;
-            // 
-            // txtPreco
-            // 
-            txtPreco.Location = new Point(328, 137);
-            txtPreco.Margin = new Padding(3, 2, 3, 2);
-            txtPreco.Name = "txtPreco";
-            txtPreco.Size = new Size(235, 23);
-            txtPreco.TabIndex = 28;
-            txtPreco.TextChanged += txtPreco_TextChanged;
-            // 
             // btnCadastrarAutomovel
             // 
-            btnCadastrarAutomovel.Location = new Point(217, 297);
-            btnCadastrarAutomovel.Margin = new Padding(3, 2, 3, 2);
+            btnCadastrarAutomovel.Location = new Point(248, 396);
             btnCadastrarAutomovel.Name = "btnCadastrarAutomovel";
-            btnCadastrarAutomovel.Size = new Size(204, 46);
+            btnCadastrarAutomovel.Size = new Size(233, 61);
             btnCadastrarAutomovel.TabIndex = 30;
             btnCadastrarAutomovel.Text = "Cadastrar Automóvel";
             btnCadastrarAutomovel.UseVisualStyleBackColor = true;
@@ -236,35 +182,59 @@
             // lblAno
             // 
             lblAno.AutoSize = true;
-            lblAno.Location = new Point(328, 72);
+            lblAno.Location = new Point(375, 96);
             lblAno.Name = "lblAno";
-            lblAno.Size = new Size(71, 15);
+            lblAno.Size = new Size(89, 20);
             lblAno.TabIndex = 32;
             lblAno.Text = "Insira o ano:";
             lblAno.Click += lblAno_Click;
             // 
             // txtAno
             // 
-            txtAno.Location = new Point(328, 89);
-            txtAno.Margin = new Padding(3, 2, 3, 2);
+            txtAno.Location = new Point(375, 119);
             txtAno.Name = "txtAno";
-            txtAno.Size = new Size(235, 23);
+            txtAno.Size = new Size(268, 27);
             txtAno.TabIndex = 31;
             txtAno.TextChanged += txtAno_TextChanged;
             // 
+            // cbmDescricaoPreco
+            // 
+            cbmDescricaoPreco.FormattingEnabled = true;
+            cbmDescricaoPreco.Location = new Point(86, 183);
+            cbmDescricaoPreco.Name = "cbmDescricaoPreco";
+            cbmDescricaoPreco.Size = new Size(268, 28);
+            cbmDescricaoPreco.TabIndex = 33;
+            cbmDescricaoPreco.SelectedIndexChanged += cbmDescricaoPreco_SelectedIndexChanged;
+            // 
+            // txtModelo
+            // 
+            txtModelo.Location = new Point(86, 52);
+            txtModelo.Name = "txtModelo";
+            txtModelo.Size = new Size(268, 27);
+            txtModelo.TabIndex = 35;
+            txtModelo.TextChanged += txtModelo_TextChanged;
+            // 
+            // txtPlaca
+            // 
+            txtPlaca.Location = new Point(375, 52);
+            txtPlaca.Name = "txtPlaca";
+            txtPlaca.Size = new Size(268, 27);
+            txtPlaca.TabIndex = 36;
+            txtPlaca.TextChanged += txtPlaca_TextChanged;
+            // 
             // FrmCadAutomovel
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
-            ClientSize = new Size(723, 378);
+            ClientSize = new Size(898, 531);
+            Controls.Add(txtPlaca);
+            Controls.Add(txtModelo);
+            Controls.Add(cbmDescricaoPreco);
             Controls.Add(lblAno);
             Controls.Add(txtAno);
             Controls.Add(btnCadastrarAutomovel);
-            Controls.Add(lblPreco);
-            Controls.Add(txtPreco);
             Controls.Add(lblDescricaoPreco);
-            Controls.Add(txtDescricaoPreco);
             Controls.Add(lblFreioKm);
             Controls.Add(txtFreioKm);
             Controls.Add(lblRenavam);
@@ -277,9 +247,6 @@
             Controls.Add(txtRenavam);
             Controls.Add(txtChassi);
             Controls.Add(txtCor);
-            Controls.Add(txtPlaca);
-            Controls.Add(txtModelo);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "FrmCadAutomovel";
             Text = "FrmCadAutomovel";
             Load += FrmCadAutomovel_Load;
@@ -299,16 +266,14 @@
         private TextBox txtRenavam;
         private TextBox txtChassi;
         private TextBox txtCor;
-        private TextBox txtPlaca;
-        private TextBox txtModelo;
         private TextBox txtFreioKm;
         private Label lblFreioKm;
         private Label lblDescricaoPreco;
-        private TextBox txtDescricaoPreco;
-        private Label lblPreco;
-        private TextBox txtPreco;
         private Button btnCadastrarAutomovel;
         private Label lblAno;
         private TextBox txtAno;
+        private ComboBox cbmDescricaoPreco;
+        private TextBox txtModelo;
+        private TextBox txtPlaca;
     }
 }

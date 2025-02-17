@@ -16,7 +16,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             try
             {
-                locacaoRepositorio.AtualizarStatus(locacaoId, novoStatus);
+             //   locacaoRepositorio.AtualizarStatus(locacaoId, novoStatus);
             }
             catch (Exception ex)
             {

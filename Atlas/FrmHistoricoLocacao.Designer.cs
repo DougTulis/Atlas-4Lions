@@ -33,20 +33,20 @@
             retorno = new DataGridViewTextBoxColumn();
             tipoLocacao = new DataGridViewTextBoxColumn();
             valorTotal = new DataGridViewTextBoxColumn();
-            idCondutor = new DataGridViewTextBoxColumn();
-            idLocatario = new DataGridViewTextBoxColumn();
+            Status = new DataGridViewTextBoxColumn();
+            condutor = new DataGridViewTextBoxColumn();
+            locatario = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvHistoricoLocacao).BeginInit();
             SuspendLayout();
             // 
             // dgvHistoricoLocacao
             // 
             dgvHistoricoLocacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvHistoricoLocacao.Columns.AddRange(new DataGridViewColumn[] { saida, retorno, tipoLocacao, valorTotal, idCondutor, idLocatario });
-            dgvHistoricoLocacao.Location = new Point(-23, 7);
-            dgvHistoricoLocacao.Margin = new Padding(3, 2, 3, 2);
+            dgvHistoricoLocacao.Columns.AddRange(new DataGridViewColumn[] { saida, retorno, tipoLocacao, valorTotal, Status, condutor, locatario });
+            dgvHistoricoLocacao.Location = new Point(-26, 9);
             dgvHistoricoLocacao.Name = "dgvHistoricoLocacao";
             dgvHistoricoLocacao.RowHeadersWidth = 51;
-            dgvHistoricoLocacao.Size = new Size(711, 324);
+            dgvHistoricoLocacao.Size = new Size(937, 472);
             dgvHistoricoLocacao.TabIndex = 1;
             dgvHistoricoLocacao.CellContentClick += dgvHistoricoLocacao_CellContentClick;
             // 
@@ -82,31 +82,39 @@
             valorTotal.Name = "valorTotal";
             valorTotal.Width = 125;
             // 
-            // idCondutor
+            // Status
             // 
-            idCondutor.DataPropertyName = "Condutor[Nome]";
-            idCondutor.HeaderText = "Condutor";
-            idCondutor.MinimumWidth = 6;
-            idCondutor.Name = "idCondutor";
-            idCondutor.Width = 125;
+            Status.DataPropertyName = "Status";
+            Status.HeaderText = "Status";
+            Status.MinimumWidth = 6;
+            Status.Name = "Status";
+            Status.Width = 125;
             // 
-            // idLocatario
+            // condutor
             // 
-            idLocatario.DataPropertyName = "Locatario";
-            idLocatario.HeaderText = "Locatario";
-            idLocatario.MinimumWidth = 6;
-            idLocatario.Name = "idLocatario";
-            idLocatario.Width = 125;
+            condutor.DataPropertyName = "NomeCondutor";
+            condutor.HeaderText = "Condutor";
+            condutor.MinimumWidth = 6;
+            condutor.Name = "condutor";
+            condutor.Width = 125;
+            // 
+            // locatario
+            // 
+            locatario.DataPropertyName = "NomeLocatario";
+            locatario.HeaderText = "Locatario";
+            locatario.MinimumWidth = 6;
+            locatario.Name = "locatario";
+            locatario.Width = 125;
             // 
             // FrmHistoricoLocacao
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(700, 338);
+            ClientSize = new Size(923, 518);
             Controls.Add(dgvHistoricoLocacao);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "FrmHistoricoLocacao";
             Text = "FrmHistoricoLocacao";
+            Load += FrmHistoricoLocacao_Load;
             ((System.ComponentModel.ISupportInitialize)dgvHistoricoLocacao).EndInit();
             ResumeLayout(false);
         }
@@ -118,7 +126,8 @@
         private DataGridViewTextBoxColumn retorno;
         private DataGridViewTextBoxColumn tipoLocacao;
         private DataGridViewTextBoxColumn valorTotal;
-        private DataGridViewTextBoxColumn idCondutor;
-        private DataGridViewTextBoxColumn idLocatario;
+        private DataGridViewTextBoxColumn Status;
+        private DataGridViewTextBoxColumn condutor;
+        private DataGridViewTextBoxColumn locatario;
     }
 }

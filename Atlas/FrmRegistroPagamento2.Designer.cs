@@ -30,111 +30,159 @@
         {
             dgvParcelasPendFinEscolhida = new DataGridView();
             lblSequenciaParcela = new Label();
-            txtSequenciaParcela = new TextBox();
+            txtParcelaSelecionada = new TextBox();
             txtValorPago = new TextBox();
             lblValorPago = new Label();
             txtDataPagamento = new TextBox();
             lblDataPagamento = new Label();
-            txtEspeciePagamento = new TextBox();
             lblEspeciePagamento = new Label();
+            cmbEspeciePagamento = new ComboBox();
+            btnRegistrarPagamento = new Button();
+            sequencia = new DataGridViewTextBoxColumn();
+            vencimento = new DataGridViewTextBoxColumn();
+            valor = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvParcelasPendFinEscolhida).BeginInit();
             SuspendLayout();
             // 
             // dgvParcelasPendFinEscolhida
             // 
             dgvParcelasPendFinEscolhida.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvParcelasPendFinEscolhida.Location = new Point(12, 40);
+            dgvParcelasPendFinEscolhida.Columns.AddRange(new DataGridViewColumn[] { sequencia, vencimento, valor });
+            dgvParcelasPendFinEscolhida.Location = new Point(3, 29);
+            dgvParcelasPendFinEscolhida.Margin = new Padding(3, 4, 3, 4);
             dgvParcelasPendFinEscolhida.Name = "dgvParcelasPendFinEscolhida";
-            dgvParcelasPendFinEscolhida.Size = new Size(296, 318);
+            dgvParcelasPendFinEscolhida.RowHeadersWidth = 51;
+            dgvParcelasPendFinEscolhida.Size = new Size(400, 424);
             dgvParcelasPendFinEscolhida.TabIndex = 0;
             dgvParcelasPendFinEscolhida.CellContentClick += dgvParcelasPendFinEscolhida_CellContentClick;
+            dgvParcelasPendFinEscolhida.CellMouseClick += dgvParcelasPendFinEscolhida_CellMouseClick;
             // 
             // lblSequenciaParcela
             // 
             lblSequenciaParcela.AutoSize = true;
-            lblSequenciaParcela.Location = new Point(322, 22);
+            lblSequenciaParcela.Location = new Point(420, 28);
             lblSequenciaParcela.Name = "lblSequenciaParcela";
-            lblSequenciaParcela.Size = new Size(38, 15);
+            lblSequenciaParcela.Size = new Size(144, 20);
             lblSequenciaParcela.TabIndex = 1;
-            lblSequenciaParcela.Text = "label1";
+            lblSequenciaParcela.Text = "Parcela Selecionada:";
             lblSequenciaParcela.Click += lblSequenciaParcela_Click;
             // 
-            // txtSequenciaParcela
+            // txtParcelaSelecionada
             // 
-            txtSequenciaParcela.Location = new Point(322, 40);
-            txtSequenciaParcela.Name = "txtSequenciaParcela";
-            txtSequenciaParcela.Size = new Size(100, 23);
-            txtSequenciaParcela.TabIndex = 2;
-            txtSequenciaParcela.TextChanged += txtSequenciaParcela_TextChanged;
+            txtParcelaSelecionada.Location = new Point(420, 52);
+            txtParcelaSelecionada.Margin = new Padding(3, 4, 3, 4);
+            txtParcelaSelecionada.Name = "txtParcelaSelecionada";
+            txtParcelaSelecionada.Size = new Size(144, 27);
+            txtParcelaSelecionada.TabIndex = 2;
+            txtParcelaSelecionada.TextChanged += txtParcelaSelecionada_TextChanged;
             // 
             // txtValorPago
             // 
-            txtValorPago.Location = new Point(322, 99);
+            txtValorPago.Location = new Point(420, 120);
+            txtValorPago.Margin = new Padding(3, 4, 3, 4);
             txtValorPago.Name = "txtValorPago";
-            txtValorPago.Size = new Size(100, 23);
+            txtValorPago.Size = new Size(144, 27);
             txtValorPago.TabIndex = 4;
             txtValorPago.TextChanged += txtValorPago_TextChanged;
             // 
             // lblValorPago
             // 
             lblValorPago.AutoSize = true;
-            lblValorPago.Location = new Point(322, 81);
+            lblValorPago.Location = new Point(420, 96);
             lblValorPago.Name = "lblValorPago";
-            lblValorPago.Size = new Size(38, 15);
+            lblValorPago.Size = new Size(153, 20);
             lblValorPago.TabIndex = 3;
-            lblValorPago.Text = "label2";
+            lblValorPago.Text = "Informe o valor pago:";
             lblValorPago.Click += lblValorPago_Click;
             // 
             // txtDataPagamento
             // 
-            txtDataPagamento.Location = new Point(322, 155);
+            txtDataPagamento.Location = new Point(420, 190);
+            txtDataPagamento.Margin = new Padding(3, 4, 3, 4);
             txtDataPagamento.Name = "txtDataPagamento";
-            txtDataPagamento.Size = new Size(100, 23);
+            txtDataPagamento.Size = new Size(144, 27);
             txtDataPagamento.TabIndex = 6;
             txtDataPagamento.TextChanged += txtDataPagamento_TextChanged;
             // 
             // lblDataPagamento
             // 
             lblDataPagamento.AutoSize = true;
-            lblDataPagamento.Location = new Point(322, 137);
+            lblDataPagamento.Location = new Point(420, 166);
             lblDataPagamento.Name = "lblDataPagamento";
-            lblDataPagamento.Size = new Size(38, 15);
+            lblDataPagamento.Size = new Size(212, 20);
             lblDataPagamento.TabIndex = 5;
-            lblDataPagamento.Text = "label3";
+            lblDataPagamento.Text = "Informe a data de pagamento:";
             lblDataPagamento.Click += lblDataPagamento_Click;
-            // 
-            // txtEspeciePagamento
-            // 
-            txtEspeciePagamento.Location = new Point(322, 210);
-            txtEspeciePagamento.Name = "txtEspeciePagamento";
-            txtEspeciePagamento.Size = new Size(100, 23);
-            txtEspeciePagamento.TabIndex = 8;
-            txtEspeciePagamento.TextChanged += txtEspeciePagamento_TextChanged;
             // 
             // lblEspeciePagamento
             // 
             lblEspeciePagamento.AutoSize = true;
-            lblEspeciePagamento.Location = new Point(322, 192);
+            lblEspeciePagamento.Location = new Point(420, 235);
             lblEspeciePagamento.Name = "lblEspeciePagamento";
-            lblEspeciePagamento.Size = new Size(38, 15);
+            lblEspeciePagamento.Size = new Size(142, 20);
             lblEspeciePagamento.TabIndex = 7;
-            lblEspeciePagamento.Text = "label4";
+            lblEspeciePagamento.Text = "Selecione a espécie:";
             lblEspeciePagamento.Click += lblEspeciePagamento_Click;
+            // 
+            // cmbEspeciePagamento
+            // 
+            cmbEspeciePagamento.FormattingEnabled = true;
+            cmbEspeciePagamento.Location = new Point(420, 258);
+            cmbEspeciePagamento.Name = "cmbEspeciePagamento";
+            cmbEspeciePagamento.Size = new Size(144, 28);
+            cmbEspeciePagamento.TabIndex = 8;
+            cmbEspeciePagamento.SelectedIndexChanged += cmbEspeciePagamento_SelectedIndexChanged;
+            // 
+            // btnRegistrarPagamento
+            // 
+            btnRegistrarPagamento.Location = new Point(420, 315);
+            btnRegistrarPagamento.Name = "btnRegistrarPagamento";
+            btnRegistrarPagamento.Size = new Size(169, 44);
+            btnRegistrarPagamento.TabIndex = 9;
+            btnRegistrarPagamento.Text = "Registrar Pagamento";
+            btnRegistrarPagamento.UseVisualStyleBackColor = true;
+            btnRegistrarPagamento.Click += btnRegistrarPagamento_Click;
+            // 
+            // sequencia
+            // 
+            sequencia.DataPropertyName = "Sequencia";
+            sequencia.HeaderText = "Sequencia";
+            sequencia.MinimumWidth = 6;
+            sequencia.Name = "sequencia";
+            sequencia.Width = 125;
+            // 
+            // vencimento
+            // 
+            vencimento.DataPropertyName = "DataVencimento";
+            vencimento.HeaderText = "Vencimento";
+            vencimento.MinimumWidth = 6;
+            vencimento.Name = "vencimento";
+            vencimento.Width = 125;
+            // 
+            // valor
+            // 
+            valor.DataPropertyName = "Valor";
+            valor.HeaderText = "Valor";
+            valor.MinimumWidth = 6;
+            valor.Name = "valor";
+            valor.Width = 125;
             // 
             // FrmRegistroPagamento2
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(550, 384);
-            Controls.Add(txtEspeciePagamento);
+            ClientSize = new Size(673, 463);
+            Controls.Add(btnRegistrarPagamento);
+            Controls.Add(cmbEspeciePagamento);
             Controls.Add(lblEspeciePagamento);
             Controls.Add(txtDataPagamento);
             Controls.Add(lblDataPagamento);
             Controls.Add(txtValorPago);
             Controls.Add(lblValorPago);
-            Controls.Add(txtSequenciaParcela);
+            Controls.Add(txtParcelaSelecionada);
             Controls.Add(lblSequenciaParcela);
             Controls.Add(dgvParcelasPendFinEscolhida);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "FrmRegistroPagamento2";
             Text = "FrmRegistroPagamento2";
             Load += FrmRegistroPagamento2_Load;
@@ -147,12 +195,16 @@
 
         private DataGridView dgvParcelasPendFinEscolhida;
         private Label lblSequenciaParcela;
-        private TextBox txtSequenciaParcela;
+        private TextBox txtParcelaSelecionada;
         private TextBox txtValorPago;
         private Label lblValorPago;
         private TextBox txtDataPagamento;
         private Label lblDataPagamento;
-        private TextBox txtEspeciePagamento;
         private Label lblEspeciePagamento;
+        private ComboBox cmbEspeciePagamento;
+        private Button btnRegistrarPagamento;
+        private DataGridViewTextBoxColumn sequencia;
+        private DataGridViewTextBoxColumn vencimento;
+        private DataGridViewTextBoxColumn valor;
     }
 }

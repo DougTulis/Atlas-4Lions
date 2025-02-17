@@ -67,7 +67,6 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 }
             }
         }
-
         public IEnumerable<AutomovelDTO> PopularLista(MySqlDataReader dataReader)
         {
             var lista = new List<AutomovelDTO>();
@@ -81,10 +80,10 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     Placa = dataReader["Placa"].ToString(),
                     Cor = dataReader["Cor"].ToString(),
                     Status = Enum.Parse<EStatusVeiculo>(dataReader["Status"].ToString()),
-                    Chassi = dataReader["Chassi"] != DBNull.Value ? dataReader["Chassi"].ToString() : null,
-                    Renavam = dataReader["Renavam"] != DBNull.Value ? dataReader["Renavam"].ToString() : null,
-                    Oleokm = dataReader["OleoKm"] != DBNull.Value ? (int?)Convert.ToInt32(dataReader["OleoKm"]) : null,
-                    PastilhaFreioKm = dataReader["PastilhaFreioKm"] != DBNull.Value ? (int?)Convert.ToInt32(dataReader["PastilhaFreioKm"]) : null,
+                    Chassi = !Convert.IsDBNull(dataReader["Chassi"]) ? dataReader["Chassi"].ToString() : null,
+                    Renavam = !Convert.IsDBNull(dataReader["Renavam"]) ? dataReader["Renavam"].ToString() : null,
+                    Oleokm = !Convert.IsDBNull(dataReader["OleoKm"]) ? (int?)Convert.ToInt32(dataReader["OleoKm"]) : null,
+                    PastilhaFreioKm = !Convert.IsDBNull(dataReader["PastilhaFreioKm"]) ? (int?)Convert.ToInt32(dataReader["PastilhaFreioKm"]) : null,
                     DataCriacao = Convert.ToDateTime(dataReader["DataCriacao"]),
                     IdPreco = dataReader["IdPreco"] != DBNull.Value ? Convert.ToInt32(dataReader["IdPreco"]) : (int?)null
                 };
@@ -94,6 +93,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
             return lista;
         }
+
 
         public void AtualizarStatus(int automovelId, EStatusVeiculo novoStatus)
         {

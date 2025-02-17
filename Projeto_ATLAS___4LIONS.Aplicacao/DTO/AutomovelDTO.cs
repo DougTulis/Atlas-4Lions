@@ -47,6 +47,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
             sb.AppendLine("Placa: " + Placa);
             sb.AppendLine("Cor: " + Cor);
             sb.AppendLine("Ano: " + Ano);
+            sb.AppendLine("Id Preco: " + IdPreco);
             sb.AppendLine("Status: " + Status);
             sb.AppendLine("Chassi: " + (string.IsNullOrEmpty(Chassi) ? "Não informado" : Chassi));
             sb.AppendLine("Renavam: " + (string.IsNullOrEmpty(Renavam) ? "Não informado" : Renavam));
@@ -55,6 +56,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
 
             return sb.ToString();
         }
+
         public string ExibirDadosBreves()
         {
             return $"Id: {Id} | Modelo: {Modelo} | Placa: {Placa} ";

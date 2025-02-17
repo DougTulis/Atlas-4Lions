@@ -69,8 +69,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Menus
                     histLocacao.Exibir();
                     break;
                 case 3:
-                    RegistroPagamento regPagamento = new RegistroPagamento(_pendenciaFinanceiraRepositorio, _parcelaRepositorio);
-                    regPagamento.Exibir();
+                   // RegistroPagamento regPagamento = new RegistroPagamento(_pendenciaFinanceiraRepositorio, _parcelaRepositorio);
+                 //   regPagamento.Exibir();
                     break;
                 case 4:
                     ProcessamentoLocacao processarLocacao = new ProcessamentoLocacao(_locacaoRepositorio, _automovelRepositorio);

@@ -14,17 +14,13 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 
         public IEnumerable<LocacaoDTO> Executar()
         {
-           return locacaoRepositorio.ListarTodos();
+            return locacaoRepositorio.ListarTodas();
         
         }
-
-        public void ExecutarRecuperacaoStatusAndamento()
+        public IEnumerable<LocacaoDTO> ExecutarRecuperacaoStatusAndamento()
         {
-            var lista = locacaoRepositorio.ListarPorStatusAndamento();
-            foreach (var item in locacaoRepositorio.ListarPorStatusAndamento())
-            {
-                Console.WriteLine(item);
-            }
+            return locacaoRepositorio.ListarStatusAndamento();
+          
 
         }
         public LocacaoDTO? ExecutarRecuperarPorId(int id)

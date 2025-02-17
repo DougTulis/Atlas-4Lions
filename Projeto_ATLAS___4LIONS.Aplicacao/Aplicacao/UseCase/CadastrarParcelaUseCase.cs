@@ -31,7 +31,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 {
                     return;
                 }
-                parcelaRepositorio.Adicionar(parcelaDto);
+               // parcelaRepositorio.Adicionar(parcelaDto);
             }
             catch (MySqlException ex)
             {

@@ -28,9 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnExcluirAutomovel = new Button();
-            txtIdAutomovelExclusao = new TextBox();
-            lblIdAutomovelExclusao = new Label();
             dgvHistoricoAutomovelExclusaoAutomovel = new DataGridView();
             id = new DataGridViewTextBoxColumn();
             modelo = new DataGridViewTextBoxColumn();
@@ -44,44 +41,20 @@
             ((System.ComponentModel.ISupportInitialize)dgvHistoricoAutomovelExclusaoAutomovel).BeginInit();
             SuspendLayout();
             // 
-            // btnExcluirAutomovel
-            // 
-            btnExcluirAutomovel.Location = new Point(434, 101);
-            btnExcluirAutomovel.Name = "btnExcluirAutomovel";
-            btnExcluirAutomovel.Size = new Size(138, 29);
-            btnExcluirAutomovel.TabIndex = 8;
-            btnExcluirAutomovel.Text = "Excluir Automovel";
-            btnExcluirAutomovel.UseVisualStyleBackColor = true;
-            btnExcluirAutomovel.Click += btnExcluirAutomovel_Click;
-            // 
-            // txtIdAutomovelExclusao
-            // 
-            txtIdAutomovelExclusao.Location = new Point(434, 56);
-            txtIdAutomovelExclusao.Name = "txtIdAutomovelExclusao";
-            txtIdAutomovelExclusao.Size = new Size(269, 27);
-            txtIdAutomovelExclusao.TabIndex = 7;
-            txtIdAutomovelExclusao.TextChanged += txtIdAutomovelExclusao_TextChanged;
-            // 
-            // lblIdAutomovelExclusao
-            // 
-            lblIdAutomovelExclusao.AutoSize = true;
-            lblIdAutomovelExclusao.Location = new Point(434, 33);
-            lblIdAutomovelExclusao.Name = "lblIdAutomovelExclusao";
-            lblIdAutomovelExclusao.Size = new Size(297, 20);
-            lblIdAutomovelExclusao.TabIndex = 6;
-            lblIdAutomovelExclusao.Text = "Insira o Id do automovel que deseja excluir:";
-            lblIdAutomovelExclusao.Click += lblIdAutomovelExclusao_Click;
-            // 
             // dgvHistoricoAutomovelExclusaoAutomovel
             // 
+            dgvHistoricoAutomovelExclusaoAutomovel.AllowUserToAddRows = false;
+            dgvHistoricoAutomovelExclusaoAutomovel.AllowUserToDeleteRows = false;
             dgvHistoricoAutomovelExclusaoAutomovel.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvHistoricoAutomovelExclusaoAutomovel.Columns.AddRange(new DataGridViewColumn[] { id, modelo, placa, cor, status, chassi, renavam, OleoKm, pastilhaFreioKm });
             dgvHistoricoAutomovelExclusaoAutomovel.Location = new Point(12, 12);
             dgvHistoricoAutomovelExclusaoAutomovel.Name = "dgvHistoricoAutomovelExclusaoAutomovel";
+            dgvHistoricoAutomovelExclusaoAutomovel.ReadOnly = true;
             dgvHistoricoAutomovelExclusaoAutomovel.RowHeadersWidth = 51;
-            dgvHistoricoAutomovelExclusaoAutomovel.Size = new Size(400, 445);
+            dgvHistoricoAutomovelExclusaoAutomovel.Size = new Size(765, 445);
             dgvHistoricoAutomovelExclusaoAutomovel.TabIndex = 5;
             dgvHistoricoAutomovelExclusaoAutomovel.CellContentClick += dgvHistoricoAutomovelExclusaoAutomovel_CellContentClick;
+            dgvHistoricoAutomovelExclusaoAutomovel.CellMouseDoubleClick += dgvHistoricoAutomovelExclusaoAutomovel_CellMouseDoubleClick;
             // 
             // id
             // 
@@ -89,6 +62,7 @@
             id.HeaderText = "Id";
             id.MinimumWidth = 6;
             id.Name = "id";
+            id.ReadOnly = true;
             id.Width = 125;
             // 
             // modelo
@@ -97,6 +71,7 @@
             modelo.HeaderText = "Modelo";
             modelo.MinimumWidth = 6;
             modelo.Name = "modelo";
+            modelo.ReadOnly = true;
             modelo.Width = 125;
             // 
             // placa
@@ -105,6 +80,7 @@
             placa.HeaderText = "Placa";
             placa.MinimumWidth = 6;
             placa.Name = "placa";
+            placa.ReadOnly = true;
             placa.Width = 125;
             // 
             // cor
@@ -113,6 +89,7 @@
             cor.HeaderText = "Cor";
             cor.MinimumWidth = 6;
             cor.Name = "cor";
+            cor.ReadOnly = true;
             cor.Width = 125;
             // 
             // status
@@ -121,6 +98,7 @@
             status.HeaderText = "Status";
             status.MinimumWidth = 6;
             status.Name = "status";
+            status.ReadOnly = true;
             status.Width = 125;
             // 
             // chassi
@@ -129,6 +107,7 @@
             chassi.HeaderText = "Chassi";
             chassi.MinimumWidth = 6;
             chassi.Name = "chassi";
+            chassi.ReadOnly = true;
             chassi.Width = 125;
             // 
             // renavam
@@ -137,6 +116,7 @@
             renavam.HeaderText = "Renavam";
             renavam.MinimumWidth = 6;
             renavam.Name = "renavam";
+            renavam.ReadOnly = true;
             renavam.Width = 125;
             // 
             // OleoKm
@@ -145,6 +125,7 @@
             OleoKm.HeaderText = "OleoKm";
             OleoKm.MinimumWidth = 6;
             OleoKm.Name = "OleoKm";
+            OleoKm.ReadOnly = true;
             OleoKm.Width = 125;
             // 
             // pastilhaFreioKm
@@ -153,29 +134,22 @@
             pastilhaFreioKm.HeaderText = "PastilhaFreioKm";
             pastilhaFreioKm.MinimumWidth = 6;
             pastilhaFreioKm.Name = "pastilhaFreioKm";
+            pastilhaFreioKm.ReadOnly = true;
             pastilhaFreioKm.Width = 125;
             // 
             // FrmExclusaoAutomovel
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(btnExcluirAutomovel);
-            Controls.Add(txtIdAutomovelExclusao);
-            Controls.Add(lblIdAutomovelExclusao);
+            ClientSize = new Size(819, 474);
             Controls.Add(dgvHistoricoAutomovelExclusaoAutomovel);
             Name = "FrmExclusaoAutomovel";
             Text = "FrmExclusaoAutomovel";
             ((System.ComponentModel.ISupportInitialize)dgvHistoricoAutomovelExclusaoAutomovel).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-        private Button btnExcluirAutomovel;
-        private TextBox txtIdAutomovelExclusao;
-        private Label lblIdAutomovelExclusao;
         private DataGridView dgvHistoricoAutomovelExclusaoAutomovel;
         private DataGridViewTextBoxColumn id;
         private DataGridViewTextBoxColumn modelo;

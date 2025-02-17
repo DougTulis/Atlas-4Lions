@@ -21,7 +21,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                     Id = tabelaPrecoDto.Id,
                     Valor = tabelaPrecoDto.Valor,
                     Descricao = tabelaPrecoDto.Descricao,
-                    AutomovelId = tabelaPrecoDto.AutomovelId,
                     DataCriacao = DateTime.Now
                 };
 

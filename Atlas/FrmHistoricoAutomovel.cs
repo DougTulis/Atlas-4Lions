@@ -32,8 +32,6 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void dgvHistoricoAutomovel_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
-
         }
         private void AtualizarGridView()
         {

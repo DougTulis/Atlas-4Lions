@@ -14,20 +14,11 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         }
 
 
-        public void Executar()
+        public IEnumerable<TabelaPrecoDTO> Executar()
         {
-            try
-            {
-                foreach (var item in tabelaRepositorio.ListarTodos())
-                {
-                    Console.WriteLine(item);
-                }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine(ex.StackTrace);
-            }
+            return tabelaRepositorio.ListarTodos();      
         }
+
         public TabelaPrecoDTO? ExecutarRecuperarPorId(int id)
         {
             return tabelaRepositorio.RecuperarPorId(id);

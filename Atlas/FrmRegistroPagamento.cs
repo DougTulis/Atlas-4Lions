@@ -11,12 +11,19 @@ namespace Projeto_ATLAS___4LIONS.Forms
     public partial class FrmRegistroPagamento : Form
     {
         private readonly IPendenciaFinanceiraRepositorio pendFinRepositorio;
+        private readonly ILocacaoRepositorio locacaoRepositorio;
+        private readonly IAutomovelRepositorio automovelRepositorio;
+        private readonly IPessoaRepositorio pessoaRepositorio;
         private readonly ListarPendenciaFinanceiraUseCase listarPendFinUseCase;
-        private FrmRegistroPagamento2 frmRegistroPagamento2 = new FrmRegistroPagamento2();
+        private FrmRegistroPagamento2 frmRegistroPagamento2;
+
 
         public FrmRegistroPagamento()
         {
-            pendFinRepositorio = new PendenciaFinanceiraRepositorio();
+            pessoaRepositorio = new PessoaRepositorio();
+            automovelRepositorio = new AutomovelRepositorio();
+            locacaoRepositorio = new LocacaoRepositorio(pessoaRepositorio, automovelRepositorio);
+            pendFinRepositorio = new PendenciaFinanceiraRepositorio(locacaoRepositorio);
             listarPendFinUseCase = new ListarPendenciaFinanceiraUseCase(pendFinRepositorio);
             InitializeComponent();
             AtualizarGridView();
@@ -33,23 +40,6 @@ namespace Projeto_ATLAS___4LIONS.Forms
             dgvHistoricoPendenciaFinanceiras.DataSource = listarPendFinUseCase.Executar().ToList();
             dgvHistoricoPendenciaFinanceiras.Refresh();
         }
-
-        private void btnPendenciasFinanceiras_Click(object sender, EventArgs e)
-        {
-            var pendFinDto = listarPendFinUseCase.ExecutarRecuperarPorId(int.Parse(txtPendenciasFinanceiras.Text));
-            if (pendFinDto != null)
-            {
-                frmRegistroPagamento2.SetParametros(pendFinDto);
-                frmRegistroPagamento2.Show();
-
-            }
-        }
-
-        private void txtPendenciasFinanceiras_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void dgvHistoricoPendenciaFinanceiras_DoubleClick(object sender, EventArgs e)
         {
         }
@@ -59,12 +49,19 @@ namespace Projeto_ATLAS___4LIONS.Forms
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvHistoricoPendenciaFinanceiras.Rows[e.RowIndex];
-                txtPendenciasFinanceiras.Text = row.Cells[0].Value.ToString();
+                int idSelecionado = Convert.ToInt16(dgvHistoricoPendenciaFinanceiras.Rows[e.RowIndex].Cells[0].Value);
+                frmRegistroPagamento2 = new FrmRegistroPagamento2(idSelecionado);
+                frmRegistroPagamento2.ShowDialog();
             }
         }
 
         private void dgvHistoricoPendenciaFinanceiras_Enter(object sender, EventArgs e)
         {
+        }
+
+        private void FrmRegistroPagamento_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -19,7 +19,6 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     Id = tabelaPrecoDto.Id,
                     Valor = tabelaPrecoDto.Valor,
                     Descricao = tabelaPrecoDto.Descricao,
-                    AutomovelId = tabelaPrecoDto.AutomovelId,
                     DataCriacao = DateTime.Now
                 };
 
@@ -30,7 +29,6 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 using var cmd = new MySqlCommand(sql, conexao);
                 cmd.Parameters.AddWithValue("@Descricao", tabelaPreco.Descricao);
                 cmd.Parameters.AddWithValue("@Valor", tabelaPreco.Valor);
-                cmd.Parameters.AddWithValue("@AutomovelId", tabelaPreco.AutomovelId);
 
                 cmd.ExecuteNonQuery();
                 tabelaPrecoDto.Id = (int)cmd.LastInsertedId;
@@ -46,7 +44,6 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     Id = tabelaPrecoDto.Id,
                     Valor = tabelaPrecoDto.Valor,
                     Descricao = tabelaPrecoDto.Descricao,
-                    AutomovelId = tabelaPrecoDto.AutomovelId,
                     DataCriacao = DateTime.Now
                 };
 
@@ -90,7 +87,6 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     Id = Convert.ToInt32(dataReader["Id"]),
                     Descricao = Convert.ToString(dataReader["Descricao"]),
                     Valor = Convert.ToDecimal(dataReader["Valor"]),
-                    AutomovelId = Convert.ToInt32(dataReader["AutomovelId"])
                 };
 
                 lista.Add(tabelaPreco);
@@ -105,10 +101,10 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             {
                 conexao.Open();
 
-                string sql = "SELECT * FROM tabela_preco WHERE Id = @IdPreco";
+                string sql = "SELECT * FROM tabela_preco WHERE Id = @Id";
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    cmd.Parameters.AddWithValue("@IdPreco", idPreco);
+                    cmd.Parameters.AddWithValue("@Id", idPreco);
 
                     using (var dataReader = cmd.ExecuteReader())
                     {

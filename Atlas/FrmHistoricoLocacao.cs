@@ -5,12 +5,17 @@ namespace Projeto_ATLAS___4LIONS.Forms
 {
     public partial class FrmHistoricoLocacao : Form
     {
-        private readonly ListarLocacoesUseCase listarLocacoesUseCase;
-        private readonly ILocacaoRepositorio locacaoRepositorio;
-        public FrmHistoricoLocacao()
+
+        private readonly IPessoaRepositorio _pessoaRepositorio;
+        private readonly ILocacaoRepositorio _locacaoRepositorio;
+        private readonly ListarHistoricoLocacaoUseCase _listarHistoricoLocacaoUseCase;
+
+        public FrmHistoricoLocacao(IPessoaRepositorio pessoaRepositorio, ILocacaoRepositorio locacaoRepositorio, ListarHistoricoLocacaoUseCase listarHistoricoLocacaoUseCase)
         {
-            locacaoRepositorio = new Infra.Repositorios.LocacaoRepositorio();
-            listarLocacoesUseCase = new ListarLocacoesUseCase(locacaoRepositorio);
+            _pessoaRepositorio = pessoaRepositorio;
+            _locacaoRepositorio = locacaoRepositorio;
+            _listarHistoricoLocacaoUseCase = listarHistoricoLocacaoUseCase;
+
             InitializeComponent();
             AtualizarGridView();
         }
@@ -23,9 +28,14 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private void AtualizarGridView()
         {
             dgvHistoricoLocacao.AutoGenerateColumns = false;
-            var dados = listarLocacoesUseCase.Executar();
+            var dados = _listarHistoricoLocacaoUseCase.Executar().ToList();
             dgvHistoricoLocacao.DataSource = dados.ToList();
             dgvHistoricoLocacao.Refresh();
+
+        }
+
+        private void FrmHistoricoLocacao_Load(object sender, EventArgs e)
+        {
 
         }
     }
