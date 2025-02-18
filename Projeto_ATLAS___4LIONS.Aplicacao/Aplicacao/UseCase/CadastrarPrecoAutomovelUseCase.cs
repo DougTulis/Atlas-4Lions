@@ -1,11 +1,12 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 {
-    public class CadastrarPrecoAutomovelUseCase
+    public class CadastrarPrecoAutomovelUseCase : ICadastrarTabelaPrecoUseCase
     {
         private readonly ITabelaPrecoRepositorio tabelaRepositorio;
         public CadastrarPrecoAutomovelUseCase(ITabelaPrecoRepositorio tabelaRepositorio)
@@ -27,8 +28,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 
                 if (!tabelaPreco.Validacao())
                 {
-                    Thread.Sleep(2000);
-                    return;
+                //
                 }
 
                 tabelaRepositorio.Adicionar(tabelaPrecoDto);

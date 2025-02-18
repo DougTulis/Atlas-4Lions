@@ -1,36 +1,36 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 {
-    public class CadastrarPendenciaFinanceiraUseCase
+    public class CadastrarPendenciaFinanceiraUseCase : ICadastrarPendenciaFinanceiraUseCase
     {
-        private readonly IPendenciaFinanceiraRepositorio pendenciaRepositorio;
-        private readonly ILocacaoRepositorio locacaoRepositorio;
-        private readonly IPessoaRepositorio pessoaRepositorio;
-        private readonly IAutomovelRepositorio automovelRepositorio;
-        private readonly ITabelaPrecoRepositorio precoRepositorio;
-
+        private readonly IPendenciaFinanceiraRepositorio _pendenciaRepositorio;
+        private readonly ILocacaoRepositorio _locacaoRepositorio;
+        private readonly IPessoaRepositorio _pessoaRepositorio;
+        private readonly IAutomovelRepositorio _automovelRepositorio;
+        private readonly ITabelaPrecoRepositorio _precoRepositorio;
 
         public CadastrarPendenciaFinanceiraUseCase(IPendenciaFinanceiraRepositorio pendenciaRepositorio, ILocacaoRepositorio locacaoRepositorio, IPessoaRepositorio pessoaRepositorio, IAutomovelRepositorio automovelRepositorio, ITabelaPrecoRepositorio precoRepositorio)
         {
-            this.pendenciaRepositorio = pendenciaRepositorio;
-            this.locacaoRepositorio = locacaoRepositorio;
-            this.pessoaRepositorio = pessoaRepositorio;
-            this.automovelRepositorio = automovelRepositorio;
-            this.precoRepositorio = precoRepositorio;
+            _pendenciaRepositorio = pendenciaRepositorio;
+            _locacaoRepositorio = locacaoRepositorio;
+            _pessoaRepositorio = pessoaRepositorio;
+            _automovelRepositorio = automovelRepositorio;
+            _precoRepositorio = precoRepositorio;
         }
 
         public void Executar(PendenciaFinanceiraDTO pendenciaDto)
         {
             try
             {
-                LocacaoDTO locacaoDto = locacaoRepositorio.RecuperarPorId(pendenciaDto.IdLocacao);
-                PessoaDTO locatarioDto = pessoaRepositorio.RecuperarPorId(locacaoDto.IdLocatario);
-                PessoaDTO condutorDto = pessoaRepositorio.RecuperarPorId(locacaoDto.IdCondutor);
-                AutomovelDTO automovelDto = automovelRepositorio.RecuperarPorId(locacaoDto.IdAutomovel);
+                LocacaoDTO locacaoDto = _locacaoRepositorio.RecuperarPorId(pendenciaDto.IdLocacao);
+                PessoaDTO locatarioDto = _pessoaRepositorio.RecuperarPorId(locacaoDto.IdLocatario);
+                PessoaDTO condutorDto = _pessoaRepositorio.RecuperarPorId(locacaoDto.IdCondutor);
+                AutomovelDTO automovelDto = _automovelRepositorio.RecuperarPorId(locacaoDto.IdAutomovel);
 
                 if (automovelDto == null)
                 {
@@ -42,7 +42,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                     throw new Exception("O automóvel não possui um preço associado.");
                 }
 
-                TabelaPrecoDTO tabelaPrecoDto = precoRepositorio.RecuperarPorId(automovelDto.IdPreco.Value);
+                var tabelaPrecoDto = _precoRepositorio.RecuperarPorId(automovelDto.IdPreco.Value);
 
                 Pessoa locatario = new Pessoa
                 {
@@ -104,7 +104,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                     Thread.Sleep(2000);
                     return;
                 }
-                pendenciaRepositorio.Adicionar(pendenciaDto);
+                _pendenciaRepositorio.Adicionar(pendenciaDto);
                
             }
             catch (MySqlException ex)

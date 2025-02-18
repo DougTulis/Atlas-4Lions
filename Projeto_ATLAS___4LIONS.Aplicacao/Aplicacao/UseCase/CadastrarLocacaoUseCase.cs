@@ -1,12 +1,13 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 using System;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 {
-    public class CadastrarLocacaoUseCase
+    public class CadastrarLocacaoUseCase : ICadastrarLocacaoUseCase
     {
         private readonly ILocacaoRepositorio _locacaoRepositorio;
         private readonly ITabelaPrecoRepositorio _tabelaPrecoRepositorio;
@@ -99,7 +100,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             return _locacaoRepositorio.Adicionar(locacaoDto);
         }
 
-        private decimal CalcularValorTotal(DateTime saida, DateTime retorno, decimal precoDiaria)
+        public decimal CalcularValorTotal(DateTime saida, DateTime retorno, decimal precoDiaria)
         {
             int dias = (retorno - saida).Days;
             return dias > 0 ? dias * precoDiaria : precoDiaria; // Se for um único dia, cobra pelo menos uma diária

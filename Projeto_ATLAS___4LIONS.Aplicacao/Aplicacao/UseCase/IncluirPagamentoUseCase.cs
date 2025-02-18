@@ -1,13 +1,13 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
-
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 {
-    public class IncluirPagamentoUseCase
+    public class IncluirPagamentoUseCase : IIncluirPagamentoUseCase
     {
         private readonly IParcelaRepositorio parcelaRepositorio;
         public IncluirPagamentoUseCase(IParcelaRepositorio parcelaRepositorio)

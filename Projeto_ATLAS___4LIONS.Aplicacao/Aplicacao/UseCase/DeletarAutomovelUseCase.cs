@@ -1,11 +1,12 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 {
-    public class DeletarAutomovelUseCase
+    public class DeletarAutomovelUseCase :  IDeletarAutomovelUseCase
     {
         private readonly IAutomovelRepositorio automovelRepositorio;
         public DeletarAutomovelUseCase(IAutomovelRepositorio automovelRepositorio)

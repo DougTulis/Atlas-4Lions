@@ -1,10 +1,11 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 {
-    public class ListarTabelaPrecoUseCase
+    public class ListarTabelaPrecoUseCase : IListarTabelaPrecoUseCase
     {
 
         private readonly ITabelaPrecoRepositorio tabelaRepositorio;

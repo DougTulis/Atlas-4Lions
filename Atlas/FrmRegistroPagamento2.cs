@@ -1,5 +1,6 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
 using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 using Projeto_ATLAS___4LIONS.Infra.Repositorios;
@@ -18,20 +19,19 @@ namespace Projeto_ATLAS___4LIONS.Forms
     public partial class FrmRegistroPagamento2 : Form
     {
         private int idPendFin;
-        private int idParcelaSelecionada;
         private readonly IParcelaRepositorio _parcelaRepositorio;
-        private readonly ListarParcelaUseCase _listarParcelaUseCase;
-        private readonly IncluirPagamentoUseCase _incluirPagamentoUseCase;
+        private readonly IListarParcelaUseCase _listarParcelaUseCase;
+        private readonly IIncluirPagamentoUseCase _incluirPagamentoUseCase;
         
         public FrmRegistroPagamento2()
         {
             InitializeComponent();
         }
-        public FrmRegistroPagamento2(int _Idpendfin)
+        public FrmRegistroPagamento2(int _Idpendfin, IIncluirPagamentoUseCase incluirPagamentoUseCase, IListarParcelaUseCase listarParcelaUseCase, IParcelaRepositorio parcelaRepositorio)
         {
-            _parcelaRepositorio = new ParcelaRepositorio();
-            _listarParcelaUseCase = new ListarParcelaUseCase(_parcelaRepositorio);
-            _incluirPagamentoUseCase = new IncluirPagamentoUseCase(_parcelaRepositorio);
+            _parcelaRepositorio = parcelaRepositorio;
+            _listarParcelaUseCase = listarParcelaUseCase;
+            _incluirPagamentoUseCase = incluirPagamentoUseCase;
             idPendFin = _Idpendfin;
             InitializeComponent();
 
@@ -94,14 +94,16 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void btnRegistrarPagamento_Click(object sender, EventArgs e)
         {
-            idParcelaSelecionada = Convert.ToInt16(txtParcelaSelecionada.Text);
+            int idParcelaSelecionada = Convert.ToInt16(txtParcelaSelecionada.Text);
             var parcelaSelecionada = (ParcelaDTO)_listarParcelaUseCase.ExecutarRecuperacaoPorId(idParcelaSelecionada);
             parcelaSelecionada.PendenciaFinanceiraId = idPendFin;
             parcelaSelecionada.ValorPago = Convert.ToDecimal(txtValorPago.Text);
             parcelaSelecionada.DataPagamento = Convert.ToDateTime(txtDataPagamento.Text);
             parcelaSelecionada.EspeciePagamento = (EEspecie)cmbEspeciePagamento.SelectedItem;
             _incluirPagamentoUseCase.Executar(parcelaSelecionada);
-            MessageBox.Show("OK PAGAMENTO REALIZADO, UPDATE FEITO");
+            MessageBox.Show("Locação cadastrada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.Close();
+
         }
 
         private void AtualizarGridView()

@@ -41,12 +41,16 @@
             // 
             // dgvHistoricoLocacao
             // 
+            dgvHistoricoLocacao.AllowUserToAddRows = false;
+            dgvHistoricoLocacao.AllowUserToDeleteRows = false;
             dgvHistoricoLocacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvHistoricoLocacao.Columns.AddRange(new DataGridViewColumn[] { saida, retorno, tipoLocacao, valorTotal, Status, condutor, locatario });
-            dgvHistoricoLocacao.Location = new Point(-26, 9);
+            dgvHistoricoLocacao.Location = new Point(1, 7);
+            dgvHistoricoLocacao.Margin = new Padding(3, 2, 3, 2);
             dgvHistoricoLocacao.Name = "dgvHistoricoLocacao";
+            dgvHistoricoLocacao.ReadOnly = true;
             dgvHistoricoLocacao.RowHeadersWidth = 51;
-            dgvHistoricoLocacao.Size = new Size(937, 472);
+            dgvHistoricoLocacao.Size = new Size(890, 436);
             dgvHistoricoLocacao.TabIndex = 1;
             dgvHistoricoLocacao.CellContentClick += dgvHistoricoLocacao_CellContentClick;
             // 
@@ -56,6 +60,7 @@
             saida.HeaderText = "Saida";
             saida.MinimumWidth = 6;
             saida.Name = "saida";
+            saida.ReadOnly = true;
             saida.Width = 125;
             // 
             // retorno
@@ -64,6 +69,7 @@
             retorno.HeaderText = "Retorno";
             retorno.MinimumWidth = 6;
             retorno.Name = "retorno";
+            retorno.ReadOnly = true;
             retorno.Width = 125;
             // 
             // tipoLocacao
@@ -72,6 +78,7 @@
             tipoLocacao.HeaderText = "Tipo da Locação";
             tipoLocacao.MinimumWidth = 6;
             tipoLocacao.Name = "tipoLocacao";
+            tipoLocacao.ReadOnly = true;
             tipoLocacao.Width = 125;
             // 
             // valorTotal
@@ -80,6 +87,7 @@
             valorTotal.HeaderText = "Valor Total";
             valorTotal.MinimumWidth = 6;
             valorTotal.Name = "valorTotal";
+            valorTotal.ReadOnly = true;
             valorTotal.Width = 125;
             // 
             // Status
@@ -88,6 +96,7 @@
             Status.HeaderText = "Status";
             Status.MinimumWidth = 6;
             Status.Name = "Status";
+            Status.ReadOnly = true;
             Status.Width = 125;
             // 
             // condutor
@@ -96,6 +105,7 @@
             condutor.HeaderText = "Condutor";
             condutor.MinimumWidth = 6;
             condutor.Name = "condutor";
+            condutor.ReadOnly = true;
             condutor.Width = 125;
             // 
             // locatario
@@ -104,14 +114,18 @@
             locatario.HeaderText = "Locatario";
             locatario.MinimumWidth = 6;
             locatario.Name = "locatario";
+            locatario.ReadOnly = true;
             locatario.Width = 125;
             // 
             // FrmHistoricoLocacao
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(923, 518);
+            BackColor = SystemColors.AppWorkspace;
+            ClientSize = new Size(961, 485);
             Controls.Add(dgvHistoricoLocacao);
+            FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(3, 2, 3, 2);
             Name = "FrmHistoricoLocacao";
             Text = "FrmHistoricoLocacao";
             Load += FrmHistoricoLocacao_Load;

@@ -20,7 +20,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
         {
             InitializeComponent();
             pessoaRepositorio = new PessoaRepositorio();
-            locacaoRepositorio = new LocacaoRepositorio(pessoaRepositorio,automovelRepositorio);
+            locacaoRepositorio = new LocacaoRepositorio(pessoaRepositorio, automovelRepositorio);
             automovelRepositorio = new AutomovelRepositorio();
             listarLocacoesUseCase = new ListarLocacoesUseCase(locacaoRepositorio);
             alterarStatusLocacaoUseCase = new AlterarStatusLocacaoUseCase(locacaoRepositorio);
@@ -43,10 +43,10 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void dgvBaixaLocacao_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.RowIndex >= 0) 
+            if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvBaixaLocacao.Rows[e.RowIndex];
-                int idLocacao = Convert.ToInt32(row.Cells[0].Value); 
+                int idLocacao = Convert.ToInt32(row.Cells[0].Value);
 
                 DialogResult resultado = MessageBox.Show(
                     "Deseja finalizar esta locação?",
@@ -66,6 +66,11 @@ namespace Projeto_ATLAS___4LIONS.Forms
                     AtualizarGridView();
                 }
             }
+        }
+
+        private void FrmBaixaLocacao_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 {
-    public class CadastrarVeiculoUseCase
+    public class CadastrarVeiculoUseCase : ICadastrarVeiculoUseCase
     {
         private readonly IAutomovelRepositorio automovelRepositorio;
         public CadastrarVeiculoUseCase(IAutomovelRepositorio automovelRepositorio)
@@ -35,14 +36,13 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 
                 if (!automovel.Validacao())
                 {
-                    Thread.Sleep(2000);
-                    return;
+                    //
                 }
                 automovelRepositorio.Adicionar(automovelDto);
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine(ex.StackTrace);
+                //
             }
         }
 

@@ -1,11 +1,14 @@
-﻿using System;
-using System.Windows.Forms;
-using Atlas;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Servicos;
 using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
-using Projeto_ATLAS___4LIONS.Forms;
 using Projeto_ATLAS___4LIONS.Infra.Repositorios;
+using Projeto_ATLAS___4LIONS.Forms;
+using System;
+using System.Windows.Forms;
+using Atlas;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.Servicos;
 
 namespace Projeto_ATLAS___4LIONS
 {
@@ -14,38 +17,63 @@ namespace Projeto_ATLAS___4LIONS
         [STAThread]
         static void Main()
         {
+            var serviceProvider = ConfigureServices();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var pessoaRepositorio = new PessoaRepositorio();
-            var automovelRepositorio = new AutomovelRepositorio();
-            var locacaoRepositorio = new LocacaoRepositorio(pessoaRepositorio, automovelRepositorio);
-            var tabelaPrecoRepositorio = new TabelaPrecoRepositorio();
-            var pendenciaFinanceiraRepositorio = new PendenciaFinanceiraRepositorio(locacaoRepositorio);
-            var parcelaRepositorio = new ParcelaRepositorio();
+            var mainForm = serviceProvider.GetRequiredService<FrmPrincipal>();
+            Application.Run(mainForm);
+        }
 
-            var listarPessoaUseCase = new ListarPessoaUseCase(pessoaRepositorio);
-            var listarAutomovelUseCase = new ListarAutomovelUseCase(automovelRepositorio);
-            var cadastrarLocacaoUseCase = new CadastrarLocacaoUseCase(locacaoRepositorio,tabelaPrecoRepositorio,automovelRepositorio, pessoaRepositorio);
-            var listarHistoricoLocacaoUseCase = new ListarHistoricoLocacaoUseCase(locacaoRepositorio, pessoaRepositorio);
+        private static ServiceProvider ConfigureServices()
+        {
+            var services = new ServiceCollection();
 
-            var locacaoService = new LocacaoService(cadastrarLocacaoUseCase,tabelaPrecoRepositorio); 
+            // Repositórios
+            services.AddSingleton<IPessoaRepositorio, PessoaRepositorio>();
+            services.AddSingleton<IAutomovelRepositorio, AutomovelRepositorio>();
+            services.AddSingleton<ITabelaPrecoRepositorio, TabelaPrecoRepositorio>();
+            services.AddSingleton<ILocacaoRepositorio, LocacaoRepositorio>();
+            services.AddSingleton<IParcelaRepositorio, ParcelaRepositorio>();
+            services.AddSingleton<IPendenciaFinanceiraRepositorio, PendenciaFinanceiraRepositorio>();
 
-            var pendenciaFinanceiraService = new PendenciaFinanceiraServico(
-                pendenciaFinanceiraRepositorio, parcelaRepositorio, tabelaPrecoRepositorio
-            );
+            // Use Cases
+            services.AddTransient<IListarParcelaUseCase, ListarParcelaUseCase>();
+            services.AddTransient<IListarPendenciaFinanceiraUseCase, ListarPendenciaFinanceiraUseCase>();
+            services.AddTransient<IDeletarAutomovelUseCase, DeletarAutomovelUseCase>();
+            services.AddTransient<IIncluirCnhUseCase, IncluirCnhUseCase>();
+            services.AddTransient<IDeletarPessoaUseCase, DeletarPessoaUseCase> ();
+            services.AddTransient<IListarPessoaUseCase, ListarPessoaUseCase>();
+            services.AddTransient<ICadastrarPessoaUseCase, CadastrarPessoaUseCase>();
+            services.AddTransient<ICadastrarVeiculoUseCase, CadastrarVeiculoUseCase>();
+            services.AddTransient<ICadastrarLocacaoUseCase, CadastrarLocacaoUseCase>();
+            services.AddTransient<ICadastrarTabelaPrecoUseCase, CadastrarPrecoAutomovelUseCase>();
+            services.AddTransient<IListarAutomovelUseCase, ListarAutomovelUseCase>();
+            services.AddTransient<IListarTabelaPrecoUseCase, ListarTabelaPrecoUseCase>();
+            services.AddTransient<IListarHistoricoLocacaoUseCase, ListarHistoricoLocacaoUseCase>();
+            services.AddTransient<IIncluirPagamentoUseCase, IncluirPagamentoUseCase>();
 
-            // 🔹 Criando Formulário e passando os serviços via construtor
-            var frmCadLocacao = new FrmCadLocacao(
-                locacaoService,
-                pendenciaFinanceiraService,
-                listarPessoaUseCase,
-                listarAutomovelUseCase,
-                tabelaPrecoRepositorio
-            );
+            // Serviços
+            services.AddTransient<ILocacaoService, LocacaoService>();
+            services.AddTransient<PendenciaFinanceiraServico>();
 
-            Application.Run(new FrmPrincipal(locacaoService, pendenciaFinanceiraService,listarPessoaUseCase,listarAutomovelUseCase,listarHistoricoLocacaoUseCase,pessoaRepositorio,automovelRepositorio,tabelaPrecoRepositorio));
+            // Forms
+            services.AddTransient<FrmPrincipal>();
+            services.AddTransient<FrmBaixaLocacao>();
+            services.AddTransient<FrmCadAutomovel>();
+            services.AddTransient<FrmCadLocacao>();
+            services.AddTransient<FrmCadPessoas>();
+            services.AddTransient<FrmExclusaoAutomovel>();
+            services.AddTransient<FrmExclusaoPessoas>();
+            services.AddTransient<FrmHistoricoAutomovel>();
+            services.AddTransient<FrmHistoricoLocacao>();
+            services.AddTransient<FrmHistoricoPessoas>();
+            services.AddTransient<FrmRegistroPagamento>();
+            services.AddTransient<FrmRegistroPagamento2>();
+            services.AddTransient<FrmVinculacaoCnh>();
 
+            return services.BuildServiceProvider();
         }
     }
 }

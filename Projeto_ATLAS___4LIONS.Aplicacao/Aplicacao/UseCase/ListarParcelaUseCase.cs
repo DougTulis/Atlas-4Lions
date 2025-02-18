@@ -1,22 +1,23 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 {
-    public class ListarParcelaUseCase
+    public class ListarParcelaUseCase : IListarParcelaUseCase
     {
-        private readonly IParcelaRepositorio parcelaRepositorio;
+        private readonly IParcelaRepositorio _parcelaRepositorio;
         public ListarParcelaUseCase(IParcelaRepositorio parcelaRepositorio)
         {
-            this.parcelaRepositorio = parcelaRepositorio;
+            _parcelaRepositorio = parcelaRepositorio;
         }
         public IEnumerable<ParcelaDTO> ExecutarRecuperacaoPorPendFin(int idPendencia)
         {
-          return parcelaRepositorio.ListarPorPendencia(idPendencia);
+          return _parcelaRepositorio.ListarPorPendencia(idPendencia);
         }
         public ParcelaDTO? ExecutarRecuperacaoPorId(int id)
         {
-            return parcelaRepositorio.RecuperarPorId(id);
+            return _parcelaRepositorio.RecuperarPorId(id);
         }
 
     }

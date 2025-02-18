@@ -42,11 +42,14 @@
             // 
             // dgvHistoricoPessoas
             // 
+            dgvHistoricoPessoas.AllowUserToAddRows = false;
+            dgvHistoricoPessoas.AllowUserToDeleteRows = false;
             dgvHistoricoPessoas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvHistoricoPessoas.Columns.AddRange(new DataGridViewColumn[] { pessoaNome, email, contato, dataNascimento, cpf, cnpj, vencimentoCnh, numeroCnh });
             dgvHistoricoPessoas.Location = new Point(0, 20);
             dgvHistoricoPessoas.Margin = new Padding(3, 2, 3, 2);
             dgvHistoricoPessoas.Name = "dgvHistoricoPessoas";
+            dgvHistoricoPessoas.ReadOnly = true;
             dgvHistoricoPessoas.RowHeadersWidth = 51;
             dgvHistoricoPessoas.Size = new Size(746, 324);
             dgvHistoricoPessoas.TabIndex = 0;
@@ -58,6 +61,7 @@
             pessoaNome.HeaderText = "Nome ";
             pessoaNome.MinimumWidth = 6;
             pessoaNome.Name = "pessoaNome";
+            pessoaNome.ReadOnly = true;
             pessoaNome.Width = 125;
             // 
             // email
@@ -66,6 +70,7 @@
             email.HeaderText = "Email";
             email.MinimumWidth = 6;
             email.Name = "email";
+            email.ReadOnly = true;
             email.Width = 125;
             // 
             // contato
@@ -74,6 +79,7 @@
             contato.HeaderText = "Contato";
             contato.MinimumWidth = 6;
             contato.Name = "contato";
+            contato.ReadOnly = true;
             contato.Width = 125;
             // 
             // dataNascimento
@@ -82,6 +88,7 @@
             dataNascimento.HeaderText = "Data de Nascimento";
             dataNascimento.MinimumWidth = 6;
             dataNascimento.Name = "dataNascimento";
+            dataNascimento.ReadOnly = true;
             dataNascimento.Width = 125;
             // 
             // cpf
@@ -90,6 +97,7 @@
             cpf.HeaderText = "Cpf";
             cpf.MinimumWidth = 6;
             cpf.Name = "cpf";
+            cpf.ReadOnly = true;
             cpf.Width = 125;
             // 
             // cnpj
@@ -98,6 +106,7 @@
             cnpj.HeaderText = "Cnpj";
             cnpj.MinimumWidth = 6;
             cnpj.Name = "cnpj";
+            cnpj.ReadOnly = true;
             cnpj.Width = 125;
             // 
             // vencimentoCnh
@@ -106,6 +115,7 @@
             vencimentoCnh.HeaderText = "Vencimento CNH";
             vencimentoCnh.MinimumWidth = 6;
             vencimentoCnh.Name = "vencimentoCnh";
+            vencimentoCnh.ReadOnly = true;
             vencimentoCnh.Width = 125;
             // 
             // numeroCnh
@@ -114,14 +124,17 @@
             numeroCnh.HeaderText = "Numero da CNH";
             numeroCnh.MinimumWidth = 6;
             numeroCnh.Name = "numeroCnh";
+            numeroCnh.ReadOnly = true;
             numeroCnh.Width = 125;
             // 
             // FrmHistoricoPessoas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(757, 368);
+            BackColor = SystemColors.AppWorkspace;
+            ClientSize = new Size(961, 485);
             Controls.Add(dgvHistoricoPessoas);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 2, 3, 2);
             Name = "FrmHistoricoPessoas";
             Text = "FrmHistoricoPessoas";

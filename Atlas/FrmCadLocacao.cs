@@ -1,5 +1,7 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.Servicos;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Servicos;
 using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
 using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
@@ -12,17 +14,17 @@ namespace Projeto_ATLAS___4LIONS.Forms
 {
     public partial class FrmCadLocacao : Form
     {
-        private readonly LocacaoService _locacaoService;
+        private readonly ILocacaoService _locacaoService;
         private readonly PendenciaFinanceiraServico _pendenciaService;
-        private readonly ListarPessoaUseCase _listarPessoaUseCase;
-        private readonly ListarAutomovelUseCase _listarAutomovelUseCase;
+        private readonly IListarPessoaUseCase _listarPessoaUseCase;
+        private readonly IListarAutomovelUseCase _listarAutomovelUseCase;
         private readonly ITabelaPrecoRepositorio _tabelaPrecoRepositorio;
 
         public FrmCadLocacao(
-            LocacaoService locacaoService,
+            ILocacaoService locacaoService,
             PendenciaFinanceiraServico pendenciaFinanceiraService,
-            ListarPessoaUseCase listarPessoaUseCase,
-            ListarAutomovelUseCase listarAutomovelUseCase,
+            IListarPessoaUseCase listarPessoaUseCase,
+            IListarAutomovelUseCase listarAutomovelUseCase,
             ITabelaPrecoRepositorio tabelaPrecoRepositorio)
         {
             _locacaoService = locacaoService;

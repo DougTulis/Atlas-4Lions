@@ -19,15 +19,13 @@ namespace Projeto_ATLAS___4LIONS.Forms
 {
     public partial class FrmCadPessoas : Form
     {
-        private readonly CadastrarPessoaUseCase cadastrarPessoaUseCase;
-        private readonly IPessoaRepositorio pessoaRepositorio;
-        private readonly List<Notificacao> _notificacoes = new();
+        private readonly ICadastrarPessoaUseCase _cadastrarPessoaUseCase;
+        private readonly IPessoaRepositorio _pessoaRepositorio;
 
-
-        public FrmCadPessoas()
+        public FrmCadPessoas(ICadastrarPessoaUseCase cadastrarPessoaUseCase, IPessoaRepositorio pessoaRepositorio)
         {
-            pessoaRepositorio = new PessoaRepositorio();
-            cadastrarPessoaUseCase = new CadastrarPessoaUseCase(pessoaRepositorio);
+            _cadastrarPessoaUseCase = cadastrarPessoaUseCase;
+            _pessoaRepositorio = pessoaRepositorio;
 
             InitializeComponent();
 
@@ -107,9 +105,14 @@ namespace Projeto_ATLAS___4LIONS.Forms
                     Cnpj = txtCnpj.Text,
                     DataNascimento = Convert.ToDateTime(txtDataNascimento.Text),
                 };
-                cadastrarPessoaUseCase.Executar(pessoaDto);
+                _cadastrarPessoaUseCase.Executar(pessoaDto);
 
-            }catch (Exception ex)
+                MessageBox.Show("Pessoa cadastrada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.Close();
+
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

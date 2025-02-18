@@ -1,5 +1,6 @@
 ﻿using Org.BouncyCastle.Tls;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using Projeto_ATLAS___4LIONS.Infra.Repositorios;
@@ -10,21 +11,24 @@ namespace Projeto_ATLAS___4LIONS.Forms
 {
     public partial class FrmRegistroPagamento : Form
     {
-        private readonly IPendenciaFinanceiraRepositorio pendFinRepositorio;
-        private readonly ILocacaoRepositorio locacaoRepositorio;
-        private readonly IAutomovelRepositorio automovelRepositorio;
-        private readonly IPessoaRepositorio pessoaRepositorio;
-        private readonly ListarPendenciaFinanceiraUseCase listarPendFinUseCase;
-        private FrmRegistroPagamento2 frmRegistroPagamento2;
+        private readonly IPendenciaFinanceiraRepositorio _pendFinRepositorio;
+        private readonly ILocacaoRepositorio _locacaoRepositorio;
+        private readonly IAutomovelRepositorio _automovelRepositorio;
+        private readonly IPessoaRepositorio _pessoaRepositorio;
+        private readonly IListarPendenciaFinanceiraUseCase _listarPendFinUseCase;
+        private readonly IIncluirPagamentoUseCase _incluirPagamentoUseCase;
+        private readonly IListarParcelaUseCase _listarParcelaUseCase;
+        private readonly IParcelaRepositorio _parcelaRepositorio;
+        private FrmRegistroPagamento2 _frmRegistroPagamento2;
 
-
-        public FrmRegistroPagamento()
+        public FrmRegistroPagamento(IPendenciaFinanceiraRepositorio pendFinRepositorio, ILocacaoRepositorio locacaoRepositorio, IAutomovelRepositorio automovelRepositorio, IPessoaRepositorio pessoaRepositorio, IListarPendenciaFinanceiraUseCase listarPendFinUseCase, IIncluirPagamentoUseCase incluirPagamentoUseCase, IListarParcelaUseCase listarParcelaUseCase, IParcelaRepositorio parcelaRepositorio, FrmRegistroPagamento2 frmRegistroPagamento2)
         {
-            pessoaRepositorio = new PessoaRepositorio();
-            automovelRepositorio = new AutomovelRepositorio();
-            locacaoRepositorio = new LocacaoRepositorio(pessoaRepositorio, automovelRepositorio);
-            pendFinRepositorio = new PendenciaFinanceiraRepositorio(locacaoRepositorio);
-            listarPendFinUseCase = new ListarPendenciaFinanceiraUseCase(pendFinRepositorio);
+            _incluirPagamentoUseCase = incluirPagamentoUseCase;
+            _listarParcelaUseCase = listarParcelaUseCase;
+            _parcelaRepositorio = parcelaRepositorio;
+            _frmRegistroPagamento2 = frmRegistroPagamento2;
+            _listarPendFinUseCase = listarPendFinUseCase;
+
             InitializeComponent();
             AtualizarGridView();
         }
@@ -37,7 +41,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private void AtualizarGridView()
         {
             dgvHistoricoPendenciaFinanceiras.AutoGenerateColumns = false;
-            dgvHistoricoPendenciaFinanceiras.DataSource = listarPendFinUseCase.Executar().ToList();
+            dgvHistoricoPendenciaFinanceiras.DataSource = _listarPendFinUseCase.Executar().ToList();
             dgvHistoricoPendenciaFinanceiras.Refresh();
         }
         private void dgvHistoricoPendenciaFinanceiras_DoubleClick(object sender, EventArgs e)
@@ -50,8 +54,9 @@ namespace Projeto_ATLAS___4LIONS.Forms
             {
                 DataGridViewRow row = dgvHistoricoPendenciaFinanceiras.Rows[e.RowIndex];
                 int idSelecionado = Convert.ToInt16(dgvHistoricoPendenciaFinanceiras.Rows[e.RowIndex].Cells[0].Value);
-                frmRegistroPagamento2 = new FrmRegistroPagamento2(idSelecionado);
-                frmRegistroPagamento2.ShowDialog();
+                _frmRegistroPagamento2 = new FrmRegistroPagamento2(idSelecionado,_incluirPagamentoUseCase,_listarParcelaUseCase,_parcelaRepositorio);
+                _frmRegistroPagamento2.ShowDialog();
+                this.Close();
             }
         }
 
@@ -60,6 +65,11 @@ namespace Projeto_ATLAS___4LIONS.Forms
         }
 
         private void FrmRegistroPagamento_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblPendenciasFinanceiras_Click(object sender, EventArgs e)
         {
 
         }

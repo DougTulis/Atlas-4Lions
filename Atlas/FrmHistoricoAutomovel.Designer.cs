@@ -42,11 +42,14 @@
             // 
             // dgvHistoricoAutomovel
             // 
+            dgvHistoricoAutomovel.AllowUserToAddRows = false;
+            dgvHistoricoAutomovel.AllowUserToDeleteRows = false;
             dgvHistoricoAutomovel.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvHistoricoAutomovel.Columns.AddRange(new DataGridViewColumn[] { modelo, placa, cor, status, chassi, renavam, oleoKm, FreioKm });
             dgvHistoricoAutomovel.Location = new Point(-90, 19);
             dgvHistoricoAutomovel.Margin = new Padding(3, 2, 3, 2);
             dgvHistoricoAutomovel.Name = "dgvHistoricoAutomovel";
+            dgvHistoricoAutomovel.ReadOnly = true;
             dgvHistoricoAutomovel.RowHeadersWidth = 51;
             dgvHistoricoAutomovel.Size = new Size(746, 324);
             dgvHistoricoAutomovel.TabIndex = 1;
@@ -57,55 +60,65 @@
             modelo.DataPropertyName = "Modelo";
             modelo.HeaderText = "Modelo";
             modelo.Name = "modelo";
+            modelo.ReadOnly = true;
             // 
             // placa
             // 
             placa.DataPropertyName = "Placa";
             placa.HeaderText = "Placa";
             placa.Name = "placa";
+            placa.ReadOnly = true;
             // 
             // cor
             // 
             cor.DataPropertyName = "Cor";
             cor.HeaderText = "Cor";
             cor.Name = "cor";
+            cor.ReadOnly = true;
             // 
             // status
             // 
             status.DataPropertyName = "Status";
             status.HeaderText = "Status";
             status.Name = "status";
+            status.ReadOnly = true;
             // 
             // chassi
             // 
             chassi.DataPropertyName = "Chassi";
             chassi.HeaderText = "Chassi";
             chassi.Name = "chassi";
+            chassi.ReadOnly = true;
             // 
             // renavam
             // 
             renavam.DataPropertyName = "Renavam";
             renavam.HeaderText = "Renavam";
             renavam.Name = "renavam";
+            renavam.ReadOnly = true;
             // 
             // oleoKm
             // 
             oleoKm.DataPropertyName = "OleoKm";
             oleoKm.HeaderText = "OleoKm";
             oleoKm.Name = "oleoKm";
+            oleoKm.ReadOnly = true;
             // 
             // FreioKm
             // 
             FreioKm.DataPropertyName = "FreioKm";
             FreioKm.HeaderText = "PastilhaFreioKm";
             FreioKm.Name = "FreioKm";
+            FreioKm.ReadOnly = true;
             // 
             // FrmHistoricoAutomovel
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(680, 412);
+            BackColor = SystemColors.AppWorkspace;
+            ClientSize = new Size(961, 485);
             Controls.Add(dgvHistoricoAutomovel);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "FrmHistoricoAutomovel";
             Text = "FrmHistoricoAutomovel";
             Load += FrmHistoricoAutomovel_Load;

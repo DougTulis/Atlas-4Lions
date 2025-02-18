@@ -1,16 +1,17 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 {
-    public class IncluirCnhUseCase
+    public class IncluirCnhUseCase : IIncluirCnhUseCase
     {
-        private readonly IPessoaRepositorio pessoaRepositorio;
+        private readonly IPessoaRepositorio _pessoaRepositorio;
         public IncluirCnhUseCase(IPessoaRepositorio pessoaRepositorio)
         {
-            this.pessoaRepositorio = pessoaRepositorio;
+          _pessoaRepositorio = pessoaRepositorio;
         }
         public void Executar(PessoaDTO pessoaDto, string numeroCnh, DateTime vencimentoCnh)
         {
@@ -34,7 +35,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 {
                     return;
                 }
-                pessoaRepositorio.IncluirCNH(pessoaDto.Id, numeroCnh, vencimentoCnh);
+                _pessoaRepositorio.IncluirCNH(pessoaDto.Id, numeroCnh, vencimentoCnh);
             }
             catch (MySqlException ex)
             {

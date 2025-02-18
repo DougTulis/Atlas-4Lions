@@ -1,30 +1,20 @@
-﻿using MySqlX.XDevAPI;
+﻿
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
-using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
-using Projeto_ATLAS___4LIONS.Infra.Repositorios;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 
 namespace Projeto_ATLAS___4LIONS.Forms
 {
     public partial class FrmHistoricoPessoas : Form
     {
-        private readonly IPessoaRepositorio repositorio;
-        private readonly ListarPessoaUseCase listarPessoaUseCase;
+        private readonly IPessoaRepositorio _pessoaRepositorio;
+        private readonly IListarPessoaUseCase _listarPessoaUseCase;
 
-        public FrmHistoricoPessoas()
+        public FrmHistoricoPessoas(IPessoaRepositorio pessoaRepositorio, IListarPessoaUseCase listarPessoaUseCase)
         {
 
             InitializeComponent();
-            repositorio = new PessoaRepositorio();
-            listarPessoaUseCase = new ListarPessoaUseCase(repositorio);
+            _pessoaRepositorio = pessoaRepositorio;
+            _listarPessoaUseCase = listarPessoaUseCase;
             AtualizarGridView();
         }
 
@@ -39,7 +29,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private void AtualizarGridView()
         {
             dgvHistoricoPessoas.AutoGenerateColumns = false;
-            var dados = listarPessoaUseCase.ExecutarDadosCompletos();
+            var dados = _listarPessoaUseCase.ExecutarDadosCompletos();
             dgvHistoricoPessoas.DataSource = dados.ToList();
             dgvHistoricoPessoas.Refresh();
         }

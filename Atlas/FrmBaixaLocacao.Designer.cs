@@ -42,13 +42,13 @@
             dgvBaixaLocacao.AllowUserToDeleteRows = false;
             dgvBaixaLocacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvBaixaLocacao.Columns.AddRange(new DataGridViewColumn[] { saida, retorno, status, tipoLocacao });
-            dgvBaixaLocacao.Location = new Point(12, 14);
+            dgvBaixaLocacao.Location = new Point(0, 0);
+            dgvBaixaLocacao.Margin = new Padding(3, 2, 3, 2);
             dgvBaixaLocacao.Name = "dgvBaixaLocacao";
             dgvBaixaLocacao.ReadOnly = true;
             dgvBaixaLocacao.RowHeadersWidth = 51;
-            dgvBaixaLocacao.Size = new Size(768, 424);
+            dgvBaixaLocacao.Size = new Size(604, 358);
             dgvBaixaLocacao.TabIndex = 0;
-          
             // 
             // saida
             // 
@@ -88,12 +88,17 @@
             // 
             // FrmBaixaLocacao
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackColor = SystemColors.AppWorkspace;
+            ClientSize = new Size(961, 485);
             Controls.Add(dgvBaixaLocacao);
+            ForeColor = SystemColors.ControlText;
+            FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(3, 2, 3, 2);
             Name = "FrmBaixaLocacao";
             Text = "FrmBaixaLocacao";
+            Load += FrmBaixaLocacao_Load;
             ((System.ComponentModel.ISupportInitialize)dgvBaixaLocacao).EndInit();
             ResumeLayout(false);
         }

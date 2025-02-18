@@ -1,54 +1,42 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
 using Projeto_ATLAS___4LIONS.Infra.Repositorios;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Projeto_ATLAS___4LIONS.Forms
 {
     public partial class FrmExclusaoAutomovel : Form
     {
 
-        private readonly IAutomovelRepositorio automovelRepositorio;
-        private readonly ListarAutomovelUseCase listarAutomovelUseCase;
-        private readonly DeletarAutomovelUseCase deletarAutomovelUseCase;
+        private readonly IAutomovelRepositorio _automovelRepositorio;
+        private readonly IListarAutomovelUseCase _listarAutomovelUseCase;
+        private readonly IDeletarAutomovelUseCase _deletarAutomovelUseCase;
 
-        public FrmExclusaoAutomovel()
+        public FrmExclusaoAutomovel(IAutomovelRepositorio automovelRepositorio, IListarAutomovelUseCase listarAutomovelUseCase, IDeletarAutomovelUseCase deletarAutomovelUseCase)
         {
-            automovelRepositorio = new AutomovelRepositorio();
-            listarAutomovelUseCase = new ListarAutomovelUseCase(automovelRepositorio);
-            deletarAutomovelUseCase = new DeletarAutomovelUseCase(automovelRepositorio);
-            InitializeComponent();
-            AtualizarGridView();
+            _automovelRepositorio = automovelRepositorio;
+            _listarAutomovelUseCase = listarAutomovelUseCase;
+            _deletarAutomovelUseCase = deletarAutomovelUseCase;
         }
 
         private void dgvHistoricoAutomovelExclusaoAutomovel_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
-
-
         private void AtualizarGridView()
         {
             dgvHistoricoAutomovelExclusaoAutomovel.AutoGenerateColumns = false;
             dgvHistoricoAutomovelExclusaoAutomovel.DataSource = null;
-            var dados = listarAutomovelUseCase.ExecutarStatusGaragem();
+            var dados = _listarAutomovelUseCase.ExecutarStatusGaragem();
             dgvHistoricoAutomovelExclusaoAutomovel.DataSource = dados.ToList();
             dgvHistoricoAutomovelExclusaoAutomovel.Update();
             dgvHistoricoAutomovelExclusaoAutomovel.Refresh();
         }
 
-   
+
         private void dgvHistoricoAutomovelExclusaoAutomovel_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.RowIndex >= 0) 
+            if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvHistoricoAutomovelExclusaoAutomovel.Rows[e.RowIndex];
                 int automovelId = Convert.ToInt32(row.Cells[0].Value);
@@ -62,12 +50,17 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
                 if (resultado == DialogResult.Yes)
                 {
-                    var automovelDto = listarAutomovelUseCase.ExecutarRecuperarPorId(automovelId);
-                    deletarAutomovelUseCase.Executar(automovelDto);
+                    var automovelDto = _listarAutomovelUseCase.ExecutarRecuperarPorId(automovelId);
+                    _deletarAutomovelUseCase.Executar(automovelDto);
                     MessageBox.Show("Automóvel excluído com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     AtualizarGridView();
                 }
             }
+        }
+
+        private void FrmExclusaoAutomovel_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

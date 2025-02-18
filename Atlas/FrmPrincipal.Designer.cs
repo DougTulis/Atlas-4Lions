@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipal));
             panel1 = new Panel();
+            pcbAtlas = new PictureBox();
             lblTitulo = new ReaLTaiizor.Controls.DungeonHeaderLabel();
             nightControlBox1 = new ReaLTaiizor.Controls.NightControlBox();
-            pictureBox1 = new PictureBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
             menuStrip1 = new MenuStrip();
             mnuGerenciamentoPessoas = new ToolStripMenuItem();
@@ -52,22 +51,34 @@
             itmGerenciamentoLocacoesBaixaLocacao = new ToolStripMenuItem();
             timer1 = new System.Windows.Forms.Timer(components);
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pcbAtlas).BeginInit();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(pcbAtlas);
             panel1.Controls.Add(lblTitulo);
             panel1.Controls.Add(nightControlBox1);
-            panel1.Controls.Add(pictureBox1);
             panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 30);
+            panel1.Location = new Point(0, 24);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1098, 49);
+            panel1.Size = new Size(961, 37);
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint;
+            // 
+            // pcbAtlas
+            // 
+            pcbAtlas.Image = Projeto_ATLAS___4LIONS.Forms.Properties.Resources._1455013;
+            pcbAtlas.Location = new Point(13, 2);
+            pcbAtlas.Name = "pcbAtlas";
+            pcbAtlas.Size = new Size(37, 32);
+            pcbAtlas.SizeMode = PictureBoxSizeMode.StretchImage;
+            pcbAtlas.TabIndex = 7;
+            pcbAtlas.TabStop = false;
+            pcbAtlas.Click += pcbAtlas_Click;
             // 
             // lblTitulo
             // 
@@ -75,9 +86,9 @@
             lblTitulo.BackColor = Color.Transparent;
             lblTitulo.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             lblTitulo.ForeColor = Color.FromArgb(76, 76, 77);
-            lblTitulo.Location = new Point(64, 13);
+            lblTitulo.Location = new Point(56, 10);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(249, 25);
+            lblTitulo.Size = new Size(195, 20);
             lblTitulo.TabIndex = 3;
             lblTitulo.Text = "ATLAS - Locação de Carros";
             lblTitulo.Click += lblTitulo_Click;
@@ -96,7 +107,7 @@
             nightControlBox1.EnableMaximizeColor = Color.FromArgb(160, 160, 160);
             nightControlBox1.EnableMinimizeButton = true;
             nightControlBox1.EnableMinimizeColor = Color.FromArgb(160, 160, 160);
-            nightControlBox1.Location = new Point(939, 0);
+            nightControlBox1.Location = new Point(822, 0);
             nightControlBox1.MaximizeHoverColor = Color.FromArgb(15, 255, 255, 255);
             nightControlBox1.MaximizeHoverForeColor = Color.White;
             nightControlBox1.MinimizeHoverColor = Color.FromArgb(15, 255, 255, 255);
@@ -106,25 +117,15 @@
             nightControlBox1.TabIndex = 1;
             nightControlBox1.Click += nightControlBox1_Click;
             // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(7, 9);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(38, 29);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
-            // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.BackColor = Color.Black;
             flowLayoutPanel1.Dock = DockStyle.Left;
             flowLayoutPanel1.ForeColor = SystemColors.Control;
-            flowLayoutPanel1.Location = new Point(0, 79);
+            flowLayoutPanel1.Location = new Point(0, 61);
+            flowLayoutPanel1.Margin = new Padding(3, 2, 3, 2);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(113, 568);
+            flowLayoutPanel1.Size = new Size(99, 424);
             flowLayoutPanel1.TabIndex = 2;
             flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
             // 
@@ -134,8 +135,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { mnuGerenciamentoPessoas, mnuGerenciamentoVeiculos, mnuGerenciamentoLocacoes });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Padding = new Padding(7, 3, 0, 3);
-            menuStrip1.Size = new Size(1098, 30);
+            menuStrip1.Size = new Size(961, 24);
             menuStrip1.TabIndex = 5;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -144,35 +144,35 @@
             mnuGerenciamentoPessoas.BackColor = SystemColors.AppWorkspace;
             mnuGerenciamentoPessoas.DropDownItems.AddRange(new ToolStripItem[] { itmGerenciamentoPessoasCadPessoas, itmGerenciamentoPessoasHistPessoas, itmGerenciamentoPessoasExcluirPessoas, itmGerenciamentoPessoasVincularCnh });
             mnuGerenciamentoPessoas.Name = "mnuGerenciamentoPessoas";
-            mnuGerenciamentoPessoas.Size = new Size(201, 24);
+            mnuGerenciamentoPessoas.Size = new Size(160, 20);
             mnuGerenciamentoPessoas.Text = "Gerenciamento de pessoas";
             mnuGerenciamentoPessoas.Click += mnuGerenciamentoPessoas_Click;
             // 
             // itmGerenciamentoPessoasCadPessoas
             // 
             itmGerenciamentoPessoasCadPessoas.Name = "itmGerenciamentoPessoasCadPessoas";
-            itmGerenciamentoPessoasCadPessoas.Size = new Size(274, 26);
+            itmGerenciamentoPessoasCadPessoas.Size = new Size(218, 22);
             itmGerenciamentoPessoasCadPessoas.Text = "Cadastro de pessoas";
             itmGerenciamentoPessoasCadPessoas.Click += itmGerenciamentoPessoasCadPessoas_Click;
             // 
             // itmGerenciamentoPessoasHistPessoas
             // 
             itmGerenciamentoPessoasHistPessoas.Name = "itmGerenciamentoPessoasHistPessoas";
-            itmGerenciamentoPessoasHistPessoas.Size = new Size(274, 26);
+            itmGerenciamentoPessoasHistPessoas.Size = new Size(218, 22);
             itmGerenciamentoPessoasHistPessoas.Text = "Historico de Pessoas";
             itmGerenciamentoPessoasHistPessoas.Click += itmGerenciamentoPessoasHistPessoas_Click;
             // 
             // itmGerenciamentoPessoasExcluirPessoas
             // 
             itmGerenciamentoPessoasExcluirPessoas.Name = "itmGerenciamentoPessoasExcluirPessoas";
-            itmGerenciamentoPessoasExcluirPessoas.Size = new Size(274, 26);
+            itmGerenciamentoPessoasExcluirPessoas.Size = new Size(218, 22);
             itmGerenciamentoPessoasExcluirPessoas.Text = "Excluir pessoas cadastradas";
             itmGerenciamentoPessoasExcluirPessoas.Click += itmGerenciamentoPessoasExcluirPessoas_Click;
             // 
             // itmGerenciamentoPessoasVincularCnh
             // 
             itmGerenciamentoPessoasVincularCnh.Name = "itmGerenciamentoPessoasVincularCnh";
-            itmGerenciamentoPessoasVincularCnh.Size = new Size(274, 26);
+            itmGerenciamentoPessoasVincularCnh.Size = new Size(218, 22);
             itmGerenciamentoPessoasVincularCnh.Text = "Vincular CNH";
             itmGerenciamentoPessoasVincularCnh.Click += itmGerenciamentoPessoasVincularCnh_Click;
             // 
@@ -181,28 +181,28 @@
             mnuGerenciamentoVeiculos.BackColor = SystemColors.AppWorkspace;
             mnuGerenciamentoVeiculos.DropDownItems.AddRange(new ToolStripItem[] { itmGerenciamentoVeiculosCadVeiculo, itmGerenciamentoVeiculosHistVeiculo, itmGerenciamentoVeiculosExcluirVeiculo });
             mnuGerenciamentoVeiculos.Name = "mnuGerenciamentoVeiculos";
-            mnuGerenciamentoVeiculos.Size = new Size(202, 24);
+            mnuGerenciamentoVeiculos.Size = new Size(162, 20);
             mnuGerenciamentoVeiculos.Text = "Gerenciamento de veículos";
             mnuGerenciamentoVeiculos.Click += mnuGerenciamentoVeiculos_Click;
             // 
             // itmGerenciamentoVeiculosCadVeiculo
             // 
             itmGerenciamentoVeiculosCadVeiculo.Name = "itmGerenciamentoVeiculosCadVeiculo";
-            itmGerenciamentoVeiculosCadVeiculo.Size = new Size(230, 26);
+            itmGerenciamentoVeiculosCadVeiculo.Size = new Size(184, 22);
             itmGerenciamentoVeiculosCadVeiculo.Text = "Cadastrar veículo";
             itmGerenciamentoVeiculosCadVeiculo.Click += itmGerenciamentoVeiculosCadVeiculo_Click;
             // 
             // itmGerenciamentoVeiculosHistVeiculo
             // 
             itmGerenciamentoVeiculosHistVeiculo.Name = "itmGerenciamentoVeiculosHistVeiculo";
-            itmGerenciamentoVeiculosHistVeiculo.Size = new Size(230, 26);
+            itmGerenciamentoVeiculosHistVeiculo.Size = new Size(184, 22);
             itmGerenciamentoVeiculosHistVeiculo.Text = "Histórico de veículos";
             itmGerenciamentoVeiculosHistVeiculo.Click += itmGerenciamentoVeiculosHistVeiculo_Click;
             // 
             // itmGerenciamentoVeiculosExcluirVeiculo
             // 
             itmGerenciamentoVeiculosExcluirVeiculo.Name = "itmGerenciamentoVeiculosExcluirVeiculo";
-            itmGerenciamentoVeiculosExcluirVeiculo.Size = new Size(230, 26);
+            itmGerenciamentoVeiculosExcluirVeiculo.Size = new Size(184, 22);
             itmGerenciamentoVeiculosExcluirVeiculo.Text = "Excluir veículo";
             itmGerenciamentoVeiculosExcluirVeiculo.Click += itmGerenciamentoVeiculosExcluirVeiculo_Click;
             // 
@@ -211,44 +211,44 @@
             mnuGerenciamentoLocacoes.BackColor = SystemColors.AppWorkspace;
             mnuGerenciamentoLocacoes.DropDownItems.AddRange(new ToolStripItem[] { itmGerenciamentoLocacoesCadLocacoes, itmGerenciamentoLocacoesHistLocacoes, itmGerenciamentoLocacoesRegPagamento, itmGerenciamentoLocacoesBaixaLocacao });
             mnuGerenciamentoLocacoes.Name = "mnuGerenciamentoLocacoes";
-            mnuGerenciamentoLocacoes.Size = new Size(210, 24);
+            mnuGerenciamentoLocacoes.Size = new Size(168, 20);
             mnuGerenciamentoLocacoes.Text = "Gerenciamento de Locações";
             mnuGerenciamentoLocacoes.Click += mnuGerenciamentoLocacoes_Click;
             // 
             // itmGerenciamentoLocacoesCadLocacoes
             // 
             itmGerenciamentoLocacoesCadLocacoes.Name = "itmGerenciamentoLocacoesCadLocacoes";
-            itmGerenciamentoLocacoesCadLocacoes.Size = new Size(235, 26);
+            itmGerenciamentoLocacoesCadLocacoes.Size = new Size(187, 22);
             itmGerenciamentoLocacoesCadLocacoes.Text = "Cadastrar Locação";
             itmGerenciamentoLocacoesCadLocacoes.Click += itmGerenciamentoLocacoesCadLocacoes_Click;
             // 
             // itmGerenciamentoLocacoesHistLocacoes
             // 
             itmGerenciamentoLocacoesHistLocacoes.Name = "itmGerenciamentoLocacoesHistLocacoes";
-            itmGerenciamentoLocacoesHistLocacoes.Size = new Size(235, 26);
+            itmGerenciamentoLocacoesHistLocacoes.Size = new Size(187, 22);
             itmGerenciamentoLocacoesHistLocacoes.Text = "Histórico de locações";
             itmGerenciamentoLocacoesHistLocacoes.Click += itmGerenciamentoLocacoesHistLocacoes_Click;
             // 
             // itmGerenciamentoLocacoesRegPagamento
             // 
             itmGerenciamentoLocacoesRegPagamento.Name = "itmGerenciamentoLocacoesRegPagamento";
-            itmGerenciamentoLocacoesRegPagamento.Size = new Size(235, 26);
+            itmGerenciamentoLocacoesRegPagamento.Size = new Size(187, 22);
             itmGerenciamentoLocacoesRegPagamento.Text = "Registrar pagamento";
             itmGerenciamentoLocacoesRegPagamento.Click += itmGerenciamentoLocacoesRegPagamento_Click;
             // 
             // itmGerenciamentoLocacoesBaixaLocacao
             // 
             itmGerenciamentoLocacoesBaixaLocacao.Name = "itmGerenciamentoLocacoesBaixaLocacao";
-            itmGerenciamentoLocacoesBaixaLocacao.Size = new Size(235, 26);
+            itmGerenciamentoLocacoesBaixaLocacao.Size = new Size(187, 22);
             itmGerenciamentoLocacoesBaixaLocacao.Text = "Baixa de locações";
             itmGerenciamentoLocacoesBaixaLocacao.Click += itmGerenciamentoLocacoesBaixaLocacao_Click;
             // 
             // FrmPrincipal
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(224, 224, 224);
-            ClientSize = new Size(1098, 647);
+            ClientSize = new Size(961, 485);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(panel1);
             Controls.Add(menuStrip1);
@@ -256,8 +256,9 @@
             FormBorderStyle = FormBorderStyle.None;
             IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
-            MaximumSize = new Size(1561, 971);
-            MinimumSize = new Size(261, 65);
+            Margin = new Padding(3, 2, 3, 2);
+            MaximumSize = new Size(1366, 728);
+            MinimumSize = new Size(228, 49);
             Name = "FrmPrincipal";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
@@ -266,7 +267,7 @@
             Load += Form1_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pcbAtlas).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
@@ -276,7 +277,6 @@
         #endregion
 
         private Panel panel1;
-        private PictureBox pictureBox1;
         private ReaLTaiizor.Controls.NightControlBox nightControlBox1;
         private FlowLayoutPanel flowLayoutPanel1;
         private ReaLTaiizor.Controls.DungeonHeaderLabel lblTitulo;
@@ -296,5 +296,6 @@
         private ToolStripMenuItem itmGerenciamentoLocacoesRegPagamento;
         private ToolStripMenuItem itmGerenciamentoLocacoesBaixaLocacao;
         private System.Windows.Forms.Timer timer1;
+        private PictureBox pcbAtlas;
     }
 }

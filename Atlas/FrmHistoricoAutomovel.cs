@@ -1,4 +1,5 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
 using Projeto_ATLAS___4LIONS.Infra.Repositorios;
 using System;
@@ -15,12 +16,12 @@ namespace Projeto_ATLAS___4LIONS.Forms
 {
     public partial class FrmHistoricoAutomovel : Form
     {
-        private readonly IAutomovelRepositorio automovelRepositorio;
-        private readonly ListarAutomovelUseCase listarAutomovelUseCase;
-        public FrmHistoricoAutomovel()
+        private readonly IAutomovelRepositorio _automovelRepositorio;
+        private readonly IListarAutomovelUseCase _listarAutomovelUseCase;
+        public FrmHistoricoAutomovel(IAutomovelRepositorio automovelRepositorio, IListarAutomovelUseCase listarAutomovelUseCase)
         {
-            automovelRepositorio = new AutomovelRepositorio();
-            listarAutomovelUseCase = new ListarAutomovelUseCase(automovelRepositorio);
+            _automovelRepositorio = automovelRepositorio;
+            _listarAutomovelUseCase = listarAutomovelUseCase;
             InitializeComponent();
             AtualizarGridView();
         }
@@ -36,7 +37,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private void AtualizarGridView()
         {
             dgvHistoricoAutomovel.AutoGenerateColumns = false;
-            var dados = listarAutomovelUseCase.ExecutarDadosCompletos();
+            var dados = _listarAutomovelUseCase.ExecutarDadosCompletos();
             dgvHistoricoAutomovel.DataSource = dados.ToList();
             dgvHistoricoAutomovel.Refresh();
         }

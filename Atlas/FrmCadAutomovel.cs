@@ -1,5 +1,6 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
 using Projeto_ATLAS___4LIONS.Infra.Repositorios;
 
@@ -8,21 +9,21 @@ namespace Projeto_ATLAS___4LIONS.Forms
 {
     public partial class FrmCadAutomovel : Form
     {
-        private readonly ITabelaPrecoRepositorio tabelaPrecoRepositorio;
-        private readonly IAutomovelRepositorio automovelRepositorio;
-        private readonly CadastrarVeiculoUseCase cadastrarVeiculoUseCase;
-        private readonly CadastrarPrecoAutomovelUseCase cadastrarPrecoAutomovelUseCase;
-        private readonly ListarAutomovelUseCase listarAutomovelUseCase;
-        private readonly ListarTabelaPrecoUseCase listarTabelaPrecoUseCase;
+        private readonly ITabelaPrecoRepositorio _tabelaPrecoRepositorio;
+        private readonly IAutomovelRepositorio _automovelRepositorio;
+        private readonly ICadastrarVeiculoUseCase _cadastrarVeiculoUseCase;
+        private readonly ICadastrarTabelaPrecoUseCase _cadastrarPrecoAutomovelUseCase;
+        private readonly IListarAutomovelUseCase _listarAutomovelUseCase;
+        private readonly IListarTabelaPrecoUseCase _listarTabelaPrecoUseCase;
 
-        public FrmCadAutomovel()
+        public FrmCadAutomovel(ITabelaPrecoRepositorio tabelaPrecoRepositorio, IAutomovelRepositorio automovelRepositorio, ICadastrarVeiculoUseCase cadastrarVeiculoUseCase, ICadastrarTabelaPrecoUseCase cadastrarPrecoAutomovelUseCase, IListarAutomovelUseCase listarAutomovelUseCase, IListarTabelaPrecoUseCase listarTabelaPrecoUseCase)
         {
-            automovelRepositorio = new AutomovelRepositorio();
-            tabelaPrecoRepositorio = new TabelaPrecoRepositorio();
-            cadastrarVeiculoUseCase = new CadastrarVeiculoUseCase(automovelRepositorio);
-            listarAutomovelUseCase = new ListarAutomovelUseCase(automovelRepositorio);
-            cadastrarPrecoAutomovelUseCase = new CadastrarPrecoAutomovelUseCase(tabelaPrecoRepositorio);
-            listarTabelaPrecoUseCase = new ListarTabelaPrecoUseCase(tabelaPrecoRepositorio);
+            _tabelaPrecoRepositorio = tabelaPrecoRepositorio;
+            _automovelRepositorio = automovelRepositorio;
+            _cadastrarVeiculoUseCase = cadastrarVeiculoUseCase;
+            _cadastrarPrecoAutomovelUseCase = cadastrarPrecoAutomovelUseCase;
+            _listarAutomovelUseCase = listarAutomovelUseCase;
+            _listarTabelaPrecoUseCase = listarTabelaPrecoUseCase;
             InitializeComponent();
             CarregarCombos();
         }
@@ -140,12 +141,16 @@ namespace Projeto_ATLAS___4LIONS.Forms
                 PastilhaFreioKm = int.TryParse(txtFreioKm.Text, out int freio) ? freio : null,
                 IdPreco = precoSelecionado.Id
             };
-            cadastrarVeiculoUseCase.Executar(automovelDto);
+            _cadastrarVeiculoUseCase.Executar(automovelDto);
+
+            MessageBox.Show("Automovel cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            this.Close();
 
         }
         private void CarregarCombos()
         {
-            cbmDescricaoPreco.DataSource = listarTabelaPrecoUseCase.Executar();
+            cbmDescricaoPreco.DataSource = _listarTabelaPrecoUseCase.Executar();
             cbmDescricaoPreco.ValueMember = "";
             cbmDescricaoPreco.SelectedIndex = -1;
 

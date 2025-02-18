@@ -172,7 +172,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
-            ClientSize = new Size(700, 338);
+            ClientSize = new Size(961, 485);
             Controls.Add(btnCadastrarPessoa);
             Controls.Add(lblCpf);
             Controls.Add(lblCnpj);
@@ -186,6 +186,7 @@
             Controls.Add(txtContato);
             Controls.Add(txtEmail);
             Controls.Add(textNome);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 2, 3, 2);
             Name = "FrmCadPessoas";
             Text = "FrmCadPessoas";

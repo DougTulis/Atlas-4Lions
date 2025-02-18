@@ -1,8 +1,9 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 
 
-public class ListarHistoricoLocacaoUseCase
+public class ListarHistoricoLocacaoUseCase : IListarHistoricoLocacaoUseCase
 {
     private readonly ILocacaoRepositorio _locacaoRepositorio;
     private readonly IPessoaRepositorio _pessoaRepositorio;

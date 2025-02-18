@@ -1,4 +1,5 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
 using Projeto_ATLAS___4LIONS.Infra.Repositorios;
 namespace Projeto_ATLAS___4LIONS.Forms
@@ -8,18 +9,16 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private readonly IPessoaRepositorio _pessoaRepositorio;
         private readonly ILocacaoRepositorio _locacaoRepositorio;
-        private readonly ListarHistoricoLocacaoUseCase _listarHistoricoLocacaoUseCase;
+        private readonly IListarHistoricoLocacaoUseCase _listarHistoricoLocacaoUseCase;
 
-        public FrmHistoricoLocacao(IPessoaRepositorio pessoaRepositorio, ILocacaoRepositorio locacaoRepositorio, ListarHistoricoLocacaoUseCase listarHistoricoLocacaoUseCase)
+        public FrmHistoricoLocacao(IPessoaRepositorio pessoaRepositorio, ILocacaoRepositorio locacaoRepositorio, IListarHistoricoLocacaoUseCase listarHistoricoLocacaoUseCase)
         {
             _pessoaRepositorio = pessoaRepositorio;
             _locacaoRepositorio = locacaoRepositorio;
             _listarHistoricoLocacaoUseCase = listarHistoricoLocacaoUseCase;
-
             InitializeComponent();
             AtualizarGridView();
         }
-
         private void dgvHistoricoLocacao_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 

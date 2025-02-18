@@ -46,12 +46,15 @@
             // 
             // dgvVinculacaoCnh
             // 
+            dgvVinculacaoCnh.AllowUserToAddRows = false;
+            dgvVinculacaoCnh.AllowUserToDeleteRows = false;
             dgvVinculacaoCnh.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvVinculacaoCnh.Columns.AddRange(new DataGridViewColumn[] { id, nome, cpf, cnpj });
-            dgvVinculacaoCnh.Location = new Point(12, 69);
+            dgvVinculacaoCnh.Location = new Point(10, 67);
             dgvVinculacaoCnh.Name = "dgvVinculacaoCnh";
+            dgvVinculacaoCnh.ReadOnly = true;
             dgvVinculacaoCnh.RowHeadersWidth = 51;
-            dgvVinculacaoCnh.Size = new Size(320, 303);
+            dgvVinculacaoCnh.Size = new Size(489, 303);
             dgvVinculacaoCnh.TabIndex = 0;
             dgvVinculacaoCnh.CellContentClick += dgvVinculacaoCnh_CellContentClick;
             // 
@@ -61,6 +64,7 @@
             id.HeaderText = "Id";
             id.MinimumWidth = 6;
             id.Name = "id";
+            id.ReadOnly = true;
             id.Width = 125;
             // 
             // nome
@@ -69,6 +73,7 @@
             nome.HeaderText = "Nome";
             nome.MinimumWidth = 6;
             nome.Name = "nome";
+            nome.ReadOnly = true;
             nome.Width = 125;
             // 
             // cpf
@@ -77,6 +82,7 @@
             cpf.HeaderText = "Cpf";
             cpf.MinimumWidth = 6;
             cpf.Name = "cpf";
+            cpf.ReadOnly = true;
             cpf.Width = 125;
             // 
             // cnpj
@@ -85,6 +91,7 @@
             cnpj.HeaderText = "Cnpj";
             cnpj.MinimumWidth = 6;
             cnpj.Name = "cnpj";
+            cnpj.ReadOnly = true;
             cnpj.Width = 125;
             // 
             // bigLblVinculacaoCnh
@@ -92,7 +99,7 @@
             bigLblVinculacaoCnh.AutoSize = true;
             bigLblVinculacaoCnh.BackColor = Color.Transparent;
             bigLblVinculacaoCnh.Font = new Font("Segoe UI", 15F);
-            bigLblVinculacaoCnh.ForeColor = Color.FromArgb(80, 80, 80);
+            bigLblVinculacaoCnh.ForeColor = Color.White;
             bigLblVinculacaoCnh.Location = new Point(12, 38);
             bigLblVinculacaoCnh.Name = "bigLblVinculacaoCnh";
             bigLblVinculacaoCnh.Size = new Size(252, 28);
@@ -101,7 +108,7 @@
             // 
             // txtPessoa
             // 
-            txtPessoa.Location = new Point(338, 93);
+            txtPessoa.Location = new Point(524, 103);
             txtPessoa.Name = "txtPessoa";
             txtPessoa.Size = new Size(121, 23);
             txtPessoa.TabIndex = 2;
@@ -110,7 +117,7 @@
             // lblPessoa
             // 
             lblPessoa.AutoSize = true;
-            lblPessoa.Location = new Point(336, 75);
+            lblPessoa.Location = new Point(522, 85);
             lblPessoa.Name = "lblPessoa";
             lblPessoa.Size = new Size(292, 15);
             lblPessoa.TabIndex = 3;
@@ -119,7 +126,7 @@
             // 
             // btnSelecionarPessoa
             // 
-            btnSelecionarPessoa.Location = new Point(336, 242);
+            btnSelecionarPessoa.Location = new Point(522, 252);
             btnSelecionarPessoa.Name = "btnSelecionarPessoa";
             btnSelecionarPessoa.Size = new Size(123, 23);
             btnSelecionarPessoa.TabIndex = 4;
@@ -130,7 +137,7 @@
             // lblVencimentoCnh
             // 
             lblVencimentoCnh.AutoSize = true;
-            lblVencimentoCnh.Location = new Point(336, 129);
+            lblVencimentoCnh.Location = new Point(522, 139);
             lblVencimentoCnh.Name = "lblVencimentoCnh";
             lblVencimentoCnh.Size = new Size(173, 15);
             lblVencimentoCnh.TabIndex = 5;
@@ -139,7 +146,7 @@
             // 
             // txtVencimentoCnh
             // 
-            txtVencimentoCnh.Location = new Point(338, 154);
+            txtVencimentoCnh.Location = new Point(524, 164);
             txtVencimentoCnh.Margin = new Padding(3, 2, 3, 2);
             txtVencimentoCnh.Name = "txtVencimentoCnh";
             txtVencimentoCnh.Size = new Size(121, 23);
@@ -148,7 +155,7 @@
             // 
             // txtNumeroCnh
             // 
-            txtNumeroCnh.Location = new Point(338, 209);
+            txtNumeroCnh.Location = new Point(524, 219);
             txtNumeroCnh.Margin = new Padding(3, 2, 3, 2);
             txtNumeroCnh.Name = "txtNumeroCnh";
             txtNumeroCnh.Size = new Size(121, 23);
@@ -158,7 +165,7 @@
             // lblNumeroCnh
             // 
             lblNumeroCnh.AutoSize = true;
-            lblNumeroCnh.Location = new Point(336, 184);
+            lblNumeroCnh.Location = new Point(522, 194);
             lblNumeroCnh.Name = "lblNumeroCnh";
             lblNumeroCnh.Size = new Size(152, 15);
             lblNumeroCnh.TabIndex = 7;
@@ -169,7 +176,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(628, 381);
+            BackColor = SystemColors.AppWorkspace;
+            ClientSize = new Size(961, 485);
             Controls.Add(txtNumeroCnh);
             Controls.Add(lblNumeroCnh);
             Controls.Add(txtVencimentoCnh);
@@ -179,6 +187,7 @@
             Controls.Add(txtPessoa);
             Controls.Add(bigLblVinculacaoCnh);
             Controls.Add(dgvVinculacaoCnh);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "FrmVinculacaoCnh";
             Text = "FrmVinculacaoCnh";
             Load += FrmVinculacaoCnh_Load;

@@ -1,16 +1,18 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.Servicos;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
 using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.Servicos
 {
-    public class LocacaoService
+    public class LocacaoService : ILocacaoService
     {
-        private readonly CadastrarLocacaoUseCase _cadastrarLocacaoUseCase;
+        private readonly ICadastrarLocacaoUseCase _cadastrarLocacaoUseCase;
         private readonly ITabelaPrecoRepositorio _tabelaPrecoRepositorio;
 
-        public LocacaoService(CadastrarLocacaoUseCase cadastrarLocacaoUseCase, ITabelaPrecoRepositorio tabelaPrecoRepositorio)
+        public LocacaoService(ICadastrarLocacaoUseCase cadastrarLocacaoUseCase, ITabelaPrecoRepositorio tabelaPrecoRepositorio)
         {
             _cadastrarLocacaoUseCase = cadastrarLocacaoUseCase;
             _tabelaPrecoRepositorio = tabelaPrecoRepositorio;
