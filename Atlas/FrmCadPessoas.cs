@@ -37,7 +37,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
         }
 
         private void txtEmail_TextChanged(object sender, EventArgs e)
-       {
+        {
 
         }
 
@@ -118,6 +118,10 @@ namespace Projeto_ATLAS___4LIONS.Forms
             }
         }
 
-        
+        private void FrmCadPessoas_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
     }
 }

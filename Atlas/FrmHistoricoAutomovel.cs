@@ -41,5 +41,11 @@ namespace Projeto_ATLAS___4LIONS.Forms
             dgvHistoricoAutomovel.DataSource = dados.ToList();
             dgvHistoricoAutomovel.Refresh();
         }
+
+        private void FrmHistoricoAutomovel_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
     }
 }

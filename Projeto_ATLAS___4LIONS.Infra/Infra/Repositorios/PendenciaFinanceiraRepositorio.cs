@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.Interface_Adapter;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using Projeto_ATLAS___4LIONS.Infra.Servicos;
 using System;
@@ -12,23 +13,25 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
     public class PendenciaFinanceiraRepositorio : IPendenciaFinanceiraRepositorio
     {
         private readonly ILocacaoRepositorio _locacaoRepositorio;
+        private readonly IMySqlAdaptadorConexao _conexaoAdapter;
 
-        public PendenciaFinanceiraRepositorio(ILocacaoRepositorio locacaoRepositorio)
+        public PendenciaFinanceiraRepositorio(ILocacaoRepositorio locacaoRepositorio, IMySqlAdaptadorConexao conexaoAdapter)
         {
             _locacaoRepositorio = locacaoRepositorio;
+            _conexaoAdapter = conexaoAdapter;
         }
 
         public void Adicionar(PendenciaFinanceiraDTO pendenciaDto)
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 
-                // 🔥 Buscar a locação COMPLETA pelo Id
-                var locacaoDto = _locacaoRepositorio.RecuperarPorId(pendenciaDto.IdLocacao)
-                    ?? throw new Exception("Locação não encontrada.");
 
-                // Criar um objeto Locacao COMPLETO com os dados recuperados
+                var locacaoDto = _locacaoRepositorio.RecuperarPorId(pendenciaDto.IdLocacao);
+                  
+
+   
                 var locacao = new Locacao
                 {
                     Id = locacaoDto.Id,
@@ -38,17 +41,15 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     ValorTotal = locacaoDto.ValorTotal,
                     Status = locacaoDto.Status
                 };
-
-                // Criar a pendência financeira associada à locação
                 var pendencia = new PendenciaFinanceira
                 {
                     TransacaoId = pendenciaDto.TransacaoId,
                     ValorTotal = pendenciaDto.ValorTotal,
                     DataCriacao = DateTime.Now,
-                    Locacao = locacao // ✅ Associação correta da locação
+                    Locacao = locacao // 
                 };
 
-                // Persistindo a pendência no banco
+         
                 string sql = @"
                 INSERT INTO PendenciaFinanceira (TransacaoId, ValorTotal, DataCriacao, LocacaoId)
                 VALUES (@TransacaoId, @ValorTotal, @DataCriacao, @LocacaoId)";
@@ -68,7 +69,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
         public void Deletar(PendenciaFinanceiraDTO pendenciaDto)
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
                 string sql = "DELETE FROM PendenciaFinanceira WHERE Id = @Id";
@@ -83,7 +84,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
         public IEnumerable<PendenciaFinanceiraDTO> ListarTodos()
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
                 string sql = "SELECT * FROM PendenciaFinanceira";
@@ -121,7 +122,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
         public PendenciaFinanceiraDTO? RecuperarPorId(int id)
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
                 string sql = "SELECT * FROM PendenciaFinanceira WHERE Id = @Id";

@@ -22,7 +22,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private readonly IListarPessoaUseCase _listarpessoaUseCase;
         private readonly IIncluirCnhUseCase _incluirCnhUseCase;
 
-        public FrmVinculacaoCnh(IPessoaRepositorio pessoaRepositorio, IIncluirCnhUseCase incluirCnhUseCase,IListarPessoaUseCase listarPessoaUseCase)
+        public FrmVinculacaoCnh(IPessoaRepositorio pessoaRepositorio, IIncluirCnhUseCase incluirCnhUseCase, IListarPessoaUseCase listarPessoaUseCase)
         {
             _pessoaRepositorio = pessoaRepositorio;
             _listarpessoaUseCase = listarPessoaUseCase;
@@ -91,6 +91,17 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private void txtNumeroCnh_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void dgvVinculacaoCnh_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvVinculacaoCnh.Rows[e.RowIndex];
+                int idSelecionado = Convert.ToInt16(dgvVinculacaoCnh.Rows[e.RowIndex].Cells[0].Value);
+                txtPessoa.Text = Convert.ToString(idSelecionado);
+
+            }
         }
     }
 }

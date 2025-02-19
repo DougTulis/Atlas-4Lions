@@ -1,4 +1,6 @@
-﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
+﻿using MySql.Data.MySqlClient;
+using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
+using Projeto_ATLAS___4LIONS.Aplicacao.Exceções;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
@@ -28,25 +30,28 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 
         public int Executar(LocacaoDTO locacaoDto)
         {
-            // 🔥 1. Buscar o automóvel completo para obter o ID do preço
+
+
+
+            // Buscar o automóvel completo para obter o ID do preço
             var automovelDto = _automovelRepositorio.RecuperarPorId(locacaoDto.IdAutomovel)
                 ?? throw new Exception("Automóvel não encontrado.");
 
-            // 🔥 2. Buscar o preço da diária do automóvel
+            //  Buscar o preço da diária do automóvel
             var precoDiaria = _tabelaPrecoRepositorio.RecuperarPorId(automovelDto.IdPreco ?? 0)?.Valor
                 ?? throw new Exception("Preço da diária não encontrado para o automóvel selecionado.");
 
-            // 🔥 3. Buscar o Locatário e o Condutor completos
+            //  Buscar o Locatário e o Condutor completos
             var locatarioDto = _pessoaRepositorio.RecuperarPorId(locacaoDto.IdLocatario)
                 ?? throw new Exception("Locatário não encontrado.");
 
             var condutorDto = _pessoaRepositorio.RecuperarPorId(locacaoDto.IdCondutor)
                 ?? throw new Exception("Condutor não encontrado.");
 
-            // 🔥 4. Calcular o valor total da locação
+            // . Calcular o valor total da locação
             locacaoDto.ValorTotal = CalcularValorTotal(locacaoDto.Saida, locacaoDto.Retorno, precoDiaria);
 
-            // 🔥 5. Criar a entidade Locacao com os objetos COMPLETOS
+            // Criar a entidade Locacao com os objetos COMPLETOS
             var locacao = new Locacao(
                 locacaoDto.Saida,
                 locacaoDto.Retorno,
@@ -87,17 +92,24 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                     Oleokm = automovelDto.Oleokm,
                     PastilhaFreioKm = automovelDto.PastilhaFreioKm,
                     DataCriacao = automovelDto.DataCriacao,
-                    Status = EStatusVeiculo.ALUGADO,
+                    Status = automovelDto.Status,
                 },
                 EStatusLocacao.ANDAMENTO
-            );
 
+        );
 
-            // 🔥 6. Validar regras de negócio antes de salvar
-            if (!locacao.Validacao())
-                throw new Exception("A locação não passou na validação de regras de negócio.");
-            _automovelRepositorio.AtualizarStatus(locacao.Automovel.Id,EStatusVeiculo.ALUGADO);
-            return _locacaoRepositorio.Adicionar(locacaoDto);
+            try
+            { 
+                if (!locacao.Validacao())
+                    throw new Exception("A locação não passou na validação de regras de negócio.");
+                _automovelRepositorio.AtualizarStatus(locacao.Automovel.Id, EStatusVeiculo.ALUGADO);
+                return _locacaoRepositorio.Adicionar(locacaoDto);
+            }
+            catch (MySqlException ex)
+            {
+                throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
+            }
+
         }
 
         public decimal CalcularValorTotal(DateTime saida, DateTime retorno, decimal precoDiaria)

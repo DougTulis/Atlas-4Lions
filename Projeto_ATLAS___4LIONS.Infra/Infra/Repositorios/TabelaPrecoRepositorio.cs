@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.Interface_Adapter;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using Projeto_ATLAS___4LIONS.Infra.Servicos;
 
@@ -8,9 +9,17 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 {
     public class TabelaPrecoRepositorio : ITabelaPrecoRepositorio
     {
+        private readonly IMySqlAdaptadorConexao _conexaoAdapter;
+
+        public TabelaPrecoRepositorio(IMySqlAdaptadorConexao conexaoAdapter)
+        {
+            _conexaoAdapter = conexaoAdapter;
+        }
+
         public void Adicionar(TabelaPrecoDTO tabelaPrecoDto)
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 
@@ -23,8 +32,8 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 };
 
                 string sql = @"
-                INSERT INTO tabela_preco (Descricao, Valor, AutomovelId)
-                VALUES (@Descricao, @Valor, @AutomovelId)";
+                INSERT INTO tabela_preco (Descricao, Valor)
+                VALUES (@Descricao, @Valor)";
 
                 using var cmd = new MySqlCommand(sql, conexao);
                 cmd.Parameters.AddWithValue("@Descricao", tabelaPreco.Descricao);
@@ -37,7 +46,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
         public void Deletar(TabelaPrecoDTO tabelaPrecoDto)
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 var tabelaPreco = new TabelaPreco
                 {
@@ -64,7 +73,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
         public IEnumerable<TabelaPrecoDTO> ListarTodos()
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 
@@ -97,7 +106,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
         public TabelaPrecoDTO? RecuperarPorId(int idPreco)
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 

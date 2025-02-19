@@ -45,12 +45,11 @@
             dgvHistoricoLocacao.AllowUserToDeleteRows = false;
             dgvHistoricoLocacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvHistoricoLocacao.Columns.AddRange(new DataGridViewColumn[] { saida, retorno, tipoLocacao, valorTotal, Status, condutor, locatario });
-            dgvHistoricoLocacao.Location = new Point(1, 7);
-            dgvHistoricoLocacao.Margin = new Padding(3, 2, 3, 2);
+            dgvHistoricoLocacao.Location = new Point(1, 9);
             dgvHistoricoLocacao.Name = "dgvHistoricoLocacao";
             dgvHistoricoLocacao.ReadOnly = true;
             dgvHistoricoLocacao.RowHeadersWidth = 51;
-            dgvHistoricoLocacao.Size = new Size(890, 436);
+            dgvHistoricoLocacao.Size = new Size(1017, 581);
             dgvHistoricoLocacao.TabIndex = 1;
             dgvHistoricoLocacao.CellContentClick += dgvHistoricoLocacao_CellContentClick;
             // 
@@ -119,15 +118,15 @@
             // 
             // FrmHistoricoLocacao
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
-            ClientSize = new Size(961, 485);
+            ClientSize = new Size(1098, 647);
             Controls.Add(dgvHistoricoLocacao);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(3, 2, 3, 2);
             Name = "FrmHistoricoLocacao";
             Text = "FrmHistoricoLocacao";
+            FormClosing += FrmHistoricoLocacao_FormClosing;
             Load += FrmHistoricoLocacao_Load;
             ((System.ComponentModel.ISupportInitialize)dgvHistoricoLocacao).EndInit();
             ResumeLayout(false);

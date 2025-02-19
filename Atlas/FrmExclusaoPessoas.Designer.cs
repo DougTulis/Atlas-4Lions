@@ -40,12 +40,11 @@
             dgvHistoricoPessoasExclusaoPessoas.AllowUserToDeleteRows = false;
             dgvHistoricoPessoasExclusaoPessoas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvHistoricoPessoasExclusaoPessoas.Columns.AddRange(new DataGridViewColumn[] { id, pessoaNome });
-            dgvHistoricoPessoasExclusaoPessoas.Location = new Point(10, 9);
-            dgvHistoricoPessoasExclusaoPessoas.Margin = new Padding(3, 2, 3, 2);
+            dgvHistoricoPessoasExclusaoPessoas.Location = new Point(11, 12);
             dgvHistoricoPessoasExclusaoPessoas.Name = "dgvHistoricoPessoasExclusaoPessoas";
             dgvHistoricoPessoasExclusaoPessoas.ReadOnly = true;
             dgvHistoricoPessoasExclusaoPessoas.RowHeadersWidth = 51;
-            dgvHistoricoPessoasExclusaoPessoas.Size = new Size(388, 308);
+            dgvHistoricoPessoasExclusaoPessoas.Size = new Size(443, 411);
             dgvHistoricoPessoasExclusaoPessoas.TabIndex = 1;
             dgvHistoricoPessoasExclusaoPessoas.CellContentClick += dgvHistoricoPessoasExclusaoPessoas_CellContentClick;
             dgvHistoricoPessoasExclusaoPessoas.CellDoubleClick += dgvHistoricoPessoasExclusaoPessoas_CellDoubleClick;
@@ -70,16 +69,16 @@
             // 
             // FrmExclusaoPessoas
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(961, 485);
+            ClientSize = new Size(1098, 647);
             Controls.Add(dgvHistoricoPessoasExclusaoPessoas);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(3, 2, 3, 2);
             Name = "FrmExclusaoPessoas";
             Text = "FrmExclusaoPessoas";
+            FormClosing += FrmExclusaoPessoas_FormClosing;
             Load += FrmExclusaoPessoas_Load;
             ((System.ComponentModel.ISupportInitialize)dgvHistoricoPessoasExclusaoPessoas).EndInit();
             ResumeLayout(false);

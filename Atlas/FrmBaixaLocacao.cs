@@ -1,4 +1,5 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
 using Projeto_ATLAS___4LIONS.Infra.Repositorios;
 using System;
@@ -9,23 +10,22 @@ namespace Projeto_ATLAS___4LIONS.Forms
 {
     public partial class FrmBaixaLocacao : Form
     {
-        private readonly ILocacaoRepositorio locacaoRepositorio;
-        private readonly IAutomovelRepositorio automovelRepositorio;
-        private readonly IPessoaRepositorio pessoaRepositorio;
-        private readonly ListarLocacoesUseCase listarLocacoesUseCase;
-        private readonly AlterarStatusLocacaoUseCase alterarStatusLocacaoUseCase;
-        private readonly AlterarStatusVeiculoUseCase alterarStatusAutomovelUseCase;
+        private readonly ILocacaoRepositorio _locacaoRepositorio;
+        private readonly IAutomovelRepositorio _automovelRepositorio;
+        private readonly IPessoaRepositorio _pessoaRepositorio;
+        private readonly IListarLocacoesUseCase _listarLocacoesUseCase;
+        private readonly IAlterarStatusLocacaoUseCase _alterarStatusLocacaoUseCase;
+        private readonly IAlterarStatusVeiculoUseCase _alterarStatusAutomovelUseCase;
 
-        public FrmBaixaLocacao()
+        public FrmBaixaLocacao(ILocacaoRepositorio locacaoRepositorio, IAutomovelRepositorio automovelRepositorio, IPessoaRepositorio pessoaRepositorio, IListarLocacoesUseCase listarLocacoesUseCase, IAlterarStatusLocacaoUseCase alterarStatusLocacaoUseCase, IAlterarStatusVeiculoUseCase alterarStatusAutomovelUseCase)
         {
+            _locacaoRepositorio = locacaoRepositorio;
+            _automovelRepositorio = automovelRepositorio;
+            _pessoaRepositorio = pessoaRepositorio;
+            _listarLocacoesUseCase = listarLocacoesUseCase;
+            _alterarStatusLocacaoUseCase = alterarStatusLocacaoUseCase;
+            _alterarStatusAutomovelUseCase = alterarStatusAutomovelUseCase;
             InitializeComponent();
-            pessoaRepositorio = new PessoaRepositorio();
-            locacaoRepositorio = new LocacaoRepositorio(pessoaRepositorio, automovelRepositorio);
-            automovelRepositorio = new AutomovelRepositorio();
-            listarLocacoesUseCase = new ListarLocacoesUseCase(locacaoRepositorio);
-            alterarStatusLocacaoUseCase = new AlterarStatusLocacaoUseCase(locacaoRepositorio);
-            alterarStatusAutomovelUseCase = new AlterarStatusVeiculoUseCase(automovelRepositorio);
-
             AtualizarGridView();
         }
 
@@ -34,9 +34,8 @@ namespace Projeto_ATLAS___4LIONS.Forms
             dgvBaixaLocacao.AutoGenerateColumns = false;
             dgvBaixaLocacao.DataSource = null;
 
-            var locacoes = listarLocacoesUseCase.ExecutarRecuperacaoStatusAndamento();
+            var locacoes = _listarLocacoesUseCase.ExecutarRecuperacaoStatusAndamento();
             dgvBaixaLocacao.DataSource = locacoes.ToList();
-
             dgvBaixaLocacao.Update();
             dgvBaixaLocacao.Refresh();
         }
@@ -57,10 +56,10 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
                 if (resultado == DialogResult.Yes)
                 {
-                    var locacao = listarLocacoesUseCase.ExecutarRecuperarPorId(idLocacao);
+                    var locacao = _listarLocacoesUseCase.ExecutarRecuperarPorId(idLocacao);
 
-                    alterarStatusLocacaoUseCase.Executar(idLocacao, Dominio.ValueObjects.Enums.EStatusLocacao.FINALIZADO);
-                    alterarStatusAutomovelUseCase.Executar(locacao.IdAutomovel, Dominio.ValueObjects.Enums.EStatusVeiculo.GARAGEM);
+                    _alterarStatusLocacaoUseCase.Executar(idLocacao, Dominio.ValueObjects.Enums.EStatusLocacao.FINALIZADO);
+                    _alterarStatusAutomovelUseCase.Executar(locacao.IdAutomovel, Dominio.ValueObjects.Enums.EStatusVeiculo.GARAGEM);
 
                     MessageBox.Show("Locação finalizada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     AtualizarGridView();
@@ -71,6 +70,17 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private void FrmBaixaLocacao_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void dgvBaixaLocacao_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void FrmBaixaLocacao_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
         }
     }
 }

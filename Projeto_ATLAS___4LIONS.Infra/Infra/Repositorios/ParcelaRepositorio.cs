@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.Interface_Adapter;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 using Projeto_ATLAS___4LIONS.Infra.Servicos;
@@ -10,6 +11,12 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 {
     public class ParcelaRepositorio : IParcelaRepositorio
     {
+        private readonly IMySqlAdaptadorConexao _conexaoAdapter;
+public ParcelaRepositorio(IMySqlAdaptadorConexao conexaoAdapter)
+        {
+            _conexaoAdapter = conexaoAdapter;
+        }
+
         public void Adicionar(ParcelaDTO parcelaDto)
         {
             var parcela = new Parcela
@@ -20,7 +27,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 Valor = parcelaDto.Valor
             };
 
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 
@@ -43,7 +50,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
         public void AdicionarVarias(IEnumerable<ParcelaDTO> parcelasDto)
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
                 using (var transacao = conexao.BeginTransaction())
@@ -90,7 +97,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
         public IEnumerable<ParcelaDTO> ListarPorPendencia(int pendenciaId)
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 
@@ -123,7 +130,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
         public ParcelaDTO? RecuperarPorId(int id)
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 
@@ -156,7 +163,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
         public void AtualizarPagamentoParcela(int idPendenciaFinanceira, int sequencia, decimal valorPago, DateTime dataPagamento, EEspecie especiePagamento)
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 

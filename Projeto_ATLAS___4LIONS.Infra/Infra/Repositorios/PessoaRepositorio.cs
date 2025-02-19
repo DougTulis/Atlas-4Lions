@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.Interface_Adapter;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using Projeto_ATLAS___4LIONS.Infra.Servicos;
 
@@ -8,9 +9,17 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 {
     public class PessoaRepositorio : IPessoaRepositorio
     {
+
+        private readonly IMySqlAdaptadorConexao _conexaoAdapter;
+
+        public PessoaRepositorio(IMySqlAdaptadorConexao conexaoAdapter)
+        {
+            _conexaoAdapter = conexaoAdapter;
+        }
+
         public void Adicionar(PessoaDTO pessoaDto)
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 
@@ -51,7 +60,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
         public void Deletar(PessoaDTO pessoaDto)
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 
@@ -67,7 +76,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
         public IEnumerable<PessoaDTO> ListarTodos()
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 
@@ -85,7 +94,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
         public PessoaDTO? RecuperarPorId(int id)
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 
@@ -106,7 +115,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
         public IEnumerable<PessoaDTO> ListarSemCNH()
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 
@@ -124,7 +133,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
         public void IncluirCNH(int id, string numeroCnh, DateTime vencimentoCnh)
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 

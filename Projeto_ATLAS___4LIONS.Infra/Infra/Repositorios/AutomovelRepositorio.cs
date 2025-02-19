@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.Interface_Adapter;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 using Projeto_ATLAS___4LIONS.Infra.Servicos;
@@ -9,9 +10,16 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 {
     public class AutomovelRepositorio : IAutomovelRepositorio
     {
+        private readonly IMySqlAdaptadorConexao _conexaoAdapter;
+
+        public AutomovelRepositorio(IMySqlAdaptadorConexao conexaoAdapter)
+        {
+            _conexaoAdapter = conexaoAdapter;
+        }
+
         public void Adicionar(AutomovelDTO automovelDto)
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 
@@ -40,7 +48,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
         public void Deletar(AutomovelDTO automovelDto)
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 
@@ -55,7 +63,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
         public IEnumerable<AutomovelDTO> ListarTodos()
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
                 string sql = "SELECT * FROM automovel";
@@ -97,7 +105,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
         public void AtualizarStatus(int automovelId, EStatusVeiculo novoStatus)
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
                 string sql = "UPDATE automovel SET Status = @Status WHERE Id = @Id";
@@ -113,7 +121,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
         public AutomovelDTO? RecuperarPorId(int id)
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
                 string sql = "SELECT * FROM automovel WHERE Id = @id";
@@ -133,7 +141,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
         public IEnumerable<AutomovelDTO> ListarStatusGaragem()
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
                 string sql = "SELECT * FROM automovel WHERE Status = 1";

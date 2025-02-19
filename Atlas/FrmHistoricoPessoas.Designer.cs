@@ -46,12 +46,11 @@
             dgvHistoricoPessoas.AllowUserToDeleteRows = false;
             dgvHistoricoPessoas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvHistoricoPessoas.Columns.AddRange(new DataGridViewColumn[] { pessoaNome, email, contato, dataNascimento, cpf, cnpj, vencimentoCnh, numeroCnh });
-            dgvHistoricoPessoas.Location = new Point(0, 20);
-            dgvHistoricoPessoas.Margin = new Padding(3, 2, 3, 2);
+            dgvHistoricoPessoas.Location = new Point(0, 27);
             dgvHistoricoPessoas.Name = "dgvHistoricoPessoas";
             dgvHistoricoPessoas.ReadOnly = true;
             dgvHistoricoPessoas.RowHeadersWidth = 51;
-            dgvHistoricoPessoas.Size = new Size(746, 324);
+            dgvHistoricoPessoas.Size = new Size(853, 432);
             dgvHistoricoPessoas.TabIndex = 0;
             dgvHistoricoPessoas.CellContentClick += dgvHistoricoPessoas_CellContentClick;
             // 
@@ -129,15 +128,15 @@
             // 
             // FrmHistoricoPessoas
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
-            ClientSize = new Size(961, 485);
+            ClientSize = new Size(1098, 647);
             Controls.Add(dgvHistoricoPessoas);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(3, 2, 3, 2);
             Name = "FrmHistoricoPessoas";
             Text = "FrmHistoricoPessoas";
+            FormClosing += FrmHistoricoPessoas_FormClosing;
             Load += FrmHistoricoPessoas_Load;
             ((System.ComponentModel.ISupportInitialize)dgvHistoricoPessoas).EndInit();
             ResumeLayout(false);

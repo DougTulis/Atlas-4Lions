@@ -54,7 +54,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
             {
                 DataGridViewRow row = dgvHistoricoPendenciaFinanceiras.Rows[e.RowIndex];
                 int idSelecionado = Convert.ToInt16(dgvHistoricoPendenciaFinanceiras.Rows[e.RowIndex].Cells[0].Value);
-                _frmRegistroPagamento2 = new FrmRegistroPagamento2(idSelecionado,_incluirPagamentoUseCase,_listarParcelaUseCase,_parcelaRepositorio);
+                _frmRegistroPagamento2 = new FrmRegistroPagamento2(idSelecionado, _incluirPagamentoUseCase, _listarParcelaUseCase, _parcelaRepositorio);
                 _frmRegistroPagamento2.ShowDialog();
                 this.Close();
             }
@@ -72,6 +72,12 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private void lblPendenciasFinanceiras_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void FrmRegistroPagamento_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
         }
     }
 }

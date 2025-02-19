@@ -9,6 +9,8 @@ using System;
 using System.Windows.Forms;
 using Atlas;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.Servicos;
+using Projeto_ATLAS___4LIONS.Infra.Servicos;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.Interface_Adapter;
 
 namespace Projeto_ATLAS___4LIONS
 {
@@ -30,7 +32,7 @@ namespace Projeto_ATLAS___4LIONS
         {
             var services = new ServiceCollection();
 
-            // Repositórios
+            // Repositrios
             services.AddSingleton<IPessoaRepositorio, PessoaRepositorio>();
             services.AddSingleton<IAutomovelRepositorio, AutomovelRepositorio>();
             services.AddSingleton<ITabelaPrecoRepositorio, TabelaPrecoRepositorio>();
@@ -38,7 +40,12 @@ namespace Projeto_ATLAS___4LIONS
             services.AddSingleton<IParcelaRepositorio, ParcelaRepositorio>();
             services.AddSingleton<IPendenciaFinanceiraRepositorio, PendenciaFinanceiraRepositorio>();
 
+
+
             // Use Cases
+            services.AddTransient<IAlterarStatusVeiculoUseCase, AlterarStatusVeiculoUseCase>();
+            services.AddTransient<IAlterarStatusLocacaoUseCase, AlterarStatusLocacaoUseCase>();
+            services.AddTransient<IListarLocacoesUseCase, ListarLocacoesUseCase>();
             services.AddTransient<IListarParcelaUseCase, ListarParcelaUseCase>();
             services.AddTransient<IListarPendenciaFinanceiraUseCase, ListarPendenciaFinanceiraUseCase>();
             services.AddTransient<IDeletarAutomovelUseCase, DeletarAutomovelUseCase>();
@@ -59,6 +66,7 @@ namespace Projeto_ATLAS___4LIONS
             services.AddTransient<PendenciaFinanceiraServico>();
 
             // Forms
+            services.AddTransient<FrmCadastroPreco>();
             services.AddTransient<FrmPrincipal>();
             services.AddTransient<FrmBaixaLocacao>();
             services.AddTransient<FrmCadAutomovel>();
@@ -72,6 +80,9 @@ namespace Projeto_ATLAS___4LIONS
             services.AddTransient<FrmRegistroPagamento>();
             services.AddTransient<FrmRegistroPagamento2>();
             services.AddTransient<FrmVinculacaoCnh>();
+
+            services.AddSingleton<IMySqlAdaptadorConexao, MySqlAdaptadorConexao>();
+
 
             return services.BuildServiceProvider();
         }

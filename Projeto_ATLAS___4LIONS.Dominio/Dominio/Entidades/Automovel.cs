@@ -40,11 +40,6 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
 
             if (!contratos.IsValid())
             {
-                foreach (var notificacao in contratos.Notificacoes)
-                {
-                    Console.WriteLine($"Erro em {notificacao.NomePropriedade}: {notificacao.Mensagem}");
-                    Thread.Sleep(3000);
-                }
                 return false;
             }
             return true;
@@ -56,10 +51,6 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
 
             if (!contratos.IsValid())
             {
-                foreach (var notificacao in contratos.Notificacoes)
-                {
-                    Console.WriteLine($"Erro em {notificacao.NomePropriedade}: {notificacao.Mensagem}");
-                }
                 return false;
             }
             return true;

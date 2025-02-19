@@ -1,4 +1,6 @@
-﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
+﻿using MySql.Data.MySqlClient;
+using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
+using Projeto_ATLAS___4LIONS.Aplicacao.Exceções;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 
@@ -14,12 +16,26 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         }
         public IEnumerable<PendenciaFinanceiraDTO> Executar()
         {
-            return _pendenciaRepositorio.ListarTodos();
-      
+            try
+            {
+                return _pendenciaRepositorio.ListarTodos();
+            }
+            catch (MySqlException ex)
+            {
+                throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
+            }
+
         }
         public PendenciaFinanceiraDTO? ExecutarRecuperarPorId(int id)
         {
-            return _pendenciaRepositorio.RecuperarPorId(id);
+            try
+            {
+                return _pendenciaRepositorio.RecuperarPorId(id);
+            }
+            catch (MySqlException ex)
+            {
+                throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
+            }
         }
     }
 }

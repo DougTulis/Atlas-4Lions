@@ -42,10 +42,10 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void dgvHistoricoPessoasExclusaoPessoas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0) 
+            if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvHistoricoPessoasExclusaoPessoas.Rows[e.RowIndex];
-                int pessoaId = Convert.ToInt32(row.Cells[0].Value); 
+                int pessoaId = Convert.ToInt32(row.Cells[0].Value);
 
                 DialogResult resultado = MessageBox.Show(
                     "Deseja realmente excluir esta pessoa?",
@@ -63,6 +63,12 @@ namespace Projeto_ATLAS___4LIONS.Forms
                     AtualizarGridView();
                 }
             }
+        }
+
+        private void FrmExclusaoPessoas_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
         }
     }
 }

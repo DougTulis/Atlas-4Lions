@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
+using Projeto_ATLAS___4LIONS.Aplicacao.Exceções;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
@@ -28,16 +29,14 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 
                 if (!tabelaPreco.Validacao())
                 {
-                //
+                    return;
                 }
 
                 tabelaRepositorio.Adicionar(tabelaPrecoDto);
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine(ex.StackTrace);
-
-
+                throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
             }
         }
 

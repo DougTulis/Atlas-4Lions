@@ -42,11 +42,12 @@
             dgvHistoricoPendenciaFinanceiras.AllowUserToDeleteRows = false;
             dgvHistoricoPendenciaFinanceiras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvHistoricoPendenciaFinanceiras.Columns.AddRange(new DataGridViewColumn[] { id, valorTotal, transacaoId });
-            dgvHistoricoPendenciaFinanceiras.Location = new Point(12, 61);
+            dgvHistoricoPendenciaFinanceiras.Location = new Point(14, 81);
+            dgvHistoricoPendenciaFinanceiras.Margin = new Padding(3, 4, 3, 4);
             dgvHistoricoPendenciaFinanceiras.Name = "dgvHistoricoPendenciaFinanceiras";
             dgvHistoricoPendenciaFinanceiras.ReadOnly = true;
             dgvHistoricoPendenciaFinanceiras.RowHeadersWidth = 51;
-            dgvHistoricoPendenciaFinanceiras.Size = new Size(463, 287);
+            dgvHistoricoPendenciaFinanceiras.Size = new Size(529, 383);
             dgvHistoricoPendenciaFinanceiras.TabIndex = 0;
             dgvHistoricoPendenciaFinanceiras.CellContentClick += dgvHistoricoPendenciaFinanceiras_CellContentClick;
             dgvHistoricoPendenciaFinanceiras.CellMouseClick += dgvHistoricoPendenciaFinanceiras_CellMouseClick;
@@ -82,24 +83,26 @@
             // lblPendenciasFinanceiras
             // 
             lblPendenciasFinanceiras.AutoSize = true;
-            lblPendenciasFinanceiras.Location = new Point(12, 43);
+            lblPendenciasFinanceiras.Location = new Point(14, 57);
             lblPendenciasFinanceiras.Name = "lblPendenciasFinanceiras";
-            lblPendenciasFinanceiras.Size = new Size(334, 15);
+            lblPendenciasFinanceiras.Size = new Size(425, 20);
             lblPendenciasFinanceiras.TabIndex = 2;
             lblPendenciasFinanceiras.Text = "Selecione a pendência que você deseja registrar o pagamento:";
             lblPendenciasFinanceiras.Click += lblPendenciasFinanceiras_Click;
             // 
             // FrmRegistroPagamento
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
-            ClientSize = new Size(961, 485);
+            ClientSize = new Size(1098, 647);
             Controls.Add(lblPendenciasFinanceiras);
             Controls.Add(dgvHistoricoPendenciaFinanceiras);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(3, 4, 3, 4);
             Name = "FrmRegistroPagamento";
             Text = "FrmRegistroPagamento";
+            FormClosing += FrmRegistroPagamento_FormClosing;
             Load += FrmRegistroPagamento_Load;
             ((System.ComponentModel.ISupportInitialize)dgvHistoricoPendenciaFinanceiras).EndInit();
             ResumeLayout(false);

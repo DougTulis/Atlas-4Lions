@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Interface.Interface_Adapter;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 using Projeto_ATLAS___4LIONS.Infra.Servicos;
@@ -14,16 +15,18 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
     {
         private readonly IPessoaRepositorio _pessoaRepositorio;
         private readonly IAutomovelRepositorio _automovelRepositorio;
+        private readonly IMySqlAdaptadorConexao _conexaoAdapter;
 
-        public LocacaoRepositorio(IPessoaRepositorio pessoaRepositorio, IAutomovelRepositorio automovelRepositorio)
+        public LocacaoRepositorio(IPessoaRepositorio pessoaRepositorio, IAutomovelRepositorio automovelRepositorio, IMySqlAdaptadorConexao conexaoAdapter)
         {
             _pessoaRepositorio = pessoaRepositorio;
             _automovelRepositorio = automovelRepositorio;
+            _conexaoAdapter = conexaoAdapter;
         }
 
         public int Adicionar(LocacaoDTO locacaoDto)
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 
@@ -110,7 +113,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
         public void Atualizar(LocacaoDTO locacaoDto)
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 

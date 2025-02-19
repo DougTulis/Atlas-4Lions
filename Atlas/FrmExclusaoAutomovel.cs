@@ -62,5 +62,11 @@ namespace Projeto_ATLAS___4LIONS.Forms
         {
 
         }
+
+        private void FrmExclusaoAutomovel_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
     }
 }

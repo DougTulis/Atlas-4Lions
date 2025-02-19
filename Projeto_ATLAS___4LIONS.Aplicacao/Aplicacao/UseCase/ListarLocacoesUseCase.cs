@@ -1,4 +1,6 @@
-﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
+﻿using MySql.Data.MySqlClient;
+using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
+using Projeto_ATLAS___4LIONS.Aplicacao.Exceções;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 
@@ -10,24 +12,48 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         private readonly ILocacaoRepositorio _locacaoRepositorio;
         public ListarLocacoesUseCase(ILocacaoRepositorio locacaoRepositorio)
         {
-            _locacaoRepositorio = locacaoRepositorio;
+            try
+            {
+                _locacaoRepositorio = locacaoRepositorio;
+            }
+            catch (MySqlException ex)
+            {
+                throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
+            }
         }
 
         public IEnumerable<LocacaoDTO> Executar()
         {
-            return _locacaoRepositorio.ListarTodas();
+            try
+            {
+                return _locacaoRepositorio.ListarTodas();
+            }
+            catch (MySqlException ex)
+            {
+                throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
+            }
 
         }
         public IEnumerable<LocacaoDTO> ExecutarRecuperacaoStatusAndamento()
         {
-            return _locacaoRepositorio.ListarStatusAndamento();
-
+            try
+            {
+                return _locacaoRepositorio.ListarStatusAndamento();
+            }catch (MySqlException ex)
+            {
+                throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
+            }
 
         }
         public LocacaoDTO? ExecutarRecuperarPorId(int id)
         {
-            return _locacaoRepositorio.RecuperarPorId(id);
-
+            try
+            {
+                return _locacaoRepositorio.RecuperarPorId(id);
+            } catch (MySqlException ex)
+            {
+                throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
+            }
         }
     }
 }

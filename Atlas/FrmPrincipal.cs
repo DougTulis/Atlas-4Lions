@@ -24,24 +24,9 @@ namespace Atlas
         private FrmHistoricoLocacao _frmHistoricoLocacao;
         private FrmBaixaLocacao _frmBaixaLocacao;
         private FrmRegistroPagamento _frmRegistroPagamento;
+        private FrmCadastroPreco _frmCadastroPreco;
 
-        //aki os repositorios
-        private readonly IPessoaRepositorio _pessoaRepositorio;
-        private readonly IAutomovelRepositorio _automovelRepositorio;
-        private readonly ITabelaPrecoRepositorio _tabelaPrecoRepositorio;
-        private readonly ILocacaoRepositorio _locacaoRepositorio;
-
-
-
-        // aki use cases
-        private readonly ICadastrarPessoaUseCase _cadastrarPessoaUseCase;
-        private readonly ICadastrarVeiculoUseCase _cadastrarVeiculoUseCase;
-        private readonly ICadastrarTabelaPrecoUseCase _cadastrarTabelaPrecoUseCase;
-        private readonly IListarAutomovelUseCase _listarAutomovelUseCase;
-        private readonly IListarTabelaPrecoUseCase _listartabelaPrecoUseCase;
-        private readonly IListarHistoricoLocacaoUseCase _listarHistoricoLocacaoUseCase;
-
-        public FrmPrincipal(FrmCadPessoas frmCadPessoas, FrmCadAutomovel frmCadAutomovel, FrmCadLocacao frmCadLocacao, FrmHistoricoPessoas frmHistoricoPessoas, FrmExclusaoPessoas frmExclusaoPessoas, FrmVinculacaoCnh frmVinculacaoCnh, FrmHistoricoAutomovel frmHistoricoAutomovel, FrmExclusaoAutomovel frmExclusaoAutomovel, FrmHistoricoLocacao frmHistoricoLocacao, FrmBaixaLocacao frmBaixaLocacao, FrmRegistroPagamento frmRegistroPagamento, IPessoaRepositorio pessoaRepositorio, IAutomovelRepositorio automovelRepositorio, ITabelaPrecoRepositorio tabelaPrecoRepositorio, ILocacaoRepositorio locacaoRepositorio, ICadastrarPessoaUseCase cadastrarPessoaUseCase, ICadastrarVeiculoUseCase cadastrarVeiculoUseCase, ICadastrarTabelaPrecoUseCase cadastrarTabelaPrecoUseCase, IListarAutomovelUseCase listarAutomovelUseCase, IListarTabelaPrecoUseCase listartabelaPrecoUseCase, IListarHistoricoLocacaoUseCase listarHistoricoLocacaoUseCase)
+        public FrmPrincipal(FrmCadPessoas frmCadPessoas, FrmCadAutomovel frmCadAutomovel, FrmCadLocacao frmCadLocacao, FrmHistoricoPessoas frmHistoricoPessoas, FrmExclusaoPessoas frmExclusaoPessoas, FrmVinculacaoCnh frmVinculacaoCnh, FrmHistoricoAutomovel frmHistoricoAutomovel, FrmExclusaoAutomovel frmExclusaoAutomovel, FrmHistoricoLocacao frmHistoricoLocacao, FrmBaixaLocacao frmBaixaLocacao, FrmRegistroPagamento frmRegistroPagamento, FrmCadastroPreco frmCadastroPreco)
         {
             _frmCadPessoas = frmCadPessoas;
             _frmCadAutomovel = frmCadAutomovel;
@@ -54,17 +39,7 @@ namespace Atlas
             _frmHistoricoLocacao = frmHistoricoLocacao;
             _frmBaixaLocacao = frmBaixaLocacao;
             _frmRegistroPagamento = frmRegistroPagamento;
-            _pessoaRepositorio = pessoaRepositorio;
-            _automovelRepositorio = automovelRepositorio;
-            _tabelaPrecoRepositorio = tabelaPrecoRepositorio;
-            _locacaoRepositorio = locacaoRepositorio;
-            _cadastrarPessoaUseCase = cadastrarPessoaUseCase;
-            _cadastrarVeiculoUseCase = cadastrarVeiculoUseCase;
-            _cadastrarTabelaPrecoUseCase = cadastrarTabelaPrecoUseCase;
-            _listarAutomovelUseCase = listarAutomovelUseCase;
-            _listartabelaPrecoUseCase = listartabelaPrecoUseCase;
-            _listarHistoricoLocacaoUseCase = listarHistoricoLocacaoUseCase;
-
+            _frmCadastroPreco = frmCadastroPreco;
             InitializeComponent();
         }
 
@@ -167,6 +142,12 @@ namespace Atlas
         private void pcbAtlas_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void itmGerenciamentoVeiculosCadastrarPreco_Click(object sender, EventArgs e)
+        {
+            _frmCadastroPreco.MdiParent = this;
+            _frmCadastroPreco.Show();   
         }
     }
 }
