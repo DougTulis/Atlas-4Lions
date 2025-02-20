@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.Servicos
 {
-    public class PendenciaFinanceiraServico
+    public class PendenciaFinanceiraServico : IPendenciaFinanceiraService
     {
         private readonly IPendenciaFinanceiraRepositorio _pendenciaRepo;
         private readonly IParcelaRepositorio _parcelaRepo;
@@ -35,7 +35,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Servicos
             CriarParcelas(pendenciaDto.Id, preco.Valor, numeroParcelas);
         }
 
-        private void CriarParcelas(int idPendencia, decimal valorTotal, int numeroParcelas)
+        public void CriarParcelas(int idPendencia, decimal valorTotal, int numeroParcelas)
         {
             decimal valorParcela = valorTotal / numeroParcelas;
             List<ParcelaDTO> parcelas = new();

@@ -15,24 +15,19 @@ namespace Projeto_ATLAS___4LIONS.Forms
     public partial class FrmCadLocacao : Form
     {
         private readonly ILocacaoService _locacaoService;
-        private readonly PendenciaFinanceiraServico _pendenciaService;
+        private readonly IPendenciaFinanceiraService _pendenciaService;
         private readonly IListarPessoaUseCase _listarPessoaUseCase;
         private readonly IListarAutomovelUseCase _listarAutomovelUseCase;
-        private readonly ITabelaPrecoRepositorio _tabelaPrecoRepositorio;
+        private readonly IListarTabelaPrecoUseCase _listarTabelaPrecoUseCase;
 
-        public FrmCadLocacao(
-            ILocacaoService locacaoService,
-            PendenciaFinanceiraServico pendenciaFinanceiraService,
-            IListarPessoaUseCase listarPessoaUseCase,
-            IListarAutomovelUseCase listarAutomovelUseCase,
-            ITabelaPrecoRepositorio tabelaPrecoRepositorio)
+
+        public FrmCadLocacao(ILocacaoService locacaoService, IPendenciaFinanceiraService pendenciaService, IListarPessoaUseCase listarPessoaUseCase, IListarAutomovelUseCase listarAutomovelUseCase, IListarTabelaPrecoUseCase listarTabelaPrecoUseCase)
         {
             _locacaoService = locacaoService;
-            _pendenciaService = pendenciaFinanceiraService;
+            _pendenciaService = pendenciaService;
             _listarPessoaUseCase = listarPessoaUseCase;
             _listarAutomovelUseCase = listarAutomovelUseCase;
-            _tabelaPrecoRepositorio = tabelaPrecoRepositorio;
-
+            _listarTabelaPrecoUseCase = listarTabelaPrecoUseCase;
             InitializeComponent();
             ConfigurarFormulario();
         }
@@ -117,7 +112,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
             if (cmbAutomovel.SelectedItem is AutomovelDTO automovelSelecionado)
             {
 
-                var precoDiaria = _tabelaPrecoRepositorio.RecuperarPorId(automovelSelecionado.IdPreco.Value);
+                var precoDiaria = _listarTabelaPrecoUseCase.ExecutarRecuperarPorId(automovelSelecionado.IdPreco.Value);
                 txtPreco.Text = precoDiaria.Valor.ToString("C");
             }
             else

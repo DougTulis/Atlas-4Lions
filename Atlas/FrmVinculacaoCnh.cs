@@ -1,36 +1,23 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
-using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
-using Projeto_ATLAS___4LIONS.Infra.Repositorios;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
 
 namespace Projeto_ATLAS___4LIONS.Forms
 {
     public partial class FrmVinculacaoCnh : Form
     {
 
-
-        private readonly IPessoaRepositorio _pessoaRepositorio;
         private readonly IListarPessoaUseCase _listarpessoaUseCase;
         private readonly IIncluirCnhUseCase _incluirCnhUseCase;
 
-        public FrmVinculacaoCnh(IPessoaRepositorio pessoaRepositorio, IIncluirCnhUseCase incluirCnhUseCase, IListarPessoaUseCase listarPessoaUseCase)
+        public FrmVinculacaoCnh(IListarPessoaUseCase listarpessoaUseCase, IIncluirCnhUseCase incluirCnhUseCase)
         {
-            _pessoaRepositorio = pessoaRepositorio;
-            _listarpessoaUseCase = listarPessoaUseCase;
+            _listarpessoaUseCase = listarpessoaUseCase;
             _incluirCnhUseCase = incluirCnhUseCase;
-
             InitializeComponent();
             AtualizarGridView();
         }
+
 
         private void FrmVinculacaoCnh_Load(object sender, EventArgs e)
         {

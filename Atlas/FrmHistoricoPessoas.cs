@@ -6,14 +6,12 @@ namespace Projeto_ATLAS___4LIONS.Forms
 {
     public partial class FrmHistoricoPessoas : Form
     {
-        private readonly IPessoaRepositorio _pessoaRepositorio;
         private readonly IListarPessoaUseCase _listarPessoaUseCase;
 
-        public FrmHistoricoPessoas(IPessoaRepositorio pessoaRepositorio, IListarPessoaUseCase listarPessoaUseCase)
+        public FrmHistoricoPessoas(IListarPessoaUseCase listarPessoaUseCase)
         {
 
             InitializeComponent();
-            _pessoaRepositorio = pessoaRepositorio;
             _listarPessoaUseCase = listarPessoaUseCase;
             AtualizarGridView();
         }

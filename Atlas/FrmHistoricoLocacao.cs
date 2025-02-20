@@ -7,14 +7,11 @@ namespace Projeto_ATLAS___4LIONS.Forms
     public partial class FrmHistoricoLocacao : Form
     {
 
-        private readonly IPessoaRepositorio _pessoaRepositorio;
-        private readonly ILocacaoRepositorio _locacaoRepositorio;
         private readonly IListarHistoricoLocacaoUseCase _listarHistoricoLocacaoUseCase;
 
-        public FrmHistoricoLocacao(IPessoaRepositorio pessoaRepositorio, ILocacaoRepositorio locacaoRepositorio, IListarHistoricoLocacaoUseCase listarHistoricoLocacaoUseCase)
+        public FrmHistoricoLocacao(IListarHistoricoLocacaoUseCase listarHistoricoLocacaoUseCase)
         {
-            _pessoaRepositorio = pessoaRepositorio;
-            _locacaoRepositorio = locacaoRepositorio;
+
             _listarHistoricoLocacaoUseCase = listarHistoricoLocacaoUseCase;
             InitializeComponent();
             AtualizarGridView();

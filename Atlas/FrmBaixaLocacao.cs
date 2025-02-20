@@ -10,18 +10,12 @@ namespace Projeto_ATLAS___4LIONS.Forms
 {
     public partial class FrmBaixaLocacao : Form
     {
-        private readonly ILocacaoRepositorio _locacaoRepositorio;
-        private readonly IAutomovelRepositorio _automovelRepositorio;
-        private readonly IPessoaRepositorio _pessoaRepositorio;
         private readonly IListarLocacoesUseCase _listarLocacoesUseCase;
         private readonly IAlterarStatusLocacaoUseCase _alterarStatusLocacaoUseCase;
         private readonly IAlterarStatusVeiculoUseCase _alterarStatusAutomovelUseCase;
 
-        public FrmBaixaLocacao(ILocacaoRepositorio locacaoRepositorio, IAutomovelRepositorio automovelRepositorio, IPessoaRepositorio pessoaRepositorio, IListarLocacoesUseCase listarLocacoesUseCase, IAlterarStatusLocacaoUseCase alterarStatusLocacaoUseCase, IAlterarStatusVeiculoUseCase alterarStatusAutomovelUseCase)
+        public FrmBaixaLocacao(IListarLocacoesUseCase listarLocacoesUseCase, IAlterarStatusLocacaoUseCase alterarStatusLocacaoUseCase, IAlterarStatusVeiculoUseCase alterarStatusAutomovelUseCase)
         {
-            _locacaoRepositorio = locacaoRepositorio;
-            _automovelRepositorio = automovelRepositorio;
-            _pessoaRepositorio = pessoaRepositorio;
             _listarLocacoesUseCase = listarLocacoesUseCase;
             _alterarStatusLocacaoUseCase = alterarStatusLocacaoUseCase;
             _alterarStatusAutomovelUseCase = alterarStatusAutomovelUseCase;

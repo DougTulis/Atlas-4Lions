@@ -1,31 +1,14 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
-using Projeto_ATLAS___4LIONS.Aplicacao.Servicos;
-using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
-using Projeto_ATLAS___4LIONS.Dominio.Entidades;
-using Projeto_ATLAS___4LIONS.Dominio.Notificacoes;
-using Projeto_ATLAS___4LIONS.Infra.Repositorios;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Projeto_ATLAS___4LIONS.Forms
 {
     public partial class FrmCadPessoas : Form
     {
         private readonly ICadastrarPessoaUseCase _cadastrarPessoaUseCase;
-        private readonly IPessoaRepositorio _pessoaRepositorio;
-
-        public FrmCadPessoas(ICadastrarPessoaUseCase cadastrarPessoaUseCase, IPessoaRepositorio pessoaRepositorio)
+        public FrmCadPessoas(ICadastrarPessoaUseCase cadastrarPessoaUseCase)
         {
             _cadastrarPessoaUseCase = cadastrarPessoaUseCase;
-            _pessoaRepositorio = pessoaRepositorio;
 
             InitializeComponent();
 
@@ -108,8 +91,6 @@ namespace Projeto_ATLAS___4LIONS.Forms
                 _cadastrarPessoaUseCase.Executar(pessoaDto);
 
                 MessageBox.Show("Pessoa cadastrada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                this.Close();
 
             }
             catch (Exception ex)

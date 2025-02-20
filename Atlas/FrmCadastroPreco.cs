@@ -40,5 +40,10 @@ namespace Projeto_ATLAS___4LIONS.Forms
         {
 
         }
+
+        private void FrmCadastroPreco_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

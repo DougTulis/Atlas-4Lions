@@ -93,6 +93,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "FrmCadastroPreco";
             Text = "FrmCadastroPreco";
+            Load += FrmCadastroPreco_Load;
             ResumeLayout(false);
             PerformLayout();
         }

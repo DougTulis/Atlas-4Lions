@@ -9,17 +9,14 @@ namespace Projeto_ATLAS___4LIONS.Forms
 {
     public partial class FrmCadAutomovel : Form
     {
-        private readonly ITabelaPrecoRepositorio _tabelaPrecoRepositorio;
-        private readonly IAutomovelRepositorio _automovelRepositorio;
+
         private readonly ICadastrarVeiculoUseCase _cadastrarVeiculoUseCase;
         private readonly ICadastrarTabelaPrecoUseCase _cadastrarPrecoAutomovelUseCase;
         private readonly IListarAutomovelUseCase _listarAutomovelUseCase;
         private readonly IListarTabelaPrecoUseCase _listarTabelaPrecoUseCase;
 
-        public FrmCadAutomovel(ITabelaPrecoRepositorio tabelaPrecoRepositorio, IAutomovelRepositorio automovelRepositorio, ICadastrarVeiculoUseCase cadastrarVeiculoUseCase, ICadastrarTabelaPrecoUseCase cadastrarPrecoAutomovelUseCase, IListarAutomovelUseCase listarAutomovelUseCase, IListarTabelaPrecoUseCase listarTabelaPrecoUseCase)
+        public FrmCadAutomovel(ICadastrarVeiculoUseCase cadastrarVeiculoUseCase, ICadastrarTabelaPrecoUseCase cadastrarPrecoAutomovelUseCase, IListarAutomovelUseCase listarAutomovelUseCase, IListarTabelaPrecoUseCase listarTabelaPrecoUseCase)
         {
-            _tabelaPrecoRepositorio = tabelaPrecoRepositorio;
-            _automovelRepositorio = automovelRepositorio;
             _cadastrarVeiculoUseCase = cadastrarVeiculoUseCase;
             _cadastrarPrecoAutomovelUseCase = cadastrarPrecoAutomovelUseCase;
             _listarAutomovelUseCase = listarAutomovelUseCase;

@@ -8,13 +8,11 @@ namespace Projeto_ATLAS___4LIONS.Forms
     public partial class FrmExclusaoAutomovel : Form
     {
 
-        private readonly IAutomovelRepositorio _automovelRepositorio;
         private readonly IListarAutomovelUseCase _listarAutomovelUseCase;
         private readonly IDeletarAutomovelUseCase _deletarAutomovelUseCase;
 
-        public FrmExclusaoAutomovel(IAutomovelRepositorio automovelRepositorio, IListarAutomovelUseCase listarAutomovelUseCase, IDeletarAutomovelUseCase deletarAutomovelUseCase)
+        public FrmExclusaoAutomovel(IListarAutomovelUseCase listarAutomovelUseCase, IDeletarAutomovelUseCase deletarAutomovelUseCase)
         {
-            _automovelRepositorio = automovelRepositorio;
             _listarAutomovelUseCase = listarAutomovelUseCase;
             _deletarAutomovelUseCase = deletarAutomovelUseCase;
         }

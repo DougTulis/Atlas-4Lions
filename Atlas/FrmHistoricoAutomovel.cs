@@ -16,11 +16,9 @@ namespace Projeto_ATLAS___4LIONS.Forms
 {
     public partial class FrmHistoricoAutomovel : Form
     {
-        private readonly IAutomovelRepositorio _automovelRepositorio;
         private readonly IListarAutomovelUseCase _listarAutomovelUseCase;
-        public FrmHistoricoAutomovel(IAutomovelRepositorio automovelRepositorio, IListarAutomovelUseCase listarAutomovelUseCase)
+        public FrmHistoricoAutomovel(IListarAutomovelUseCase listarAutomovelUseCase)
         {
-            _automovelRepositorio = automovelRepositorio;
             _listarAutomovelUseCase = listarAutomovelUseCase;
             InitializeComponent();
             AtualizarGridView();

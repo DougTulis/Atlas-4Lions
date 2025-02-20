@@ -7,13 +7,11 @@ namespace Projeto_ATLAS___4LIONS.Forms
 {
     public partial class FrmExclusaoPessoas : Form
     {
-        private readonly IPessoaRepositorio _pessoarepositorio;
         private readonly IDeletarPessoaUseCase _deletarPessoaUseCase;
         private readonly IListarPessoaUseCase _listarPessoaUseCase;
 
-        public FrmExclusaoPessoas(IPessoaRepositorio pessoarepositorio, IDeletarPessoaUseCase deletarPessoaUseCase, IListarPessoaUseCase listarPessoaUseCase)
+        public FrmExclusaoPessoas(IDeletarPessoaUseCase deletarPessoaUseCase, IListarPessoaUseCase listarPessoaUseCase)
         {
-            _pessoarepositorio = pessoarepositorio;
             _deletarPessoaUseCase = deletarPessoaUseCase;
             _listarPessoaUseCase = listarPessoaUseCase;
             InitializeComponent();
@@ -59,7 +57,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
                     var pessoaDto = _listarPessoaUseCase.ExecutarRecuperarPorId(pessoaId);
                     _deletarPessoaUseCase.Executar(pessoaDto);
                     MessageBox.Show("Pessoa excluída com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Close();
+               
                     AtualizarGridView();
                 }
             }

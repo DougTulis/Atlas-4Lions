@@ -63,7 +63,7 @@ namespace Projeto_ATLAS___4LIONS
 
             // Serviços
             services.AddTransient<ILocacaoService, LocacaoService>();
-            services.AddTransient<PendenciaFinanceiraServico>();
+            services.AddTransient<IPendenciaFinanceiraService, PendenciaFinanceiraServico>();
 
             // Forms
             services.AddTransient<FrmCadastroPreco>();

@@ -1,25 +1,14 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
-using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
 using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
-using Projeto_ATLAS___4LIONS.Infra.Repositorios;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
 
 namespace Projeto_ATLAS___4LIONS.Forms
 {
     public partial class FrmRegistroPagamento2 : Form
     {
         private int idPendFin;
-        private readonly IParcelaRepositorio _parcelaRepositorio;
         private readonly IListarParcelaUseCase _listarParcelaUseCase;
         private readonly IIncluirPagamentoUseCase _incluirPagamentoUseCase;
         
@@ -27,9 +16,8 @@ namespace Projeto_ATLAS___4LIONS.Forms
         {
             InitializeComponent();
         }
-        public FrmRegistroPagamento2(int _Idpendfin, IIncluirPagamentoUseCase incluirPagamentoUseCase, IListarParcelaUseCase listarParcelaUseCase, IParcelaRepositorio parcelaRepositorio)
+        public FrmRegistroPagamento2(int _Idpendfin, IIncluirPagamentoUseCase incluirPagamentoUseCase, IListarParcelaUseCase listarParcelaUseCase)
         {
-            _parcelaRepositorio = parcelaRepositorio;
             _listarParcelaUseCase = listarParcelaUseCase;
             _incluirPagamentoUseCase = incluirPagamentoUseCase;
             idPendFin = _Idpendfin;
