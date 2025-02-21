@@ -28,7 +28,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
             _cadastrarPreco.Executar(precoDto);
             MessageBox.Show("Preço cadastrado com sucesooso", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            this.Close();
+            this.Hide();
         }
 
         private void txtDescricao_TextChanged(object sender, EventArgs e)

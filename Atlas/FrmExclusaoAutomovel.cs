@@ -15,6 +15,9 @@ namespace Projeto_ATLAS___4LIONS.Forms
         {
             _listarAutomovelUseCase = listarAutomovelUseCase;
             _deletarAutomovelUseCase = deletarAutomovelUseCase;
+            InitializeComponent();
+            AtualizarGridView();
+
         }
 
         private void dgvHistoricoAutomovelExclusaoAutomovel_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -27,7 +30,6 @@ namespace Projeto_ATLAS___4LIONS.Forms
             dgvHistoricoAutomovelExclusaoAutomovel.DataSource = null;
             var dados = _listarAutomovelUseCase.ExecutarStatusGaragem();
             dgvHistoricoAutomovelExclusaoAutomovel.DataSource = dados.ToList();
-            dgvHistoricoAutomovelExclusaoAutomovel.Update();
             dgvHistoricoAutomovelExclusaoAutomovel.Refresh();
         }
 

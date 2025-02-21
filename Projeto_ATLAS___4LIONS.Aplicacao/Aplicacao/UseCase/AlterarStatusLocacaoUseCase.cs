@@ -19,7 +19,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             try
             {
-             //   locacaoRepositorio.AtualizarStatus(locacaoId, novoStatus);
+              locacaoRepositorio.AtualizarStatusLocacao(locacaoId, novoStatus);
             }
             catch (MySqlException ex)
             {

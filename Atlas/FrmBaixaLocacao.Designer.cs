@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             dgvBaixaLocacao = new DataGridView();
+            Id = new DataGridViewTextBoxColumn();
             saida = new DataGridViewTextBoxColumn();
             retorno = new DataGridViewTextBoxColumn();
             status = new DataGridViewTextBoxColumn();
@@ -41,7 +42,7 @@
             dgvBaixaLocacao.AllowUserToAddRows = false;
             dgvBaixaLocacao.AllowUserToDeleteRows = false;
             dgvBaixaLocacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvBaixaLocacao.Columns.AddRange(new DataGridViewColumn[] { saida, retorno, status, tipoLocacao });
+            dgvBaixaLocacao.Columns.AddRange(new DataGridViewColumn[] { Id, saida, retorno, status, tipoLocacao });
             dgvBaixaLocacao.Location = new Point(0, 0);
             dgvBaixaLocacao.Name = "dgvBaixaLocacao";
             dgvBaixaLocacao.ReadOnly = true;
@@ -49,6 +50,16 @@
             dgvBaixaLocacao.Size = new Size(690, 477);
             dgvBaixaLocacao.TabIndex = 0;
             dgvBaixaLocacao.CellContentClick += dgvBaixaLocacao_CellContentClick;
+            dgvBaixaLocacao.CellDoubleClick += dgvBaixaLocacao_CellDoubleClick;
+            // 
+            // Id
+            // 
+            Id.DataPropertyName = "Id";
+            Id.HeaderText = "Id";
+            Id.MinimumWidth = 6;
+            Id.Name = "Id";
+            Id.ReadOnly = true;
+            Id.Width = 125;
             // 
             // saida
             // 
@@ -106,6 +117,7 @@
         #endregion
 
         private DataGridView dgvBaixaLocacao;
+        private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn saida;
         private DataGridViewTextBoxColumn retorno;
         private DataGridViewTextBoxColumn status;

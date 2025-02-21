@@ -46,7 +46,7 @@
             dgvHistoricoAutomovel.AllowUserToDeleteRows = false;
             dgvHistoricoAutomovel.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvHistoricoAutomovel.Columns.AddRange(new DataGridViewColumn[] { modelo, placa, cor, status, chassi, renavam, oleoKm, FreioKm });
-            dgvHistoricoAutomovel.Location = new Point(-103, 25);
+            dgvHistoricoAutomovel.Location = new Point(12, 24);
             dgvHistoricoAutomovel.Name = "dgvHistoricoAutomovel";
             dgvHistoricoAutomovel.ReadOnly = true;
             dgvHistoricoAutomovel.RowHeadersWidth = 51;

@@ -50,7 +50,7 @@
             dgvVinculacaoCnh.AllowUserToDeleteRows = false;
             dgvVinculacaoCnh.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvVinculacaoCnh.Columns.AddRange(new DataGridViewColumn[] { id, nome, cpf, cnpj });
-            dgvVinculacaoCnh.Location = new Point(11, 89);
+            dgvVinculacaoCnh.Location = new Point(14, 102);
             dgvVinculacaoCnh.Margin = new Padding(3, 4, 3, 4);
             dgvVinculacaoCnh.Name = "dgvVinculacaoCnh";
             dgvVinculacaoCnh.ReadOnly = true;
@@ -102,7 +102,7 @@
             bigLblVinculacaoCnh.BackColor = Color.Transparent;
             bigLblVinculacaoCnh.Font = new Font("Segoe UI", 15F);
             bigLblVinculacaoCnh.ForeColor = Color.White;
-            bigLblVinculacaoCnh.Location = new Point(14, 51);
+            bigLblVinculacaoCnh.Location = new Point(127, 63);
             bigLblVinculacaoCnh.Name = "bigLblVinculacaoCnh";
             bigLblVinculacaoCnh.Size = new Size(326, 35);
             bigLblVinculacaoCnh.TabIndex = 1;
@@ -113,6 +113,7 @@
             txtPessoa.Location = new Point(599, 137);
             txtPessoa.Margin = new Padding(3, 4, 3, 4);
             txtPessoa.Name = "txtPessoa";
+            txtPessoa.ReadOnly = true;
             txtPessoa.Size = new Size(138, 27);
             txtPessoa.TabIndex = 2;
             txtPessoa.TextChanged += txtPessoa_TextChanged;
@@ -134,7 +135,7 @@
             btnSelecionarPessoa.Name = "btnSelecionarPessoa";
             btnSelecionarPessoa.Size = new Size(141, 31);
             btnSelecionarPessoa.TabIndex = 4;
-            btnSelecionarPessoa.Text = "Selecionar Pessoa";
+            btnSelecionarPessoa.Text = "Vincular CNH";
             btnSelecionarPessoa.UseVisualStyleBackColor = true;
             btnSelecionarPessoa.Click += btnSelecionarPessoa_Click;
             // 

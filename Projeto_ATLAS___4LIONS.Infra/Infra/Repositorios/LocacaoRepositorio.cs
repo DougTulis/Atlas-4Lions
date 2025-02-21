@@ -268,6 +268,23 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
             return lista;
         }
+
+        public void AtualizarStatusLocacao(int locacaoId, EStatusLocacao novoStatus)
+        {
+            using (var conexao = _conexaoAdapter.ObterConexao())
+            {
+                conexao.Open();
+                string sql = "UPDATE Locacao SET statusLocacao = @Status WHERE Id = @Id";
+
+                using (var cmd = new MySqlCommand(sql, conexao))
+                {
+                    cmd.Parameters.AddWithValue("@Status", (int)novoStatus);
+                    cmd.Parameters.AddWithValue("@Id", locacaoId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public IEnumerable<LocacaoDTO> ListarStatusAndamento()
         {
             using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
