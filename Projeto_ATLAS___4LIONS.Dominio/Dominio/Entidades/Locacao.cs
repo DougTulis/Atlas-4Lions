@@ -18,6 +18,7 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         public Locacao()
         {
         }
+
         public Locacao(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, decimal valorTotal, Pessoa locatario, Pessoa condutor, Automovel automovel, EStatusLocacao status)
         {
             Saida = saida;

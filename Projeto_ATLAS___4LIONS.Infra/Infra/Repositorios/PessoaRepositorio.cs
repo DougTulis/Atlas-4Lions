@@ -17,24 +17,11 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             _conexaoAdapter = conexaoAdapter;
         }
 
-        public void Adicionar(PessoaDTO pessoaDto)
+        public void Adicionar(Pessoa pessoa)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
-
-                var pessoa = new Pessoa
-                {
-                    Nome = pessoaDto.Nome,
-                    Email = pessoaDto.Email,
-                    Contato = pessoaDto.Contato,
-                    DataNascimento = pessoaDto.DataNascimento,
-                    Cpf = pessoaDto.Cpf ?? null,
-                    Cnpj = pessoaDto.Cnpj ?? null,
-                    DataCriacao = DateTime.Now,
-                    NumeroCnh = pessoaDto.NumeroCnh ?? null,
-                    VencimentoCnh = pessoaDto.VencimentoCnh ?? null
-                };
 
                 string sql = @"
                 INSERT INTO pessoa (Nome, Email, Contato, DataNascimento, Cpf, Cnpj, NumeroCnh, VencimentoCnh, DataCriacao)
@@ -53,7 +40,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     cmd.Parameters.AddWithValue("@DataCriacao", pessoa.DataCriacao);
 
                     cmd.ExecuteNonQuery();
-                    pessoaDto.Id = (int)cmd.LastInsertedId;
+                    //pessoaDto.Id = (int)cmd.LastInsertedId;
                 }
             }
         }

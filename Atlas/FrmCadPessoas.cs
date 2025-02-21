@@ -86,7 +86,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
                     Contato = txtContato.Text,
                     Cpf = txtCpf.Text,
                     Cnpj = txtCnpj.Text,
-                    DataNascimento = Convert.ToDateTime(txtDataNascimento.Text),
+                    DataNascimento = string.IsNullOrWhiteSpace(txtDataNascimento.Text) ? null : Convert.ToDateTime(txtDataNascimento.Text)
                 };
                 _cadastrarPessoaUseCase.Executar(pessoaDto);
 
