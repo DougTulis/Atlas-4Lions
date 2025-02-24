@@ -10,7 +10,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface
 {
     public interface IPendenciaFinanceiraService
     {
-        public PendenciaFinanceira CriarPendencia(decimal valorTotal, ETipoLocacao tipoLocacao);
+        public PendenciaFinanceira CriarPendencia(decimal valorTotal);
 
     }
 }

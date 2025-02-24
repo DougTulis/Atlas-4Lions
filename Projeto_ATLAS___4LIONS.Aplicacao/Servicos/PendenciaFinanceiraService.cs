@@ -11,13 +11,10 @@ public class PendenciaFinanceiraService : IPendenciaFinanceiraService
         _parcelaService = parcelaService;
     }
 
-    public PendenciaFinanceira CriarPendencia(decimal valorTotal, ETipoLocacao tipoLocacao)
+    public PendenciaFinanceira CriarPendencia(decimal valorTotal)
     {
         var pendenciaFinanceira = PendenciaFinanceira.Create(valorTotal);
-        int quantidadeParcelas = tipoLocacao == ETipoLocacao.CONTRATO ? 3 : 1;
 
-        _parcelaService.GerarParcelas(pendenciaFinanceira, quantidadeParcelas);
-
-        return pendenciaFinanceira;
+         return pendenciaFinanceira;
     }
 }

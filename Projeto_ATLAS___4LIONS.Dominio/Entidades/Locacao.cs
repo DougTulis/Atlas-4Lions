@@ -13,26 +13,25 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         public Pessoa Locatario { get; private set; }
         public Pessoa Condutor { get; private set; }
         public Automovel Automovel { get; private set; }
-        public PendenciaFinanceira PendenciaFinanceira { get; set; }
-        public EStatusLocacao Status { get; set; }
+        public PendenciaFinanceira PendenciaFinanceira { get; private set; }
+        public EStatusLocacao Status { get; private set; }
 
-        public Locacao(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, Pessoa locatario, Pessoa condutor, Automovel automovel, EStatusLocacao status, decimal valorTotal) : base()
+        public Locacao(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, Pessoa locatario, Pessoa condutor, Automovel automovel, EStatusLocacao status) : base()
         {
             Saida = saida;
             Retorno = retorno;
             TipoLocacao = tipoLocacao;
-            ValorTotal = valorTotal;
             Locatario = locatario;
             Condutor = condutor;
             Automovel = automovel;
             Status = status;
-            ValorTotal = valorTotal;
+            ValorTotal = CalcularValorTotal();
         }
 
         //fabrica
-        public static Locacao Create(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, Pessoa locatario, Pessoa condutor, Automovel automovel, EStatusLocacao status, decimal valorTotal)
+        public static Locacao Create(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, Pessoa locatario, Pessoa condutor, Automovel automovel, EStatusLocacao status)
         {
-            return new Locacao(saida,retorno,tipoLocacao,locatario,condutor,automovel,status,valorTotal);
+            return new Locacao(saida,retorno,tipoLocacao,locatario,condutor,automovel,status);
         }
 
         public override bool Validacao()
@@ -51,22 +50,22 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
 
             return true;
         }
-
         private decimal CalcularValorTotal()
         {
+
             int dias = (Retorno - Saida).Days;
             return dias * Automovel.Preco.Valor; 
+
         }
 
-
-        public EStatusLocacao AlterarStatusAndamento()
+        public void AlterarStatusAndamento()
         {
-            return EStatusLocacao.ANDAMENTO;
+            Status = EStatusLocacao.ANDAMENTO;
         }
 
-        public EStatusLocacao AlterarStatusFinalizado()
+        public void AlterarStatusFinalizado()
         {
-            return EStatusLocacao.FINALIZADO;
+            Status = EStatusLocacao.FINALIZADO;
         }
 
     }

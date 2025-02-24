@@ -16,25 +16,31 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         private readonly ITabelaPrecoRepositorio _tabelaPrecoRepositorio;
         private readonly IAutomovelRepositorio _automovelRepositorio;
         private readonly IPessoaRepositorio _pessoaRepositorio;
-        private readonly ICalculoValorLocacaoService _calculoValorLocacaoService;
+        private readonly IPendenciaFinanceiraService _pendenciaFinanceiraService;
+        private readonly IParcelaService _parcelaService;
+
 
         public CadastrarLocacaoUseCase(
             ILocacaoRepositorio locacaoRepositorio,
             ITabelaPrecoRepositorio tabelaPrecoRepositorio,
             IAutomovelRepositorio automovelRepositorio,
             IPessoaRepositorio pessoaRepositorio,
-            ICalculoValorLocacaoService calculoValorLocacaoService)
+            ICalculoValorLocacaoService calculoValorLocacaoService,
+            IPendenciaFinanceiraService pendenciaFinanceiraService,
+            IParcelaService parcelaService)
         {
             _locacaoRepositorio = locacaoRepositorio;
             _tabelaPrecoRepositorio = tabelaPrecoRepositorio;
             _automovelRepositorio = automovelRepositorio;
             _pessoaRepositorio = pessoaRepositorio;
-            _calculoValorLocacaoService = calculoValorLocacaoService;
+            _pendenciaFinanceiraService = pendenciaFinanceiraService;
+            _parcelaService = parcelaService;
         }
         public void Executar(LocacaoDTO locacaoDto)
         {
             //  Buscar o Locatario e fabrica o model
             var locatarioDto = _pessoaRepositorio.RecuperarPorId(locacaoDto.IdLocatario);
+
             var locatario = Pessoa.Create(locatarioDto.Nome, locatarioDto.Email, locatarioDto.Contato, locatarioDto.TipoPessoa, locatarioDto.NumeroDocumento, locatarioDto.DataRegistro);
 
             //  Buscar o CondutorDto e fabrica o model
@@ -47,31 +53,29 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             var preco = TabelaPreco.Create(precoDto.Descricao, precoDto.Valor);
             var automovel = Automovel.Create(automovelDto.Modelo, automovelDto.Placa, automovelDto.Cor, automovelDto.Status, automovelDto.Ano, automovelDto.Chassi, automovelDto.Renavam, automovelDto.Oleokm, automovelDto.PastilhaFreioKm, preco);
 
-            //servico q calculo o valor total
-            var valorTotal = _calculoValorLocacaoService.CalcularValorTotal(locacaoDto.Saida, locacaoDto.Retorno, preco.Valor);
-
-            var locacao = Locacao.Create(locacaoDto.Saida, locacaoDto.Retorno, locacaoDto.TipoLocacao, locatario, condutor, automovel, locacaoDto.Status,valorTotal);
-
+            var locacao = Locacao.Create(locacaoDto.Saida, locacaoDto.Retorno, locacaoDto.TipoLocacao, locatario, condutor, automovel, locacaoDto.Status);
 
             if (!locacao.Validacao())
             {
                 throw new Exception("A locação não passou na validação de regras de negócio.");
             }
 
-          //  var pendenciaFinanceira = PendenciaFinanceira.Create(locacao.ValorTotal);
+            var pendencia = _pendenciaFinanceiraService.CriarPendencia(locacao.ValorTotal);
 
-        //    if (!pendenciaFinanceira.Validacao())
+            { 
+            if (!pendencia.Validacao())
             {
                 throw new Exception("A pendência financeira não passou na validação.");
             }
 
-          //  locacao.AdicionarPendenciaFinanceira(pendenciaFinanceira);
+            // aqui vai gerar todas as parcelas....
+                _parcelaService.GerarParcelas(pendencia, pendencia.QuantidadeParcelas);
+
+                automovel.AlterarParaAlugado(); // aqui altera pra garágem o status do automovel.
+          
             try
             {
-                // 🔹 5️⃣ Atualizar Status do Automóvel
-                _automovelRepositorio.AtualizarStatus(automovel.Id, EStatusVeiculo.ALUGADO);
-
-                // 🔹 6️⃣ Persistir a Locacao no banco
+                _automovelRepositorio.AtualizarStatus(automovel.Id, automovel.Status);
                 _locacaoRepositorio.Adicionar(locacao);
             }
             catch (MySqlException ex)

@@ -14,6 +14,5 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Servicos
             int dias = (retorno - saida).Days;
             return dias > 0 ? dias * precoDiaria : precoDiaria; // Garante pelo menos 1 diária
         }
-
     }
 }

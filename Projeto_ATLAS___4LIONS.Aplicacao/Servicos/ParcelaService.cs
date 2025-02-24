@@ -7,15 +7,14 @@ public class ParcelaService : IParcelaService
     {
  
         decimal valorParcela = pendenciaFinanceira.ValorTotal / quantidadeParcelas;
+        // vou implementar aquela logica da ultima parcela pois nem todas as parcelas vao ter os valores devidamente equivalentes dependendo da qnt de parcelas.
         DateTime dataVencimento = DateTime.Now.AddMonths(1);
 
         for (int i = 1; i <= quantidadeParcelas; i++)
         {
-            var parcela = Parcela.Create(i, dataVencimento, valorParcela);
+            var parcela = Parcela.Create(i, dataVencimento, valorParcela, pendenciaFinanceira);
             pendenciaFinanceira.AdicionarParcela(parcela);
-
             dataVencimento = dataVencimento.AddMonths(1); 
-
         }
     }
 }
