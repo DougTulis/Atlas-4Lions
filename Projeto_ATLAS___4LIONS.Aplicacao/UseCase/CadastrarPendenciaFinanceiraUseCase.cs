@@ -14,6 +14,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         private readonly IPessoaRepositorio _pessoaRepositorio;
         private readonly IAutomovelRepositorio _automovelRepositorio;
         private readonly ITabelaPrecoRepositorio _precoRepositorio;
+      
 
         public CadastrarPendenciaFinanceiraUseCase(IPendenciaFinanceiraRepositorio pendenciaRepositorio, ILocacaoRepositorio locacaoRepositorio, IPessoaRepositorio pessoaRepositorio, IAutomovelRepositorio automovelRepositorio, ITabelaPrecoRepositorio precoRepositorio)
         {

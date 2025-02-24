@@ -16,17 +16,20 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         private readonly ITabelaPrecoRepositorio _tabelaPrecoRepositorio;
         private readonly IAutomovelRepositorio _automovelRepositorio;
         private readonly IPessoaRepositorio _pessoaRepositorio;
+        private readonly ICalculoValorLocacaoService _calculoValorLocacaoService;
 
         public CadastrarLocacaoUseCase(
             ILocacaoRepositorio locacaoRepositorio,
             ITabelaPrecoRepositorio tabelaPrecoRepositorio,
             IAutomovelRepositorio automovelRepositorio,
-            IPessoaRepositorio pessoaRepositorio)
+            IPessoaRepositorio pessoaRepositorio,
+            ICalculoValorLocacaoService calculoValorLocacaoService)
         {
             _locacaoRepositorio = locacaoRepositorio;
             _tabelaPrecoRepositorio = tabelaPrecoRepositorio;
             _automovelRepositorio = automovelRepositorio;
             _pessoaRepositorio = pessoaRepositorio;
+            _calculoValorLocacaoService = calculoValorLocacaoService;
         }
         public void Executar(LocacaoDTO locacaoDto)
         {
@@ -45,8 +48,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             var automovel = Automovel.Create(automovelDto.Modelo, automovelDto.Placa, automovelDto.Cor, automovelDto.Status, automovelDto.Ano, automovelDto.Chassi, automovelDto.Renavam, automovelDto.Oleokm, automovelDto.PastilhaFreioKm, preco);
 
             //servico q calculo o valor total
-            var valorTotal = CalculoValorLocacaoService.CalcularValorTotal(locacaoDto.Saida, locacaoDto.Retorno, preco.Valor);
-
+            var valorTotal = _calculoValorLocacaoService.CalcularValorTotal(locacaoDto.Saida, locacaoDto.Retorno, preco.Valor);
 
             var locacao = Locacao.Create(locacaoDto.Saida, locacaoDto.Retorno, locacaoDto.TipoLocacao, locatario, condutor, automovel, locacaoDto.Status,valorTotal);
 
