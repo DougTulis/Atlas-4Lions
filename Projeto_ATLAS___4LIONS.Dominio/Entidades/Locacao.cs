@@ -16,23 +16,23 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         public PendenciaFinanceira PendenciaFinanceira { get; set; }
         public EStatusLocacao Status { get; set; }
 
-        public Locacao(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, Pessoa locatario, Pessoa condutor, Automovel automovel, EStatusLocacao status) : base()
+        public Locacao(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, Pessoa locatario, Pessoa condutor, Automovel automovel, EStatusLocacao status, decimal valorTotal) : base()
         {
-
             Saida = saida;
             Retorno = retorno;
             TipoLocacao = tipoLocacao;
-            ValorTotal = CalcularValorTotal();
+            ValorTotal = valorTotal;
             Locatario = locatario;
             Condutor = condutor;
             Automovel = automovel;
-            Status = AlterarStatusAndamento();
+            Status = status;
+            ValorTotal = valorTotal;
         }
 
         //fabrica
-        public static Locacao Create(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, Pessoa locatario, Pessoa condutor, Automovel automovel, EStatusLocacao status)
+        public static Locacao Create(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, Pessoa locatario, Pessoa condutor, Automovel automovel, EStatusLocacao status, decimal valorTotal)
         {
-            return new Locacao(saida,retorno,tipoLocacao,locatario,condutor,automovel,status);
+            return new Locacao(saida,retorno,tipoLocacao,locatario,condutor,automovel,status,valorTotal);
         }
 
         public override bool Validacao()
@@ -58,11 +58,6 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
             return dias * Automovel.Preco.Valor; 
         }
 
-
-        public void AdicionarPendenciaFinanceira(PendenciaFinanceira pendencia)
-        {
-            PendenciaFinanceira = pendencia;
-        }
 
         public EStatusLocacao AlterarStatusAndamento()
         {

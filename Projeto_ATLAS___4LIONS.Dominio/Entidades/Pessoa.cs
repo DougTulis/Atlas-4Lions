@@ -69,8 +69,6 @@ public class Pessoa : ModeloAbstrato, IContrato
 
         return true;
     }
-
-
     public bool ValidacaoCnh()
     {
         var contratos = new ContratoValidacoes<Pessoa>()

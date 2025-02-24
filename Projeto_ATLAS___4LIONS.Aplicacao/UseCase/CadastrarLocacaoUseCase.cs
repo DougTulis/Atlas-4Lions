@@ -3,6 +3,7 @@ using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Exceções;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Servicos;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 using System;
@@ -43,7 +44,11 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             var preco = TabelaPreco.Create(precoDto.Descricao, precoDto.Valor);
             var automovel = Automovel.Create(automovelDto.Modelo, automovelDto.Placa, automovelDto.Cor, automovelDto.Status, automovelDto.Ano, automovelDto.Chassi, automovelDto.Renavam, automovelDto.Oleokm, automovelDto.PastilhaFreioKm, preco);
 
-            var locacao = Locacao.Create(locacaoDto.Saida, locacaoDto.Retorno, locacaoDto.TipoLocacao, locatario, condutor, automovel, locacaoDto.Status);
+            //servico q calculo o valor total
+            var valorTotal = CalculoValorLocacaoService.CalcularValorTotal(locacaoDto.Saida, locacaoDto.Retorno, preco.Valor);
+
+
+            var locacao = Locacao.Create(locacaoDto.Saida, locacaoDto.Retorno, locacaoDto.TipoLocacao, locatario, condutor, automovel, locacaoDto.Status,valorTotal);
 
 
             if (!locacao.Validacao())

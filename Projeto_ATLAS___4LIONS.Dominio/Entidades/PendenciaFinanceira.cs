@@ -7,13 +7,11 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
     public class PendenciaFinanceira : ModeloAbstrato, IContrato
     {
         public decimal ValorTotal { get; private set; }
-        public int QuantidadeParcelas { get; private set; }
         public IList<Parcela> Parcelas { get; private set; } = new List<Parcela>();
 
-        public PendenciaFinanceira(decimal valorTotal, int quantidadeParcelas)
+        public PendenciaFinanceira(decimal valorTotal)
         {
             ValorTotal = valorTotal;
-            QuantidadeParcelas = quantidadeParcelas;
         }
 
 
@@ -21,9 +19,9 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         //{
         //}
 
-        public static PendenciaFinanceira Create(decimal valorTotal, int quantidadeParcelas)
+        public static PendenciaFinanceira Create(decimal valorTotal)
         {
-            return new PendenciaFinanceira(valorTotal,quantidadeParcelas);
+            return new PendenciaFinanceira(valorTotal);
         }
 
         public void AdicionarParcela(Parcela parcela)
