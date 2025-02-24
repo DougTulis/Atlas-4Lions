@@ -27,7 +27,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             }
         }
 
-        public TabelaPrecoDTO? ExecutarRecuperarPorId(int id)
+        public TabelaPrecoDTO? ExecutarRecuperarPorId(Guid id)
         {
             try
             {

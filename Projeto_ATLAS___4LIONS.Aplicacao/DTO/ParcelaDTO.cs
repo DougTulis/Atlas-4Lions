@@ -4,7 +4,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
 {
     public class ParcelaDTO
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public DateTime DataCriacao { get; set; }
         public int Sequencia { get; set; }
         public int PendenciaFinanceiraId { get; set; }

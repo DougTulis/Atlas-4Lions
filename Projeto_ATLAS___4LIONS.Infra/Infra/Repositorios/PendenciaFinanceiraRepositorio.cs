@@ -3,10 +3,7 @@ using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.Interface_Adapter;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
-using Projeto_ATLAS___4LIONS.Infra.Servicos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+
 
 namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 {
@@ -21,48 +18,24 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             _conexaoAdapter = conexaoAdapter;
         }
 
-        public void Adicionar(PendenciaFinanceiraDTO pendenciaDto)
+        public void Adicionar(PendenciaFinanceira pendencia)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 
-
-                var locacaoDto = _locacaoRepositorio.RecuperarPorId(pendenciaDto.IdLocacao);
-                  
-
-   
-                var locacao = new Locacao
-                {
-                    Id = locacaoDto.Id,
-                    Saida = locacaoDto.Saida,
-                    Retorno = locacaoDto.Retorno,
-                    TipoLocacao = locacaoDto.TipoLocacao,
-                    ValorTotal = locacaoDto.ValorTotal,
-                    Status = locacaoDto.Status
-                };
-                var pendencia = new PendenciaFinanceira
-                {
-                    TransacaoId = pendenciaDto.TransacaoId,
-                    ValorTotal = pendenciaDto.ValorTotal,
-                    DataCriacao = DateTime.Now,
-                    Locacao = locacao // 
-                };
-
          
                 string sql = @"
-                INSERT INTO PendenciaFinanceira (TransacaoId, ValorTotal, DataCriacao, LocacaoId)
-                VALUES (@TransacaoId, @ValorTotal, @DataCriacao, @LocacaoId)";
+                INSERT INTO pendencia_financeira (id, valor_total, data_criacao)
+                VALUES (@id, @valor_total, @data_criacao)";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    cmd.Parameters.AddWithValue("@TransacaoId", pendencia.TransacaoId);
-                    cmd.Parameters.AddWithValue("@ValorTotal", pendencia.ValorTotal);
-                    cmd.Parameters.AddWithValue("@DataCriacao", pendencia.DataCriacao);
-                    cmd.Parameters.AddWithValue("@LocacaoId", locacao.Id);
-
+                    cmd.Parameters.AddWithValue("@id", pendencia.Id);
+                    cmd.Parameters.AddWithValue("@valor_total", pendencia.ValorTotal);
+                    cmd.Parameters.AddWithValue("@data_criacao", pendencia.DataCriacao);
                     cmd.ExecuteNonQuery();
-                    pendenciaDto.Id = (int)cmd.LastInsertedId;
+
                 }
             }
         }
@@ -72,11 +45,11 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
-                string sql = "DELETE FROM PendenciaFinanceira WHERE Id = @Id";
+                string sql = "DELETE FROM PendenciaFinanceira WHERE id = @id";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    cmd.Parameters.AddWithValue("@Id", pendenciaDto.Id);
+                    cmd.Parameters.AddWithValue("@id", pendenciaDto.Id);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -98,7 +71,6 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 }
             }
         }
-
         public IEnumerable<PendenciaFinanceiraDTO> PopularLista(MySqlDataReader dataReader)
         {
             var lista = new List<PendenciaFinanceiraDTO>();
@@ -108,28 +80,25 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 var pendencia = new PendenciaFinanceiraDTO
                 {
                     Id = Convert.ToInt32(dataReader["Id"]),
-                    TransacaoId = Guid.Parse(dataReader["TransacaoId"].ToString()),
-                    ValorTotal = Convert.ToDecimal(dataReader["ValorTotal"]),
-                    DataCriacao = Convert.ToDateTime(dataReader["DataCriacao"]),
-                    IdLocacao = dataReader["LocacaoId"] != DBNull.Value ? Convert.ToInt32(dataReader["LocacaoId"]) : Convert.ToInt16(null)
+                    ValorTotal = Convert.ToDecimal(dataReader["valor_total"]),
+                    DataCriacao = Convert.ToDateTime(dataReader["data_Criacao"]),
                 };
 
                 lista.Add(pendencia);
             }
-
             return lista;
         }
 
-        public PendenciaFinanceiraDTO? RecuperarPorId(int id)
+        public PendenciaFinanceiraDTO? RecuperarPorId(Guid id)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
-                string sql = "SELECT * FROM PendenciaFinanceira WHERE Id = @Id";
+                string sql = "SELECT * FROM pendencia_financeira WHERE id = @id";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.Parameters.AddWithValue("@id", id);
 
                     using (var dataReader = cmd.ExecuteReader())
                     {

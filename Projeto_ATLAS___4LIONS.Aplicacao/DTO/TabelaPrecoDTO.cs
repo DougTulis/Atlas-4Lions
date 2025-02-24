@@ -5,7 +5,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
     public class TabelaPrecoDTO
     {
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Descricao { get; set; }
         public decimal Valor { get; set; }
 
@@ -20,9 +20,5 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         {
         }
 
-        public override string? ToString()
-        {
-            return Descricao + " - R$" + Valor.ToString("F2", CultureInfo.InvariantCulture);
-        }
     }
 }

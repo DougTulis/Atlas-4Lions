@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
+using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface
 
         public IEnumerable<AutomovelDTO> ListarTodos();
         public IEnumerable<AutomovelDTO> PopularLista(MySqlDataReader dataReader);
-        public void Adicionar(AutomovelDTO objeto);
+        public void Adicionar(Automovel objeto);
         public void Deletar(AutomovelDTO objeto);
-        public AutomovelDTO? RecuperarPorId(int id);
-        public void AtualizarStatus(int automovelId, EStatusVeiculo novoStatus);
+        public AutomovelDTO? RecuperarPorId(Guid id);
+        public void AtualizarStatus(Guid automovelId, EStatusVeiculo novoStatus);
         public IEnumerable<AutomovelDTO> ListarStatusGaragem();
     }
 

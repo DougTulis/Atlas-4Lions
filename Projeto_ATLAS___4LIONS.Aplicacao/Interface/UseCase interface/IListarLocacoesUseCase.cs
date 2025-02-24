@@ -11,7 +11,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface
     {
         public IEnumerable<LocacaoDTO> Executar();
         public IEnumerable<LocacaoDTO> ExecutarRecuperacaoStatusAndamento();
-        public LocacaoDTO? ExecutarRecuperarPorId(int id);
+        public LocacaoDTO? ExecutarRecuperarPorId(Guid id);
 
     }
 }

@@ -17,22 +17,13 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             try
             {
-                var parcela = new Parcela
-                {
-                    PendenciaFinanceiraId = parcelaDto.PendenciaFinanceiraId,
-                    Sequencia = parcelaDto.Sequencia,
-                    Valor = parcelaDto.Valor,
-                    DataVencimento = parcelaDto.DataVencimento,
-                    DataPagamento = parcelaDto.DataPagamento,
-                    ValorPago = parcelaDto.ValorPago,
-                    EspeciePagamento = parcelaDto.EspeciePagamento
-                };
+                var parcela = Parcela.Create(parcelaDto.Sequencia, parcelaDto.DataVencimento, parcelaDto.Valor);
 
                 if (!parcela.Validacao())
                 {
                     return;
                 }
-                parcelaRepositorio.Adicionar(parcelaDto);
+                parcelaRepositorio.Adicionar(parcela);
             }
             catch (MySqlException ex)
             {

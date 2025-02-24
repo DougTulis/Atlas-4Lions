@@ -16,31 +16,22 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             _conexaoAdapter = conexaoAdapter;
         }
 
-        public void Adicionar(TabelaPrecoDTO tabelaPrecoDto)
+        public void Adicionar(TabelaPreco tabelaPreco)
         {
 
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 
-                var tabelaPreco = new TabelaPreco
-                {
-                    Id = tabelaPrecoDto.Id,
-                    Valor = tabelaPrecoDto.Valor,
-                    Descricao = tabelaPrecoDto.Descricao,
-                    DataCriacao = DateTime.Now
-                };
-
                 string sql = @"
-                INSERT INTO tabela_preco (Descricao, Valor)
-                VALUES (@Descricao, @Valor)";
+                INSERT INTO tabela_preco (id,descricao, valor)
+                VALUES (@id, @descricao, @valor)";
 
                 using var cmd = new MySqlCommand(sql, conexao);
-                cmd.Parameters.AddWithValue("@Descricao", tabelaPreco.Descricao);
-                cmd.Parameters.AddWithValue("@Valor", tabelaPreco.Valor);
-
+                cmd.Parameters.AddWithValue("@id", tabelaPreco.Id);
+                cmd.Parameters.AddWithValue("@descricao", tabelaPreco.Descricao);
+                cmd.Parameters.AddWithValue("@valor", tabelaPreco.Valor);
                 cmd.ExecuteNonQuery();
-                tabelaPrecoDto.Id = (int)cmd.LastInsertedId;
             }
         }
 
@@ -48,24 +39,15 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
-                var tabelaPreco = new TabelaPreco
-                {
-                    Id = tabelaPrecoDto.Id,
-                    Valor = tabelaPrecoDto.Valor,
-                    Descricao = tabelaPrecoDto.Descricao,
-                    DataCriacao = DateTime.Now
-                };
-
                 conexao.Open();
 
-                string sql = "DELETE FROM tabela_preco WHERE Id = @Id";
+                string sql = "DELETE FROM tabela_preco WHERE id = @id";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
 
 
-                    cmd.Parameters.AddWithValue("@Id", tabelaPrecoDto.Id);
-
+                    cmd.Parameters.AddWithValue("@id", tabelaPrecoDto.Id);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -76,24 +58,20 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
-
                 string sql = "SELECT * FROM tabela_preco";
                 using var cmd = new MySqlCommand(sql, conexao);
                 using var dataReader = cmd.ExecuteReader();
-
                 return PopularLista(dataReader);
             }
         }
-
         public IEnumerable<TabelaPrecoDTO> PopularLista(MySqlDataReader dataReader)
         {
             var lista = new List<TabelaPrecoDTO>();
-
             while (dataReader.Read())
             {
                 var tabelaPreco = new TabelaPrecoDTO
                 {
-                    Id = Convert.ToInt32(dataReader["Id"]),
+                    Id = Guid.Parse(dataReader["Id"].ToString()),
                     Descricao = Convert.ToString(dataReader["Descricao"]),
                     Valor = Convert.ToDecimal(dataReader["Valor"]),
                 };
@@ -103,18 +81,15 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
             return lista;
         }
-
-        public TabelaPrecoDTO? RecuperarPorId(int idPreco)
+        public TabelaPrecoDTO? RecuperarPorId(Guid idPreco)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
-
                 string sql = "SELECT * FROM tabela_preco WHERE Id = @Id";
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
                     cmd.Parameters.AddWithValue("@Id", idPreco);
-
                     using (var dataReader = cmd.ExecuteReader())
                     {
                         var lista = PopularLista(dataReader);

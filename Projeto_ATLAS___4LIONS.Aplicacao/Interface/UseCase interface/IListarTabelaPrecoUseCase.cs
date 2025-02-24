@@ -10,6 +10,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface
     public interface IListarTabelaPrecoUseCase
     {
         public IEnumerable<TabelaPrecoDTO> Executar();
-        public TabelaPrecoDTO? ExecutarRecuperarPorId(int id);
+        public TabelaPrecoDTO? ExecutarRecuperarPorId(Guid id);
     }
 }

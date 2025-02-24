@@ -3,6 +3,7 @@ using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.Interface_Adapter;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
+using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 using Projeto_ATLAS___4LIONS.Infra.Servicos;
 
 namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
@@ -24,21 +25,21 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 conexao.Open();
 
                 string sql = @"
-                INSERT INTO pessoa (Nome, Email, Contato, DataNascimento, Cpf, Cnpj, NumeroCnh, VencimentoCnh, DataCriacao)
-                VALUES (@Nome, @Email, @Contato, @DataNascimento, @Cpf, @Cnpj, @NumeroCnh, @VencimentoCnh, @DataCriacao)";
+                INSERT INTO pessoa (data_criacao,vencimento_cnh,data_registro,id,nome,email,contato,numero_cnh,tipo_pessoa,numero_documento)
+                VALUES (@data_criacao,@vencimento_cnh,@data_registro,@id,@nome,@email,@contato,@numero_cnh,@tipo_pessoa,@numero_documento)";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    cmd.Parameters.AddWithValue("@Nome", pessoa.Nome);
-                    cmd.Parameters.AddWithValue("@Email", pessoa.Email);
-                    cmd.Parameters.AddWithValue("@Contato", pessoa.Contato);
-                    cmd.Parameters.AddWithValue("@DataNascimento", pessoa.DataNascimento);
-                    cmd.Parameters.AddWithValue("@Cpf", pessoa.Cpf ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@Cnpj", pessoa.Cnpj ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@NumeroCnh", pessoa.NumeroCnh ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@VencimentoCnh", pessoa.VencimentoCnh ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@DataCriacao", pessoa.DataCriacao);
-
+                    cmd.Parameters.AddWithValue("@id", pessoa.Id);
+                    cmd.Parameters.AddWithValue("@data_criacao", pessoa.DataCriacao);
+                    cmd.Parameters.AddWithValue("@nome", pessoa.Nome);
+                    cmd.Parameters.AddWithValue("@email", pessoa.Email);
+                    cmd.Parameters.AddWithValue("@contato", pessoa.Contato);
+                    cmd.Parameters.AddWithValue("@data_registro", pessoa.DataRegistro);
+                    cmd.Parameters.AddWithValue("@tipo_pessoa", pessoa.TipoPessoa.ToString());
+                    cmd.Parameters.AddWithValue("@numero_documento", pessoa.NumeroDocumento);
+                    cmd.Parameters.AddWithValue("@numero_cnh", pessoa.NumeroCnh ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@vencimento_Cnh", pessoa.VencimentoCnh ?? (object)DBNull.Value);
                     cmd.ExecuteNonQuery();
                     //pessoaDto.Id = (int)cmd.LastInsertedId;
                 }
@@ -51,11 +52,11 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             {
                 conexao.Open();
 
-                string sql = "DELETE FROM pessoa WHERE Id = @Id";
+                string sql = "DELETE FROM pessoa WHERE id = @id";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    cmd.Parameters.AddWithValue("@Id", pessoaDto.Id);
+                    cmd.Parameters.AddWithValue("@id", pessoaDto.Id);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -79,17 +80,17 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             }
         }
 
-        public PessoaDTO? RecuperarPorId(int id)
+        public PessoaDTO? RecuperarPorId(Guid id)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 
-                string sql = "SELECT * FROM pessoa WHERE Id = @Id";
+                string sql = "SELECT * FROM pessoa WHERE id = @id";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.Parameters.AddWithValue("@id", id);
 
                     using (var dataReader = cmd.ExecuteReader())
                     {
@@ -106,7 +107,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             {
                 conexao.Open();
 
-                string sql = "SELECT * FROM pessoa WHERE NumeroCnh IS NULL";
+                string sql = "SELECT * FROM pessoa WHERE numero_cnh IS NULL";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
@@ -118,19 +119,19 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             }
         }
 
-        public void IncluirCNH(int id, string numeroCnh, DateTime vencimentoCnh)
+        public void IncluirCNH(Guid id, string numeroCnh, DateTime vencimentoCnh)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 
-                string sql = "UPDATE pessoa SET NumeroCnh = @NumeroCnh, VencimentoCnh = @VencimentoCnh WHERE Id = @Id";
+                string sql = "UPDATE pessoa SET numero_cnh = @numero_cnh, vencimento_cnh = @vencimento_cnh WHERE id = @id";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    cmd.Parameters.AddWithValue("@NumeroCnh", numeroCnh);
-                    cmd.Parameters.AddWithValue("@VencimentoCnh", vencimentoCnh);
-                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.Parameters.AddWithValue("@numeroCnh", numeroCnh);
+                    cmd.Parameters.AddWithValue("@vencimentoCnh", vencimentoCnh);
+                    cmd.Parameters.AddWithValue("@id", id);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -142,29 +143,25 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
             while (dataReader.Read())
             {
-                var nome = Convert.ToString(dataReader["Nome"]);
-                var email = Convert.ToString(dataReader["Email"]);
-                var contato = Convert.ToString(dataReader["Contato"]);
-                var dataNascimento = dataReader["DataNascimento"] != DBNull.Value
-                    ? Convert.ToDateTime(dataReader["DataNascimento"])
-                    : (DateTime?)null; // Opcional para pessoa jurídica
-                var cpf = dataReader["Cpf"] != DBNull.Value
-                    ? Convert.ToString(dataReader["Cpf"])
-                    : null;
-                var cnpj = dataReader["Cnpj"] != DBNull.Value
-                    ? Convert.ToString(dataReader["Cnpj"])
-                    : null;
+                var id = dataReader["id"].ToString();
+                var nome = Convert.ToString(dataReader["nome"]);
+                var email = Convert.ToString(dataReader["email"]);
+                var contato = Convert.ToString(dataReader["contato"]);
+                var dataRegistro = Convert.ToDateTime(dataReader["data_registro"]);
+                var tipoPessoa = Enum.Parse<ETipoPessoa>(dataReader["tipo_pessoa"].ToString());
+                var numeroDocumento = dataReader["numero_documento"].ToString();
 
-                var pessoaDto = new PessoaDTO(nome, email, contato, cpf, cnpj,dataNascimento)
+
+                var pessoaDto = new PessoaDTO(nome, email, contato,tipoPessoa,numeroDocumento,dataRegistro)
                 {
-                    Id = Convert.ToInt32(dataReader["Id"]),
-                    NumeroCnh = dataReader["NumeroCnh"] != DBNull.Value
-                        ? Convert.ToString(dataReader["NumeroCnh"])
+                   Id = Guid.Parse(dataReader["id"].ToString()),
+                    NumeroCnh = dataReader["numero_cnh"] != DBNull.Value
+                        ? Convert.ToString(dataReader["numero_cnh"])
                         : null,
-                    VencimentoCnh = dataReader["VencimentoCnh"] != DBNull.Value
-                        ? Convert.ToDateTime(dataReader["VencimentoCnh"])
+                    VencimentoCnh = dataReader["vencimento_cnh"] != DBNull.Value
+                        ? Convert.ToDateTime(dataReader["vencimento_cnh"])
                         : (DateTime?)null,
-                    DataCriacao = Convert.ToDateTime(dataReader["DataCriacao"])
+                    DataCriacao = Convert.ToDateTime(dataReader["data_criacao"])
                 };
 
                 lista.Add(pessoaDto);

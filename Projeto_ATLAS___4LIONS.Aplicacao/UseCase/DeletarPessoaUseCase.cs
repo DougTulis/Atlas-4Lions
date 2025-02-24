@@ -18,20 +18,9 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             try
             {
-                var _pessoa = new Pessoa
-                {
-                    Id = pessoaDto.Id,
-                    Nome = pessoaDto.Nome,
-                    Email = pessoaDto.Email,
-                    Contato = pessoaDto.Contato,
-                    DataNascimento = pessoaDto.DataNascimento,
-                    Cpf = pessoaDto.Cpf,
-                    DataCriacao = pessoaDto.DataCriacao,
-                    VencimentoCnh = pessoaDto.VencimentoCnh,
-                    NumeroCnh = pessoaDto.NumeroCnh
-                };
+                var pessoa = Pessoa.Create(pessoaDto.Nome, pessoaDto.Email, pessoaDto.Contato, pessoaDto.TipoPessoa, pessoaDto.NumeroDocumento, pessoaDto.DataRegistro);
 
-                if (!_pessoa.Validacao())
+                if (!pessoa.Validacao())
                 {
                     return;
                 }

@@ -2,7 +2,6 @@
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.Servicos;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
-using Projeto_ATLAS___4LIONS.Aplicacao.Servicos;
 using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
 using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 using Projeto_ATLAS___4LIONS.Infra.Repositorios;
@@ -14,17 +13,14 @@ namespace Projeto_ATLAS___4LIONS.Forms
 {
     public partial class FrmCadLocacao : Form
     {
-        private readonly ILocacaoService _locacaoService;
-        private readonly IPendenciaFinanceiraService _pendenciaService;
+       
         private readonly IListarPessoaUseCase _listarPessoaUseCase;
         private readonly IListarAutomovelUseCase _listarAutomovelUseCase;
         private readonly IListarTabelaPrecoUseCase _listarTabelaPrecoUseCase;
 
 
-        public FrmCadLocacao(ILocacaoService locacaoService, IPendenciaFinanceiraService pendenciaService, IListarPessoaUseCase listarPessoaUseCase, IListarAutomovelUseCase listarAutomovelUseCase, IListarTabelaPrecoUseCase listarTabelaPrecoUseCase)
+        public FrmCadLocacao(IListarPessoaUseCase listarPessoaUseCase, IListarAutomovelUseCase listarAutomovelUseCase, IListarTabelaPrecoUseCase listarTabelaPrecoUseCase)
         {
-            _locacaoService = locacaoService;
-            _pendenciaService = pendenciaService;
             _listarPessoaUseCase = listarPessoaUseCase;
             _listarAutomovelUseCase = listarAutomovelUseCase;
             _listarTabelaPrecoUseCase = listarTabelaPrecoUseCase;
@@ -58,8 +54,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void cmbTipoLocacao_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbTipoLocacao.SelectedItem == null) return;
-            lblParcelas.Visible = cmbTipoLocacao.SelectedItem.Equals(ETipoLocacao.CONTRATO);
+//lblParcelas.Visible = cmbTipoLocacao.SelectedItem.Equals(ETipoLocacao.CONTRATO);
             cmbParcelas.Visible = lblParcelas.Visible;
         }
 
@@ -81,11 +76,11 @@ namespace Projeto_ATLAS___4LIONS.Forms
                 DateTime dataSaida = DateTime.Parse(txtSaida.Text);
                 DateTime dataRetorno = DateTime.Parse(txtRetorno.Text);
 
-                int idLocacao = _locacaoService.CadastrarLocacao(locatarioDto, condutorDto, automovelDto, dataSaida, dataRetorno, (ETipoLocacao)cmbTipoLocacao.SelectedItem);
+             //   int idLocacao = _locacaoService.CadastrarLocacao(locatarioDto, condutorDto, automovelDto, dataSaida, dataRetorno, (ETipoLocacao)cmbTipoLocacao.SelectedItem);
 
-                int idPreco = automovelDto.IdPreco ?? throw new Exception("Preço não encontrado.");
+               // int idPreco = automovelDto.IdPreco ?? throw new Exception("Preço não encontrado.");
 
-                _pendenciaService.CriarPendenciaFinanceira(idLocacao, idPreco, numeroParcelas);
+//                _pendenciaService.CriarPendenciaFinanceira(idLocacao, idPreco, numeroParcelas);
 
                 MessageBox.Show("Locação cadastrada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -112,8 +107,8 @@ namespace Projeto_ATLAS___4LIONS.Forms
             if (cmbAutomovel.SelectedItem is AutomovelDTO automovelSelecionado)
             {
 
-                var precoDiaria = _listarTabelaPrecoUseCase.ExecutarRecuperarPorId(automovelSelecionado.IdPreco.Value);
-                txtPreco.Text = precoDiaria.Valor.ToString("C");
+              //  var precoDiaria = _listarTabelaPrecoUseCase.ExecutarRecuperarPorId(automovelSelecionado.IdPreco.Value);
+                //txtPreco.Text = precoDiaria.Valor.ToString("C");
             }
             else
             {

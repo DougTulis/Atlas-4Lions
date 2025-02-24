@@ -9,16 +9,16 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 {
     public class AlterarStatusVeiculoUseCase : IAlterarStatusVeiculoUseCase
     {
-        private readonly IAutomovelRepositorio automovelRepositorio;
+        private readonly IAutomovelRepositorio _automovelRepositorio;
         public AlterarStatusVeiculoUseCase(IAutomovelRepositorio automovelRepositorio)
         {
-            this.automovelRepositorio = automovelRepositorio;
+            _automovelRepositorio = automovelRepositorio;
         }
-        public void Executar(int automovelId, EStatusVeiculo novoStatus)
+        public void Executar(Guid automovelId, EStatusVeiculo novoStatus)
         {
             try
             {
-                automovelRepositorio.AtualizarStatus(automovelId, novoStatus);
+                _automovelRepositorio.AtualizarStatus(automovelId, novoStatus);
             }
             catch (MySqlException ex)
             {

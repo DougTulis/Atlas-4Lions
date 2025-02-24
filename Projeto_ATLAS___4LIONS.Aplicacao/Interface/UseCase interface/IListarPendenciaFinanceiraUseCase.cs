@@ -10,7 +10,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface
     public interface IListarPendenciaFinanceiraUseCase
     {
         public IEnumerable<PendenciaFinanceiraDTO> Executar();
-        public PendenciaFinanceiraDTO? ExecutarRecuperarPorId(int id);
+        public PendenciaFinanceiraDTO? ExecutarRecuperarPorId(Guid id);
 
     }
 }

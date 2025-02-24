@@ -32,20 +32,20 @@
             txtEmail = new TextBox();
             txtContato = new TextBox();
             txtDataNascimento = new TextBox();
-            txtCpf = new TextBox();
-            txtCnpj = new TextBox();
             lblNome = new Label();
             lblEmail = new Label();
             lblContato = new Label();
             lblDataNascimento = new Label();
-            lblCnpj = new Label();
-            lblCpf = new Label();
             btnCadastrarPessoa = new Button();
+            cbmTipoPessoa = new ComboBox();
+            lblTipoPessoa = new Label();
+            txtNumeroDocumento = new TextBox();
+            lblNumeroDocumento = new Label();
             SuspendLayout();
             // 
             // textNome
             // 
-            textNome.Location = new Point(103, 125);
+            textNome.Location = new Point(138, 120);
             textNome.Name = "textNome";
             textNome.Size = new Size(268, 27);
             textNome.TabIndex = 0;
@@ -53,7 +53,7 @@
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(392, 125);
+            txtEmail.Location = new Point(427, 120);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(268, 27);
             txtEmail.TabIndex = 1;
@@ -61,7 +61,7 @@
             // 
             // txtContato
             // 
-            txtContato.Location = new Point(103, 192);
+            txtContato.Location = new Point(138, 187);
             txtContato.Name = "txtContato";
             txtContato.Size = new Size(268, 27);
             txtContato.TabIndex = 2;
@@ -69,32 +69,16 @@
             // 
             // txtDataNascimento
             // 
-            txtDataNascimento.Location = new Point(392, 192);
+            txtDataNascimento.Location = new Point(427, 187);
             txtDataNascimento.Name = "txtDataNascimento";
             txtDataNascimento.Size = new Size(268, 27);
             txtDataNascimento.TabIndex = 3;
             txtDataNascimento.TextChanged += txtDataNascimento_TextChanged;
             // 
-            // txtCpf
-            // 
-            txtCpf.Location = new Point(103, 261);
-            txtCpf.Name = "txtCpf";
-            txtCpf.Size = new Size(268, 27);
-            txtCpf.TabIndex = 4;
-            txtCpf.TextChanged += txtCpf_TextChanged;
-            // 
-            // txtCnpj
-            // 
-            txtCnpj.Location = new Point(392, 261);
-            txtCnpj.Name = "txtCnpj";
-            txtCnpj.Size = new Size(268, 27);
-            txtCnpj.TabIndex = 5;
-            txtCnpj.TextChanged += txtCnpj_TextChanged;
-            // 
             // lblNome
             // 
             lblNome.AutoSize = true;
-            lblNome.Location = new Point(103, 103);
+            lblNome.Location = new Point(138, 98);
             lblNome.Name = "lblNome";
             lblNome.Size = new Size(170, 20);
             lblNome.TabIndex = 6;
@@ -104,7 +88,7 @@
             // lblEmail
             // 
             lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(392, 103);
+            lblEmail.Location = new Point(427, 98);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(101, 20);
             lblEmail.TabIndex = 7;
@@ -114,7 +98,7 @@
             // lblContato
             // 
             lblContato.AutoSize = true;
-            lblContato.Location = new Point(103, 169);
+            lblContato.Location = new Point(138, 164);
             lblContato.Name = "lblContato";
             lblContato.Size = new Size(191, 20);
             lblContato.TabIndex = 8;
@@ -124,35 +108,16 @@
             // lblDataNascimento
             // 
             lblDataNascimento.AutoSize = true;
-            lblDataNascimento.Location = new Point(392, 169);
+            lblDataNascimento.Location = new Point(427, 164);
             lblDataNascimento.Name = "lblDataNascimento";
-            lblDataNascimento.Size = new Size(194, 20);
+            lblDataNascimento.Size = new Size(228, 20);
             lblDataNascimento.TabIndex = 9;
-            lblDataNascimento.Text = "Insira a data de nascimento:";
+            lblDataNascimento.Text = "Data nascimento/Data fundação:";
             lblDataNascimento.Click += lblDataNascimento_Click;
-            // 
-            // lblCnpj
-            // 
-            lblCnpj.AutoSize = true;
-            lblCnpj.Location = new Point(392, 237);
-            lblCnpj.Name = "lblCnpj";
-            lblCnpj.Size = new Size(263, 20);
-            lblCnpj.TabIndex = 10;
-            lblCnpj.Text = "Insira o CNPJ (caso for pessoa jurídica)";
-            lblCnpj.Click += lblCnpj_Click;
-            // 
-            // lblCpf
-            // 
-            lblCpf.AutoSize = true;
-            lblCpf.Location = new Point(103, 237);
-            lblCpf.Name = "lblCpf";
-            lblCpf.Size = new Size(240, 20);
-            lblCpf.TabIndex = 11;
-            lblCpf.Text = "Insira o CPF (caso for pessoa física)";
             // 
             // btnCadastrarPessoa
             // 
-            btnCadastrarPessoa.Location = new Point(267, 325);
+            btnCadastrarPessoa.Location = new Point(295, 332);
             btnCadastrarPessoa.Name = "btnCadastrarPessoa";
             btnCadastrarPessoa.Size = new Size(233, 61);
             btnCadastrarPessoa.TabIndex = 12;
@@ -160,29 +125,65 @@
             btnCadastrarPessoa.UseVisualStyleBackColor = true;
             btnCadastrarPessoa.Click += btnCadastrarPessoa_Click;
             // 
+            // cbmTipoPessoa
+            // 
+            cbmTipoPessoa.FormattingEnabled = true;
+            cbmTipoPessoa.Location = new Point(138, 256);
+            cbmTipoPessoa.Name = "cbmTipoPessoa";
+            cbmTipoPessoa.Size = new Size(268, 28);
+            cbmTipoPessoa.TabIndex = 13;
+            cbmTipoPessoa.SelectedIndexChanged += cbmTipoPessoa_SelectedIndexChanged;
+            // 
+            // lblTipoPessoa
+            // 
+            lblTipoPessoa.AutoSize = true;
+            lblTipoPessoa.Location = new Point(138, 233);
+            lblTipoPessoa.Name = "lblTipoPessoa";
+            lblTipoPessoa.Size = new Size(177, 20);
+            lblTipoPessoa.TabIndex = 14;
+            lblTipoPessoa.Text = "Escolha o tipo de pessoa:";
+            // 
+            // txtNumeroDocumento
+            // 
+            txtNumeroDocumento.Location = new Point(427, 257);
+            txtNumeroDocumento.Name = "txtNumeroDocumento";
+            txtNumeroDocumento.Size = new Size(268, 27);
+            txtNumeroDocumento.TabIndex = 15;
+            txtNumeroDocumento.TextChanged += txtNumeroDocumento_TextChanged;
+            // 
+            // lblNumeroDocumento
+            // 
+            lblNumeroDocumento.AutoSize = true;
+            lblNumeroDocumento.Location = new Point(427, 233);
+            lblNumeroDocumento.Name = "lblNumeroDocumento";
+            lblNumeroDocumento.Size = new Size(220, 20);
+            lblNumeroDocumento.TabIndex = 16;
+            lblNumeroDocumento.Text = "Informe o numero do CNPJ/CPF:";
+            lblNumeroDocumento.Click += lblNumeroDocumento_Click;
+            // 
             // FrmCadPessoas
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
             ClientSize = new Size(1098, 647);
+            Controls.Add(lblNumeroDocumento);
+            Controls.Add(txtNumeroDocumento);
+            Controls.Add(lblTipoPessoa);
+            Controls.Add(cbmTipoPessoa);
             Controls.Add(btnCadastrarPessoa);
-            Controls.Add(lblCpf);
-            Controls.Add(lblCnpj);
             Controls.Add(lblDataNascimento);
             Controls.Add(lblContato);
             Controls.Add(lblEmail);
             Controls.Add(lblNome);
-            Controls.Add(txtCnpj);
-            Controls.Add(txtCpf);
             Controls.Add(txtDataNascimento);
             Controls.Add(txtContato);
             Controls.Add(txtEmail);
             Controls.Add(textNome);
             FormBorderStyle = FormBorderStyle.None;
+            ImeMode = ImeMode.NoControl;
             Name = "FrmCadPessoas";
             Text = "FrmCadPessoas";
-            FormClosing += FrmCadPessoas_FormClosing;
             Load += FrmCadPessoas_Load;
             ResumeLayout(false);
             PerformLayout();
@@ -194,14 +195,14 @@
         private TextBox txtEmail;
         private TextBox txtContato;
         private TextBox txtDataNascimento;
-        private TextBox txtCpf;
-        private TextBox txtCnpj;
         private Label lblNome;
         private Label lblEmail;
         private Label lblContato;
         private Label lblDataNascimento;
-        private Label lblCnpj;
-        private Label lblCpf;
         private Button btnCadastrarPessoa;
+        private ComboBox cbmTipoPessoa;
+        private Label lblTipoPessoa;
+        private TextBox txtNumeroDocumento;
+        private Label lblNumeroDocumento;
     }
 }

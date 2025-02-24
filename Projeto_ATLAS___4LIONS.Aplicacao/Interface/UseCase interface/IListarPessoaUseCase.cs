@@ -11,7 +11,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface
     {
         public IEnumerable<PessoaDTO> ExecutarDadosCompletos();
         public IEnumerable<PessoaDTO> ExecutarDadosBreves();
-        public PessoaDTO? ExecutarRecuperarPorId(int id);
+        public PessoaDTO? ExecutarRecuperarPorId(Guid id);
         public IEnumerable<PessoaDTO> ExecutarRecuperacaoSemCnh();
     }
 }

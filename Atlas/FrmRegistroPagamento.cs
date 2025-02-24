@@ -11,17 +11,10 @@ namespace Projeto_ATLAS___4LIONS.Forms
 {
     public partial class FrmRegistroPagamento : Form
     {
-        private readonly IListarPendenciaFinanceiraUseCase _listarPendFinUseCase;
-        private readonly IIncluirPagamentoUseCase _incluirPagamentoUseCase;
-        private readonly IListarParcelaUseCase _listarParcelaUseCase;
+
         private FrmRegistroPagamento2 _frmRegistroPagamento2;
 
-        public FrmRegistroPagamento(IListarPendenciaFinanceiraUseCase listarPendFinUseCase, IIncluirPagamentoUseCase incluirPagamentoUseCase, IListarParcelaUseCase listarParcelaUseCase, FrmRegistroPagamento2 frmRegistroPagamento2)
-        {
-            _listarPendFinUseCase = listarPendFinUseCase;
-            _incluirPagamentoUseCase = incluirPagamentoUseCase;
-            _listarParcelaUseCase = listarParcelaUseCase;
-            _frmRegistroPagamento2 = frmRegistroPagamento2;
+        public FrmRegistroPagamento() { 
 
             InitializeComponent();
             AtualizarGridView();
@@ -34,7 +27,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private void AtualizarGridView()
         {
             dgvHistoricoPendenciaFinanceiras.AutoGenerateColumns = false;
-            dgvHistoricoPendenciaFinanceiras.DataSource = _listarPendFinUseCase.Executar().ToList();
+//            dgvHistoricoPendenciaFinanceiras.DataSource = _listarPendFinUseCase.Executar().ToList();
             dgvHistoricoPendenciaFinanceiras.Refresh();
         }
         private void dgvHistoricoPendenciaFinanceiras_DoubleClick(object sender, EventArgs e)

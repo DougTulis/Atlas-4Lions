@@ -8,8 +8,8 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         private List<Notificacao> listaNotificacoes = new List<Notificacao>();
 
         public IReadOnlyCollection<Notificacao> Notificacoes => listaNotificacoes;
-        public int Id { get; private set; }
-        public DateTime DataCriacao { get; private set; } = DateTime.Now;
+        public Guid Id { get; private set; }
+        public DateTime DataCriacao { get; private set; }
 
         protected void SetNotificacoesLista(List<Notificacao> notificacoes)
         {
@@ -17,14 +17,8 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         }
         protected ModeloAbstrato()
         {
-            Id = 1;
+            Id = Guid.NewGuid();
             DataCriacao = DateTime.Now;
-        }
-
-        protected ModeloAbstrato(int id, DateTime dataCriacao)
-        {
-            Id = id;
-            DataCriacao = dataCriacao;
         }
 
         public abstract bool Validacao();

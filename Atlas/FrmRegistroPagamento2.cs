@@ -82,15 +82,15 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void btnRegistrarPagamento_Click(object sender, EventArgs e)
         {
-            int idParcelaSelecionada = Convert.ToInt16(txtParcelaSelecionada.Text);
-            var parcelaSelecionada = (ParcelaDTO)_listarParcelaUseCase.ExecutarRecuperacaoPorId(idParcelaSelecionada);
-            parcelaSelecionada.PendenciaFinanceiraId = idPendFin;
-            parcelaSelecionada.ValorPago = Convert.ToDecimal(txtValorPago.Text);
-            parcelaSelecionada.DataPagamento = Convert.ToDateTime(txtDataPagamento.Text);
-            parcelaSelecionada.EspeciePagamento = (EEspecie)cmbEspeciePagamento.SelectedItem;
-            _incluirPagamentoUseCase.Executar(parcelaSelecionada);
-            MessageBox.Show("Locação cadastrada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Close();
+           // int idParcelaSelecionada = Convert.ToInt16(txtParcelaSelecionada.Text);
+         //   var parcelaSelecionada = (ParcelaDTO)_listarParcelaUseCase.ExecutarRecuperacaoPorId(idParcelaSelecionada);
+          /// parcelaSelecionada.PendenciaFinanceiraId = idPendFin;
+          /// parcelaSelecionada.ValorPago = Convert.ToDecimal(txtValorPago.Text);
+          /// parcelaSelecionada.DataPagamento = Convert.ToDateTime(txtDataPagamento.Text);
+          /// parcelaSelecionada.EspeciePagamento = (EEspecie)cmbEspeciePagamento.SelectedItem;
+          /// _incluirPagamentoUseCase.Executar(parcelaSelecionada);
+          /// MessageBox.Show("Locação cadastrada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+          /// this.Close();
 
         }
 

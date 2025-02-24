@@ -26,7 +26,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             }
 
         }
-        public PendenciaFinanceiraDTO? ExecutarRecuperarPorId(int id)
+        public PendenciaFinanceiraDTO? ExecutarRecuperarPorId(Guid id)
         {
             try
             {

@@ -45,7 +45,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             }
 
         }
-        public LocacaoDTO? ExecutarRecuperarPorId(int id)
+        public LocacaoDTO? ExecutarRecuperarPorId(Guid id)
         {
             try
             {

@@ -1,5 +1,6 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 
 namespace Projeto_ATLAS___4LIONS.Forms
 {
@@ -11,9 +12,13 @@ namespace Projeto_ATLAS___4LIONS.Forms
             _cadastrarPessoaUseCase = cadastrarPessoaUseCase;
 
             InitializeComponent();
-
+            CarregarCombos();
         }
 
+        private void cbmTipoPessoa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
         private void textNome_TextChanged(object sender, EventArgs e)
         {
 
@@ -33,13 +38,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
         {
 
         }
-
-        private void txtCpf_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtCnpj_TextChanged(object sender, EventArgs e)
+        private void txtNumeroDocumento_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -68,41 +67,33 @@ namespace Projeto_ATLAS___4LIONS.Forms
         {
 
         }
-
-        private void lblCnpj_Click(object sender, EventArgs e)
+        private void lblNumeroDocumento_Click(object sender, EventArgs e)
         {
 
         }
-
         private void btnCadastrarPessoa_Click(object sender, EventArgs e)
         {
-            try
+
+
+            var pessoaDto = new PessoaDTO
             {
+                Nome = textNome.Text,
+                Email = txtEmail.Text,
+                Contato = txtContato.Text,
+                DataRegistro = Convert.ToDateTime(txtDataNascimento.Text),
+                TipoPessoa = (ETipoPessoa)cbmTipoPessoa.SelectedItem,
+                NumeroDocumento = txtNumeroDocumento.Text,
+            };
+            _cadastrarPessoaUseCase.Executar(pessoaDto);
 
-                var pessoaDto = new PessoaDTO
-                {
-                    Nome = textNome.Text,
-                    Email = txtEmail.Text,
-                    Contato = txtContato.Text,
-                    Cpf = txtCpf.Text,
-                    Cnpj = txtCnpj.Text,
-                    DataNascimento = string.IsNullOrWhiteSpace(txtDataNascimento.Text) ? null : Convert.ToDateTime(txtDataNascimento.Text)
-                };
-                _cadastrarPessoaUseCase.Executar(pessoaDto);
-
-                MessageBox.Show("Pessoa cadastrada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            MessageBox.Show("Pessoa cadastrada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
-        private void FrmCadPessoas_FormClosing(object sender, FormClosingEventArgs e)
+  
+        private void CarregarCombos()
         {
-            e.Cancel = true;
-            this.Hide();
+            cbmTipoPessoa.DataSource = Enum.GetValues(typeof(ETipoPessoa));
+            cbmTipoPessoa.SelectedIndex = -1;
         }
+
     }
 }

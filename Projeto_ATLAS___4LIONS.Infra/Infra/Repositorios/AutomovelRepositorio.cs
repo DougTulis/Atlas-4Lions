@@ -17,31 +17,29 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             _conexaoAdapter = conexaoAdapter;
         }
 
-        public void Adicionar(AutomovelDTO automovelDto)
+        public void Adicionar(Automovel automovel)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 
                 string sql = @"
-                        INSERT INTO automovel (Modelo, Placa, Cor, Status, Chassi, Renavam, OleoKm, DataCriacao, PastilhaFreioKm, IdPreco)
-                        VALUES (@Modelo, @Placa, @Cor, @Status, @Chassi, @Renavam, @OleoKm, @DataCriacao, @PastilhaFreioKm, @IdPreco)";
+                        INSERT INTO automovel (modelo, placa, cor, status, chassi, renavam, oleo_km, data_criacao, pastilha_freio_Km, id_preco)
+                        VALUES (@modelo, @placa, @cor, @status, @chassi, @renavam, @oleo_km, @data_criacao, @pastilha_freio_Km, @id_preco)";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    cmd.Parameters.AddWithValue("@Modelo", automovelDto.Modelo);
-                    cmd.Parameters.AddWithValue("@Placa", automovelDto.Placa);
-                    cmd.Parameters.AddWithValue("@Cor", automovelDto.Cor);
-                    cmd.Parameters.AddWithValue("@Status", (int)automovelDto.Status);
-                    cmd.Parameters.AddWithValue("@Chassi", automovelDto.Chassi);
-                    cmd.Parameters.AddWithValue("@Renavam", automovelDto.Renavam);
-                    cmd.Parameters.AddWithValue("@OleoKm", automovelDto.Oleokm);
-                    cmd.Parameters.AddWithValue("@DataCriacao", automovelDto.DataCriacao);
-                    cmd.Parameters.AddWithValue("@PastilhaFreioKm", automovelDto.PastilhaFreioKm);
-                    cmd.Parameters.AddWithValue("@IdPreco", automovelDto.IdPreco);
-
+                    cmd.Parameters.AddWithValue("@modelo", automovel.Modelo);
+                    cmd.Parameters.AddWithValue("@placa", automovel.Placa);
+                    cmd.Parameters.AddWithValue("@cor", automovel.Cor);
+                    cmd.Parameters.AddWithValue("@status", automovel.Status);
+                    cmd.Parameters.AddWithValue("@chassi", automovel.Chassi);
+                    cmd.Parameters.AddWithValue("@renavam", automovel.Renavam);
+                    cmd.Parameters.AddWithValue("@oleo_km", automovel.Oleokm);
+                    cmd.Parameters.AddWithValue("@data_criacao", automovel.DataCriacao);
+                    cmd.Parameters.AddWithValue("@pastilha_freio_km", automovel.PastilhaFreioKm);
+                    cmd.Parameters.AddWithValue("@id_preco", automovel.Preco.Id);
                     cmd.ExecuteNonQuery();
-                    automovelDto.Id = (int)cmd.LastInsertedId;
                 }
             }
         }
@@ -52,7 +50,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             {
                 conexao.Open();
 
-                string sql = "DELETE FROM automovel WHERE Id = @id";
+                string sql = "DELETE FROM automovel WHERE id = @id";
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
                     cmd.Parameters.AddWithValue("@id", automovelDto.Id);
@@ -83,17 +81,17 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             {
                 var automovel = new AutomovelDTO
                 {
-                    Id = Convert.ToInt32(dataReader["Id"]),
-                    Modelo = dataReader["Modelo"].ToString(),
-                    Placa = dataReader["Placa"].ToString(),
-                    Cor = dataReader["Cor"].ToString(),
-                    Status = Enum.Parse<EStatusVeiculo>(dataReader["Status"].ToString()),
-                    Chassi = !Convert.IsDBNull(dataReader["Chassi"]) ? dataReader["Chassi"].ToString() : null,
-                    Renavam = !Convert.IsDBNull(dataReader["Renavam"]) ? dataReader["Renavam"].ToString() : null,
-                    Oleokm = !Convert.IsDBNull(dataReader["OleoKm"]) ? (int?)Convert.ToInt32(dataReader["OleoKm"]) : null,
-                    PastilhaFreioKm = !Convert.IsDBNull(dataReader["PastilhaFreioKm"]) ? (int?)Convert.ToInt32(dataReader["PastilhaFreioKm"]) : null,
-                    DataCriacao = Convert.ToDateTime(dataReader["DataCriacao"]),
-                    IdPreco = dataReader["IdPreco"] != DBNull.Value ? Convert.ToInt32(dataReader["IdPreco"]) : (int?)null
+                    Id = Guid.Parse(dataReader["id"].ToString()),
+                    Modelo = dataReader["modelo"].ToString(),
+                    Placa = dataReader["placa"].ToString(),
+                    Cor = dataReader["cor"].ToString(),
+                    Status = Enum.Parse<EStatusVeiculo>(dataReader["status"].ToString()),
+                    Chassi = !Convert.IsDBNull(dataReader["chassi"]) ? dataReader["chassi"].ToString() : null,
+                    Renavam = !Convert.IsDBNull(dataReader["renavam"]) ? dataReader["renavam"].ToString() : null,
+                    Oleokm = !Convert.IsDBNull(dataReader["oleo_km"]) ? (int?)Convert.ToInt32(dataReader["oleo_km"]) : null,
+                    PastilhaFreioKm = !Convert.IsDBNull(dataReader["pastilha_freio_km"]) ? (int?)Convert.ToInt32(dataReader["pastilha_freio_km"]) : null,
+                    DataCriacao = Convert.ToDateTime(dataReader["data_criacao"]),
+                    IdPreco = Guid.Parse((dataReader["id_preco"].ToString()))
                 };
 
                 lista.Add(automovel);
@@ -103,28 +101,28 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
         }
 
 
-        public void AtualizarStatus(int automovelId, EStatusVeiculo novoStatus)
+        public void AtualizarStatus(Guid automovelId, EStatusVeiculo novoStatus)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
-                string sql = "UPDATE automovel SET Status = @Status WHERE Id = @Id";
+                string sql = "UPDATE automovel SET status = @status WHERE id = @id";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    cmd.Parameters.AddWithValue("@Status", (int)novoStatus);
-                    cmd.Parameters.AddWithValue("@Id", automovelId);
+                    cmd.Parameters.AddWithValue("@status", novoStatus);
+                    cmd.Parameters.AddWithValue("@id", automovelId);
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
-        public AutomovelDTO? RecuperarPorId(int id)
+        public AutomovelDTO? RecuperarPorId(Guid id)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
-                string sql = "SELECT * FROM automovel WHERE Id = @id";
+                string sql = "SELECT * FROM automovel WHERE id = @id";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
@@ -144,7 +142,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
-                string sql = "SELECT * FROM automovel WHERE Status = 1";
+                string sql = "SELECT * FROM automovel WHERE status = 'GARAGEM'";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 using (var dataReader = cmd.ExecuteReader())

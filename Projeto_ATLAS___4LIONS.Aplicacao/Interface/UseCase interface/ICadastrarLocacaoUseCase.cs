@@ -9,7 +9,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface
 {
     public interface ICadastrarLocacaoUseCase
     {
-        public int Executar(LocacaoDTO locacaoDto);
-        decimal CalcularValorTotal(DateTime saida, DateTime retorno, decimal precoDiaria);
+        public void Executar(LocacaoDTO locacaoDto);
     }
 }

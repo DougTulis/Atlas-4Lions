@@ -15,8 +15,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             this.pessoaRepositorio = pessoaRepositorio;
         }
 
-
-
         public void Executar(PessoaDTO pessoaDto)
         {
             try
@@ -34,22 +32,12 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 //    NumeroCnh = pessoaDto.NumeroCnh
                 //};
 
-                var pessoa = Pessoa.Create(
-                    pessoaDto.Nome,
-                    pessoaDto.Email,
-                    pessoaDto.Contato,
-                    pessoaDto.Cpf,
-                    pessoaDto.Cnpj,
-                    pessoaDto.DataNascimento);
+                var pessoa = Pessoa.Create(pessoaDto.Nome,pessoaDto.Email,pessoaDto.Contato, pessoaDto.TipoPessoa, pessoaDto.NumeroDocumento, pessoaDto.DataRegistro);
 
                 if (!pessoa.Validacao())
                 {
-                    string erros = "";
-                    foreach (Notificacao notificacao in pessoa.Notificacoes)
-                    {
-                        erros += $"{notificacao.NomePropriedade}: {notificacao.Mensagem}\n";
-                    }
-                    throw new Exception(erros);
+
+                    return;
                 }
 
                 pessoaRepositorio.Adicionar(pessoa);

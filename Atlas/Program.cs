@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
-using Projeto_ATLAS___4LIONS.Aplicacao.Servicos;
 using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
 using Projeto_ATLAS___4LIONS.Infra.Repositorios;
 using Projeto_ATLAS___4LIONS.Forms;
@@ -37,7 +36,6 @@ namespace Projeto_ATLAS___4LIONS
             services.AddSingleton<IAutomovelRepositorio, AutomovelRepositorio>();
             services.AddSingleton<ITabelaPrecoRepositorio, TabelaPrecoRepositorio>();
             services.AddSingleton<ILocacaoRepositorio, LocacaoRepositorio>();
-            services.AddSingleton<IParcelaRepositorio, ParcelaRepositorio>();
             services.AddSingleton<IPendenciaFinanceiraRepositorio, PendenciaFinanceiraRepositorio>();
 
 
@@ -59,11 +57,6 @@ namespace Projeto_ATLAS___4LIONS
             services.AddTransient<IListarAutomovelUseCase, ListarAutomovelUseCase>();
             services.AddTransient<IListarTabelaPrecoUseCase, ListarTabelaPrecoUseCase>();
             services.AddTransient<IListarHistoricoLocacaoUseCase, ListarHistoricoLocacaoUseCase>();
-            services.AddTransient<IIncluirPagamentoUseCase, IncluirPagamentoUseCase>();
-
-            // Serviços
-            services.AddTransient<ILocacaoService, LocacaoService>();
-            services.AddTransient<IPendenciaFinanceiraService, PendenciaFinanceiraServico>();
 
             // Forms
             services.AddTransient<FrmCadastroPreco>();

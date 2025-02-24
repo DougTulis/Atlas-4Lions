@@ -43,7 +43,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvHistoricoPessoasExclusaoPessoas.Rows[e.RowIndex];
-                int pessoaId = Convert.ToInt32(row.Cells[0].Value);
+                //Guid pessoaId = (row.Cells[0].Value);
 
                 DialogResult resultado = MessageBox.Show(
                     "Deseja realmente excluir esta pessoa?",
@@ -54,10 +54,11 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
                 if (resultado == DialogResult.Yes)
                 {
-                    var pessoaDto = _listarPessoaUseCase.ExecutarRecuperarPorId(pessoaId);
-                    _deletarPessoaUseCase.Executar(pessoaDto);
+                  //  var pessoaDto = _listarPessoaUseCase.ExecutarRecuperarPorId(pessoaId);
+                 //   _deletarPessoaUseCase.Executar(pessoaDto);
                     MessageBox.Show("Pessoa excluída com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                
+
                     AtualizarGridView();
                 }
             }

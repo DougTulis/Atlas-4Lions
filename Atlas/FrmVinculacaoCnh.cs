@@ -49,8 +49,8 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private void btnSelecionarPessoa_Click(object sender, EventArgs e)
         {
             int idPessoa = Convert.ToInt32(txtPessoa.Text);
-            var pessoaDto = _listarpessoaUseCase.ExecutarRecuperarPorId(idPessoa);
-            _incluirCnhUseCase.Executar(pessoaDto, txtNumeroCnh.Text, DateTime.Parse(txtVencimentoCnh.Text));
+          //  var pessoaDto = _listarpessoaUseCase.ExecutarRecuperarPorId(idPessoa);
+           // _incluirCnhUseCase.Executar(pessoaDto, txtNumeroCnh.Text, DateTime.Parse(txtVencimentoCnh.Text));
             MessageBox.Show("CNH vinculada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
         }

@@ -5,9 +5,6 @@ using Projeto_ATLAS___4LIONS.Aplicacao.Interface.Interface_Adapter;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 using Projeto_ATLAS___4LIONS.Infra.Servicos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 {
@@ -24,188 +21,72 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             _conexaoAdapter = conexaoAdapter;
         }
 
-        public int Adicionar(LocacaoDTO locacaoDto)
+        public void Adicionar(Locacao locacao)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 
-                // 🔥 Buscar objetos COMPLETOS
-                var locatarioDto = _pessoaRepositorio.RecuperarPorId(locacaoDto.IdLocatario);
-
-
-                var condutorDto = _pessoaRepositorio.RecuperarPorId(locacaoDto.IdCondutor);
-
-
-                var automovelDto = _automovelRepositorio.RecuperarPorId(locacaoDto.IdAutomovel);
-                 
-
-            
-                var locacao = new Locacao
-                {
-                    Saida = locacaoDto.Saida,
-                    Retorno = locacaoDto.Retorno,
-                    TipoLocacao = locacaoDto.TipoLocacao,
-                    ValorTotal = locacaoDto.ValorTotal,
-                    Locatario = new Pessoa
-                    {
-                        Id = locatarioDto.Id,
-                        Nome = locatarioDto.Nome,
-                        Email = locatarioDto.Email,
-                        Contato = locatarioDto.Contato,
-                        Cpf = locatarioDto.Cpf,
-                        Cnpj = locatarioDto.Cnpj,
-                        DataNascimento = locatarioDto.DataNascimento,
-                        NumeroCnh = locatarioDto.NumeroCnh,
-                        VencimentoCnh = locatarioDto.VencimentoCnh
-                    },
-                    Condutor = new Pessoa
-                    {
-                        Id = condutorDto.Id,
-                        Nome = condutorDto.Nome,
-                        Email = condutorDto.Email,
-                        Contato = condutorDto.Contato,
-                        Cpf = condutorDto.Cpf,
-                        Cnpj = condutorDto.Cnpj,
-                        DataNascimento = condutorDto.DataNascimento,
-                        NumeroCnh = condutorDto.NumeroCnh,
-                        VencimentoCnh = condutorDto.VencimentoCnh
-                    },
-                    Automovel = new Automovel
-                    {
-                        Id = automovelDto.Id,
-                        Modelo = automovelDto.Modelo,
-                        Placa = automovelDto.Placa,
-                        Cor = automovelDto.Cor,
-                        Chassi = automovelDto.Chassi,
-                        Renavam = automovelDto.Renavam,
-                        Oleokm = automovelDto.Oleokm,
-                        PastilhaFreioKm = automovelDto.PastilhaFreioKm,
-                        DataCriacao = automovelDto.DataCriacao,
-                        Status = automovelDto.Status
-                    },
-                    Status = EStatusLocacao.ANDAMENTO
-                };
-
-                // 🔥 Persistindo APENAS o Model no banco
                 string sql = @"
-                INSERT INTO Locacao 
-                (Saida, Retorno, TipoLocacao, ValorTotal, LocatarioId, CondutorId, AutomovelId, statusLocacao)
+                INSERT INTO locacao 
+                (saida, retorno, tipolocacao, valor_total, locatario_id, condutor_id, automovel_id, status_locacao,pendencia_financeira_id,id)
                 VALUES 
-                (@Saida, @Retorno, @TipoLocacao, @ValorTotal, @LocatarioId, @CondutorId, @AutomovelId, @statusLocacao)";
+                (@saida, @retorno, @tipolocacao, @valor_total, @locatario_id, @condutor_id, @automovel_id, @status_locacao,@pendencia_financeira_id,@id)";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    cmd.Parameters.AddWithValue("@Saida", locacao.Saida);
-                    cmd.Parameters.AddWithValue("@Retorno", locacao.Retorno);
-                    cmd.Parameters.AddWithValue("@TipoLocacao", locacao.TipoLocacao);
-                    cmd.Parameters.AddWithValue("@ValorTotal", locacao.ValorTotal);
-                    cmd.Parameters.AddWithValue("@LocatarioId", locacao.Locatario.Id);
-                    cmd.Parameters.AddWithValue("@CondutorId", locacao.Condutor.Id);
-                    cmd.Parameters.AddWithValue("@AutomovelId", locacao.Automovel.Id);
-                    cmd.Parameters.AddWithValue("@statusLocacao", locacao.Status);
-
+                    cmd.Parameters.AddWithValue("@id", locacao.Id);
+                    cmd.Parameters.AddWithValue("@saida", locacao.Saida);
+                    cmd.Parameters.AddWithValue("@retorno", locacao.Retorno);
+                    cmd.Parameters.AddWithValue("@tipo_locacao", locacao.TipoLocacao);
+                    cmd.Parameters.AddWithValue("@valor_total", locacao.ValorTotal);
+                    cmd.Parameters.AddWithValue("@locatario_id", locacao.Locatario.Id);
+                    cmd.Parameters.AddWithValue("@condutor_id", locacao.Condutor.Id);
+                    cmd.Parameters.AddWithValue("@automovel_id", locacao.Automovel.Id);
+                    cmd.Parameters.AddWithValue("@pendencia_financeira_id", locacao.PendenciaFinanceira.Id);
+                    cmd.Parameters.AddWithValue("@status_locacao", locacao.Status);
                     cmd.ExecuteNonQuery();
-                    return (int)cmd.LastInsertedId;
                 }
             }
         }
 
-        public void Atualizar(LocacaoDTO locacaoDto)
+        public void Atualizar(Locacao locacao)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
 
 
-                var locatario = _pessoaRepositorio.RecuperarPorId(locacaoDto.IdLocatario);
-
-
-                var condutor = _pessoaRepositorio.RecuperarPorId(locacaoDto.IdCondutor);
-
-
-                var automovel = _automovelRepositorio.RecuperarPorId(locacaoDto.IdAutomovel);
-   
-                var locacao = new Locacao
-                {
-                    Id = locacaoDto.Id,
-                    Saida = locacaoDto.Saida,
-                    Retorno = locacaoDto.Retorno,
-                    TipoLocacao = locacaoDto.TipoLocacao,
-                    ValorTotal = locacaoDto.ValorTotal,
-                    Locatario = new Pessoa
-                    {
-                        Id = locatario.Id,
-                        Nome = locatario.Nome,
-                        Email = locatario.Email,
-                        Contato = locatario.Contato,
-                        Cpf = locatario.Cpf,
-                        Cnpj = locatario.Cnpj,
-                        DataNascimento = locatario.DataNascimento,
-                        NumeroCnh = locatario.NumeroCnh,
-                        VencimentoCnh = locatario.VencimentoCnh
-                    },
-                    Condutor = new Pessoa
-                    {
-                        Id = condutor.Id,
-                        Nome = condutor.Nome,
-                        Email = condutor.Email,
-                        Contato = condutor.Contato,
-                        Cpf = condutor.Cpf,
-                        Cnpj = condutor.Cnpj,
-                        DataNascimento = condutor.DataNascimento,
-                        NumeroCnh = condutor.NumeroCnh,
-                        VencimentoCnh = condutor.VencimentoCnh
-                    },
-                    Automovel = new Automovel
-                    {
-                        Id = automovel.Id,
-                        Modelo = automovel.Modelo,
-                        Placa = automovel.Placa,
-                        Cor = automovel.Cor,
-                        Chassi = automovel.Chassi,
-                        Renavam = automovel.Renavam,
-                        Oleokm = automovel.Oleokm,
-                        PastilhaFreioKm = automovel.PastilhaFreioKm,
-                        DataCriacao = automovel.DataCriacao,
-                        Status = automovel.Status
-                    },
-                    Status = locacaoDto.Status
-                };
-
                 string sql = @"
         UPDATE Locacao 
-        SET Saida = @Saida, Retorno = @Retorno, TipoLocacao = @TipoLocacao,
-            ValorTotal = @ValorTotal, LocatarioId = @LocatarioId, CondutorId = @CondutorId,
-            AutomovelId = @AutomovelId, statusLocacao = @statusLocacao
-        WHERE Id = @Id";
+        SET saida = @saida, retorno = @retorno, tipo_locacao = @tipo_locacao, valor_total = @valor_total, locatario_id = @locatario_id, condutor_id = @condutor_id, automovel_id = @automovel_id, status_locacao = @status_locacao WHERE id = @id";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
                     cmd.Parameters.AddWithValue("@Id", locacao.Id);
-                    cmd.Parameters.AddWithValue("@Saida", locacao.Saida);
-                    cmd.Parameters.AddWithValue("@Retorno", locacao.Retorno);
-                    cmd.Parameters.AddWithValue("@TipoLocacao", locacao.TipoLocacao);
-                    cmd.Parameters.AddWithValue("@ValorTotal", locacao.ValorTotal);
-                    cmd.Parameters.AddWithValue("@LocatarioId", locacao.Locatario.Id);
-                    cmd.Parameters.AddWithValue("@CondutorId", locacao.Condutor.Id);
-                    cmd.Parameters.AddWithValue("@AutomovelId", locacao.Automovel.Id);
-                    cmd.Parameters.AddWithValue("@statusLocacao", locacao.Status);
-
+                    cmd.Parameters.AddWithValue("@saida", locacao.Saida);
+                    cmd.Parameters.AddWithValue("@retorno", locacao.Retorno);
+                    cmd.Parameters.AddWithValue("@tipo_locacao", locacao.TipoLocacao);
+                    cmd.Parameters.AddWithValue("@valor_total", locacao.ValorTotal);
+                    cmd.Parameters.AddWithValue("@locatario_id", locacao.Locatario.Id);
+                    cmd.Parameters.AddWithValue("@condutor_id", locacao.Condutor.Id);
+                    cmd.Parameters.AddWithValue("@automovel_id", locacao.Automovel.Id);
+                    cmd.Parameters.AddWithValue("@status_locacao", locacao.Status);
+                    cmd.Parameters.AddWithValue("@pendencia_financeira_id", locacao.PendenciaFinanceira.Id);
                     cmd.ExecuteNonQuery();
                 }
             }
         }
-        public void Deletar(int id)
+        public void Deletar(Guid id)
         {
             using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
             {
                 conexao.Open();
-                string sql = "DELETE FROM Locacao WHERE Id = @Id";
+                string sql = "DELETE FROM Locacao WHERE id = @id";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.Parameters.AddWithValue("@id", id);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -216,7 +97,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
             {
                 conexao.Open();
-                string sql = "SELECT * FROM Locacao";
+                string sql = "SELECT * FROM locacao";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 using (var dataReader = cmd.ExecuteReader())
@@ -225,16 +106,16 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 }
             }
         }
-        public LocacaoDTO? RecuperarPorId(int id)
+        public LocacaoDTO? RecuperarPorId(Guid id)
         {
             using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
             {
                 conexao.Open();
-                string sql = "SELECT * FROM Locacao WHERE Id = @Id";
+                string sql = "SELECT * FROM locacao WHERE id = @id";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.Parameters.AddWithValue("@id", id);
 
                     using (var dataReader = cmd.ExecuteReader())
                     {
@@ -252,17 +133,16 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             {
                 var locacaoDto = new LocacaoDTO
                 {
-                    Id = Convert.ToInt32(dataReader["Id"]),
-                    Saida = Convert.ToDateTime(dataReader["Saida"]),
-                    Retorno = Convert.ToDateTime(dataReader["Retorno"]),
-                    TipoLocacao = (ETipoLocacao)Convert.ToInt32(dataReader["TipoLocacao"]),
-                    ValorTotal = Convert.ToDecimal(dataReader["ValorTotal"]),
-                    IdLocatario = Convert.ToInt32(dataReader["LocatarioId"]),
-                    IdCondutor = Convert.ToInt32(dataReader["CondutorId"]),
-                    IdAutomovel = Convert.ToInt32(dataReader["AutomovelId"]),
-                    Status = (EStatusLocacao)Convert.ToInt32(dataReader["statusLocacao"])
+                    Id = Guid.Parse(dataReader["id"].ToString()),
+                    Saida = Convert.ToDateTime(dataReader["saida"]),
+                    Retorno = Convert.ToDateTime(dataReader["retorno"]),
+                    TipoLocacao = (ETipoLocacao)Convert.ToInt32(dataReader["tipo_locacao"]),
+                    ValorTotal = Convert.ToDecimal(dataReader["valor_total"]),
+                    IdLocatario = Guid.Parse(dataReader["locatario_id"].ToString()),
+                    IdCondutor = Guid.Parse(dataReader["condutor_id"].ToString()),
+                    IdAutomovel = Guid.Parse(dataReader["automovel_id"].ToString()),
+                    Status = (EStatusLocacao)Convert.ToInt32(dataReader["statusLocacao"]),
                 };
-
                 lista.Add(locacaoDto);
             }
 
@@ -274,12 +154,12 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
-                string sql = "UPDATE Locacao SET statusLocacao = @Status WHERE Id = @Id";
+                string sql = "UPDATE locacao SET status_locacao = @status WHERE id = @id";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    cmd.Parameters.AddWithValue("@Status", (int)novoStatus);
-                    cmd.Parameters.AddWithValue("@Id", locacaoId);
+                    cmd.Parameters.AddWithValue("@status",novoStatus);
+                    cmd.Parameters.AddWithValue("@id", locacaoId);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -290,11 +170,11 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
             {
                 conexao.Open();
-                string sql = "SELECT * FROM Locacao WHERE statusLocacao = @statusLocacao";
+                string sql = "SELECT * FROM locacao WHERE status_locacao = @status_locacao";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    cmd.Parameters.AddWithValue("@statusLocacao", (int)EStatusLocacao.ANDAMENTO);
+                    cmd.Parameters.AddWithValue("@status_locacao", (int)EStatusLocacao.ANDAMENTO);
 
                     using (var dataReader = cmd.ExecuteReader())
                     {

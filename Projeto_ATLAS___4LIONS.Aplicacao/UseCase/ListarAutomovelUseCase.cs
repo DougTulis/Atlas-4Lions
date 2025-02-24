@@ -29,7 +29,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             }
         }
 
-        public AutomovelDTO? ExecutarRecuperarPorId(int id)
+        public AutomovelDTO? ExecutarRecuperarPorId(Guid id)
         {
             try
             {

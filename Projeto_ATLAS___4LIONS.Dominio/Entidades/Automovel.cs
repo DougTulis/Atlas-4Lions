@@ -6,21 +6,23 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
 {
     public class Automovel : ModeloAbstrato, IContrato
     {
-        public string Modelo { get; set; }
-        public string Placa { get; set; }
-        public string Cor { get; set; }
-        public string Ano { get; set; }
-        public EStatusVeiculo Status { get; set; }
-        public string? Chassi { get; set; }
-        public IList<TabelaPreco> TabelaPrecos { get; set; }
-        public string? Renavam { get; set; }
-        public int? Oleokm { get; set; }
-        public int? PastilhaFreioKm { get; set; }
+        public string Modelo { get; private set; }
+        public string Placa { get; private set; }
+        public string Cor { get; private set; }
+        public string Ano { get; private set; }
+        public EStatusVeiculo Status { get; private set; }
+        public string? Chassi { get; private set; }
+        public TabelaPreco Preco { get; private set; }
+        public string? Renavam { get; private set; }
+        public int? Oleokm { get; private set; }
+        public int? PastilhaFreioKm { get; private set; }
 
-        public Automovel()
-        {
-        }
-        public Automovel(string modelo, string placa, string cor, EStatusVeiculo status,string ano, string? chassi, string? renavam, int? oleokm, int? pastilhaFreioKm)
+        //public Automovel()
+        //{
+        //}
+
+     
+        public Automovel(string modelo, string placa, string cor, EStatusVeiculo status, string ano, string? chassi, string? renavam, int? oleokm, int? pastilhaFreioKm, TabelaPreco preco) : base()
         {
             Modelo = modelo;
             Placa = placa;
@@ -31,7 +33,13 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
             Oleokm = oleokm;
             PastilhaFreioKm = pastilhaFreioKm;
             Ano = ano;
+            Preco = preco;
         }
+        public static Automovel Create(string modelo, string placa, string cor, EStatusVeiculo status, string ano, string? chassi, string? renavam, int? oleokm, int? pastilhaFreioKm,TabelaPreco preco)
+        {
+            return new Automovel(modelo, placa, cor, status, ano, chassi, renavam, oleokm, pastilhaFreioKm, preco);
+        }
+
         public override bool Validacao()
         {
             var contratos = new ContratoValidacoes<Automovel>()

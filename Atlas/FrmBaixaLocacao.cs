@@ -36,7 +36,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void dgvBaixaLocacao_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-           
+
         }
 
         private void FrmBaixaLocacao_Load(object sender, EventArgs e)
@@ -57,30 +57,8 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void dgvBaixaLocacao_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = dgvBaixaLocacao.Rows[e.RowIndex];
-                int idLocacao = Convert.ToInt32(row.Cells[0].Value);
 
-                DialogResult resultado = MessageBox.Show(
-                    "confirma a  finalização dessa locação?",
-                    "Confirmação",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question
-                );
-
-                if (resultado == DialogResult.Yes)
-                {
-                    var locacao = _listarLocacoesUseCase.ExecutarRecuperarPorId(idLocacao);
-
-                    _alterarStatusLocacaoUseCase.Executar(idLocacao, Dominio.ValueObjects.Enums.EStatusLocacao.FINALIZADO);
-                    _alterarStatusAutomovelUseCase.Executar(locacao.IdAutomovel, Dominio.ValueObjects.Enums.EStatusVeiculo.GARAGEM);
-
-                    MessageBox.Show("Locação finalizada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    AtualizarGridView();
-                }
-            }
         }
     }
 }
+

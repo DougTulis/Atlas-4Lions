@@ -2,7 +2,6 @@
 using Projeto_ATLAS___4LIONS.Forms;
 using Projeto_ATLAS___4LIONS.Forms.Properties;
 using Projeto_ATLAS___4LIONS.Infra.Servicos;
-using Projeto_ATLAS___4LIONS.Aplicacao.Servicos;
 using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
 using Projeto_ATLAS___4LIONS.Infra.Repositorios;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;

@@ -18,21 +18,14 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             try
             {
-                var tabelaPreco = new TabelaPreco
-                {
-                    Id = tabelaPrecoDto.Id,
-                    Valor = tabelaPrecoDto.Valor,
-                    Descricao = tabelaPrecoDto.Descricao,
-                    DataCriacao = DateTime.Now
-                };
-
+                var tabelaPreco = TabelaPreco.Create(tabelaPrecoDto.Descricao, tabelaPrecoDto.Valor);
 
                 if (!tabelaPreco.Validacao())
                 {
                     return;
                 }
 
-                tabelaRepositorio.Adicionar(tabelaPrecoDto);
+                tabelaRepositorio.Adicionar(tabelaPreco);
             }
             catch (MySqlException ex)
             {

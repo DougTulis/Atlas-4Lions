@@ -23,9 +23,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Validacoes
             return _notificacoes.Count == 0;
         }
 
-        public List<Notificacao> ObterNotificacoes()
-{
-    return _notificacoes;
-}
+
     }
 }

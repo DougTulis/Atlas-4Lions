@@ -19,24 +19,13 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             try
             {
 
-                var pessoa = new Pessoa
-                {
-                    Id = pessoaDto.Id,
-                    Nome = pessoaDto.Nome,
-                    Email = pessoaDto.Email,
-                    Contato = pessoaDto.Contato,
-                    DataNascimento = pessoaDto.DataNascimento,
-                    Cpf = pessoaDto.Cpf,
-                    DataCriacao = pessoaDto.DataCriacao,
-                    VencimentoCnh = vencimentoCnh,
-                    NumeroCnh = numeroCnh,
-                };
+                var pessoa = Pessoa.Create(pessoaDto.Nome, pessoaDto.Email, pessoaDto.Contato, pessoaDto.TipoPessoa, pessoaDto.NumeroDocumento, pessoaDto.DataRegistro);
 
                 if (!pessoa.ValidacaoCnh())
                 {
                     return;
                 }
-                _pessoaRepositorio.IncluirCNH(pessoaDto.Id, numeroCnh, vencimentoCnh);
+                _pessoaRepositorio.IncluirCNH(pessoa.Id, numeroCnh, vencimentoCnh);
             }
             catch (MySqlException ex)
             {

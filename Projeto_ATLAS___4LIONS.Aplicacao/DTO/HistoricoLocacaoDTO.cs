@@ -9,7 +9,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
 {
     public class HistoricoLocacaoDTO
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string NomeLocatario { get; set; }
         public string NomeCondutor { get; set; }
         public DateTime DataCriacao { get; set; }
