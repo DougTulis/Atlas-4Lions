@@ -1,4 +1,6 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
+using Projeto_ATLAS___4LIONS.Aplicacao.RespostaPadrao;
+using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface
 {
     public interface IIncluirCnhUseCase
     {
-        public void Executar(PessoaDTO pessoaDto, string numeroCnh, DateTime vencimentoCnh);
+        public RespostaPadrao<string> Executar(Pessoa pessoaDto, string numeroCnh, DateTime vencimentoCnh);
     }
 }

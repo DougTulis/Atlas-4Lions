@@ -24,5 +24,15 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Validacoes
         }
 
 
+        public string CapturadorErros()
+        {
+            string mensagensErro = "";
+
+            foreach (var notificacao in _notificacoes)
+            {
+                mensagensErro += notificacao.Mensagem + "\n";
+            }
+            return mensagensErro;
+        }
     }
 }

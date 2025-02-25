@@ -22,7 +22,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 
                 if (!tabelaPreco.Validacao())
                 {
-                    return;
+                    
                 }
 
                 tabelaRepositorio.Adicionar(tabelaPreco);

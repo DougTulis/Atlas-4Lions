@@ -22,5 +22,7 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         }
 
         public abstract bool Validacao();
+
+        public abstract bool Validacao(out string erros);
     }
 }

@@ -36,7 +36,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             _pendenciaFinanceiraService = pendenciaFinanceiraService;
             _parcelaService = parcelaService;
         }
-        public void Executar(LocacaoDTO locacaoDto)
+        public void Executar(LocacaoDTO locacaoDto,int quantidadeParcelas)
         {
             //  Buscar o Locatario e fabrica o model
             var locatarioDto = _pessoaRepositorio.RecuperarPorId(locacaoDto.IdLocatario);
@@ -47,7 +47,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             var condutorDto = _pessoaRepositorio.RecuperarPorId(locacaoDto.IdLocatario);
             var condutor = Pessoa.Create(condutorDto.Nome, condutorDto.Email, condutorDto.Contato, condutorDto.TipoPessoa, condutorDto.NumeroDocumento, condutorDto.DataRegistro);
 
-            // Buscar o automóvel, preco por id e fabrica o model de ambos
+            // Buscar o automóvel, preco por id e fabrica o model dos dois
             var automovelDto = _automovelRepositorio.RecuperarPorId(locacaoDto.IdAutomovel);
             var precoDto = _tabelaPrecoRepositorio.RecuperarPorId(automovelDto.IdPreco);
             var preco = TabelaPreco.Create(precoDto.Descricao, precoDto.Valor);
@@ -60,30 +60,30 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 throw new Exception("A locação não passou na validação de regras de negócio.");
             }
 
-            var pendencia = _pendenciaFinanceiraService.CriarPendencia(locacao.ValorTotal);
+            var pendencia = _pendenciaFinanceiraService.CriarPendencia(locacao.ValorTotal,quantidadeParcelas);
 
-            { 
-            if (!pendencia.Validacao())
             {
-                throw new Exception("A pendência financeira não passou na validação.");
-            }
+                if (!pendencia.Validacao())
+                {
+                    throw new Exception("A pendência financeira não passou na validação.");
+                }
 
-            // aqui vai gerar todas as parcelas....
+                // aqui vai gerar todas as parcelas....
                 _parcelaService.GerarParcelas(pendencia, pendencia.QuantidadeParcelas);
 
                 automovel.AlterarParaAlugado(); // aqui altera pra garágem o status do automovel.
-          
-            try
-            {
-                _automovelRepositorio.AtualizarStatus(automovel.Id, automovel.Status);
-                _locacaoRepositorio.Adicionar(locacao);
-            }
-            catch (MySqlException ex)
-            {
-                throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
-            }
-        }
 
+                try
+                {
+                    _automovelRepositorio.AtualizarStatus(automovel.Id, automovel.Status);
+                    _locacaoRepositorio.Adicionar(locacao);
+                }
+                catch (MySqlException ex)
+                {
+                    throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
+                }
+            }
+
+        }
     }
 }
-

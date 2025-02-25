@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             dgvHistoricoPessoas = new DataGridView();
+            tipoPessoa = new DataGridViewTextBoxColumn();
             pessoaNome = new DataGridViewTextBoxColumn();
             email = new DataGridViewTextBoxColumn();
             contato = new DataGridViewTextBoxColumn();
-            dataNascimento = new DataGridViewTextBoxColumn();
-            cpf = new DataGridViewTextBoxColumn();
-            cnpj = new DataGridViewTextBoxColumn();
+            dataRegistro = new DataGridViewTextBoxColumn();
+            numeroDocumento = new DataGridViewTextBoxColumn();
             vencimentoCnh = new DataGridViewTextBoxColumn();
             numeroCnh = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvHistoricoPessoas).BeginInit();
@@ -45,95 +45,104 @@
             dgvHistoricoPessoas.AllowUserToAddRows = false;
             dgvHistoricoPessoas.AllowUserToDeleteRows = false;
             dgvHistoricoPessoas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvHistoricoPessoas.Columns.AddRange(new DataGridViewColumn[] { pessoaNome, email, contato, dataNascimento, cpf, cnpj, vencimentoCnh, numeroCnh });
-            dgvHistoricoPessoas.Location = new Point(0, 27);
+            dgvHistoricoPessoas.Columns.AddRange(new DataGridViewColumn[] { tipoPessoa, pessoaNome, email, contato, dataRegistro, numeroDocumento, vencimentoCnh, numeroCnh });
+            dgvHistoricoPessoas.Location = new Point(2, -1);
+            dgvHistoricoPessoas.Margin = new Padding(3, 2, 3, 2);
             dgvHistoricoPessoas.Name = "dgvHistoricoPessoas";
             dgvHistoricoPessoas.ReadOnly = true;
             dgvHistoricoPessoas.RowHeadersWidth = 51;
-            dgvHistoricoPessoas.Size = new Size(853, 432);
+            dgvHistoricoPessoas.Size = new Size(876, 441);
             dgvHistoricoPessoas.TabIndex = 0;
             dgvHistoricoPessoas.CellContentClick += dgvHistoricoPessoas_CellContentClick;
             // 
+            // tipoPessoa
+            // 
+            tipoPessoa.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            tipoPessoa.DataPropertyName = "TipoPessoa";
+            tipoPessoa.HeaderText = "Tipo Pessoa";
+            tipoPessoa.Name = "tipoPessoa";
+            tipoPessoa.ReadOnly = true;
+            tipoPessoa.Width = 94;
+            // 
             // pessoaNome
             // 
+            pessoaNome.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             pessoaNome.DataPropertyName = "Nome";
             pessoaNome.HeaderText = "Nome ";
             pessoaNome.MinimumWidth = 6;
             pessoaNome.Name = "pessoaNome";
             pessoaNome.ReadOnly = true;
-            pessoaNome.Width = 125;
+            pessoaNome.Width = 68;
             // 
             // email
             // 
+            email.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             email.DataPropertyName = "Email";
             email.HeaderText = "Email";
             email.MinimumWidth = 6;
             email.Name = "email";
             email.ReadOnly = true;
-            email.Width = 125;
+            email.Width = 61;
             // 
             // contato
             // 
+            contato.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             contato.DataPropertyName = "Contato";
             contato.HeaderText = "Contato";
             contato.MinimumWidth = 6;
             contato.Name = "contato";
             contato.ReadOnly = true;
-            contato.Width = 125;
+            contato.Width = 75;
             // 
-            // dataNascimento
+            // dataRegistro
             // 
-            dataNascimento.DataPropertyName = "DataNascimento";
-            dataNascimento.HeaderText = "Data de Nascimento";
-            dataNascimento.MinimumWidth = 6;
-            dataNascimento.Name = "dataNascimento";
-            dataNascimento.ReadOnly = true;
-            dataNascimento.Width = 125;
+            dataRegistro.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dataRegistro.DataPropertyName = "DataRegistro";
+            dataRegistro.HeaderText = "Data Nascimento/Fundação";
+            dataRegistro.MinimumWidth = 6;
+            dataRegistro.Name = "dataRegistro";
+            dataRegistro.ReadOnly = true;
+            dataRegistro.Width = 164;
             // 
-            // cpf
+            // numeroDocumento
             // 
-            cpf.DataPropertyName = "Cpf";
-            cpf.HeaderText = "Cpf";
-            cpf.MinimumWidth = 6;
-            cpf.Name = "cpf";
-            cpf.ReadOnly = true;
-            cpf.Width = 125;
-            // 
-            // cnpj
-            // 
-            cnpj.DataPropertyName = "Cnpj";
-            cnpj.HeaderText = "Cnpj";
-            cnpj.MinimumWidth = 6;
-            cnpj.Name = "cnpj";
-            cnpj.ReadOnly = true;
-            cnpj.Width = 125;
+            numeroDocumento.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            numeroDocumento.DataPropertyName = "NumeroDocumento";
+            numeroDocumento.HeaderText = "CPF/CNPJ";
+            numeroDocumento.MinimumWidth = 6;
+            numeroDocumento.Name = "numeroDocumento";
+            numeroDocumento.ReadOnly = true;
+            numeroDocumento.Width = 85;
             // 
             // vencimentoCnh
             // 
+            vencimentoCnh.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             vencimentoCnh.DataPropertyName = "VencimentoCnh";
             vencimentoCnh.HeaderText = "Vencimento CNH";
             vencimentoCnh.MinimumWidth = 6;
             vencimentoCnh.Name = "vencimentoCnh";
             vencimentoCnh.ReadOnly = true;
-            vencimentoCnh.Width = 125;
+            vencimentoCnh.Width = 114;
             // 
             // numeroCnh
             // 
+            numeroCnh.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             numeroCnh.DataPropertyName = "NumeroCnh";
             numeroCnh.HeaderText = "Numero da CNH";
             numeroCnh.MinimumWidth = 6;
             numeroCnh.Name = "numeroCnh";
             numeroCnh.ReadOnly = true;
-            numeroCnh.Width = 125;
+            numeroCnh.Width = 88;
             // 
             // FrmHistoricoPessoas
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
-            ClientSize = new Size(1098, 647);
+            ClientSize = new Size(961, 485);
             Controls.Add(dgvHistoricoPessoas);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(3, 2, 3, 2);
             Name = "FrmHistoricoPessoas";
             Text = "FrmHistoricoPessoas";
             FormClosing += FrmHistoricoPessoas_FormClosing;
@@ -145,12 +154,12 @@
         #endregion
 
         private DataGridView dgvHistoricoPessoas;
+        private DataGridViewTextBoxColumn tipoPessoa;
         private DataGridViewTextBoxColumn pessoaNome;
         private DataGridViewTextBoxColumn email;
         private DataGridViewTextBoxColumn contato;
-        private DataGridViewTextBoxColumn dataNascimento;
-        private DataGridViewTextBoxColumn cpf;
-        private DataGridViewTextBoxColumn cnpj;
+        private DataGridViewTextBoxColumn dataRegistro;
+        private DataGridViewTextBoxColumn numeroDocumento;
         private DataGridViewTextBoxColumn vencimentoCnh;
         private DataGridViewTextBoxColumn numeroCnh;
     }

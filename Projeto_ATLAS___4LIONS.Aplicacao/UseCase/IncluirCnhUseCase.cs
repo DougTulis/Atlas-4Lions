@@ -3,7 +3,9 @@ using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Exceções;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.RespostaPadrao;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 {
@@ -14,18 +16,18 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
           _pessoaRepositorio = pessoaRepositorio;
         }
-        public void Executar(PessoaDTO pessoaDto, string numeroCnh, DateTime vencimentoCnh)
+        public RespostaPadrao<string> Executar(Pessoa pessoa, string numeroCnh, DateTime vencimentoCnh)
         {
             try
             {
-
-                var pessoa = Pessoa.Create(pessoaDto.Nome, pessoaDto.Email, pessoaDto.Contato, pessoaDto.TipoPessoa, pessoaDto.NumeroDocumento, pessoaDto.DataRegistro);
-
-                if (!pessoa.ValidacaoCnh())
+                string erros;
+                if (!pessoa.ValidacaoCnh(out erros))
                 {
-                    return;
+                    return RespostaPadrao<string>.Falha(false, erros, "ERRO");
                 }
                 _pessoaRepositorio.IncluirCNH(pessoa.Id, numeroCnh, vencimentoCnh);
+
+                return RespostaPadrao<string>.Sucesso(true, "CNH vínculada com sucesso!");
             }
             catch (MySqlException ex)
             {

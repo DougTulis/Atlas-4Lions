@@ -145,8 +145,10 @@ namespace Atlas
 
         private void itmGerenciamentoVeiculosCadastrarPreco_Click(object sender, EventArgs e)
         {
+
             _frmCadastroPreco.MdiParent = this;
             _frmCadastroPreco.Show();   
         }
+  
     }
 }

@@ -36,34 +36,14 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
             Parcelas.Remove(parcela);
         }
 
-
-        private List<Parcela> GerarParcelas()
-        {
-            List<Parcela> listaParcelas = new List<Parcela>();
-
-            if (QuantidadeParcelas == 1)
-            {
-                // 🔹 Se for diária, cria apenas 1 parcela com o valor total
-                listaParcelas.Add(Parcela.Create(1, DateTime.Now.AddDays(30), ValorTotal));
-            }
-            else
-            {
-                // 🔹 Se for contrato, divide o valor total entre as parcelas
-                decimal valorParcela = ValorTotal / QuantidadeParcelas;
-
-                for (int i = 0; i < QuantidadeParcelas; i++)
-                {
-                    DateTime vencimento = DateTime.Now.AddMonths(i + 1);
-                    listaParcelas.Add(Parcela.Create(i + 1, vencimento, valorParcela));
-                }
-            }
-
-            return listaParcelas;
-        }
-
         public override bool Validacao()
         {
             return true; // por enquanto
+        }
+
+        public override bool Validacao(out string erros)
+        {
+            throw new NotImplementedException();
         }
     }
 }

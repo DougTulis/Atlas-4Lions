@@ -21,7 +21,6 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         //{
         //}
 
-     
         public Automovel(string modelo, string placa, string cor, EStatusVeiculo status, string ano, string? chassi, string? renavam, int? oleokm, int? pastilhaFreioKm, TabelaPreco preco) : base()
         {
             Modelo = modelo;
@@ -42,6 +41,7 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
 
         public override bool Validacao()
         {
+
             var contratos = new ContratoValidacoes<Automovel>()
                 .ModeloIsOk(this.Modelo, "Insira um modelo válido", "Modelo")
                 .PlacaIsOk(this.Placa, "Placa inválida", "Placa");
@@ -73,5 +73,9 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
             Status = EStatusVeiculo.ALUGADO;
         }
 
+        public override bool Validacao(out string erros)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -36,15 +36,13 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
 
         public override bool Validacao()
         {
+
             var contratos = new ContratoValidacoes<Locacao>().PossuiCnh(Condutor, "A pessoa escolhida precisa ter uma CNH vinculada", "Condutor")
                 .SaidaIsOk(this.Saida, this.Retorno, "Data de saída inválida.", "Saida")
                 .RetornoIsOk(this.Retorno, this.Saida, "Data de retorno inválida", "Retorno");
             if (!contratos.IsValid())
             {
-                foreach (var notificacao in contratos.Notificacoes)
-                {
-                    Console.WriteLine($"Erro em {notificacao.NomePropriedade}: {notificacao.Mensagem}");
-                }
+
                 return false;
             }
 
@@ -52,7 +50,6 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         }
         private decimal CalcularValorTotal()
         {
-
             int dias = (Retorno - Saida).Days;
             return dias * Automovel.Preco.Valor; 
 
@@ -68,5 +65,9 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
             Status = EStatusLocacao.FINALIZADO;
         }
 
+        public override bool Validacao(out string erros)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

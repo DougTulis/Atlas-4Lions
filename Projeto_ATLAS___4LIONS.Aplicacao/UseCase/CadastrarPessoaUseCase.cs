@@ -2,6 +2,7 @@
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Exceções;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.RespostaPadrao;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using Projeto_ATLAS___4LIONS.Dominio.Notificacoes;
 
@@ -15,7 +16,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             this.pessoaRepositorio = pessoaRepositorio;
         }
 
-        public void Executar(PessoaDTO pessoaDto)
+        public RespostaPadrao<string> Executar(PessoaDTO pessoaDto)
         {
             try
             {
@@ -32,21 +33,22 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 //    NumeroCnh = pessoaDto.NumeroCnh
                 //};
 
-                var pessoa = Pessoa.Create(pessoaDto.Nome,pessoaDto.Email,pessoaDto.Contato, pessoaDto.TipoPessoa, pessoaDto.NumeroDocumento, pessoaDto.DataRegistro);
+                var pessoa = Pessoa.Create(pessoaDto.Nome, pessoaDto.Email, pessoaDto.Contato, pessoaDto.TipoPessoa, pessoaDto.NumeroDocumento, pessoaDto.DataRegistro);
 
-                if (!pessoa.Validacao())
+                string erros;
+                if (!pessoa.Validacao(out erros))
                 {
-
-                    return;
+                 
+                    return RespostaPadrao<string>.Falha(true, erros, "ERRO");
                 }
-
                 pessoaRepositorio.Adicionar(pessoa);
+
+                return RespostaPadrao<string>.Sucesso(true, "Pessoa cadastrada com sucesso!", null);
             }
             catch (MySqlException ex)
             {
                 throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
             }
         }
-
     }
 }

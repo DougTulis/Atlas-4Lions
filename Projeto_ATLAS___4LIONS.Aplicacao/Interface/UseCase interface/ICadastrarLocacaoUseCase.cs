@@ -9,6 +9,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface
 {
     public interface ICadastrarLocacaoUseCase
     {
-        public void Executar(LocacaoDTO locacaoDto);
+        public void Executar(LocacaoDTO locacaoDto, int quantidadeParcelas);
     }
 }

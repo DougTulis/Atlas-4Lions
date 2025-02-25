@@ -1,5 +1,6 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.RespostaPadrao;
 using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 
 namespace Projeto_ATLAS___4LIONS.Forms
@@ -84,9 +85,10 @@ namespace Projeto_ATLAS___4LIONS.Forms
                 TipoPessoa = (ETipoPessoa)cbmTipoPessoa.SelectedItem,
                 NumeroDocumento = txtNumeroDocumento.Text,
             };
-            _cadastrarPessoaUseCase.Executar(pessoaDto);
+          RespostaPadrao<string> resultado = _cadastrarPessoaUseCase.Executar(pessoaDto);
 
-            MessageBox.Show("Pessoa cadastrada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBoxIcon icone = resultado.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning;
+            MessageBox.Show(resultado.Mensagem, "Cadastro de Pessoa", MessageBoxButtons.OK, icone);
         }
   
         private void CarregarCombos()

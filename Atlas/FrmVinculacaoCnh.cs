@@ -1,5 +1,7 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
+using Projeto_ATLAS___4LIONS.Dominio.Entidades;
+using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 
 
 namespace Projeto_ATLAS___4LIONS.Forms
@@ -48,11 +50,13 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void btnSelecionarPessoa_Click(object sender, EventArgs e)
         {
-            int idPessoa = Convert.ToInt32(txtPessoa.Text);
-          //  var pessoaDto = _listarpessoaUseCase.ExecutarRecuperarPorId(idPessoa);
-           // _incluirCnhUseCase.Executar(pessoaDto, txtNumeroCnh.Text, DateTime.Parse(txtVencimentoCnh.Text));
-            MessageBox.Show("CNH vinculada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Close();
+             Guid.TryParse(txtPessoa.Text, out Guid idPessoa);
+
+            var pessoaDto = _listarpessoaUseCase.ExecutarRecuperarPorId(idPessoa);
+            var pessoa = Pessoa.Create(pessoaDto.Nome,pessoaDto.Email, pessoaDto.Contato, pessoaDto.TipoPessoa, pessoaDto.NumeroDocumento, pessoaDto.DataRegistro);
+
+           _incluirCnhUseCase.Executar(pessoa, txtNumeroCnh.Text, DateTime.Parse(txtVencimentoCnh.Text));
+
         }
 
         private void txtVencimentoCnh_TextChanged(object sender, EventArgs e)
@@ -85,8 +89,8 @@ namespace Projeto_ATLAS___4LIONS.Forms
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvVinculacaoCnh.Rows[e.RowIndex];
-                int idSelecionado = Convert.ToInt16(dgvVinculacaoCnh.Rows[e.RowIndex].Cells[0].Value);
-                txtPessoa.Text = Convert.ToString(idSelecionado);
+                string idSelecionado = row.Cells[0].Value.ToString();
+                txtPessoa.Text = idSelecionado;
 
             }
         }

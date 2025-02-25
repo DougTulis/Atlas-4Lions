@@ -1,4 +1,5 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
+using Projeto_ATLAS___4LIONS.Aplicacao.RespostaPadrao;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface
 {
     public interface ICadastrarPessoaUseCase
     {
-        public void Executar(PessoaDTO pessoaDto);
+        public RespostaPadrao<string> Executar(PessoaDTO pessoaDto);
     }
 }
