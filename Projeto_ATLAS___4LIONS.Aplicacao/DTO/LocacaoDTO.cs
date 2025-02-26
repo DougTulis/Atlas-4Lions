@@ -21,13 +21,12 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         {
         }
 
-        public LocacaoDTO(Guid id, DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, decimal valorTotal, Guid idLocatario, Guid idCondutor, Guid idAutomovel, Guid pendenciaFinanceiraId, EStatusLocacao status)
+        public LocacaoDTO(Guid id, DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, Guid idLocatario, Guid idCondutor, Guid idAutomovel, Guid pendenciaFinanceiraId, EStatusLocacao status)
         {
             Id = id;
             Saida = saida;
             Retorno = retorno;
             TipoLocacao = tipoLocacao;
-            ValorTotal = valorTotal;
             IdLocatario = idLocatario;
             IdCondutor = idCondutor;
             IdAutomovel = idAutomovel;

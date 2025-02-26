@@ -75,7 +75,6 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private void btnCadastrarPessoa_Click(object sender, EventArgs e)
         {
 
-
             var pessoaDto = new PessoaDTO
             {
                 Nome = textNome.Text,
@@ -85,7 +84,10 @@ namespace Projeto_ATLAS___4LIONS.Forms
                 TipoPessoa = (ETipoPessoa)cbmTipoPessoa.SelectedItem,
                 NumeroDocumento = txtNumeroDocumento.Text,
             };
-          RespostaPadrao<string> resultado = _cadastrarPessoaUseCase.Executar(pessoaDto);
+
+      
+
+            RespostaPadrao<string> resultado = _cadastrarPessoaUseCase.Executar(pessoaDto);
 
             MessageBoxIcon icone = resultado.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning;
             MessageBox.Show(resultado.Mensagem, "Cadastro de Pessoa", MessageBoxButtons.OK, icone);

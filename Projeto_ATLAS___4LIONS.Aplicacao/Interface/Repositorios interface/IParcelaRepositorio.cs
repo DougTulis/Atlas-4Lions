@@ -12,10 +12,9 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface
 {
     public interface IParcelaRepositorio
     {
-        void Adicionar(Parcela parcelaDto);
+        void Adicionar(Parcela parcela);
         void AdicionarVarias(IEnumerable<ParcelaDTO> parcelasDto);
         IEnumerable<ParcelaDTO> ListarPorPendencia(int pendenciaId);
         void AtualizarPagamentoParcela(Guid idPendenciaFinanceira, int sequencia, decimal valorPago, DateTime dataPagamento, EEspecie especiePagamento);
-        public ParcelaDTO? RecuperarPorId(int id);
     }
 }

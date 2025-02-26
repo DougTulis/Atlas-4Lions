@@ -3,6 +3,7 @@ using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Exceções;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.RespostaPadrao;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
@@ -11,25 +12,26 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
     {
         private readonly IAutomovelRepositorio _automovelRepositorio;
         private readonly ITabelaPrecoRepositorio _precoRepositorio;
-        public CadastrarVeiculoUseCase(IAutomovelRepositorio automovelRepositorio,ITabelaPrecoRepositorio precoRepositorio)
+        public CadastrarVeiculoUseCase(IAutomovelRepositorio automovelRepositorio, ITabelaPrecoRepositorio precoRepositorio)
         {
             _automovelRepositorio = automovelRepositorio;
             _precoRepositorio = precoRepositorio;
         }
 
-        public void Executar(AutomovelDTO automovelDto)
+        public RespostaPadrao<string> Executar(AutomovelDTO automovelDto)
         {
             try
             {
-                var precoDto = _precoRepositorio.RecuperarPorId(automovelDto.Id);
-                var preco = TabelaPreco.Create(precoDto.Descricao, precoDto.Valor);
-                var automovel = Automovel.Create(automovelDto.Modelo, automovelDto.Placa, automovelDto.Cor, automovelDto.Status, automovelDto.Ano, automovelDto.Chassi, automovelDto.Renavam, automovelDto.Oleokm, automovelDto.PastilhaFreioKm, preco);
+                var automovel = Automovel.Create(automovelDto.Modelo, automovelDto.Placa, automovelDto.Cor, automovelDto.Status, automovelDto.Ano, automovelDto.Chassi, automovelDto.Renavam, automovelDto.Oleokm, automovelDto.PastilhaFreioKm, automovelDto.IdPreco);
 
-                if (!automovel.Validacao())
+                string erros;
+                if (!automovel.Validacao(out erros))
                 {
-                    
+                    return RespostaPadrao<string>.Falha(false, "Cadastro de automóveis", erros);
                 }
                 _automovelRepositorio.Adicionar(automovel);
+                return RespostaPadrao<string>.Sucesso(true, "Automóvel Cadastrado com sucesso!");
+
             }
             catch (MySqlException ex)
             {

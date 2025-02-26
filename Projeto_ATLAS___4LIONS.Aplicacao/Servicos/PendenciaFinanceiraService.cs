@@ -11,7 +11,7 @@ public class PendenciaFinanceiraService : IPendenciaFinanceiraService
         _parcelaService = parcelaService;
     }
 
-    public PendenciaFinanceira CriarPendencia(decimal valorTotal, int quantidadeParcelas)
+    public PendenciaFinanceira CriarPendencia(decimal valorTotal)
     {
         var pendenciaFinanceira = PendenciaFinanceira.Create(valorTotal,quantidadeParcelas);
 

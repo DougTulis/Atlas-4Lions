@@ -1,5 +1,6 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.RespostaPadrao;
 using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
 using Projeto_ATLAS___4LIONS.Infra.Repositorios;
 
@@ -42,8 +43,10 @@ namespace Projeto_ATLAS___4LIONS.Forms
         {
             if (e.RowIndex >= 0)
             {
+               
+
                 DataGridViewRow row = dgvHistoricoPessoasExclusaoPessoas.Rows[e.RowIndex];
-                //Guid pessoaId = (row.Cells[0].Value);
+                var pessoaId = (row.Cells[0].Value.ToString());
 
                 DialogResult resultado = MessageBox.Show(
                     "Deseja realmente excluir esta pessoa?",
@@ -54,11 +57,10 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
                 if (resultado == DialogResult.Yes)
                 {
-                  //  var pessoaDto = _listarPessoaUseCase.ExecutarRecuperarPorId(pessoaId);
-                 //   _deletarPessoaUseCase.Executar(pessoaDto);
-                    MessageBox.Show("Pessoa excluída com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-               
-
+                    var pessoaDto = _listarPessoaUseCase.ExecutarRecuperarPorId(Guid.Parse(pessoaId));
+                    RespostaPadrao<string> resposta = _deletarPessoaUseCase.Executar(pessoaDto);
+                    MessageBoxIcon icone = resposta.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning;
+                    MessageBox.Show(resposta.Mensagem, "Exclusão de Pessoas", MessageBoxButtons.OK, icone);
                     AtualizarGridView();
                 }
             }

@@ -1,6 +1,7 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.RespostaPadrao;
 using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
 using Projeto_ATLAS___4LIONS.Infra.Repositorios;
 
@@ -106,7 +107,6 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         }
 
-
         private void txtAno_TextChanged(object sender, EventArgs e)
         {
 
@@ -119,11 +119,9 @@ namespace Projeto_ATLAS___4LIONS.Forms
         {
 
         }
-
         private void btnCadastrarAutomovel_Click(object sender, EventArgs e)
         {
-            TabelaPrecoDTO precoSelecionado = (TabelaPrecoDTO)cbmDescricaoPreco.SelectedItem;
-
+            var precoSelecionado = (TabelaPrecoDTO)cbmDescricaoPreco.SelectedItem;
             var automovelDto = new AutomovelDTO
             {
                 Status = Dominio.ValueObjects.Enums.EStatusVeiculo.GARAGEM,
@@ -136,21 +134,18 @@ namespace Projeto_ATLAS___4LIONS.Forms
                 Renavam = txtRenavam.Text,
                 Oleokm = int.TryParse(txtOleoKm.Text, out int oleo) ? oleo : null,
                 PastilhaFreioKm = int.TryParse(txtFreioKm.Text, out int freio) ? freio : null,
-                IdPreco = precoSelecionado.Id
+                IdPreco = precoSelecionado.Id,
+
             };
-            _cadastrarVeiculoUseCase.Executar(automovelDto);
-
-            MessageBox.Show("Automovel cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            this.Close();
-
+            RespostaPadrao<string> resposta = _cadastrarVeiculoUseCase.Executar(automovelDto);
+            MessageBoxIcon icone = resposta.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning;
+            MessageBox.Show(resposta.Mensagem, "Cadastro de Automóvel", MessageBoxButtons.OK, icone);
         }
         private void CarregarCombos()
         {
             cbmDescricaoPreco.DataSource = _listarTabelaPrecoUseCase.Executar();
             cbmDescricaoPreco.ValueMember = "";
             cbmDescricaoPreco.SelectedIndex = -1;
-
         }
 
         private void FrmCadAutomovel_FormClosing(object sender, FormClosingEventArgs e)

@@ -6,6 +6,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
     {
 
         public Guid Id { get; set; }
+        public DateTime DataCriacao { get; set; }
         public string Descricao { get; set; }
         public decimal Valor { get; set; }
 
@@ -20,5 +21,9 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         {
         }
 
+        public override string? ToString()
+        {
+            return Descricao + " - " + Valor.ToString("C");
+        }
     }
 }

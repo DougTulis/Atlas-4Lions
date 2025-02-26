@@ -3,6 +3,7 @@ using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Exceções;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.RespostaPadrao;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
@@ -14,18 +15,20 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             this.pessoaRepositorio = pessoaRepositorio;
         }
-        public void Executar(PessoaDTO pessoaDto)
+        public RespostaPadrao<string> Executar(PessoaDTO pessoaDto)
         {
             try
             {
-                var pessoa = Pessoa.Create(pessoaDto.Nome, pessoaDto.Email, pessoaDto.Contato, pessoaDto.TipoPessoa, pessoaDto.NumeroDocumento, pessoaDto.DataRegistro);
+                var pessoa = Pessoa.Create(pessoaDto.Nome, pessoaDto.Email, pessoaDto.Contato, pessoaDto.TipoPessoa, pessoaDto.NumeroDocumento, pessoaDto.DataRegistro, null, null);
 
-                if (!pessoa.Validacao())
+                string erros;
+                if (!pessoa.Validacao(out erros))
                 {
-                    return;
+                    return RespostaPadrao<string>.Falha(false, erros, "ERRO");
                 }
                 pessoaRepositorio.Deletar(pessoaDto);
 
+                return RespostaPadrao<string>.Sucesso(true, pessoa.Nome + " excluído(a) com sucesso!");
             }
             catch (MySqlException ex)
             {

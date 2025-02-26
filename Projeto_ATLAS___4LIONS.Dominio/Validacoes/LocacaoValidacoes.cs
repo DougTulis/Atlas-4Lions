@@ -5,7 +5,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Validacoes
 {
     public partial class ContratoValidacoes<T>
     {
-        public ContratoValidacoes<T> PossuiCnh(Pessoa pessoa, string mensagem, string propriedadeNome)
+        public ContratoValidacoes<T> PossuiCnh(Guid condutor, string mensagem, string propriedadeNome)
         {
             if (string.IsNullOrWhiteSpace(pessoa.NumeroCnh) || !pessoa.VencimentoCnh.HasValue)
             {

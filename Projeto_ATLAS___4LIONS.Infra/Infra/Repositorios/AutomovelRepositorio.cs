@@ -24,11 +24,12 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 conexao.Open();
 
                 string sql = @"
-                        INSERT INTO automovel (modelo, placa, cor, status, chassi, renavam, oleo_km, data_criacao, pastilha_freio_Km, id_preco)
-                        VALUES (@modelo, @placa, @cor, @status, @chassi, @renavam, @oleo_km, @data_criacao, @pastilha_freio_Km, @id_preco)";
+                        INSERT INTO automovel (id, modelo, placa, cor, status, chassi, renavam, oleo_km, data_criacao, pastilha_freio_Km, id_preco)
+                        VALUES (@id, @modelo, @placa, @cor, @status, @chassi, @renavam, @oleo_km, @data_criacao, @pastilha_freio_Km, @id_preco)";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
+                    cmd.Parameters.AddWithValue("@id", automovel.Id);
                     cmd.Parameters.AddWithValue("@modelo", automovel.Modelo);
                     cmd.Parameters.AddWithValue("@placa", automovel.Placa);
                     cmd.Parameters.AddWithValue("@cor", automovel.Cor);
@@ -38,7 +39,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     cmd.Parameters.AddWithValue("@oleo_km", automovel.Oleokm);
                     cmd.Parameters.AddWithValue("@data_criacao", automovel.DataCriacao);
                     cmd.Parameters.AddWithValue("@pastilha_freio_km", automovel.PastilhaFreioKm);
-                    cmd.Parameters.AddWithValue("@id_preco", automovel.Preco.Id);
+                    cmd.Parameters.AddWithValue("@id_preco", automovel.IdPreco);
                     cmd.ExecuteNonQuery();
                 }
             }

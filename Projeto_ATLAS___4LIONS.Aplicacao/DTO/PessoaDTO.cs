@@ -19,7 +19,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public PessoaDTO()
         {
         }
-
         public PessoaDTO(string nome, string email, string contato, ETipoPessoa tipoPessoa, string numeroDocumento, DateTime dataRegistro)
         {
             Nome = nome;
@@ -28,6 +27,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
             TipoPessoa = tipoPessoa;
             NumeroDocumento = numeroDocumento;
             DataRegistro = dataRegistro;
+
         }
 
     }

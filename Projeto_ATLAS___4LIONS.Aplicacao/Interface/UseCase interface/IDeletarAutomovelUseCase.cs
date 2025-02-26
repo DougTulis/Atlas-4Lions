@@ -1,4 +1,5 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
+using Projeto_ATLAS___4LIONS.Aplicacao.RespostaPadrao;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface
 {
     public interface IDeletarAutomovelUseCase
     {
-        public void Executar(AutomovelDTO automovelDto);
+        public RespostaPadrao<string> Executar(AutomovelDTO automovelDto);
     }
 }

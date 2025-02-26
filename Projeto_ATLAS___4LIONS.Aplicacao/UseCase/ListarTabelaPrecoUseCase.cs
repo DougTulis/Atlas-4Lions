@@ -9,18 +9,17 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
     public class ListarTabelaPrecoUseCase : IListarTabelaPrecoUseCase
     {
 
-        private readonly ITabelaPrecoRepositorio tabelaRepositorio;
+        private readonly ITabelaPrecoRepositorio _tabelaRepositorio;
         public ListarTabelaPrecoUseCase(ITabelaPrecoRepositorio tabelaRepositorio)
         {
-            this.tabelaRepositorio = tabelaRepositorio;
+            _tabelaRepositorio = tabelaRepositorio;
         }
-
 
         public IEnumerable<TabelaPrecoDTO> Executar()
         {
             try
             {
-                return tabelaRepositorio.ListarTodos();
+                return _tabelaRepositorio.ListarTodos();
             } catch (MySqlException ex)
             {
                 throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
@@ -31,7 +30,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             try
             {
-                return tabelaRepositorio.RecuperarPorId(id);
+                return _tabelaRepositorio.RecuperarPorId(id);
             } catch(MySqlException ex)
             {
                 throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);

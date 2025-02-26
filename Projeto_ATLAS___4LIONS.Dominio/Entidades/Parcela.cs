@@ -10,7 +10,7 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         public int Sequencia { get;private set; }
         public DateTime DataVencimento { get; private set; }
         public decimal Valor { get; private set; }
-        public PendenciaFinanceira PendenciaFinanceira { get; private set; }
+        public Guid IdPendenciaFinanceira { get; private set; }
         public DateTime? DataPagamento { get; private set; }
         public decimal? ValorPago { get; private set; }
         public EEspecie? EspeciePagamento { get; private  set; }
@@ -18,28 +18,20 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
        // public Parcela()
        // {
         //}
-
-        public Parcela(int sequencia, DateTime dataVencimento, decimal valor,PendenciaFinanceira pendenciaFinanceira)
+        public Parcela(int sequencia, DateTime dataVencimento, decimal valor,Guid idPendenciaFinanceira) : base()
         {
             Sequencia = sequencia;
             DataVencimento = dataVencimento;
             Valor = valor;
-            PendenciaFinanceira = pendenciaFinanceira;
+            IdPendenciaFinanceira = idPendenciaFinanceira;
         }
-
-        public static Parcela Create(int sequencia, DateTime dataVencimento, decimal valor, PendenciaFinanceira pendenciaFinanceira)
+        public static Parcela Create(int sequencia, DateTime dataVencimento, decimal valor, Guid idPendenciaFinanceira)
         {
-            return new Parcela(sequencia,dataVencimento,valor,pendenciaFinanceira);
+            return new Parcela(sequencia,dataVencimento,valor,idPendenciaFinanceira);
         }
-
-        public override bool Validacao()
-        {
-            return true;  // por enquanto
-        }
-
         public override bool Validacao(out string erros)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(); // por enquanto.
         }
     }
 }

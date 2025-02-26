@@ -10,14 +10,10 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 {
     public class LocacaoRepositorio : ILocacaoRepositorio
     {
-        private readonly IPessoaRepositorio _pessoaRepositorio;
-        private readonly IAutomovelRepositorio _automovelRepositorio;
         private readonly IMySqlAdaptadorConexao _conexaoAdapter;
 
-        public LocacaoRepositorio(IPessoaRepositorio pessoaRepositorio, IAutomovelRepositorio automovelRepositorio, IMySqlAdaptadorConexao conexaoAdapter)
+        public LocacaoRepositorio(IMySqlAdaptadorConexao conexaoAdapter)
         {
-            _pessoaRepositorio = pessoaRepositorio;
-            _automovelRepositorio = automovelRepositorio;
             _conexaoAdapter = conexaoAdapter;
         }
 

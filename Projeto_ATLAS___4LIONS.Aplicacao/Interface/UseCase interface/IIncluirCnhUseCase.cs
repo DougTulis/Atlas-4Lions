@@ -11,6 +11,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface
 {
     public interface IIncluirCnhUseCase
     {
-        public RespostaPadrao<string> Executar(Pessoa pessoaDto, string numeroCnh, DateTime vencimentoCnh);
+        public RespostaPadrao<string> Executar(PessoaDTO pessoaDto, string numeroCnh, DateTime vencimentoCnh);
     }
 }

@@ -12,7 +12,7 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         public string Ano { get; private set; }
         public EStatusVeiculo Status { get; private set; }
         public string? Chassi { get; private set; }
-        public TabelaPreco Preco { get; private set; }
+        public Guid IdPreco { get; private set; }
         public string? Renavam { get; private set; }
         public int? Oleokm { get; private set; }
         public int? PastilhaFreioKm { get; private set; }
@@ -21,7 +21,7 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         //{
         //}
 
-        public Automovel(string modelo, string placa, string cor, EStatusVeiculo status, string ano, string? chassi, string? renavam, int? oleokm, int? pastilhaFreioKm, TabelaPreco preco) : base()
+        private Automovel(string modelo, string placa, string cor, EStatusVeiculo status, string ano, string? chassi, string? renavam, int? oleokm, int? pastilhaFreioKm, Guid idPreco) : base()
         {
             Modelo = modelo;
             Placa = placa;
@@ -32,20 +32,18 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
             Oleokm = oleokm;
             PastilhaFreioKm = pastilhaFreioKm;
             Ano = ano;
-            Preco = preco;
-        }
-        public static Automovel Create(string modelo, string placa, string cor, EStatusVeiculo status, string ano, string? chassi, string? renavam, int? oleokm, int? pastilhaFreioKm,TabelaPreco preco)
-        {
-            return new Automovel(modelo, placa, cor, status, ano, chassi, renavam, oleokm, pastilhaFreioKm, preco);
+            IdPreco = idPreco;
         }
 
+        public static Automovel Create(string modelo, string placa, string cor, EStatusVeiculo status, string ano, string? chassi, string? renavam, int? oleokm, int? pastilhaFreioKm, Guid idPreco)
+        {
+            return new Automovel(modelo, placa, cor, status, ano, chassi, renavam, oleokm, pastilhaFreioKm, idPreco);
+        }
         public override bool Validacao()
         {
-
             var contratos = new ContratoValidacoes<Automovel>()
                 .ModeloIsOk(this.Modelo, "Insira um modelo válido", "Modelo")
                 .PlacaIsOk(this.Placa, "Placa inválida", "Placa");
-
             if (!contratos.IsValid())
             {
                 return false;
@@ -53,17 +51,36 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
             return true;
         }
 
-        public bool ValidarPraDeletar()
+        public bool ValidarPraDeletar(out string erros)
         {
+            erros = "";
             var contratos = new ContratoValidacoes<Automovel>().isCarroALugado(this.Status, "O automóvel está alugado e não pode ser deletado.", "Status");
 
             if (!contratos.IsValid())
             {
+                erros = contratos.CapturadorErros();
                 return false;
             }
             return true;
         }
-        public void AlterarParaGaragem()
+
+        public override bool Validacao(out string erros)
+        {
+            erros = "";
+            var contratos = new ContratoValidacoes<Automovel>()
+             .ModeloIsOk(this.Modelo, "Insira um modelo válido", "Modelo")
+             .PlacaIsOk(this.Placa, "Placa inválida", "Placa");
+
+            if (!contratos.IsValid())
+            {
+                erros = contratos.CapturadorErros();
+                return false;
+            }
+            return true;
+
+        }
+
+            public void AlterarParaGaragem()
         {
             Status = EStatusVeiculo.GARAGEM;
         }
@@ -73,9 +90,5 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
             Status = EStatusVeiculo.ALUGADO;
         }
 
-        public override bool Validacao(out string erros)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

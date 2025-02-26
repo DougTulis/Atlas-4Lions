@@ -3,6 +3,7 @@ using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Exceções;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.RespostaPadrao;
 using Projeto_ATLAS___4LIONS.Aplicacao.Servicos;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
@@ -18,6 +19,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         private readonly IPessoaRepositorio _pessoaRepositorio;
         private readonly IPendenciaFinanceiraService _pendenciaFinanceiraService;
         private readonly IParcelaService _parcelaService;
+        private readonly ICalculoValorLocacaoService _calculoValorLocacaoService;
 
 
         public CadastrarLocacaoUseCase(
@@ -35,47 +37,38 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             _pessoaRepositorio = pessoaRepositorio;
             _pendenciaFinanceiraService = pendenciaFinanceiraService;
             _parcelaService = parcelaService;
+            _calculoValorLocacaoService = calculoValorLocacaoService;
         }
-        public void Executar(LocacaoDTO locacaoDto,int quantidadeParcelas)
+        public RespostaPadrao<string> Executar(LocacaoDTO locacaoDto, int quantidadeParcelas)
         {
-            //  Buscar o Locatario e fabrica o model
-            var locatarioDto = _pessoaRepositorio.RecuperarPorId(locacaoDto.IdLocatario);
-
-            var locatario = Pessoa.Create(locatarioDto.Nome, locatarioDto.Email, locatarioDto.Contato, locatarioDto.TipoPessoa, locatarioDto.NumeroDocumento, locatarioDto.DataRegistro);
-
-            //  Buscar o CondutorDto e fabrica o model
-            var condutorDto = _pessoaRepositorio.RecuperarPorId(locacaoDto.IdLocatario);
-            var condutor = Pessoa.Create(condutorDto.Nome, condutorDto.Email, condutorDto.Contato, condutorDto.TipoPessoa, condutorDto.NumeroDocumento, condutorDto.DataRegistro);
-
-            // Buscar o automóvel, preco por id e fabrica o model dos dois
             var automovelDto = _automovelRepositorio.RecuperarPorId(locacaoDto.IdAutomovel);
+
             var precoDto = _tabelaPrecoRepositorio.RecuperarPorId(automovelDto.IdPreco);
-            var preco = TabelaPreco.Create(precoDto.Descricao, precoDto.Valor);
-            var automovel = Automovel.Create(automovelDto.Modelo, automovelDto.Placa, automovelDto.Cor, automovelDto.Status, automovelDto.Ano, automovelDto.Chassi, automovelDto.Renavam, automovelDto.Oleokm, automovelDto.PastilhaFreioKm, preco);
 
-            var locacao = Locacao.Create(locacaoDto.Saida, locacaoDto.Retorno, locacaoDto.TipoLocacao, locatario, condutor, automovel, locacaoDto.Status);
+            var valorTotal = _calculoValorLocacaoService.CalcularValorTotal(locacaoDto.Saida, locacaoDto.Retorno, precoDto.Valor);
 
-            if (!locacao.Validacao())
+              var locacao = Locacao.Create(locacaoDto.Saida, locacaoDto.Retorno, locacaoDto.TipoLocacao,valorTotal,locacaoDto.IdLocatario,locacaoDto.IdCondutor,locacaoDto.IdAutomovel,locacaoDto.PendenciaFinanceiraId,locacaoDto.Status);
+
+            string erros;
+            if (!locacao.Validacao(out erros))
             {
-                throw new Exception("A locação não passou na validação de regras de negócio.");
+                return RespostaPadrao<string>.Falha(false, "Erros", erros);
             }
 
             var pendencia = _pendenciaFinanceiraService.CriarPendencia(locacao.ValorTotal,quantidadeParcelas);
-
             {
-                if (!pendencia.Validacao())
+                if (!pendencia.Validacao(out erros))
                 {
-                    throw new Exception("A pendência financeira não passou na validação.");
+                    return RespostaPadrao<string>.Falha(false, "Erros", erros);
                 }
 
                 // aqui vai gerar todas as parcelas....
                 _parcelaService.GerarParcelas(pendencia, pendencia.QuantidadeParcelas);
 
-                automovel.AlterarParaAlugado(); // aqui altera pra garágem o status do automovel.
-
+             //   automovel.AlterarParaAlugado(); 
                 try
                 {
-                    _automovelRepositorio.AtualizarStatus(automovel.Id, automovel.Status);
+                    _automovelRepositorio.AtualizarStatus(automovel.Id, );
                     _locacaoRepositorio.Adicionar(locacao);
                 }
                 catch (MySqlException ex)

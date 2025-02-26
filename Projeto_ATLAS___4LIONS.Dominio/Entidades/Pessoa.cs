@@ -5,8 +5,7 @@ using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 namespace Projeto_ATLAS___4LIONS.Dominio.Entidades;
 
 public class Pessoa : ModeloAbstrato, IContrato
-{
-   
+{ 
     public string Nome { get; private set; }
     public string Email { get; private set; }
     public string Contato { get; private set; }
@@ -16,7 +15,7 @@ public class Pessoa : ModeloAbstrato, IContrato
     public string? NumeroCnh { get; private set; }
     public DateTime? VencimentoCnh { get;  private set; }
 
-    private Pessoa(string nome, string email, string contato, ETipoPessoa tipoPessoa, string numeroDocumento, DateTime dataRegistro)
+    private Pessoa(string nome, string email, string contato, ETipoPessoa tipoPessoa, string numeroDocumento, DateTime dataRegistro, string? numeroCnh, DateTime? vencimentoCnh) : base()
     {
         Nome = nome;
         Email = email;
@@ -24,10 +23,11 @@ public class Pessoa : ModeloAbstrato, IContrato
         TipoPessoa = tipoPessoa;
         NumeroDocumento = numeroDocumento;
         DataRegistro = dataRegistro;
+        NumeroCnh = numeroCnh;
+        VencimentoCnh = vencimentoCnh;
     }
 
-
-    //public Pessoa() não devemos ter pois isso não se trata de dominio rico em amenico
+    //public Pessoa() não devemos ter pois isso não se trata de dominio rico POIS ESTOU ALIMENTANDO O MODEL LA FORA
     //{
     //}
 
@@ -41,11 +41,10 @@ public class Pessoa : ModeloAbstrato, IContrato
     //    DataNascimento = dataNascimento;
     //}
 
-    public static Pessoa Create(string nome, string email, string contato, ETipoPessoa tipoPessoa, string numeroDocumento, DateTime dataRegistro)
+    public static Pessoa Create(string nome, string email, string contato, ETipoPessoa tipoPessoa, string numeroDocumento, DateTime dataRegistro, string? numeroCnh, DateTime? vencimentoCnh)
     {
-        return new Pessoa(nome,email,contato,tipoPessoa,numeroDocumento,dataRegistro);
+        return new Pessoa(nome,email,contato,tipoPessoa,numeroDocumento,dataRegistro,numeroCnh,vencimentoCnh);
     }
-
     public override bool Validacao()
     {
         var contratos = new ContratoValidacoes<Pessoa>()

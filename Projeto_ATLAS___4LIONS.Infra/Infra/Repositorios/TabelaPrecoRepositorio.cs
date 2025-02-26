@@ -86,10 +86,10 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
-                string sql = "SELECT * FROM tabela_preco WHERE Id = @Id";
+                string sql = "SELECT * FROM tabela_preco WHERE id = @id";
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    cmd.Parameters.AddWithValue("@Id", idPreco);
+                    cmd.Parameters.AddWithValue("@id", idPreco);
                     using (var dataReader = cmd.ExecuteReader())
                     {
                         var lista = PopularLista(dataReader);

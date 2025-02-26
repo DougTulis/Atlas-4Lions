@@ -33,7 +33,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 //    NumeroCnh = pessoaDto.NumeroCnh
                 //};
 
-                var pessoa = Pessoa.Create(pessoaDto.Nome, pessoaDto.Email, pessoaDto.Contato, pessoaDto.TipoPessoa, pessoaDto.NumeroDocumento, pessoaDto.DataRegistro);
+                var pessoa = Pessoa.Create(pessoaDto.Nome, pessoaDto.Email, pessoaDto.Contato, pessoaDto.TipoPessoa, pessoaDto.NumeroDocumento, pessoaDto.DataRegistro,null,null);
 
                 string erros;
                 if (!pessoa.Validacao(out erros))

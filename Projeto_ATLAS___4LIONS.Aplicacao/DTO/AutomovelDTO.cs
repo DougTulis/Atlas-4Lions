@@ -15,12 +15,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public string Ano { get; set; }
         public EStatusVeiculo Status { get; set; }
         public string? Chassi { get; set; }
-        public IList<TabelaPreco> TabelaPrecos { get; set; }
         public string? Renavam { get; set; }
         public int? Oleokm { get; set; }
         public int? PastilhaFreioKm { get; set; }
         public Guid IdPreco { get; set; }
-
         public AutomovelDTO()
         {
         }

@@ -19,7 +19,6 @@ namespace Projeto_ATLAS___4LIONS.Forms
             AtualizarGridView();
 
         }
-
         private void dgvHistoricoAutomovelExclusaoAutomovel_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -39,7 +38,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvHistoricoAutomovelExclusaoAutomovel.Rows[e.RowIndex];
-//                Guid automovelId = Convert.ToInt32(row.Cells[0].Value);
+                var automovelId = (row.Cells[0].Value).ToString();
 
                 DialogResult resultado = MessageBox.Show(
                     "Deseja realmente excluir este automóvel?",
@@ -50,9 +49,11 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
                 if (resultado == DialogResult.Yes)
                 {
-              //      var automovelDto = _listarAutomovelUseCase.ExecutarRecuperarPorId(automovelId);
-            //        _deletarAutomovelUseCase.Executar(automovelDto);
-                    MessageBox.Show("Automóvel excluído com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    var automovelDto = _listarAutomovelUseCase.ExecutarRecuperarPorId(Guid.Parse(automovelId));
+                   var resposta =  _deletarAutomovelUseCase.Executar(automovelDto);
+                    MessageBoxIcon icone = resposta.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning;
+                    MessageBox.Show(resposta.Mensagem, "Exclusão de Automóveis", MessageBoxButtons.OK, icone);
+
                     AtualizarGridView();
                 }
             }
