@@ -66,9 +66,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 {
                     return RespostaPadrao<string>.Falha(false, "Erros", erros);
                 }
-
-                _locacaoRepositorio.Adicionar(locacao);
                 _pendFinRepositorio.Adicionar(pendencia);
+                _locacaoRepositorio.Adicionar(locacao);
                 _parcelaService.GerarParcelas(pendencia, quantidadeParcelas);
                 _automovelRepositorio.AtualizarStatus(automovelDto.Id, EStatusVeiculo.ALUGADO);
 

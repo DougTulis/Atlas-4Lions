@@ -43,6 +43,8 @@ namespace Projeto_ATLAS___4LIONS.Infra.Infra.Repositorios
                     cmd.Parameters.AddWithValue("@valor_pago", parcela.Valor);
                     cmd.Parameters.AddWithValue("@especie_pagamento", parcela.EspeciePagamento);
                     cmd.Parameters.AddWithValue("@data_criacao", parcela.DataCriacao);
+                    cmd.Parameters.AddWithValue("@sequencia", parcela.Sequencia);
+
                     cmd.ExecuteNonQuery();
                 }
             }
