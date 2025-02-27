@@ -22,26 +22,26 @@ public class ListarHistoricoLocacaoUseCase : IListarHistoricoLocacaoUseCase
        
         try
         {
-            var locacoes = _locacaoRepositorio.ListarTodas();
-
-            foreach (var locacao in locacoes)
-            {
-                var locatario = _pessoaRepositorio.RecuperarPorId(locacao.IdLocatario);
-                var condutor = _pessoaRepositorio.RecuperarPorId(locacao.IdCondutor);
-
-                historico.Add(new HistoricoLocacaoDTO
-                {
-                    Id = locacao.Id,
-                    NomeLocatario = locatario.Nome,
-                    NomeCondutor = condutor.Nome,
-                    DataCriacao = locacao.DataCriacao,
-                    Saida = locacao.Saida,
-                    Retorno = locacao.Retorno,
-                    TipoLocacao = locacao.TipoLocacao,
-                    ValorTotal = locacao.ValorTotal,
-                    Status = locacao.Status
-                });
-            }
+        // var locacoes = _locacaoRepositorio.ListarTodas();
+        //
+        // foreach (var locacao in locacoes)
+        // {
+        //     var locatario = _pessoaRepositorio.RecuperarPorId(locacao.IdLocatario);
+        //     var condutor = _pessoaRepositorio.RecuperarPorId(locacao.IdCondutor);
+        //
+        //     historico.Add(new HistoricoLocacaoDTO
+        //     {
+        //         Id = locacao.Id,
+        //         NomeLocatario = locatario.Nome,
+        //         NomeCondutor = condutor.Nome,
+        //         DataCriacao = locacao.DataCriacao,
+        //         Saida = locacao.Saida,
+        //         Retorno = locacao.Retorno,
+        //         TipoLocacao = locacao.TipoLocacao,
+        //         ValorTotal = locacao.ValorTotal,
+        //         Status = locacao.Status
+        //      });
+        //  }
         }catch(MySqlException ex)
         {
             throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);

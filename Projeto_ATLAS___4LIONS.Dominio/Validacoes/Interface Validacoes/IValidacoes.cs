@@ -2,6 +2,6 @@
 {
     public interface IValidacoes
     {
-        bool Validacao();
+        bool Validacao(out string erros);
     }
 }

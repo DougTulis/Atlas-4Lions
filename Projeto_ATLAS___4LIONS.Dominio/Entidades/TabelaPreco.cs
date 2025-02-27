@@ -25,15 +25,10 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         // {
         //  }
 
-
-        public override bool Validacao()
-        {
-            return true; // por enquanto
-        }
-
         public override bool Validacao(out string erros)
         {
-            throw new NotImplementedException();
+            erros = "";
+            return true; // por enquanto
         }
     }
 }

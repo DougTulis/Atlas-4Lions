@@ -18,7 +18,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         }
         public RespostaPadrao<string> Executar(PessoaDTO pessoaDto, string numeroCnh, DateTime vencimentoCnh)
         {
-            var pessoa = Pessoa.Create(pessoaDto.Nome, pessoaDto.Email, pessoaDto.Contato, pessoaDto.TipoPessoa, pessoaDto.NumeroDocumento, pessoaDto.DataRegistro, pessoaDto.NumeroCnh, pessoaDto.VencimentoCnh);
+            var pessoa = Pessoa.Create(pessoaDto.Nome, pessoaDto.Email, pessoaDto.Contato, pessoaDto.TipoPessoa, pessoaDto.NumeroDocumento, pessoaDto.DataRegistro, numeroCnh, vencimentoCnh);
 
             string erros;
             if (!pessoa.ValidacaoCnh(out erros))

@@ -20,7 +20,7 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
             Id = Guid.NewGuid();
             DataCriacao = DateTime.Now;
         }
-
         public abstract bool Validacao(out string erros);
+
     }
 }

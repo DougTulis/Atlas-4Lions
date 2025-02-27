@@ -18,12 +18,14 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private readonly IListarPessoaUseCase _listarPessoaUseCase;
         private readonly IListarAutomovelUseCase _listarAutomovelUseCase;
         private readonly IListarTabelaPrecoUseCase _listarTabelaPrecoUseCase;
+        private readonly ICadastrarLocacaoUseCase _cadastrarLocacaoUseCase;
 
-        public FrmCadLocacao(IListarPessoaUseCase listarPessoaUseCase, IListarAutomovelUseCase listarAutomovelUseCase, IListarTabelaPrecoUseCase listarTabelaPrecoUseCase)
+        public FrmCadLocacao(IListarPessoaUseCase listarPessoaUseCase, IListarAutomovelUseCase listarAutomovelUseCase, IListarTabelaPrecoUseCase listarTabelaPrecoUseCase,ICadastrarLocacaoUseCase cadastrarLocacaoUseCase)
         {
             _listarPessoaUseCase = listarPessoaUseCase;
             _listarAutomovelUseCase = listarAutomovelUseCase;
             _listarTabelaPrecoUseCase = listarTabelaPrecoUseCase;
+            _cadastrarLocacaoUseCase = cadastrarLocacaoUseCase;
             InitializeComponent();
             ConfigurarFormulario();
         }
@@ -54,30 +56,39 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void cmbTipoLocacao_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //lblParcelas.Visible = cmbTipoLocacao.SelectedItem.Equals(ETipoLocacao.CONTRATO);
+      //      lblParcelas.Visible = cmbTipoLocacao.SelectedItem.Equals(ETipoLocacao.CONTRATO);
             cmbParcelas.Visible = lblParcelas.Visible;
         }
 
         private void btnCadastrarLocacao_Click(object sender, EventArgs e)
         {
-         
-                var locatarioDto = (PessoaDTO)cmbLocatario.SelectedItem;
-                var condutorDto = (PessoaDTO)cmbCondutor.SelectedItem;
-                var automovelDto = (AutomovelDTO)cmbAutomovel.SelectedItem;
 
-                if (locatarioDto == null || condutorDto == null || automovelDto == null)
-                {
-                    MessageBox.Show("Todos os campos são obrigatórios!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+            var locatarioDto = (PessoaDTO)cmbLocatario.SelectedItem;
+            var condutorDto = (PessoaDTO)cmbCondutor.SelectedItem;
+            var automovelDto = (AutomovelDTO)cmbAutomovel.SelectedItem;
 
-                int numeroParcelas = cmbParcelas.SelectedItem != null ? Convert.ToInt32(cmbParcelas.SelectedItem) : 1;
-                DateTime dataSaida = DateTime.Parse(txtSaida.Text);
-                DateTime dataRetorno = DateTime.Parse(txtRetorno.Text);
-
-                var locacao = Locacao.Create(dataSaida, dataRetorno, (ETipoLocacao)cmbTipoLocacao.SelectedItem, locatarioDto.Id, condutorDto.Id, automovelDto.Id);
-
+            if (locatarioDto == null || condutorDto == null || automovelDto == null)
+            {
+                MessageBox.Show("Todos os campos são obrigatórios!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            int quantidadeParcelas = cmbParcelas.SelectedItem != null ? Convert.ToInt32(cmbParcelas.SelectedItem) : 1;
+
+            var locacaoDto = new LocacaoDTO()
+            {
+                IdAutomovel = automovelDto.Id,
+                IdCondutor = condutorDto.Id,
+                IdLocatario = locatarioDto.Id,
+                PendenciaFinanceiraId = condutorDto.Id,
+                Saida = DateTime.Parse(txtSaida.Text),
+                Retorno = DateTime.Parse(txtRetorno.Text),
+                Status = EStatusLocacao.ANDAMENTO,
+                TipoLocacao = (ETipoLocacao)cmbTipoLocacao.SelectedItem,
+            };
+            var resultado = _cadastrarLocacaoUseCase.Executar(locacaoDto, quantidadeParcelas);
+
+        }
         private void lblDataSaida_Click(object sender, EventArgs e) { }
         private void lblDataRetorno_Click(object sender, EventArgs e) { }
         private void lblParcelas_Click(object sender, EventArgs e) { }

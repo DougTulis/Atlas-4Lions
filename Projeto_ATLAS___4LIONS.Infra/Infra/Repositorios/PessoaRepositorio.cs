@@ -41,7 +41,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     cmd.Parameters.AddWithValue("@numero_cnh", pessoa.NumeroCnh ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@vencimento_Cnh", pessoa.VencimentoCnh ?? (object)DBNull.Value);
                     cmd.ExecuteNonQuery();
-                    //pessoaDto.Id = (int)cmd.LastInsertedId;
+
                 }
             }
         }
@@ -129,8 +129,8 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    cmd.Parameters.AddWithValue("@numeroCnh", numeroCnh);
-                    cmd.Parameters.AddWithValue("@vencimentoCnh", vencimentoCnh);
+                    cmd.Parameters.AddWithValue("@numero_cnh", numeroCnh);
+                    cmd.Parameters.AddWithValue("@vencimento_cnh", vencimentoCnh);
                     cmd.Parameters.AddWithValue("@id", id);
 
                     cmd.ExecuteNonQuery();

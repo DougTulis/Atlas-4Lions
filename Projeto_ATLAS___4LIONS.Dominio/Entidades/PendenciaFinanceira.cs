@@ -9,7 +9,7 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         public decimal ValorTotal { get; private set; }
         public IList<Parcela> Parcelas { get; private set; } = new List<Parcela>();
 
-        public PendenciaFinanceira(decimal valorTotal, int quantidadeParcelas) : base()
+        public PendenciaFinanceira(decimal valorTotal) : base()
         {
             ValorTotal = valorTotal;
         }
@@ -18,9 +18,9 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         //{
         //}
 
-        public static PendenciaFinanceira Create(decimal valorTotal,int quantidadeParcelas)
+        public static PendenciaFinanceira Create(decimal valorTotal)
         {
-            return new PendenciaFinanceira(valorTotal,quantidadeParcelas);
+            return new PendenciaFinanceira(valorTotal);
         }
 
         public void AdicionarParcela(Parcela parcela)
@@ -35,7 +35,10 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
 
         public override bool Validacao(out string erros)
         {
-            throw new NotImplementedException();
+            erros = "";
+            return true; // por enquanto
         }
+
+
     }
 }

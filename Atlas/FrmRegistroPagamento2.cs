@@ -8,7 +8,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
 {
     public partial class FrmRegistroPagamento2 : Form
     {
-        private int idPendFin;
+        private Guid idPendFin;
         private readonly IListarParcelaUseCase _listarParcelaUseCase;
         private readonly IIncluirPagamentoUseCase _incluirPagamentoUseCase;
         
@@ -16,7 +16,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
         {
             InitializeComponent();
         }
-        public FrmRegistroPagamento2(int _Idpendfin, IIncluirPagamentoUseCase incluirPagamentoUseCase, IListarParcelaUseCase listarParcelaUseCase)
+        public FrmRegistroPagamento2(Guid _Idpendfin, IIncluirPagamentoUseCase incluirPagamentoUseCase, IListarParcelaUseCase listarParcelaUseCase)
         {
             _listarParcelaUseCase = listarParcelaUseCase;
             _incluirPagamentoUseCase = incluirPagamentoUseCase;
@@ -107,8 +107,8 @@ namespace Projeto_ATLAS___4LIONS.Forms
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvParcelasPendFinEscolhida.Rows[e.RowIndex];
-                int idSelecionado = Convert.ToInt16(dgvParcelasPendFinEscolhida.Rows[e.RowIndex].Cells[0].Value);
-                txtParcelaSelecionada.Text = Convert.ToString(idSelecionado);
+                var idSelecionado = (dgvParcelasPendFinEscolhida.Rows[e.RowIndex].Cells[0].Value).ToString();
+                txtParcelaSelecionada.Text = idSelecionado;
 
             }
         }

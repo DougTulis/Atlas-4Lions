@@ -39,17 +39,7 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         {
             return new Automovel(modelo, placa, cor, status, ano, chassi, renavam, oleokm, pastilhaFreioKm, idPreco);
         }
-        public override bool Validacao()
-        {
-            var contratos = new ContratoValidacoes<Automovel>()
-                .ModeloIsOk(this.Modelo, "Insira um modelo válido", "Modelo")
-                .PlacaIsOk(this.Placa, "Placa inválida", "Placa");
-            if (!contratos.IsValid())
-            {
-                return false;
-            }
-            return true;
-        }
+
 
         public bool ValidarPraDeletar(out string erros)
         {

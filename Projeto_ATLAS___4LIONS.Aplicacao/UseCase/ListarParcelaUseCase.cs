@@ -14,7 +14,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             _parcelaRepositorio = parcelaRepositorio;
         }
 
-        public IEnumerable<ParcelaDTO> ExecutarRecuperacaoPorPendFin(int idPendencia)
+        public IEnumerable<ParcelaDTO> ExecutarRecuperacaoPorPendFin(Guid idPendencia)
         {
             try
             {
@@ -25,12 +25,13 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
             }
         }
-        public ParcelaDTO? ExecutarRecuperacaoPorId(int id)
+        public ParcelaDTO? ExecutarRecuperacaoPorId(Guid id)
         {
             try
             {
                 return _parcelaRepositorio.RecuperarPorId(id);
-            }catch(MySqlException ex)
+            }
+            catch (MySqlException ex)
             {
                 throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
             }

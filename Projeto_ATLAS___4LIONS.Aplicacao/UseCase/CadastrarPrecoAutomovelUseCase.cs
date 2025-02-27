@@ -20,7 +20,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             {
                 var tabelaPreco = TabelaPreco.Create(tabelaPrecoDto.Descricao, tabelaPrecoDto.Valor);
 
-                if (!tabelaPreco.Validacao())
+                if (!tabelaPreco.Validacao(out string erros))
                 {
                     
                 }

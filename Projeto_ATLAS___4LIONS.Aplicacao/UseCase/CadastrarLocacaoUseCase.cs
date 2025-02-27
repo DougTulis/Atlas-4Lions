@@ -17,6 +17,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         private readonly ITabelaPrecoRepositorio _tabelaPrecoRepositorio;
         private readonly IAutomovelRepositorio _automovelRepositorio;
         private readonly IPessoaRepositorio _pessoaRepositorio;
+        private readonly IPendenciaFinanceiraRepositorio _pendFinRepositorio;
         private readonly IPendenciaFinanceiraService _pendenciaFinanceiraService;
         private readonly IParcelaService _parcelaService;
         private readonly ICalculoValorLocacaoService _calculoValorLocacaoService;
@@ -29,7 +30,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             IPessoaRepositorio pessoaRepositorio,
             ICalculoValorLocacaoService calculoValorLocacaoService,
             IPendenciaFinanceiraService pendenciaFinanceiraService,
-            IParcelaService parcelaService)
+            IParcelaService parcelaService,
+            IPendenciaFinanceiraRepositorio pendFinRepositorio)
         {
             _locacaoRepositorio = locacaoRepositorio;
             _tabelaPrecoRepositorio = tabelaPrecoRepositorio;
@@ -38,45 +40,46 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             _pendenciaFinanceiraService = pendenciaFinanceiraService;
             _parcelaService = parcelaService;
             _calculoValorLocacaoService = calculoValorLocacaoService;
+            _pendFinRepositorio = pendFinRepositorio;
         }
         public RespostaPadrao<string> Executar(LocacaoDTO locacaoDto, int quantidadeParcelas)
         {
-            var automovelDto = _automovelRepositorio.RecuperarPorId(locacaoDto.IdAutomovel);
-
-            var precoDto = _tabelaPrecoRepositorio.RecuperarPorId(automovelDto.IdPreco);
-
-            var valorTotal = _calculoValorLocacaoService.CalcularValorTotal(locacaoDto.Saida, locacaoDto.Retorno, precoDto.Valor);
-
-              var locacao = Locacao.Create(locacaoDto.Saida, locacaoDto.Retorno, locacaoDto.TipoLocacao,valorTotal,locacaoDto.IdLocatario,locacaoDto.IdCondutor,locacaoDto.IdAutomovel,locacaoDto.PendenciaFinanceiraId,locacaoDto.Status);
-
-            string erros;
-            if (!locacao.Validacao(out erros))
+            try
             {
-                return RespostaPadrao<string>.Falha(false, "Erros", erros);
-            }
+                var automovelDto = _automovelRepositorio.RecuperarPorId(locacaoDto.IdAutomovel);
 
-            var pendencia = _pendenciaFinanceiraService.CriarPendencia(locacao.ValorTotal,quantidadeParcelas);
-            {
+                var precoDto = _tabelaPrecoRepositorio.RecuperarPorId(automovelDto.IdPreco);
+
+                var valorTotal = _calculoValorLocacaoService.CalcularValorTotal(locacaoDto.Saida, locacaoDto.Retorno, precoDto.Valor);
+
+                var pendencia = _pendenciaFinanceiraService.CriarPendencia(valorTotal);
+
+                var locacao = Locacao.Create(locacaoDto.Saida, locacaoDto.Retorno, locacaoDto.TipoLocacao, valorTotal, locacaoDto.IdLocatario, locacaoDto.IdCondutor, locacaoDto.IdAutomovel, locacaoDto.Status, pendencia.Id);
+
+                string erros;
                 if (!pendencia.Validacao(out erros))
                 {
                     return RespostaPadrao<string>.Falha(false, "Erros", erros);
                 }
 
-                // aqui vai gerar todas as parcelas....
-                _parcelaService.GerarParcelas(pendencia, pendencia.QuantidadeParcelas);
+                if (!locacao.Validacao(out erros))
+                {
+                    return RespostaPadrao<string>.Falha(false, "Erros", erros);
+                }
 
-             //   automovel.AlterarParaAlugado(); 
-                try
-                {
-                    _automovelRepositorio.AtualizarStatus(automovel.Id, );
-                    _locacaoRepositorio.Adicionar(locacao);
-                }
-                catch (MySqlException ex)
-                {
-                    throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
-                }
+                _locacaoRepositorio.Adicionar(locacao);
+                _pendFinRepositorio.Adicionar(pendencia);
+                _parcelaService.GerarParcelas(pendencia, quantidadeParcelas);
+                _automovelRepositorio.AtualizarStatus(automovelDto.Id, EStatusVeiculo.ALUGADO);
+
+                return RespostaPadrao<string>.Sucesso(true, "Locação cadastrada com sucesso!");
             }
-
+            catch (MySqlException ex)
+            {
+                throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
+            }
         }
+
     }
 }
+

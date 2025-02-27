@@ -44,13 +44,13 @@
             itmGerenciamentoVeiculosCadVeiculo = new ToolStripMenuItem();
             itmGerenciamentoVeiculosHistVeiculo = new ToolStripMenuItem();
             itmGerenciamentoVeiculosExcluirVeiculo = new ToolStripMenuItem();
+            itmGerenciamentoVeiculosCadastrarPreco = new ToolStripMenuItem();
             mnuGerenciamentoLocacoes = new ToolStripMenuItem();
             itmGerenciamentoLocacoesCadLocacoes = new ToolStripMenuItem();
             itmGerenciamentoLocacoesHistLocacoes = new ToolStripMenuItem();
             itmGerenciamentoLocacoesRegPagamento = new ToolStripMenuItem();
             itmGerenciamentoLocacoesBaixaLocacao = new ToolStripMenuItem();
             timer1 = new System.Windows.Forms.Timer(components);
-            itmGerenciamentoVeiculosCadastrarPreco = new ToolStripMenuItem();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcbAtlas).BeginInit();
             menuStrip1.SuspendLayout();
@@ -108,7 +108,7 @@
             nightControlBox1.EnableMaximizeColor = Color.FromArgb(160, 160, 160);
             nightControlBox1.EnableMinimizeButton = true;
             nightControlBox1.EnableMinimizeColor = Color.FromArgb(160, 160, 160);
-            nightControlBox1.Location = new Point(939, 0);
+            nightControlBox1.Location = new Point(959, 0);
             nightControlBox1.MaximizeHoverColor = Color.FromArgb(15, 255, 255, 255);
             nightControlBox1.MaximizeHoverForeColor = Color.White;
             nightControlBox1.MinimizeHoverColor = Color.FromArgb(15, 255, 255, 255);
@@ -207,6 +207,13 @@
             itmGerenciamentoVeiculosExcluirVeiculo.Text = "Excluir veículo";
             itmGerenciamentoVeiculosExcluirVeiculo.Click += itmGerenciamentoVeiculosExcluirVeiculo_Click;
             // 
+            // itmGerenciamentoVeiculosCadastrarPreco
+            // 
+            itmGerenciamentoVeiculosCadastrarPreco.Name = "itmGerenciamentoVeiculosCadastrarPreco";
+            itmGerenciamentoVeiculosCadastrarPreco.Size = new Size(230, 26);
+            itmGerenciamentoVeiculosCadastrarPreco.Text = "Cadastrar Preco ";
+            itmGerenciamentoVeiculosCadastrarPreco.Click += itmGerenciamentoVeiculosCadastrarPreco_Click;
+            // 
             // mnuGerenciamentoLocacoes
             // 
             mnuGerenciamentoLocacoes.BackColor = SystemColors.AppWorkspace;
@@ -243,13 +250,6 @@
             itmGerenciamentoLocacoesBaixaLocacao.Size = new Size(235, 26);
             itmGerenciamentoLocacoesBaixaLocacao.Text = "Baixa de locações";
             itmGerenciamentoLocacoesBaixaLocacao.Click += itmGerenciamentoLocacoesBaixaLocacao_Click;
-            // 
-            // itmGerenciamentoVeiculosCadastrarPreco
-            // 
-            itmGerenciamentoVeiculosCadastrarPreco.Name = "itmGerenciamentoVeiculosCadastrarPreco";
-            itmGerenciamentoVeiculosCadastrarPreco.Size = new Size(230, 26);
-            itmGerenciamentoVeiculosCadastrarPreco.Text = "Cadastrar Preco ";
-            itmGerenciamentoVeiculosCadastrarPreco.Click += itmGerenciamentoVeiculosCadastrarPreco_Click;
             // 
             // FrmPrincipal
             // 

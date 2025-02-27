@@ -10,7 +10,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public DateTime Saida { get; set; }
         public DateTime Retorno { get; set; }
         public ETipoLocacao TipoLocacao { get; set; }
-        public decimal ValorTotal { get; set; }
         public Guid IdLocatario { get; set; }
         public Guid IdCondutor { get; set; }
         public Guid IdAutomovel { get; set; }

@@ -12,25 +12,28 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         public decimal ValorTotal { get; private  set; }
         public Guid IdLocatario { get; private set; }
         public Guid IdCondutor { get; private set; }
-        public Guid IdAutomovel { get; set; }
+        public Guid IdAutomovel { get; private set; }
         public Guid IdPendenciaFinanceira { get; private set; }
         public EStatusLocacao Status { get; private set; }
 
-        public Locacao(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, Guid idLocatario, Guid idCondutor, Guid idAutomovel) : base()
+        public Locacao(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, decimal valorTotal, Guid idLocatario, Guid idCondutor, Guid idAutomovel, EStatusLocacao status,Guid idPendenciaFinanceira)
         {
             Saida = saida;
             Retorno = retorno;
             TipoLocacao = tipoLocacao;
+            ValorTotal = valorTotal;
             IdLocatario = idLocatario;
             IdCondutor = idCondutor;
- 
-        }
-        //fabrica
-        public static Locacao Create(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, Guid idLocatario, Guid idCondutor, Guid idAutomovel)
-        {
-            return new Locacao(saida,retorno,tipoLocacao,idLocatario,idCondutor,idAutomovel);
+            IdAutomovel = idAutomovel;
+            Status = status;
+            IdPendenciaFinanceira = idPendenciaFinanceira;
         }
 
+        //fabrica
+        public static Locacao Create(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, decimal valorTotal, Guid idLocatario, Guid idCondutor, Guid idAutomovel, EStatusLocacao status, Guid idPendenciaFinanceira)
+        {
+            return new Locacao(saida,retorno,tipoLocacao,valorTotal,idLocatario,idCondutor,idAutomovel,status,idPendenciaFinanceira);
+        }
         public override bool Validacao(out string erros)
         {
             erros = "";
@@ -45,12 +48,10 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
             }
             return true;
         }
-     // private decimal CalcularValorTotal()
-     // {
-     //     int dias = (Retorno - Saida).Days;
-     //     return dias * Automovel.ValorDiaria; 
-     //
-     // }
+        public void AtribuirIdPendenciaFinanceira(Guid pendfin)
+        {
+            IdPendenciaFinanceira = pendfin;
+        }
 
         public void AlterarStatusAndamento()
         {

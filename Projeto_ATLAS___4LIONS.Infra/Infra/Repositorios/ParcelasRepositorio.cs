@@ -45,23 +45,83 @@ namespace Projeto_ATLAS___4LIONS.Infra.Infra.Repositorios
                     cmd.Parameters.AddWithValue("@data_criacao", parcela.DataCriacao);
                     cmd.ExecuteNonQuery();
                 }
+            }
+        }
+        public ParcelaDTO? RecuperarPorId(Guid id)
+        {
+            using (var conexao = _conexaoAdapter.ObterConexao())
+            {
+                conexao.Open();
+                string sql = "SELECT * FROM parcela WHERE id = @id";
 
+                using (var cmd = new MySqlCommand(sql, conexao))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    using (var dataReader = cmd.ExecuteReader())
+                    {
+                        var lista = PopularLista(dataReader);
+                        return lista.FirstOrDefault();
+                    }
+                }
+            }
+        }
+        public IEnumerable<ParcelaDTO> PopularLista(MySqlDataReader dataReader)
+        {
+            var lista = new List<ParcelaDTO>();
+            while (dataReader.Read())
+            {
+                var parcela = new ParcelaDTO
+                {
+                    Id = Guid.Parse(dataReader["id"].ToString()),
+                    Sequencia = Convert.ToInt16(dataReader["sequencia"]),
+                    PendenciaFinanceiraId = Guid.Parse(dataReader["pendencia_financeira_id"].ToString()),
+                    Valor = Convert.ToDecimal(dataReader["valor"]),
+                    DataVencimento = Convert.ToDateTime(dataReader["data_vencimento"]),
+                    DataPagamento = dataReader["data_pagamento"] != DBNull.Value ? Convert.ToDateTime(dataReader["data_pagamento"]) : (DateTime?)null,
+                    ValorPago = dataReader["valor_pago"] != DBNull.Value ? Convert.ToDecimal(dataReader["valor_pago"]) : (decimal?)null,
+                    EspeciePagamento = dataReader["especie_pagamento"] != DBNull.Value ? Enum.Parse<EEspecie>(dataReader["especie_pagamento"].ToString()) : (EEspecie?)null
+                };
+                lista.Add(parcela);
+            }
+            return lista;
+        }
+        public IEnumerable<ParcelaDTO> ListarPorPendencia(Guid pendenciaId)
+        {
+            using (var conexao = _conexaoAdapter.ObterConexao())
+            {
+                conexao.Open();
+                string sql = "SELECT * FROM parcela WHERE pendencia_financeira_id = @pendenciaId";
+
+                using (var cmd = new MySqlCommand(sql, conexao))
+                {
+                    cmd.Parameters.AddWithValue("@pendenciaId", pendenciaId);
+                    using (var dataReader = cmd.ExecuteReader())
+                    {
+                        return PopularLista(dataReader);
+                    }
+                }
+            }
+        }
+        public void AtualizarPagamentoParcela(Guid idPendenciaFinanceira, int sequencia, decimal valorPago, DateTime dataPagamento, EEspecie especiePagamento)
+        {
+            using (var conexao = _conexaoAdapter.ObterConexao())
+            {
+                conexao.Open();
+                string sql = @"UPDATE parcela SET valor_pago = @valor_pago, data_pagamento = @data_pagamento, especie_pagamento = @especie_pagamento 
+                                WHERE pendencia_financeira_id = @pendencia_financeira_id AND sequencia = @sequencia";
+
+                using (var cmd = new MySqlCommand(sql, conexao))
+                {
+                    cmd.Parameters.AddWithValue("@pendencia_financeira_id", idPendenciaFinanceira);
+                    cmd.Parameters.AddWithValue("@sequencia", sequencia);
+                    cmd.Parameters.AddWithValue("@valor_pago", valorPago);
+                    cmd.Parameters.AddWithValue("@data_pagamento", dataPagamento);
+                    cmd.Parameters.AddWithValue("@especie_pagamento", especiePagamento.ToString());
+                    cmd.ExecuteNonQuery();
+                }
             }
         }
 
-        public void AdicionarVarias(IEnumerable<ParcelaDTO> parcelasDto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AtualizarPagamentoParcela(Guid idPendenciaFinanceira, int sequencia, decimal valorPago, DateTime dataPagamento, EEspecie especiePagamento)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<ParcelaDTO> ListarPorPendencia(int pendenciaId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

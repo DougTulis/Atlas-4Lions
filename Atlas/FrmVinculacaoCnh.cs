@@ -54,7 +54,6 @@ namespace Projeto_ATLAS___4LIONS.Forms
             Guid.TryParse(txtPessoa.Text, out Guid idPessoa);
 
             var pessoaDto = _listarpessoaUseCase.ExecutarRecuperarPorId(idPessoa);
-            var teste = txtNumeroCnh.Text;
 
            RespostaPadrao<string> resultado = _incluirCnhUseCase.Executar(pessoaDto, txtNumeroCnh.Text, DateTime.Parse(txtVencimentoCnh.Text));
 

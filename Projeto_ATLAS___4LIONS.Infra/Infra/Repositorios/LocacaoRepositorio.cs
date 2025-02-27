@@ -36,10 +36,10 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     cmd.Parameters.AddWithValue("@retorno", locacao.Retorno);
                     cmd.Parameters.AddWithValue("@tipo_locacao", locacao.TipoLocacao);
                     cmd.Parameters.AddWithValue("@valor_total", locacao.ValorTotal);
-                    cmd.Parameters.AddWithValue("@locatario_id", locacao.Locatario.Id);
-                    cmd.Parameters.AddWithValue("@condutor_id", locacao.Condutor.Id);
-                    cmd.Parameters.AddWithValue("@automovel_id", locacao.Automovel.Id);
-                    cmd.Parameters.AddWithValue("@pendencia_financeira_id", locacao.PendenciaFinanceira.Id);
+                    cmd.Parameters.AddWithValue("@locatario_id", locacao.IdLocatario);
+                    cmd.Parameters.AddWithValue("@condutor_id", locacao.IdAutomovel);
+                    cmd.Parameters.AddWithValue("@automovel_id", locacao.IdAutomovel);
+                    cmd.Parameters.AddWithValue("@pendencia_financeira_id", locacao.IdPendenciaFinanceira);
                     cmd.Parameters.AddWithValue("@status_locacao", locacao.Status);
                     cmd.ExecuteNonQuery();
                 }
@@ -64,11 +64,11 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     cmd.Parameters.AddWithValue("@retorno", locacao.Retorno);
                     cmd.Parameters.AddWithValue("@tipo_locacao", locacao.TipoLocacao);
                     cmd.Parameters.AddWithValue("@valor_total", locacao.ValorTotal);
-                    cmd.Parameters.AddWithValue("@locatario_id", locacao.Locatario.Id);
-                    cmd.Parameters.AddWithValue("@condutor_id", locacao.Condutor.Id);
-                    cmd.Parameters.AddWithValue("@automovel_id", locacao.Automovel.Id);
+                    cmd.Parameters.AddWithValue("@locatario_id", locacao.IdLocatario);
+                    cmd.Parameters.AddWithValue("@condutor_id", locacao.IdCondutor);
+                    cmd.Parameters.AddWithValue("@automovel_id", locacao.IdAutomovel);
                     cmd.Parameters.AddWithValue("@status_locacao", locacao.Status);
-                    cmd.Parameters.AddWithValue("@pendencia_financeira_id", locacao.PendenciaFinanceira.Id);
+                    cmd.Parameters.AddWithValue("@pendencia_financeira_id", locacao.IdPendenciaFinanceira);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -133,11 +133,12 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     Saida = Convert.ToDateTime(dataReader["saida"]),
                     Retorno = Convert.ToDateTime(dataReader["retorno"]),
                     TipoLocacao = (ETipoLocacao)Convert.ToInt32(dataReader["tipo_locacao"]),
-                    ValorTotal = Convert.ToDecimal(dataReader["valor_total"]),
                     IdLocatario = Guid.Parse(dataReader["locatario_id"].ToString()),
                     IdCondutor = Guid.Parse(dataReader["condutor_id"].ToString()),
                     IdAutomovel = Guid.Parse(dataReader["automovel_id"].ToString()),
                     Status = (EStatusLocacao)Convert.ToInt32(dataReader["statusLocacao"]),
+
+                    //    Chassi = !Convert.IsDBNull(dataReader["chassi"]) ? dataReader["chassi"].ToString() : null,
                 };
                 lista.Add(locacaoDto);
             }

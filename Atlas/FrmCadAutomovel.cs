@@ -135,7 +135,6 @@ namespace Projeto_ATLAS___4LIONS.Forms
                 Oleokm = int.TryParse(txtOleoKm.Text, out int oleo) ? oleo : null,
                 PastilhaFreioKm = int.TryParse(txtFreioKm.Text, out int freio) ? freio : null,
                 IdPreco = precoSelecionado.Id,
-
             };
             RespostaPadrao<string> resposta = _cadastrarVeiculoUseCase.Executar(automovelDto);
             MessageBoxIcon icone = resposta.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning;

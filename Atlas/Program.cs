@@ -10,6 +10,8 @@ using Atlas;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.Servicos;
 using Projeto_ATLAS___4LIONS.Infra.Servicos;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.Interface_Adapter;
+using Projeto_ATLAS___4LIONS.Aplicacao.Servicos;
+using Projeto_ATLAS___4LIONS.Infra.Infra.Repositorios;
 
 namespace Projeto_ATLAS___4LIONS
 {
@@ -37,6 +39,7 @@ namespace Projeto_ATLAS___4LIONS
             services.AddSingleton<ITabelaPrecoRepositorio, TabelaPrecoRepositorio>();
             services.AddSingleton<ILocacaoRepositorio, LocacaoRepositorio>();
             services.AddSingleton<IPendenciaFinanceiraRepositorio, PendenciaFinanceiraRepositorio>();
+            services.AddSingleton<IParcelaRepositorio, ParcelasRepositorio>();
 
 
 
@@ -75,6 +78,10 @@ namespace Projeto_ATLAS___4LIONS
             services.AddTransient<FrmVinculacaoCnh>();
 
             services.AddSingleton<IMySqlAdaptadorConexao, MySqlAdaptadorConexao>();
+
+            services.AddTransient<ICalculoValorLocacaoService, CalculoValorLocacaoService>();
+            services.AddTransient<IPendenciaFinanceiraService, PendenciaFinanceiraService>();
+            services.AddTransient<IParcelaService, ParcelaService>();
 
 
             return services.BuildServiceProvider();

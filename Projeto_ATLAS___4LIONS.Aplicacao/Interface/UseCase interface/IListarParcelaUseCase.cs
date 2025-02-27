@@ -10,7 +10,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface
     public interface IListarParcelaUseCase
     {
 
-        public IEnumerable<ParcelaDTO> ExecutarRecuperacaoPorPendFin(int idPendencia);
-        public ParcelaDTO? ExecutarRecuperacaoPorId(int id);
+        public IEnumerable<ParcelaDTO> ExecutarRecuperacaoPorPendFin(Guid idPendencia);
+        public ParcelaDTO? ExecutarRecuperacaoPorId(Guid id);
     }
 }

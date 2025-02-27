@@ -7,7 +7,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Validacoes
     {
         public ContratoValidacoes<T> PossuiCnh(Guid condutor, string mensagem, string propriedadeNome)
         {
-            if (string.IsNullOrWhiteSpace(pessoa.NumeroCnh) || !pessoa.VencimentoCnh.HasValue)
+            
             {
                 AddNotification(new Notificacao(mensagem, propriedadeNome));
             }

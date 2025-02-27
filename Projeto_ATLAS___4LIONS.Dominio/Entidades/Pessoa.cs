@@ -45,29 +45,7 @@ public class Pessoa : ModeloAbstrato, IContrato
     {
         return new Pessoa(nome,email,contato,tipoPessoa,numeroDocumento,dataRegistro,numeroCnh,vencimentoCnh);
     }
-    public override bool Validacao()
-    {
-        var contratos = new ContratoValidacoes<Pessoa>()
-            .NomeIsOk(Nome, 3, "Nome inválido. Deve conter pelo menos 3 caracteres.", "Nome")
-            .EmailIsOk(Email, 2, "Email inválido. Insira um endereço de email válido.", "Email")
-            .ContatoIsOk(Contato, 10, "Contato inválido. Informe um número com pelo menos 10 dígitos.", "Contato");
 
-        if (TipoPessoa == ETipoPessoa.FISICA)
-        {
-            contratos.DataNascimentoIsOk(DataRegistro, 18, "Data de nascimento inválida. Deve ser maior de idade.", "DataNascimento");
-        }
-        else if (TipoPessoa == ETipoPessoa.JURIDICA)
-        {
-            contratos.DataRegistroIsOk(DataRegistro, 1, "Data de fundação inválida.", "DataRegistro");
-        }
-
-        if (!contratos.IsValid())
-        {
-            return false;
-        }
-
-        return true;
-    }
     public bool ValidacaoCnh(out string erros)
     {
         erros = "";

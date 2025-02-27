@@ -14,22 +14,17 @@ public class ParcelaService : IParcelaService
 
     public void GerarParcelas(PendenciaFinanceira pendenciaFinanceira, int quantidadeParcelas)
     {
-        try
+
+        decimal valorParcela = pendenciaFinanceira.ValorTotal / quantidadeParcelas;
+        // vou implementar aquela logica da ultima parcela pois nem todas as parcelas vao ter os valores devidamente equivalentes dependendo da qnt de parcelas.
+        DateTime dataVencimento = DateTime.Now.AddMonths(1);
+        for (int i = 1; i <= quantidadeParcelas; i++)
         {
-            decimal valorParcela = pendenciaFinanceira.ValorTotal / quantidadeParcelas;
-            // vou implementar aquela logica da ultima parcela pois nem todas as parcelas vao ter os valores devidamente equivalentes dependendo da qnt de parcelas.
-            DateTime dataVencimento = DateTime.Now.AddMonths(1);
-            for (int i = 1; i <= quantidadeParcelas; i++)
-            {
-                var parcela = Parcela.Create(i, dataVencimento, valorParcela, pendenciaFinanceira.Id);
-                pendenciaFinanceira.AdicionarParcela(parcela);
-                dataVencimento = dataVencimento.AddMonths(1);
-                _parcelaRepositorio.Adicionar(parcela);
-            }
-        }
-        catch (MySqlException ex)
-        {
-            throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
+            var parcela = Parcela.Create(i, dataVencimento, valorParcela, pendenciaFinanceira.Id);
+            pendenciaFinanceira.AdicionarParcela(parcela);
+            dataVencimento = dataVencimento.AddMonths(1);
+            _parcelaRepositorio.Adicionar(parcela);
         }
     }
+
 }

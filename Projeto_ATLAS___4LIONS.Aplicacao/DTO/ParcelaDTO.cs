@@ -7,7 +7,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public Guid Id { get; set; }
         public DateTime DataCriacao { get; set; }
         public int Sequencia { get; set; }
-        public int PendenciaFinanceiraId { get; set; }
+        public Guid PendenciaFinanceiraId { get; set; }
         public DateTime DataVencimento { get; set; }
         public decimal Valor { get; set; }
         public DateTime? DataPagamento { get; set; }

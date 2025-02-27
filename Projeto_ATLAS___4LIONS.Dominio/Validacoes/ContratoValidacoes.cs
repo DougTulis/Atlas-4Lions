@@ -22,8 +22,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Validacoes
         {
             return _notificacoes.Count == 0;
         }
-
-
         public string CapturadorErros()
         {
             string mensagensErro = "";
