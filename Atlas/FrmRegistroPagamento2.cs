@@ -63,8 +63,8 @@ namespace Projeto_ATLAS___4LIONS.Forms
         {
             if (e.RowIndex >= 0)
             {
-                var value = dgvParcelasPendFinEscolhida.Rows[e.RowIndex].Cells[0].Value;
-                txtParcelaSelecionada.Text = value?.ToString() ?? string.Empty;
+                var valor = dgvParcelasPendFinEscolhida.Rows[e.RowIndex].Cells[0].Value;
+                txtParcelaSelecionada.Text = valor.ToString();
             }
         }
 

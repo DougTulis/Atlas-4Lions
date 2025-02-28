@@ -14,17 +14,19 @@ public class ParcelaService : IParcelaService
 
     public void GerarParcelas(PendenciaFinanceira pendenciaFinanceira, int quantidadeParcelas)
     {
+        decimal valorBaseParcela = Math.Round(pendenciaFinanceira.ValorTotal / quantidadeParcelas, 2);
+        decimal valorRestante = pendenciaFinanceira.ValorTotal - (valorBaseParcela * (quantidadeParcelas - 1));
 
-        decimal valorParcela = pendenciaFinanceira.ValorTotal / quantidadeParcelas;
-        // vou implementar aquela logica da ultima parcela pois nem todas as parcelas vao ter os valores devidamente equivalentes dependendo da qnt de parcelas.
         DateTime dataVencimento = DateTime.Now.AddMonths(1);
+
         for (int i = 1; i <= quantidadeParcelas; i++)
         {
+            decimal valorParcela = (i == quantidadeParcelas) ? valorRestante : valorBaseParcela;
+
             var parcela = Parcela.Create(i, dataVencimento, valorParcela, pendenciaFinanceira.Id);
             pendenciaFinanceira.AdicionarParcela(parcela);
             dataVencimento = dataVencimento.AddMonths(1);
             _parcelaRepositorio.Adicionar(parcela);
         }
     }
-
 }
