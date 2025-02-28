@@ -1,4 +1,5 @@
-﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
+﻿using Org.BouncyCastle.Ocsp;
+using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.Servicos;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
@@ -18,9 +19,9 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private readonly IListarPessoaUseCase _listarPessoaUseCase;
         private readonly IListarAutomovelUseCase _listarAutomovelUseCase;
         private readonly IListarTabelaPrecoUseCase _listarTabelaPrecoUseCase;
-        private readonly ICadastrarLocacaoUseCase _cadastrarLocacaoUseCase;
+        private readonly ICadastrarLocacaoPendFinParcelaUseCase _cadastrarLocacaoUseCase;
 
-        public FrmCadLocacao(IListarPessoaUseCase listarPessoaUseCase, IListarAutomovelUseCase listarAutomovelUseCase, IListarTabelaPrecoUseCase listarTabelaPrecoUseCase,ICadastrarLocacaoUseCase cadastrarLocacaoUseCase)
+        public FrmCadLocacao(IListarPessoaUseCase listarPessoaUseCase, IListarAutomovelUseCase listarAutomovelUseCase, IListarTabelaPrecoUseCase listarTabelaPrecoUseCase, ICadastrarLocacaoPendFinParcelaUseCase cadastrarLocacaoUseCase)
         {
             _listarPessoaUseCase = listarPessoaUseCase;
             _listarAutomovelUseCase = listarAutomovelUseCase;
@@ -56,8 +57,11 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void cmbTipoLocacao_SelectedIndexChanged(object sender, EventArgs e)
         {
-      //      lblParcelas.Visible = cmbTipoLocacao.SelectedItem.Equals(ETipoLocacao.CONTRATO);
-            cmbParcelas.Visible = lblParcelas.Visible;
+            if (cmbTipoLocacao.SelectedItem != null)
+            {
+                lblParcelas.Visible = cmbTipoLocacao.SelectedItem.Equals(ETipoLocacao.CONTRATO);
+                cmbParcelas.Visible = lblParcelas.Visible;
+            }
         }
 
         private void btnCadastrarLocacao_Click(object sender, EventArgs e)
@@ -86,7 +90,10 @@ namespace Projeto_ATLAS___4LIONS.Forms
                 Status = EStatusLocacao.ANDAMENTO,
                 TipoLocacao = (ETipoLocacao)cmbTipoLocacao.SelectedItem,
             };
+
             var resultado = _cadastrarLocacaoUseCase.Executar(locacaoDto, quantidadeParcelas);
+            MessageBoxIcon icone = resultado.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning;
+            MessageBox.Show(resultado.Mensagem, "Cadastro de locação", MessageBoxButtons.OK, icone);
 
         }
         private void lblDataSaida_Click(object sender, EventArgs e) { }
@@ -102,7 +109,6 @@ namespace Projeto_ATLAS___4LIONS.Forms
         {
             if (cmbAutomovel.SelectedItem is AutomovelDTO automovelSelecionado)
             {
-
                 var precoDiaria = _listarTabelaPrecoUseCase.ExecutarRecuperarPorId(automovelSelecionado.IdPreco);
                 txtPreco.Text = precoDiaria.Valor.ToString("C");
             }
@@ -111,7 +117,6 @@ namespace Projeto_ATLAS___4LIONS.Forms
                 txtPreco.Text = "";
             }
         }
-
         private void cmbParcelas_SelectedIndexChanged(object sender, EventArgs e) { }
         private void txtPreco_TextChanged(object sender, EventArgs e)
         {

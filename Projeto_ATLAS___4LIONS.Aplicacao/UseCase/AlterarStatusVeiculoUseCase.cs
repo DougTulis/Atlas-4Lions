@@ -2,6 +2,7 @@
 using Projeto_ATLAS___4LIONS.Aplicacao.Exceções;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.RespostaPadrao;
 using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 
 
@@ -14,11 +15,12 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             _automovelRepositorio = automovelRepositorio;
         }
-        public void Executar(Guid automovelId, EStatusVeiculo novoStatus)
+        public RespostaPadrao<string> Executar(Guid automovelId, EStatusVeiculo novoStatus)
         {
             try
             {
                 _automovelRepositorio.AtualizarStatus(automovelId, novoStatus);
+                return RespostaPadrao<string>.Sucesso(true, "Ok");
             }
             catch (MySqlException ex)
             {

@@ -11,7 +11,7 @@ using System;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 {
-    public class CadastrarLocacaoUseCase : ICadastrarLocacaoUseCase
+    public class CadastrarLocacaoPendFinParcelaUseCase : ICadastrarLocacaoPendFinParcelaUseCase
     {
         private readonly ILocacaoRepositorio _locacaoRepositorio;
         private readonly ITabelaPrecoRepositorio _tabelaPrecoRepositorio;
@@ -23,7 +23,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         private readonly ICalculoValorLocacaoService _calculoValorLocacaoService;
 
 
-        public CadastrarLocacaoUseCase(
+        public CadastrarLocacaoPendFinParcelaUseCase(
             ILocacaoRepositorio locacaoRepositorio,
             ITabelaPrecoRepositorio tabelaPrecoRepositorio,
             IAutomovelRepositorio automovelRepositorio,

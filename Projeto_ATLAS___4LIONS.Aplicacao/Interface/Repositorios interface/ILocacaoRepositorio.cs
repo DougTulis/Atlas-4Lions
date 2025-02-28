@@ -13,6 +13,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface
         LocacaoDTO? RecuperarPorId(Guid id); 
         IEnumerable<LocacaoDTO> ListarTodas();
         IEnumerable<LocacaoDTO> ListarStatusAndamento();
-        void AtualizarStatusLocacao(int locacaoId, EStatusLocacao novoStatus);
+        void AtualizarStatusLocacao(Guid locacaoId, EStatusLocacao novoStatus);
     }
 }

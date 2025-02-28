@@ -4,9 +4,9 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Validacoes
 {
     public partial class ContratoValidacoes<T>
     {
-        public ContratoValidacoes<T> SaidaIsOk(DateTime saida, DateTime retorno, string mensagem, string propriedadeNome)
+        public ContratoValidacoes<T> AnoIsOk(string ano, string mensagem, string propriedadeNome)
         {
-            if (saida > retorno || saida == null || saida == DateTime.MinValue)
+            if (!int.TryParse(ano, out int anoInt) || anoInt < 1886 || anoInt > DateTime.Now.Year + 1)
             {
                 AddNotification(new Notificacao(mensagem, propriedadeNome));
             }

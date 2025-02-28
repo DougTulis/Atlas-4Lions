@@ -44,7 +44,8 @@ namespace Projeto_ATLAS___4LIONS.Forms
         }
         private void AtualizarGridView()
         {
-            var dados = _listarpessoaUseCase.ExecutarRecuperacaoSemCnh();
+            dgvVinculacaoCnh.AutoGenerateColumns = false;
+             var dados = _listarpessoaUseCase.ExecutarRecuperacaoSemCnh();
             dgvVinculacaoCnh.DataSource = dados.ToList();
             dgvVinculacaoCnh.Refresh();
         }
@@ -55,7 +56,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
             var pessoaDto = _listarpessoaUseCase.ExecutarRecuperarPorId(idPessoa);
 
-           RespostaPadrao<string> resultado = _incluirCnhUseCase.Executar(pessoaDto, txtNumeroCnh.Text, DateTime.Parse(txtVencimentoCnh.Text));
+            RespostaPadrao<string> resultado = _incluirCnhUseCase.Executar(pessoaDto, txtNumeroCnh.Text, DateTime.Parse(txtVencimentoCnh.Text));
 
             MessageBoxIcon icone = resultado.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning;
             MessageBox.Show(resultado.Mensagem, "Vinculação de CNH", MessageBoxButtons.OK, icone);

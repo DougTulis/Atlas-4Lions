@@ -22,13 +22,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             try
             {
-                var automovel = Automovel.Create(automovelDto.Modelo, automovelDto.Placa, automovelDto.Cor, automovelDto.Status, automovelDto.Ano, automovelDto.Chassi, automovelDto.Renavam, automovelDto.Oleokm, automovelDto.PastilhaFreioKm, automovelDto.IdPreco);
-
-                string erros;
-                if (!automovel.ValidarPraDeletar(out erros))
-                {
-                    return RespostaPadrao<string>.Falha(false,"Erro", erros);
-                }
                 _automovelRepositorio.Deletar(automovelDto);
                 return RespostaPadrao<string>.Sucesso(true, "Automóvel excluído com sucesso!");
             }

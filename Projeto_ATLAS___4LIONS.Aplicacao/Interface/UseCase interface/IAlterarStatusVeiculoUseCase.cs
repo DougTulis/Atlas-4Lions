@@ -1,4 +1,5 @@
-﻿using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
+﻿using Projeto_ATLAS___4LIONS.Aplicacao.RespostaPadrao;
+using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface
 {
     public interface IAlterarStatusVeiculoUseCase
     {
-        public void Executar(Guid automovelId, EStatusVeiculo novoStatus);
+        public RespostaPadrao<string> Executar(Guid automovelId, EStatusVeiculo novoStatus);
     }
 }

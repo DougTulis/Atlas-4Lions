@@ -13,12 +13,19 @@ namespace Projeto_ATLAS___4LIONS.Forms
     {
 
         private FrmRegistroPagamento2 _frmRegistroPagamento2;
+        private readonly IListarPendenciaFinanceiraUseCase _listarPendFin;
+        private readonly IIncluirPagamentoUseCase _incluirPagamentoUseCase;
+        private readonly IListarParcelaUseCase _listparcelaUseCase;
 
-        public FrmRegistroPagamento() { 
-
+        public FrmRegistroPagamento(IListarPendenciaFinanceiraUseCase listarPendFin, IIncluirPagamentoUseCase incluirPagamentoUseCase, IListarParcelaUseCase listarparcelaUseCase)
+        {
+            _listarPendFin = listarPendFin;
+            _incluirPagamentoUseCase = incluirPagamentoUseCase;
+            _listparcelaUseCase = listarparcelaUseCase;
             InitializeComponent();
             AtualizarGridView();
         }
+
         private void dgvHistoricoPendenciaFinanceiras_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -27,7 +34,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private void AtualizarGridView()
         {
             dgvHistoricoPendenciaFinanceiras.AutoGenerateColumns = false;
-//            dgvHistoricoPendenciaFinanceiras.DataSource = _listarPendFinUseCase.Executar().ToList();
+            dgvHistoricoPendenciaFinanceiras.DataSource = _listarPendFin.Executar().ToList();
             dgvHistoricoPendenciaFinanceiras.Refresh();
         }
         private void dgvHistoricoPendenciaFinanceiras_DoubleClick(object sender, EventArgs e)
@@ -39,9 +46,11 @@ namespace Projeto_ATLAS___4LIONS.Forms
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvHistoricoPendenciaFinanceiras.Rows[e.RowIndex];
-                int idSelecionado = Convert.ToInt16(dgvHistoricoPendenciaFinanceiras.Rows[e.RowIndex].Cells[0].Value);
-                _frmRegistroPagamento2.ShowDialog();
-                this.Close();
+                var idSelecionado = (Guid)dgvHistoricoPendenciaFinanceiras.Rows[e.RowIndex].Cells[0].Value;
+
+                var frmRegistroPagamento2 = new FrmRegistroPagamento2(idSelecionado, _incluirPagamentoUseCase, _listparcelaUseCase);
+                frmRegistroPagamento2.ShowDialog(); 
+                this.Close(); 
             }
         }
 

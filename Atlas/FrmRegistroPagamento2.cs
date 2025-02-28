@@ -2,7 +2,9 @@
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
-
+using System;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Projeto_ATLAS___4LIONS.Forms
 {
@@ -11,94 +13,49 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private Guid idPendFin;
         private readonly IListarParcelaUseCase _listarParcelaUseCase;
         private readonly IIncluirPagamentoUseCase _incluirPagamentoUseCase;
-        
+
         public FrmRegistroPagamento2()
         {
             InitializeComponent();
         }
+
         public FrmRegistroPagamento2(Guid _Idpendfin, IIncluirPagamentoUseCase incluirPagamentoUseCase, IListarParcelaUseCase listarParcelaUseCase)
+            : this()
         {
             _listarParcelaUseCase = listarParcelaUseCase;
             _incluirPagamentoUseCase = incluirPagamentoUseCase;
             idPendFin = _Idpendfin;
-            InitializeComponent();
-
-            MessageBox.Show(Convert.ToString(idPendFin));
 
             cmbEspeciePagamento.DataSource = Enum.GetValues(typeof(EEspecie));
             cmbEspeciePagamento.SelectedIndex = -1;
+
             AtualizarGridView();
-        }
-
-        private void lblSequenciaParcela_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblValorPago_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblDataPagamento_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblEspeciePagamento_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtParcelaSelecionada_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtValorPago_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtDataPagamento_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void dgvParcelasPendFinEscolhida_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void FrmRegistroPagamento2_Load(object sender, EventArgs e)
-        {
-
-        }
-        private void cmbEspeciePagamento_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void btnRegistrarPagamento_Click(object sender, EventArgs e)
         {
-           // int idParcelaSelecionada = Convert.ToInt16(txtParcelaSelecionada.Text);
-         //   var parcelaSelecionada = (ParcelaDTO)_listarParcelaUseCase.ExecutarRecuperacaoPorId(idParcelaSelecionada);
-          /// parcelaSelecionada.PendenciaFinanceiraId = idPendFin;
-          /// parcelaSelecionada.ValorPago = Convert.ToDecimal(txtValorPago.Text);
-          /// parcelaSelecionada.DataPagamento = Convert.ToDateTime(txtDataPagamento.Text);
-          /// parcelaSelecionada.EspeciePagamento = (EEspecie)cmbEspeciePagamento.SelectedItem;
-          /// _incluirPagamentoUseCase.Executar(parcelaSelecionada);
-          /// MessageBox.Show("Locação cadastrada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-          /// this.Close();
+            Guid.TryParse(txtParcelaSelecionada.Text, out var parcelaId);
+           
+            var parcelaSelecionada = _listarParcelaUseCase.ExecutarRecuperacaoPorId(parcelaId);
 
+
+            parcelaSelecionada.PendenciaFinanceiraId = idPendFin;
+            parcelaSelecionada.ValorPago = decimal.TryParse(txtValorPago.Text, out var valorPago) ? valorPago : 0;
+            parcelaSelecionada.DataPagamento = DateTime.TryParse(txtDataPagamento.Text, out var dataPagamento) ? dataPagamento : (DateTime?)null;
+            parcelaSelecionada.EspeciePagamento = (EEspecie?)cmbEspeciePagamento.SelectedItem;
+
+            var resultado = _incluirPagamentoUseCase.Executar(parcelaSelecionada);
+
+            MessageBox.Show(resultado.Mensagem, "Registro de Pagamento", MessageBoxButtons.OK,
+                resultado.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning);
+
+            if (resultado.Procede) this.Close();
         }
 
         private void AtualizarGridView()
         {
             dgvParcelasPendFinEscolhida.AutoGenerateColumns = false;
-            var dados = _listarParcelaUseCase.ExecutarRecuperacaoPorPendFin(idPendFin).ToList();
-            dgvParcelasPendFinEscolhida.DataSource = dados;
+            dgvParcelasPendFinEscolhida.DataSource = _listarParcelaUseCase.ExecutarRecuperacaoPorPendFin(idPendFin).ToList();
             dgvParcelasPendFinEscolhida.Refresh();
         }
 
@@ -106,11 +63,20 @@ namespace Projeto_ATLAS___4LIONS.Forms
         {
             if (e.RowIndex >= 0)
             {
-                DataGridViewRow row = dgvParcelasPendFinEscolhida.Rows[e.RowIndex];
-                var idSelecionado = (dgvParcelasPendFinEscolhida.Rows[e.RowIndex].Cells[0].Value).ToString();
-                txtParcelaSelecionada.Text = idSelecionado;
-
+                var value = dgvParcelasPendFinEscolhida.Rows[e.RowIndex].Cells[0].Value;
+                txtParcelaSelecionada.Text = value?.ToString() ?? string.Empty;
             }
         }
+
+        private void dgvParcelasPendFinEscolhida_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
+        private void lblSequenciaParcela_Click(object sender, EventArgs e) { }
+        private void txtParcelaSelecionada_TextChanged(object sender, EventArgs e) { }
+        private void txtValorPago_TextChanged(object sender, EventArgs e) { }
+        private void lblValorPago_Click(object sender, EventArgs e) { }
+        private void txtDataPagamento_TextChanged(object sender, EventArgs e) { }
+        private void lblEspeciePagamento_Click(object sender, EventArgs e) { }
+        private void FrmRegistroPagamento2_Load(object sender, EventArgs e) { }
+        private void cmbEspeciePagamento_SelectedIndexChanged(object sender, EventArgs e) { }
+        private void lblDataPagamento_Click(object sender, EventArgs e) { }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface
 {
-    public interface ICadastrarLocacaoUseCase
+    public interface ICadastrarLocacaoPendFinParcelaUseCase
     {
         public RespostaPadrao<string> Executar(LocacaoDTO locacaoDto, int quantidadeParcelas);
     }

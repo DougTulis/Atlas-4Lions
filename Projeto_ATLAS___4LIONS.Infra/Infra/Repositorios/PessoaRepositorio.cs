@@ -107,7 +107,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             {
                 conexao.Open();
 
-                string sql = "SELECT * FROM pessoa WHERE numero_cnh IS NULL";
+                string sql = "SELECT * FROM pessoa WHERE vencimento_cnh IS NULL";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {

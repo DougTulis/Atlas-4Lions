@@ -18,17 +18,16 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         }
         public RespostaPadrao<string> Executar(PessoaDTO pessoaDto, string numeroCnh, DateTime vencimentoCnh)
         {
-            var pessoa = Pessoa.Create(pessoaDto.Nome, pessoaDto.Email, pessoaDto.Contato, pessoaDto.TipoPessoa, pessoaDto.NumeroDocumento, pessoaDto.DataRegistro, numeroCnh, vencimentoCnh);
+            var pessoaCnh = PessoaCnh.Create(pessoaDto.Id, pessoaDto.DataCriacao, pessoaDto.Contato, pessoaDto.Email, pessoaDto.Contato, pessoaDto.TipoPessoa, pessoaDto.NumeroDocumento, pessoaDto.DataRegistro,numeroCnh, vencimentoCnh);
 
             string erros;
-            if (!pessoa.ValidacaoCnh(out erros))
+            if (!pessoaCnh.Validacao(out erros))
             {
                 return RespostaPadrao<string>.Falha(false, erros, "ERRO");
             }
-
             try
             {        
-                _pessoaRepositorio.IncluirCNH(pessoa.Id, numeroCnh, vencimentoCnh);
+                _pessoaRepositorio.IncluirCNH(pessoaCnh.Id, numeroCnh, vencimentoCnh);
 
                 return RespostaPadrao<string>.Sucesso(true, "CNH vínculada com sucesso!");
             }

@@ -132,11 +132,12 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     Id = Guid.Parse(dataReader["id"].ToString()),
                     Saida = Convert.ToDateTime(dataReader["saida"]),
                     Retorno = Convert.ToDateTime(dataReader["retorno"]),
-                    TipoLocacao = Enum.Parse<ETipoLocacao>(dataReader["tipo_locacao"].ToString()),
+                    TipoLocacao = Enum.Parse<ETipoLocacao>(dataReader["tipo_locacao"].ToString().ToUpper()),
                     IdLocatario = Guid.Parse(dataReader["locatario_id"].ToString()),
                     IdCondutor = Guid.Parse(dataReader["condutor_id"].ToString()),
                     IdAutomovel = Guid.Parse(dataReader["automovel_id"].ToString()),
                     Status = Enum.Parse<EStatusLocacao>(dataReader["status_locacao"].ToString()),
+                    PendenciaFinanceiraId = Guid.Parse(dataReader["pendencia_financeira_id"].ToString()),
                 };
                 lista.Add(locacaoDto);
             }
@@ -144,7 +145,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             return lista;
         }
 
-        public void AtualizarStatusLocacao(int locacaoId, EStatusLocacao novoStatus)
+        public void AtualizarStatusLocacao(Guid locacaoId, EStatusLocacao novoStatus)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {

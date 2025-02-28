@@ -80,13 +80,12 @@ namespace Projeto_ATLAS___4LIONS.Forms
                 Nome = textNome.Text,
                 Email = txtEmail.Text,
                 Contato = txtContato.Text,
-                DataRegistro = Convert.ToDateTime(txtDataNascimento.Text),
+                DataRegistro = DateTime.TryParse(txtDataNascimento.Text, out DateTime data) ? data : DateTime.MinValue,
                 TipoPessoa = (ETipoPessoa)cbmTipoPessoa.SelectedItem,
                 NumeroDocumento = txtNumeroDocumento.Text,
             };
 
-      
-
+     
             RespostaPadrao<string> resultado = _cadastrarPessoaUseCase.Executar(pessoaDto);
 
             MessageBoxIcon icone = resultado.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning;

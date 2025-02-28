@@ -44,6 +44,8 @@ namespace Projeto_ATLAS___4LIONS
 
 
             // Use Cases
+            services.AddTransient<IIncluirPagamentoUseCase, IncluirPagamentoUseCase>();
+            services.AddTransient<ICadastrarLocacaoPendFinParcelaUseCase, CadastrarLocacaoPendFinParcelaUseCase>();
             services.AddTransient<IAlterarStatusVeiculoUseCase, AlterarStatusVeiculoUseCase>();
             services.AddTransient<IAlterarStatusLocacaoUseCase, AlterarStatusLocacaoUseCase>();
             services.AddTransient<IListarLocacoesUseCase, ListarLocacoesUseCase>();
@@ -55,7 +57,6 @@ namespace Projeto_ATLAS___4LIONS
             services.AddTransient<IListarPessoaUseCase, ListarPessoaUseCase>();
             services.AddTransient<ICadastrarPessoaUseCase, CadastrarPessoaUseCase>();
             services.AddTransient<ICadastrarVeiculoUseCase, CadastrarVeiculoUseCase>();
-            services.AddTransient<ICadastrarLocacaoUseCase, CadastrarLocacaoUseCase>();
             services.AddTransient<ICadastrarTabelaPrecoUseCase, CadastrarPrecoAutomovelUseCase>();
             services.AddTransient<IListarAutomovelUseCase, ListarAutomovelUseCase>();
             services.AddTransient<IListarTabelaPrecoUseCase, ListarTabelaPrecoUseCase>();

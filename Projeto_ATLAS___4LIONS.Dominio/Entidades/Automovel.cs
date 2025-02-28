@@ -40,26 +40,15 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
             return new Automovel(modelo, placa, cor, status, ano, chassi, renavam, oleokm, pastilhaFreioKm, idPreco);
         }
 
-
-        public bool ValidarPraDeletar(out string erros)
-        {
-            erros = "";
-            var contratos = new ContratoValidacoes<Automovel>().isCarroALugado(this.Status, "O automóvel está alugado e não pode ser deletado.", "Status");
-
-            if (!contratos.IsValid())
-            {
-                erros = contratos.CapturadorErros();
-                return false;
-            }
-            return true;
-        }
-
         public override bool Validacao(out string erros)
         {
             erros = "";
             var contratos = new ContratoValidacoes<Automovel>()
              .ModeloIsOk(this.Modelo, "Insira um modelo válido", "Modelo")
-             .PlacaIsOk(this.Placa, "Placa inválida", "Placa");
+             .PlacaIsOk(this.Placa, "Placa inválida", "Placa")
+             .CorIsOk(this.Cor, "Cor inválida", "Cor")
+             .AnoIsOk(this.Ano, "Ano automovel inválido", "Ano");
+            
 
             if (!contratos.IsValid())
             {

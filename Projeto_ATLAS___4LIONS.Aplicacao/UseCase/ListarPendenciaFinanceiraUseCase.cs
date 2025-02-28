@@ -37,5 +37,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
             }
         }
+
     }
 }

@@ -3,7 +3,7 @@
     public enum EStatusLocacao
     {
         ANDAMENTO = 1,
-        FINALIZADO
+        FINALIZADA = 2
 
     }
 }

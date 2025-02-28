@@ -4,7 +4,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
 {
     public class PendenciaFinanceiraDTO
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public DateTime DataCriacao { get; set; }
         public decimal ValorTotal { get; set; }
         public IList<Parcela> Parcelas { get; private set; } = new List<Parcela>();

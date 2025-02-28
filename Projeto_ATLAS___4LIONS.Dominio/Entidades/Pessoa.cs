@@ -46,21 +46,6 @@ public class Pessoa : ModeloAbstrato, IContrato
         return new Pessoa(nome,email,contato,tipoPessoa,numeroDocumento,dataRegistro,numeroCnh,vencimentoCnh);
     }
 
-    public bool ValidacaoCnh(out string erros)
-    {
-        erros = "";
-        var contratos = new ContratoValidacoes<Pessoa>()
-            .CnhIsOk(NumeroCnh, 11, "Número da CNH inválido.", "NumeroCnh")
-            .VencimentoIsOk(VencimentoCnh, "Vencimento da CNH inválido.", "VencimentoCnh");
-
-        if (!contratos.IsValid())
-        {
-            erros = contratos.CapturadorErros();
-            return false;
-        }
-        return true;
-    }
-
     public override bool Validacao(out string erros)
     {
         erros = "";
@@ -68,22 +53,27 @@ public class Pessoa : ModeloAbstrato, IContrato
              .NomeIsOk(Nome, 3, "Nome inválido. Deve conter pelo menos 3 caracteres.", "Nome")
              .EmailIsOk(Email, 2, "Email inválido. Insira um endereço de email válido.", "Email")
              .ContatoIsOk(Contato, 10, "Contato inválido. Informe um número com pelo menos 10 dígitos.", "Contato");
+            
 
         if (TipoPessoa == ETipoPessoa.FISICA)
         {
-            contratos.DataNascimentoIsOk(DataRegistro, 18, "Data de nascimento inválida. Deve ser maior de idade.", "DataNascimento");
+            contratos.DataNascimentoIsOk(DataRegistro, 18, "Data de nascimento inválida. Deve ser maior de idade.", "DataNascimento")
+                .NumeroDocumentoIsOk(NumeroDocumento, 11, "CPF inválido. Deve conter 11 dígitos numéricos.", "NumeroDocumento");
+
         }
         else if (TipoPessoa == ETipoPessoa.JURIDICA)
         {
-            contratos.DataRegistroIsOk(DataRegistro, 1, "Data de fundação inválida.", "DataRegistro");
+            contratos.DataRegistroIsOk(DataRegistro, 1, "Data de fundação inválida.", "DataRegistro")
+                .NumeroDocumentoIsOk(NumeroDocumento, 14, "CNPJ inválido. Deve conter 14 dígitos numéricos.", "NumeroDocumento");
         }
-
         if (!contratos.IsValid())
         {
+
             erros = contratos.CapturadorErros();
             return false;
         }
 
         return true;
     }
+
 }

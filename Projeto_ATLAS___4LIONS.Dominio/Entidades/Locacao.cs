@@ -60,7 +60,7 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
 
         public void AlterarStatusFinalizado()
         {
-            Status = EStatusLocacao.FINALIZADO;
+            Status = EStatusLocacao.FINALIZADA;
         }
 
  

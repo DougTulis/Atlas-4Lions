@@ -45,7 +45,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
-                string sql = "DELETE FROM PendenciaFinanceira WHERE id = @id";
+                string sql = "DELETE FROM pendencia_financeira WHERE id = @id";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
@@ -60,7 +60,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
                 conexao.Open();
-                string sql = "SELECT * FROM PendenciaFinanceira";
+                string sql = "SELECT * FROM pendencia_financeira";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
@@ -79,7 +79,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             {
                 var pendencia = new PendenciaFinanceiraDTO
                 {
-                    Id = Convert.ToInt32(dataReader["Id"]),
+                    Id = Guid.Parse(dataReader["Id"].ToString()),
                     ValorTotal = Convert.ToDecimal(dataReader["valor_total"]),
                     DataCriacao = Convert.ToDateTime(dataReader["data_Criacao"]),
                 };

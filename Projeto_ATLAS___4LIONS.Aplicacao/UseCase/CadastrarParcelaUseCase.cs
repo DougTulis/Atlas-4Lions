@@ -17,7 +17,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             try
             {
-           // var parcela = Parcela.Create(parcelaDto.Sequencia, parcelaDto.DataVencimento, parcelaDto.Valor,);
+         //   var parcela = Parcela.Create(parcelaDto.Sequencia, //.DataVencimento, parcelaDto.Valor);
            //
            // if (!parcela.Validacao())
            // {

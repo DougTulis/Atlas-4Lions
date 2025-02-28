@@ -6,7 +6,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Validacoes
     {
         public ContratoValidacoes<T> RetornoIsOk(DateTime retorno, DateTime saida, string mensagem, string propriedadeNome)
         {
-            if (retorno < saida || retorno == null)
+            if (retorno < saida || retorno == null || retorno == DateTime.MinValue)
             {
                 AddNotification(new Notificacao(mensagem, propriedadeNome));
             }
