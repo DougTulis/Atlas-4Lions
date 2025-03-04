@@ -39,7 +39,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 if (!pessoa.Validacao(out erros))
                 {
                  
-                    return RespostaPadrao<string>.Falha(true, erros, "ERRO");
+                    return RespostaPadrao<string>.Falha(false, erros, "ERRO");
                 }
                 pessoaRepositorio.Adicionar(pessoa);
 

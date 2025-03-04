@@ -42,8 +42,10 @@ namespace Projeto_ATLAS___4LIONS.Forms
         {
             var locacaoId = Guid.TryParse(dgvBaixaLocacao.Rows[e.RowIndex].Cells[0].Value.ToString(), out var id) ? id : throw new Exception("ID da locação inválido!");
 
-            var resultadoLocacao = _alterarStatusLocacaoUseCase.Executar(locacaoId, Dominio.ValueObjects.Enums.EStatusLocacao.FINALIZADA);
-            var resultadoAutomovel = _alterarStatusAutomovelUseCase.Executar(locacaoId, Dominio.ValueObjects.Enums.EStatusVeiculo.GARAGEM);
+            var automovelId = Guid.TryParse(dgvBaixaLocacao.Rows[e.RowIndex].Cells[1].Value.ToString(), out var idAut) ? idAut : throw new Exception("ID do automóvel inválido!");
+
+            var resultadoLocacao = _alterarStatusLocacaoUseCase.ExecutarParaFinalizada(locacaoId);
+            var resultadoAutomovel = _alterarStatusAutomovelUseCase.ExecutarParaGaragem(automovelId);
 
             var mensagem = $"{resultadoLocacao.Mensagem}\n{resultadoAutomovel.Mensagem}";
             MessageBox.Show(mensagem, "Baixa de Locação", MessageBoxButtons.OK,

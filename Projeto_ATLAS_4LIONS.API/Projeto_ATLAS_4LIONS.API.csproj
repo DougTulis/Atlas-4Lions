@@ -1,18 +1,19 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-	  <PackageReference Include="MySql.Data" Version="8.0.31" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.3.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Projeto_ATLAS___4LIONS.Aplicacao\Projeto_ATLAS___4LIONS.Aplicacao.csproj" />
     <ProjectReference Include="..\Projeto_ATLAS___4LIONS.Dominio\Projeto_ATLAS___4LIONS.Dominio.csproj" />
+    <ProjectReference Include="..\Projeto_ATLAS___4LIONS.Infra\Projeto_ATLAS___4LIONS.Infra.csproj" />
   </ItemGroup>
 
 </Project>

@@ -66,6 +66,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 {
                     return RespostaPadrao<string>.Falha(false, "Erros", erros);
                 }
+
                 _pendFinRepositorio.Adicionar(pendencia);
                 _locacaoRepositorio.Adicionar(locacao);
                 _parcelaService.GerarParcelas(pendencia, quantidadeParcelas);

@@ -45,7 +45,7 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         {
             {
                 erros = "";
-                var contratos = new ContratoValidacoes<Pessoa>()
+                var contratos = new ContratoValidacoes<PessoaCnh>()
                     .CnhIsOk(NumeroCnh, 11, "Número da CNH inválido.", "NumeroCnh")
                     .VencimentoIsOk(VencimentoCnh, "Vencimento da CNH inválido.", "VencimentoCnh");
 
@@ -56,6 +56,20 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
                 }
                 return true;
             }
+        }
+
+        public bool ValidacaoExclusao(bool temVinculacao, out string erros)
+        {
+            erros = "";
+            var contratos = new ContratoValidacoes<PessoaCnh>()
+            .TemVinculacao(temVinculacao, "A pessoa que você deseja excluir está vinculada á uma locação em andamento","");
+
+            if (!contratos.IsValid())
+            {
+                erros = contratos.CapturadorErros();
+                return true;
+            }
+            return false;
         }
     }
 }

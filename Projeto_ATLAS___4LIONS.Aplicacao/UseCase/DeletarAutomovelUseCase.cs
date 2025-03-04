@@ -12,17 +12,15 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
     public class DeletarAutomovelUseCase : IDeletarAutomovelUseCase
     {
         private readonly IAutomovelRepositorio _automovelRepositorio;
-        private readonly ITabelaPrecoRepositorio _precoRepositorio;
-        public DeletarAutomovelUseCase(IAutomovelRepositorio automovelRepositorio, ITabelaPrecoRepositorio precoRepsoitorio)
+        public DeletarAutomovelUseCase(IAutomovelRepositorio automovelRepositorio)
         {
             _automovelRepositorio = automovelRepositorio;
-            _precoRepositorio = precoRepsoitorio;
         }
-        public RespostaPadrao<string> Executar(AutomovelDTO automovelDto)
+        public RespostaPadrao<string> Executar(Guid id)
         {
             try
             {
-                _automovelRepositorio.Deletar(automovelDto);
+                _automovelRepositorio.Deletar(id);
                 return RespostaPadrao<string>.Sucesso(true, "Automóvel excluído com sucesso!");
             }
 

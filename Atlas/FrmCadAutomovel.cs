@@ -1,9 +1,6 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
-using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.RespostaPadrao;
-using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
-using Projeto_ATLAS___4LIONS.Infra.Repositorios;
 
 
 namespace Projeto_ATLAS___4LIONS.Forms

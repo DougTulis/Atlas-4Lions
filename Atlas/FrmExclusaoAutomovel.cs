@@ -49,8 +49,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
                 if (resultado == DialogResult.Yes)
                 {
-                    var automovelDto = _listarAutomovelUseCase.ExecutarRecuperarPorId(Guid.Parse(automovelId));
-                   var resposta =  _deletarAutomovelUseCase.Executar(automovelDto);
+                   var resposta =  _deletarAutomovelUseCase.Executar(Guid.Parse(automovelId));
                     MessageBoxIcon icone = resposta.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning;
                     MessageBox.Show(resposta.Mensagem, "Exclusão de Automóveis", MessageBoxButtons.OK, icone);
 

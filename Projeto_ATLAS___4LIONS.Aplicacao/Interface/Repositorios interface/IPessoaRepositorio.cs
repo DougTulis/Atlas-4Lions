@@ -14,7 +14,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface
         public IEnumerable<PessoaDTO> ListarTodos();
         public IEnumerable<PessoaDTO> PopularLista(MySqlDataReader dataReader);
         public void Adicionar(Pessoa objeto);
-        public void Deletar(PessoaDTO objeto);
+        public void Deletar(Guid id);
+        public bool TemLocacaoVinculada(Guid id);
         public PessoaDTO? RecuperarPorId(Guid id);
         public IEnumerable<PessoaDTO> ListarSemCNH();
         public void IncluirCNH(Guid id, string numeroCnh, DateTime vencimentoCnh);

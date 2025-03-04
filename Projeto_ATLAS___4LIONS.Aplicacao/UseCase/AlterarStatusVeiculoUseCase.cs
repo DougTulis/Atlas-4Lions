@@ -15,11 +15,23 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             _automovelRepositorio = automovelRepositorio;
         }
-        public RespostaPadrao<string> Executar(Guid automovelId, EStatusVeiculo novoStatus)
+        public RespostaPadrao<string> ExecutarParaGaragem(Guid automovelId)
         {
             try
             {
-                _automovelRepositorio.AtualizarStatus(automovelId, novoStatus);
+                _automovelRepositorio.AtualizarStatus(automovelId,EStatusVeiculo.GARAGEM);
+                return RespostaPadrao<string>.Sucesso(true, "Ok");
+            }
+            catch (MySqlException ex)
+            {
+                throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
+            }
+        }
+        public RespostaPadrao<string> ExecutarParaAlugado(Guid automovelId)
+        {
+            try
+            {
+                _automovelRepositorio.AtualizarStatus(automovelId, EStatusVeiculo.ALUGADO);
                 return RespostaPadrao<string>.Sucesso(true, "Ok");
             }
             catch (MySqlException ex)

@@ -4,9 +4,9 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Validacoes
 {
     public partial class ContratoValidacoes<T>
     {
-        public ContratoValidacoes<T> CnhIsOk(string? cnh, short minLenght, string mensagem, string propriedadeNome)
+        public ContratoValidacoes<T> TemVinculacao(bool temVinculacao, string mensagem, string propriedadeNome)
         {
-            if (string.IsNullOrEmpty(cnh) || cnh.Length < minLenght)
+            if (temVinculacao == true)
             {
                 AddNotification(new Notificacao(mensagem, propriedadeNome));
             }

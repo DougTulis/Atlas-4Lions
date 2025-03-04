@@ -18,7 +18,6 @@ namespace Projeto_ATLAS___4LIONS.Forms
             InitializeComponent();
             AtualizarGridView();
         }
-
         private void AtualizarGridView()
         {
             dgvHistoricoPessoasExclusaoPessoas.AutoGenerateColumns = false;
@@ -31,9 +30,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void FrmExclusaoPessoas_Load(object sender, EventArgs e)
         {
-
         }
-
         private void dgvHistoricoPessoasExclusaoPessoas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -57,10 +54,9 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
                 if (resultado == DialogResult.Yes)
                 {
-                    var pessoaDto = _listarPessoaUseCase.ExecutarRecuperarPorId(Guid.Parse(pessoaId));
-                    RespostaPadrao<string> resposta = _deletarPessoaUseCase.Executar(pessoaDto);
+                    RespostaPadrao<string> resposta = _deletarPessoaUseCase.Executar(Guid.Parse(pessoaId));
                     MessageBoxIcon icone = resposta.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning;
-                    MessageBox.Show(resposta.Mensagem, "Exclusão de Pessoas", MessageBoxButtons.OK, icone);
+                    MessageBox.Show(resposta.Dados, resposta.Mensagem, MessageBoxButtons.OK, icone);
                     AtualizarGridView();
                 }
             }

@@ -45,7 +45,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             }
         }
 
-        public void Deletar(AutomovelDTO automovelDto)
+        public void Deletar(Guid id)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
@@ -54,7 +54,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 string sql = "DELETE FROM automovel WHERE id = @id";
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    cmd.Parameters.AddWithValue("@id", automovelDto.Id);
+                    cmd.Parameters.AddWithValue("@id", id);
                     cmd.ExecuteNonQuery();
                 }
             }

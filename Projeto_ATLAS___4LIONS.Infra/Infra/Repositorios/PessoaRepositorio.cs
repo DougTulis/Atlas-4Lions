@@ -46,7 +46,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             }
         }
 
-        public void Deletar(PessoaDTO pessoaDto)
+        public void Deletar(Guid id)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
@@ -56,8 +56,27 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    cmd.Parameters.AddWithValue("@id", pessoaDto.Id);
+                    cmd.Parameters.AddWithValue("@id", id);
                     cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public bool TemLocacaoVinculada(Guid id)
+        {
+            using (var conexao = _conexaoAdapter.ObterConexao())
+            {
+                conexao.Open();
+
+                string sql = $"select count(*) from pessoa inner join locacao ON pessoa.id = locacao.locatario_id or pessoa.id = condutor_id where locacao.status_locacao = 'ANDAMENTO' and pessoa.id = @id";
+
+                using (var cmd = new MySqlCommand(sql, conexao))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    int count = Convert.ToInt16(cmd.ExecuteScalar());
+                    if (count > 0) { return true; }
+
+                    return false;
                 }
             }
         }

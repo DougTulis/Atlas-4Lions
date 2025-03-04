@@ -16,11 +16,25 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             this.locacaoRepositorio = locacaoRepositorio;
         }
-        public RespostaPadrao<string> Executar(Guid locacaoId, EStatusLocacao novoStatus)
+        public RespostaPadrao<string> ExecutarParaAndamento(Guid locacaoId)
         {
             try
             {
-                locacaoRepositorio.AtualizarStatusLocacao(locacaoId, novoStatus);
+                locacaoRepositorio.AtualizarStatusLocacao(locacaoId, EStatusLocacao.ANDAMENTO);
+                return RespostaPadrao<string>.Sucesso(true, "Ok");
+            }
+
+            catch (MySqlException ex)
+            {
+                throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
+            }
+        }
+
+        public RespostaPadrao<string> ExecutarParaFinalizada(Guid locacaoId)
+        {
+            try
+            {
+                locacaoRepositorio.AtualizarStatusLocacao(locacaoId, EStatusLocacao.FINALIZADA);
                 return RespostaPadrao<string>.Sucesso(true, "Ok");
             }
 

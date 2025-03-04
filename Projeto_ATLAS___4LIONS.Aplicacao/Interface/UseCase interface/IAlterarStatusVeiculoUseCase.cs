@@ -10,6 +10,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface
 {
     public interface IAlterarStatusVeiculoUseCase
     {
-        public RespostaPadrao<string> Executar(Guid automovelId, EStatusVeiculo novoStatus);
+        public RespostaPadrao<string> ExecutarParaGaragem(Guid automovelId);
+        public RespostaPadrao<string> ExecutarParaAlugado(Guid automovelId);
+
     }
 }

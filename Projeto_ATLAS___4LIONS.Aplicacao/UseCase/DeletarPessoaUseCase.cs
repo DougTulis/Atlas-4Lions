@@ -10,26 +10,31 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 {
     public class DeletarPessoaUseCase : IDeletarPessoaUseCase
     {
-        private readonly IPessoaRepositorio pessoaRepositorio;
+        private readonly IPessoaRepositorio _pessoaRepositorio;
         public DeletarPessoaUseCase(IPessoaRepositorio pessoaRepositorio)
         {
-            this.pessoaRepositorio = pessoaRepositorio;
+            _pessoaRepositorio = pessoaRepositorio;
         }
-        public RespostaPadrao<string> Executar(PessoaDTO pessoaDto)
+        public RespostaPadrao<string> Executar(Guid id)
         {
+
+            var pessoaDto = _pessoaRepositorio.RecuperarPorId(id);
+
+            var pessoaCnh = PessoaCnh.Create(pessoaDto.Id, pessoaDto.DataCriacao, pessoaDto.Nome, pessoaDto.Contato, pessoaDto.Contato, pessoaDto.TipoPessoa, pessoaDto.NumeroDocumento, pessoaDto.DataRegistro, pessoaDto.NumeroCnh, pessoaDto.VencimentoCnh);
+
             try
             {
-                var pessoa = Pessoa.Create(pessoaDto.Nome, pessoaDto.Email, pessoaDto.Contato, pessoaDto.TipoPessoa, pessoaDto.NumeroDocumento, pessoaDto.DataRegistro, null, null);
+                bool temLocacaoVinculada = _pessoaRepositorio.TemLocacaoVinculada(id);
 
                 string erros;
-                if (!pessoa.Validacao(out erros))
+                if (pessoaCnh.ValidacaoExclusao(temLocacaoVinculada, out erros))
                 {
-                    return RespostaPadrao<string>.Falha(false, erros, "ERRO");
+                   return RespostaPadrao<string>.Falha(false, "Exclusão de pessoas", erros);
                 }
-                pessoaRepositorio.Deletar(pessoaDto);
-
-                return RespostaPadrao<string>.Sucesso(true, pessoa.Nome + " excluído(a) com sucesso!");
+                _pessoaRepositorio.Deletar(id);
+                return RespostaPadrao<string>.Sucesso(true, "Exclusão de pessoas!", "Pessoa excluida com sucesso!");
             }
+
             catch (MySqlException ex)
             {
                 throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);

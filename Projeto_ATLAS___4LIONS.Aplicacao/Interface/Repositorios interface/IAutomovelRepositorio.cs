@@ -16,7 +16,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface
         public IEnumerable<AutomovelDTO> ListarTodos();
         public IEnumerable<AutomovelDTO> PopularLista(MySqlDataReader dataReader);
         public void Adicionar(Automovel objeto);
-        public void Deletar(AutomovelDTO objeto);
+        public void Deletar(Guid id);
         public AutomovelDTO? RecuperarPorId(Guid id);
         public void AtualizarStatus(Guid automovelId, EStatusVeiculo novoStatus);
         public IEnumerable<AutomovelDTO> ListarStatusGaragem();

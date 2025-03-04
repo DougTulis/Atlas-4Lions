@@ -17,7 +17,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             _parcelaRepositorio = parcelaRepositorio;
         }
-
         public RespostaPadrao<string> Executar(ParcelaDTO parcelaDto)
         {
             try

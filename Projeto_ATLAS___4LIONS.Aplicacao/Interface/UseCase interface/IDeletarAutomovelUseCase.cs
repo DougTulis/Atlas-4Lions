@@ -10,6 +10,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface
 {
     public interface IDeletarAutomovelUseCase
     {
-        public RespostaPadrao<string> Executar(AutomovelDTO automovelDto);
+        public RespostaPadrao<string> Executar(Guid id);
     }
 }

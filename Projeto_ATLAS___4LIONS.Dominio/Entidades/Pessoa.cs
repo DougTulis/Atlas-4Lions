@@ -68,12 +68,12 @@ public class Pessoa : ModeloAbstrato, IContrato
         }
         if (!contratos.IsValid())
         {
-
             erros = contratos.CapturadorErros();
             return false;
         }
-
         return true;
     }
+
+   
 
 }

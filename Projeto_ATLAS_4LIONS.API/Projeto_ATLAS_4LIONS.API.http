@@ -1,0 +1,6 @@
+@Projeto_ATLAS_4LIONS.API_HostAddress = http://localhost:5275
+
+GET {{Projeto_ATLAS_4LIONS.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

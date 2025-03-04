@@ -30,6 +30,7 @@
         {
             dgvBaixaLocacao = new DataGridView();
             Id = new DataGridViewTextBoxColumn();
+            idAutomovel = new DataGridViewTextBoxColumn();
             saida = new DataGridViewTextBoxColumn();
             retorno = new DataGridViewTextBoxColumn();
             status = new DataGridViewTextBoxColumn();
@@ -42,12 +43,12 @@
             dgvBaixaLocacao.AllowUserToAddRows = false;
             dgvBaixaLocacao.AllowUserToDeleteRows = false;
             dgvBaixaLocacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvBaixaLocacao.Columns.AddRange(new DataGridViewColumn[] { Id, saida, retorno, status, tipoLocacao });
+            dgvBaixaLocacao.Columns.AddRange(new DataGridViewColumn[] { Id, idAutomovel, saida, retorno, status, tipoLocacao });
             dgvBaixaLocacao.Location = new Point(0, 0);
             dgvBaixaLocacao.Name = "dgvBaixaLocacao";
             dgvBaixaLocacao.ReadOnly = true;
             dgvBaixaLocacao.RowHeadersWidth = 51;
-            dgvBaixaLocacao.Size = new Size(690, 477);
+            dgvBaixaLocacao.Size = new Size(823, 477);
             dgvBaixaLocacao.TabIndex = 0;
             dgvBaixaLocacao.CellContentClick += dgvBaixaLocacao_CellContentClick;
             dgvBaixaLocacao.CellDoubleClick += dgvBaixaLocacao_CellDoubleClick;
@@ -59,7 +60,18 @@
             Id.MinimumWidth = 6;
             Id.Name = "Id";
             Id.ReadOnly = true;
+            Id.Visible = false;
             Id.Width = 125;
+            // 
+            // idAutomovel
+            // 
+            idAutomovel.DataPropertyName = "IdAutomovel";
+            idAutomovel.HeaderText = "IdAutomovel";
+            idAutomovel.MinimumWidth = 6;
+            idAutomovel.Name = "idAutomovel";
+            idAutomovel.ReadOnly = true;
+            idAutomovel.Visible = false;
+            idAutomovel.Width = 125;
             // 
             // saida
             // 
@@ -118,6 +130,7 @@
 
         private DataGridView dgvBaixaLocacao;
         private DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn idAutomovel;
         private DataGridViewTextBoxColumn saida;
         private DataGridViewTextBoxColumn retorno;
         private DataGridViewTextBoxColumn status;

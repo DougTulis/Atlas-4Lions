@@ -87,7 +87,6 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
      
             RespostaPadrao<string> resultado = _cadastrarPessoaUseCase.Executar(pessoaDto);
-
             MessageBoxIcon icone = resultado.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning;
             MessageBox.Show(resultado.Mensagem, "Cadastro de Pessoa", MessageBoxButtons.OK, icone);
         }
