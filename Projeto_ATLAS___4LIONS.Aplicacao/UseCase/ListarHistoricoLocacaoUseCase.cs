@@ -28,8 +28,6 @@ public class ListarHistoricoLocacaoUseCase : IListarHistoricoLocacaoUseCase
 
             foreach (var locacao in locacoes)
             {
-                Console.WriteLine("Guid pendfin:" + locacao.PendenciaFinanceiraId);
-
                 var locatario = _pessoaRepositorio.RecuperarPorId(locacao.IdLocatario);
                 var condutor = _pessoaRepositorio.RecuperarPorId(locacao.IdCondutor);
                 var pendencia = _pendenciaFinanceiraRepositorio.RecuperarPorId(locacao.PendenciaFinanceiraId);

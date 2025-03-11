@@ -10,7 +10,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private readonly ICadastrarTabelaPrecoUseCase _cadastrarPreco;
 
-        public FrmCadastroPreco(ICadastrarTabelaPrecoUseCase cadastrarPreco, ITabelaPrecoRepositorio precoRepositorio)
+        public FrmCadastroPreco(ICadastrarTabelaPrecoUseCase cadastrarPreco)
         {
             _cadastrarPreco = cadastrarPreco;
             InitializeComponent();

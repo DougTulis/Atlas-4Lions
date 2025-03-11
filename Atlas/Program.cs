@@ -32,7 +32,6 @@ namespace Projeto_ATLAS___4LIONS
         private static ServiceProvider ConfigureServices()
         {
             var services = new ServiceCollection();
-
             // Repositrios
             services.AddSingleton<IPessoaRepositorio, PessoaRepositorio>();
             services.AddSingleton<IAutomovelRepositorio, AutomovelRepositorio>();
@@ -63,27 +62,26 @@ namespace Projeto_ATLAS___4LIONS
             services.AddTransient<IListarHistoricoLocacaoUseCase, ListarHistoricoLocacaoUseCase>();
 
             // Forms
-            services.AddTransient<FrmCadastroPreco>();
-            services.AddTransient<FrmPrincipal>();
-            services.AddTransient<FrmBaixaLocacao>();
+            services.AddScoped<FrmPrincipal>();
+            services.AddSingleton<IMySqlAdaptadorConexao, MySqlAdaptadorConexao>();
+
+            services.AddTransient<FrmCadPessoas>();
             services.AddTransient<FrmCadAutomovel>();
             services.AddTransient<FrmCadLocacao>();
-            services.AddTransient<FrmCadPessoas>();
-            services.AddTransient<FrmExclusaoAutomovel>();
-            services.AddTransient<FrmExclusaoPessoas>();
-            services.AddTransient<FrmHistoricoAutomovel>();
-            services.AddTransient<FrmHistoricoLocacao>();
             services.AddTransient<FrmHistoricoPessoas>();
-            services.AddTransient<FrmRegistroPagamento>();
-            services.AddTransient<FrmRegistroPagamento2>();
+            services.AddTransient<FrmExclusaoPessoas>();
             services.AddTransient<FrmVinculacaoCnh>();
+            services.AddTransient<FrmHistoricoAutomovel>();
+            services.AddTransient<FrmExclusaoAutomovel>();
+            services.AddTransient<FrmHistoricoLocacao>();
+            services.AddTransient<FrmBaixaLocacao>();
+            services.AddTransient<FrmRegistroPagamento>();
+            services.AddTransient<FrmCadastroPreco>();
 
-            services.AddSingleton<IMySqlAdaptadorConexao, MySqlAdaptadorConexao>();
 
             services.AddTransient<ICalculoValorLocacaoService, CalculoValorLocacaoService>();
             services.AddTransient<IPendenciaFinanceiraService, PendenciaFinanceiraService>();
             services.AddTransient<IParcelaService, ParcelaService>();
-
 
             return services.BuildServiceProvider();
         }

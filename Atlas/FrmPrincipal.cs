@@ -1,17 +1,14 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Projeto_ATLAS___4LIONS.Forms;
-using Projeto_ATLAS___4LIONS.Forms.Properties;
-using Projeto_ATLAS___4LIONS.Infra.Servicos;
-using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
-using Projeto_ATLAS___4LIONS.Infra.Repositorios;
-using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
-using Projeto_ATLAS___4LIONS.Aplicacao.Validacoes;
-using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
+using System;
+using System.Windows.Forms;
 
 namespace Atlas
 {
     public partial class FrmPrincipal : Form
     {
+        private readonly IServiceProvider _serviceProvider;
+
         private FrmCadPessoas _frmCadPessoas;
         private FrmCadAutomovel _frmCadAutomovel;
         private FrmCadLocacao _frmCadLocacao;
@@ -25,44 +22,40 @@ namespace Atlas
         private FrmRegistroPagamento _frmRegistroPagamento;
         private FrmCadastroPreco _frmCadastroPreco;
 
-        public FrmPrincipal(FrmCadPessoas frmCadPessoas, FrmCadAutomovel frmCadAutomovel, FrmCadLocacao frmCadLocacao, FrmHistoricoPessoas frmHistoricoPessoas, FrmExclusaoPessoas frmExclusaoPessoas, FrmVinculacaoCnh frmVinculacaoCnh, FrmHistoricoAutomovel frmHistoricoAutomovel, FrmExclusaoAutomovel frmExclusaoAutomovel, FrmHistoricoLocacao frmHistoricoLocacao, FrmBaixaLocacao frmBaixaLocacao, FrmRegistroPagamento frmRegistroPagamento, FrmCadastroPreco frmCadastroPreco)
+        public FrmPrincipal(IServiceProvider serviceProvider)
         {
-            _frmCadPessoas = frmCadPessoas;
-            _frmCadAutomovel = frmCadAutomovel;
-            _frmCadLocacao = frmCadLocacao;
-            _frmHistoricoPessoas = frmHistoricoPessoas;
-            _frmExclusaoPessoas = frmExclusaoPessoas;
-            _frmVinculacaoCnh = frmVinculacaoCnh;
-            _frmHistoricoAutomovel = frmHistoricoAutomovel;
-            _frmExclusaoAutomovel = frmExclusaoAutomovel;
-            _frmHistoricoLocacao = frmHistoricoLocacao;
-            _frmBaixaLocacao = frmBaixaLocacao;
-            _frmRegistroPagamento = frmRegistroPagamento;
-            _frmCadastroPreco = frmCadastroPreco;
+            _serviceProvider = serviceProvider;
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e) { }
+        private void AbrirFormulario<T>(ref T form) where T : Form
+        {
+            if (form == null || form.IsDisposed)
+            {
+                form = _serviceProvider.GetRequiredService<T>();
+                form.MdiParent = this;
+                form.WindowState = FormWindowState.Maximized;
+                form.Show();
+            }
+            else
+            {
+                form.BringToFront();
+            }
+        }
+
+        // 🔹 Eventos corrigidos para os botões
+
+        private void FormPrincipal_Load(object sender, EventArgs e) { }
+
+        private void flp_principal_Paint(object sender, PaintEventArgs e) { }
 
         private void panel1_Paint(object sender, PaintEventArgs e) { }
 
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e) { }
-
         private void lblTitulo_Click(object sender, EventArgs e) { }
 
-        private void button1_Click(object sender, EventArgs e) { }
+        private void nightControlBox1_Click(object sender, EventArgs e) { }
 
-        private void panel2_Paint(object sender, PaintEventArgs e) { }
-
-        private void button1_Click_1(object sender, EventArgs e) { }
-
-        private void button2_Click(object sender, EventArgs e) { }
-
-        private void flowLayoutPanel2_Paint(object sender, PaintEventArgs e) { }
-
-        private void airButton1_Click(object sender, EventArgs e) { }
-
-        private void flowLayoutPanel2_Paint_1(object sender, PaintEventArgs e) { }
+        private void pcbAtlas_Click(object sender, EventArgs e) { }
 
         private void mnuGerenciamentoPessoas_Click(object sender, EventArgs e) { }
 
@@ -70,85 +63,69 @@ namespace Atlas
 
         private void mnuGerenciamentoLocacoes_Click(object sender, EventArgs e) { }
 
-        private void itmGerenciamentoLocacoesRegPagamento_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            _frmRegistroPagamento.MdiParent = this;
-            _frmRegistroPagamento.Show();
         }
 
-        private void nightControlBox1_Click(object sender, EventArgs e) { }
 
         private void itmGerenciamentoPessoasCadPessoas_Click(object sender, EventArgs e)
         {
-            _frmCadPessoas.MdiParent = this;
-            _frmCadPessoas.Show();
-        }
-
-        private void itmGerenciamentoPessoasExcluirPessoas_Click(object sender, EventArgs e)
-        {
-            _frmExclusaoPessoas.MdiParent = this;
-            _frmExclusaoPessoas.Show();
-        }
-
-        private void itmGerenciamentoPessoasVincularCnh_Click(object sender, EventArgs e)
-        {
-            _frmVinculacaoCnh.MdiParent = this;
-            _frmVinculacaoCnh.Show();
+            AbrirFormulario(ref _frmCadPessoas);
         }
 
         private void itmGerenciamentoPessoasHistPessoas_Click(object sender, EventArgs e)
         {
-            _frmHistoricoPessoas.MdiParent = this;
-            _frmHistoricoPessoas.Show();
+            AbrirFormulario(ref _frmHistoricoPessoas);
+        }
+
+        private void itmGerenciamentoPessoasExcluirPessoas_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(ref _frmExclusaoPessoas);
+        }
+
+        private void itmGerenciamentoPessoasVincularCnh_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(ref _frmVinculacaoCnh);
         }
 
         private void itmGerenciamentoVeiculosCadVeiculo_Click(object sender, EventArgs e)
         {
-            _frmCadAutomovel.MdiParent = this;
-            _frmCadAutomovel.Show();
+            AbrirFormulario(ref _frmCadAutomovel);
         }
 
         private void itmGerenciamentoVeiculosHistVeiculo_Click(object sender, EventArgs e)
         {
-            _frmHistoricoAutomovel.MdiParent = this;
-            _frmHistoricoAutomovel.Show();
+            AbrirFormulario(ref _frmHistoricoAutomovel);
         }
 
         private void itmGerenciamentoVeiculosExcluirVeiculo_Click(object sender, EventArgs e)
         {
-            _frmExclusaoAutomovel.MdiParent = this;
-            _frmExclusaoAutomovel.Show();
-        }
-
-        private void itmGerenciamentoLocacoesCadLocacoes_Click(object sender, EventArgs e)
-        {
-            _frmCadLocacao.MdiParent = this;
-            _frmCadLocacao.Show();
-        }
-
-        private void itmGerenciamentoLocacoesHistLocacoes_Click(object sender, EventArgs e)
-        {
-            _frmHistoricoLocacao.MdiParent = this;
-            _frmHistoricoLocacao.Show();
-        }
-
-        private void itmGerenciamentoLocacoesBaixaLocacao_Click(object sender, EventArgs e)
-        {
-            _frmBaixaLocacao.MdiParent = this;
-            _frmBaixaLocacao.Show();
-        }
-
-        private void pcbAtlas_Click(object sender, EventArgs e)
-        {
-
+            AbrirFormulario(ref _frmExclusaoAutomovel);
         }
 
         private void itmGerenciamentoVeiculosCadastrarPreco_Click(object sender, EventArgs e)
         {
-
-            _frmCadastroPreco.MdiParent = this;
-            _frmCadastroPreco.Show();   
+            AbrirFormulario(ref _frmCadastroPreco);
         }
-  
+
+        private void itmGerenciamentoLocacoesCadLocacoes_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(ref _frmCadLocacao);
+        }
+
+        private void itmGerenciamentoLocacoesHistLocacoes_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(ref _frmHistoricoLocacao);
+        }
+
+        private void itmGerenciamentoLocacoesBaixaLocacao_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(ref _frmBaixaLocacao);
+        }
+
+        private void itmGerenciamentoLocacoesRegPagamento_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(ref _frmRegistroPagamento);
+        }
     }
 }

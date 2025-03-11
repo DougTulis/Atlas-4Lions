@@ -33,7 +33,7 @@
             pcbAtlas = new PictureBox();
             lblTitulo = new ReaLTaiizor.Controls.DungeonHeaderLabel();
             nightControlBox1 = new ReaLTaiizor.Controls.NightControlBox();
-            flowLayoutPanel1 = new FlowLayoutPanel();
+            flp_principal = new FlowLayoutPanel();
             menuStrip1 = new MenuStrip();
             mnuGerenciamentoPessoas = new ToolStripMenuItem();
             itmGerenciamentoPessoasCadPessoas = new ToolStripMenuItem();
@@ -118,16 +118,16 @@
             nightControlBox1.TabIndex = 1;
             nightControlBox1.Click += nightControlBox1_Click;
             // 
-            // flowLayoutPanel1
+            // flp_principal
             // 
-            flowLayoutPanel1.BackColor = Color.Black;
-            flowLayoutPanel1.Dock = DockStyle.Left;
-            flowLayoutPanel1.ForeColor = SystemColors.Control;
-            flowLayoutPanel1.Location = new Point(0, 79);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(113, 568);
-            flowLayoutPanel1.TabIndex = 2;
-            flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
+            flp_principal.BackColor = Color.Black;
+            flp_principal.Dock = DockStyle.Left;
+            flp_principal.ForeColor = SystemColors.Control;
+            flp_principal.Location = new Point(0, 79);
+            flp_principal.Name = "flp_principal";
+            flp_principal.Size = new Size(113, 568);
+            flp_principal.TabIndex = 2;
+            flp_principal.Paint += flp_principal_Paint;
             // 
             // menuStrip1
             // 
@@ -257,7 +257,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(224, 224, 224);
             ClientSize = new Size(1098, 647);
-            Controls.Add(flowLayoutPanel1);
+            Controls.Add(flp_principal);
             Controls.Add(panel1);
             Controls.Add(menuStrip1);
             ForeColor = SystemColors.ControlText;
@@ -285,7 +285,7 @@
 
         private Panel panel1;
         private ReaLTaiizor.Controls.NightControlBox nightControlBox1;
-        private FlowLayoutPanel flowLayoutPanel1;
+        private FlowLayoutPanel flp_principal;
         private ReaLTaiizor.Controls.DungeonHeaderLabel lblTitulo;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem mnuGerenciamentoPessoas;

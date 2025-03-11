@@ -73,8 +73,10 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
             if (locatarioDto == null || condutorDto == null || automovelDto == null)
             {
+
                 MessageBox.Show("Todos os campos são obrigatórios!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+
             }
 
             int quantidadeParcelas = cmbParcelas.SelectedItem != null ? Convert.ToInt32(cmbParcelas.SelectedItem) : 1;
