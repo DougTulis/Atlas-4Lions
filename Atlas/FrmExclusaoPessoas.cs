@@ -22,7 +22,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
         {
             dgvHistoricoPessoasExclusaoPessoas.AutoGenerateColumns = false;
             dgvHistoricoPessoasExclusaoPessoas.DataSource = null;
-            var dados = _listarPessoaUseCase.ExecutarDadosCompletos();
+            var dados = _listarPessoaUseCase.Executar();
             dgvHistoricoPessoasExclusaoPessoas.DataSource = dados.ToList();
             dgvHistoricoPessoasExclusaoPessoas.Update();
             dgvHistoricoPessoasExclusaoPessoas.Refresh();

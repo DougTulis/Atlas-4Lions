@@ -60,7 +60,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             }
         }
 
-        public IEnumerable<AutomovelDTO> ListarTodos()
+        public IEnumerable<Automovel> ListarTodos()
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
@@ -74,25 +74,27 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 }
             }
         }
-        public IEnumerable<AutomovelDTO> PopularLista(MySqlDataReader dataReader)
+        public IEnumerable<Automovel> PopularLista(MySqlDataReader dataReader)
         {
             var lista = new List<AutomovelDTO>();
 
             while (dataReader.Read())
             {
-                var automovel = new AutomovelDTO
-                {
-                    Id = Guid.Parse(dataReader["id"].ToString()),
-                    Modelo = dataReader["modelo"].ToString(),
-                    Placa = dataReader["placa"].ToString(),
-                    Cor = dataReader["cor"].ToString(),
-                    Status = Enum.Parse<EStatusVeiculo>(dataReader["status"].ToString()),
-                    Chassi = !Convert.IsDBNull(dataReader["chassi"]) ? dataReader["chassi"].ToString() : null,
-                    Renavam = !Convert.IsDBNull(dataReader["renavam"]) ? dataReader["renavam"].ToString() : null,
-                    Oleokm = !Convert.IsDBNull(dataReader["oleo_km"]) ? (int?)Convert.ToInt32(dataReader["oleo_km"]) : null,
-                    PastilhaFreioKm = !Convert.IsDBNull(dataReader["pastilha_freio_km"]) ? (int?)Convert.ToInt32(dataReader["pastilha_freio_km"]) : null,
-                    DataCriacao = Convert.ToDateTime(dataReader["data_criacao"]),
-                    IdPreco = Guid.Parse((dataReader["id_preco"].ToString()))
+                var id = Guid.Parse(dataReader["id"].ToString());
+                var modelo = dataReader["modelo"].ToString();
+                var placa = dataReader["placa"].ToString();
+                var placa = dataReader["placa"].ToString();
+                var cor = dataReader["cor"].ToString();
+                var status = Enum.Parse<EStatusVeiculo>(dataReader["status"].ToString());
+                var chassi = !Convert.IsDBNull(dataReader["chassi"]) ? dataReader["chassi"].ToString() : null;
+                var renavam = !Convert.IsDBNull(dataReader["renavam"]) ? dataReader["renavam"].ToString() : null;
+                var oleokm = !Convert.IsDBNull(dataReader["oleo_km"]) ? (int?)Convert.ToInt32(dataReader["oleo_km"]) : null;
+                var pastilhaFreioKm = !Convert.IsDBNull(dataReader["pastilha_freio_km"]) ? (int?)Convert.ToInt32(dataReader["pastilha_freio_km"]) : null;
+                var dataCriacao = Convert.ToDateTime(dataReader["data_criacao"]);
+                var idPreco = Guid.Parse((dataReader["id_preco"].ToString()));
+
+                var automovel = Automovel.CreateFromDataBase(id,dataCriacao,modelo,placa,cor,status,ano,chassi)
+
                 };
 
                 lista.Add(automovel);
@@ -118,7 +120,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             }
         }
 
-        public AutomovelDTO? RecuperarPorId(Guid id)
+        public Automovel? RecuperarPorId(Guid id)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
@@ -138,7 +140,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             }
         }
 
-        public IEnumerable<AutomovelDTO> ListarStatusGaragem()
+        public IEnumerable<Automovel> ListarStatusGaragem()
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {

@@ -35,9 +35,28 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
             IdPreco = idPreco;
         }
 
+        private Automovel(Guid id, DateTime dataCriacao, string modelo, string placa, string cor, EStatusVeiculo status, string ano, string? chassi, string? renavam, int? oleokm, int? pastilhaFreioKm, Guid idPreco) : base(id,dataCriacao)
+        {
+            Modelo = modelo;
+            Placa = placa;
+            Cor = cor;
+            Status = status;
+            Chassi = chassi;
+            Renavam = renavam;
+            Oleokm = oleokm;
+            PastilhaFreioKm = pastilhaFreioKm;
+            Ano = ano;
+            IdPreco = idPreco;
+        }
+
+
         public static Automovel Create(string modelo, string placa, string cor, EStatusVeiculo status, string ano, string? chassi, string? renavam, int? oleokm, int? pastilhaFreioKm, Guid idPreco)
         {
             return new Automovel(modelo, placa, cor, status, ano, chassi, renavam, oleokm, pastilhaFreioKm, idPreco);
+        }
+        public static Automovel CreateFromDataBase(Guid id, DateTime dataCriacao, string modelo, string placa, string cor, EStatusVeiculo status, string ano, string? chassi, string? renavam, int? oleokm, int? pastilhaFreioKm, Guid idPreco)
+        {
+            return new Automovel(id,dataCriacao,modelo, placa, cor, status, ano, chassi, renavam, oleokm, pastilhaFreioKm, idPreco);
         }
 
         public override bool Validacao(out string erros)

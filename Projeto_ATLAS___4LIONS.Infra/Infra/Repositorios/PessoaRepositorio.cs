@@ -81,7 +81,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             }
         }
 
-        public IEnumerable<PessoaDTO> ListarTodos()
+        public IEnumerable<Pessoa> ListarTodos()
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
@@ -99,7 +99,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             }
         }
 
-        public PessoaDTO? RecuperarPorId(Guid id)
+        public Pessoa? RecuperarPorId(Guid id)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
@@ -120,7 +120,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             }
         }
 
-        public IEnumerable<PessoaDTO> ListarSemCNH()
+        public IEnumerable<Pessoa> ListarSemCNH()
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
@@ -156,34 +156,26 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 }
             }
         }
-        public IEnumerable<PessoaDTO> PopularLista(MySqlDataReader dataReader)
+        public IEnumerable<Pessoa> PopularLista(MySqlDataReader dataReader)
         {
-            var lista = new List<PessoaDTO>();
+            var lista = new List<Pessoa>();
 
             while (dataReader.Read())
             {
-                var id = dataReader["id"].ToString();
+                var id = Guid.Parse(dataReader["id"].ToString());
+                var dataCriacao = Convert.ToDateTime(dataReader["data_criacao"]);
                 var nome = Convert.ToString(dataReader["nome"]);
                 var email = Convert.ToString(dataReader["email"]);
                 var contato = Convert.ToString(dataReader["contato"]);
                 var dataRegistro = Convert.ToDateTime(dataReader["data_registro"]);
                 var tipoPessoa = Enum.Parse<ETipoPessoa>(dataReader["tipo_pessoa"].ToString());
                 var numeroDocumento = dataReader["numero_documento"].ToString();
+                var numeroCnh = dataReader["numero_cnh"]!= DBNull.Value ? dataReader["numero_cnh"].ToString() : null;
+                var vencimentoCnh = Convert.ToDateTime(dataReader["vencimento_cnh"] != DBNull.Value ? Convert.ToDateTime(dataReader["vencimento_cnh"]) : null);
 
+                var pessoa = Pessoa.CreateFromDataBase(id, dataCriacao, nome, email, contato, tipoPessoa, numeroDocumento, dataRegistro, numeroCnh, vencimentoCnh);
 
-                var pessoaDto = new PessoaDTO(nome, email, contato,tipoPessoa,numeroDocumento,dataRegistro)
-                {
-                   Id = Guid.Parse(dataReader["id"].ToString()),
-                    NumeroCnh = dataReader["numero_cnh"] != DBNull.Value
-                        ? Convert.ToString(dataReader["numero_cnh"])
-                        : null,
-                    VencimentoCnh = dataReader["vencimento_cnh"] != DBNull.Value
-                        ? Convert.ToDateTime(dataReader["vencimento_cnh"])
-                        : (DateTime?)null,
-                    DataCriacao = Convert.ToDateTime(dataReader["data_criacao"])
-                };
-
-                lista.Add(pessoaDto);
+                lista.Add(pessoa);
             }
 
             return lista;

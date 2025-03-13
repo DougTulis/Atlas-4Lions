@@ -15,4 +15,9 @@
 	  <PackageReference Include="MySql.Data" Version="8.0.31" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\Interface Repositorio\" />
+    <Folder Include="Interfaces\Interface Use Cases\" />
+  </ItemGroup>
+
 </Project>

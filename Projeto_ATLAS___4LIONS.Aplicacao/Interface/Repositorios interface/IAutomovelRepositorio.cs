@@ -13,13 +13,13 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface
     public interface IAutomovelRepositorio
     {
 
-        public IEnumerable<AutomovelDTO> ListarTodos();
-        public IEnumerable<AutomovelDTO> PopularLista(MySqlDataReader dataReader);
+        public IEnumerable<Automovel> ListarTodos();
+        public IEnumerable<Automovel> PopularLista(MySqlDataReader dataReader);
         public void Adicionar(Automovel objeto);
         public void Deletar(Guid id);
-        public AutomovelDTO? RecuperarPorId(Guid id);
+        public Automovel? RecuperarPorId(Guid id);
         public void AtualizarStatus(Guid automovelId, EStatusVeiculo novoStatus);
-        public IEnumerable<AutomovelDTO> ListarStatusGaragem();
+        public IEnumerable<Automovel> ListarStatusGaragem();
     }
 
 }

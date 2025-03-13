@@ -27,6 +27,18 @@ public class Pessoa : ModeloAbstrato, IContrato
         VencimentoCnh = vencimentoCnh;
     }
 
+    private Pessoa(Guid id, DateTime dataCriacao, string nome, string email, string contato, ETipoPessoa tipoPessoa, string numeroDocumento, DateTime dataRegistro, string? numeroCnh, DateTime? vencimentoCnh) : base(id,dataCriacao)
+    {
+        Nome = nome;
+        Email = email;
+        Contato = contato;
+        TipoPessoa = tipoPessoa;
+        NumeroDocumento = numeroDocumento;
+        DataRegistro = dataRegistro;
+        NumeroCnh = numeroCnh;
+        VencimentoCnh = vencimentoCnh;
+    }
+
     //public Pessoa() não devemos ter pois isso não se trata de dominio rico POIS ESTOU ALIMENTANDO O MODEL LA FORA
     //{
     //}
@@ -45,6 +57,12 @@ public class Pessoa : ModeloAbstrato, IContrato
     {
         return new Pessoa(nome,email,contato,tipoPessoa,numeroDocumento,dataRegistro,numeroCnh,vencimentoCnh);
     }
+
+    public static Pessoa CreateFromDataBase(Guid id, DateTime dataCriacao, string nome, string email, string contato, ETipoPessoa tipoPessoa, string numeroDocumento, DateTime dataRegistro, string? numeroCnh, DateTime? vencimentoCnh)
+    {
+        return new Pessoa(id, dataCriacao, nome, email, contato, tipoPessoa, numeroDocumento, dataRegistro, numeroCnh, vencimentoCnh);
+    }
+
 
     public override bool Validacao(out string erros)
     {

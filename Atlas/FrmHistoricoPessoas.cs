@@ -27,7 +27,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private void AtualizarGridView()
         {
             dgvHistoricoPessoas.AutoGenerateColumns = false;
-            var dados = _listarPessoaUseCase.ExecutarDadosCompletos();
+            var dados = _listarPessoaUseCase.Executar();
             dgvHistoricoPessoas.DataSource = dados.ToList();
             dgvHistoricoPessoas.Refresh();
         }

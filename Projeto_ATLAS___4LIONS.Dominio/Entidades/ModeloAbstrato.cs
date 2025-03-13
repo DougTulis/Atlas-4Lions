@@ -20,6 +20,11 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
             Id = Guid.NewGuid();
             DataCriacao = DateTime.Now;
         }
+        protected ModeloAbstrato(Guid id, DateTime dataCriacao)
+        {
+            Id = id;
+            DataCriacao = dataCriacao;
+        }
         public abstract bool Validacao(out string erros);
 
     }

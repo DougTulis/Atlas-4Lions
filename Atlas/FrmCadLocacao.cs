@@ -42,11 +42,11 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void CarregarCombos()
         {
-            cmbLocatario.DataSource = _listarPessoaUseCase.ExecutarDadosBreves().ToList();
+            cmbLocatario.DataSource = _listarPessoaUseCase.Executar().ToList();
             cmbLocatario.DisplayMember = "Nome";
             cmbLocatario.SelectedIndex = -1;
 
-            cmbCondutor.DataSource = _listarPessoaUseCase.ExecutarDadosBreves().ToList();
+            cmbCondutor.DataSource = _listarPessoaUseCase.Executar().ToList();
             cmbCondutor.DisplayMember = "Nome";
             cmbCondutor.SelectedIndex = -1;
 

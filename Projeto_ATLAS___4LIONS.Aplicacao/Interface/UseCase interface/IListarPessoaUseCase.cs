@@ -1,4 +1,5 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
+using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface
 {
     public interface IListarPessoaUseCase
     {
-        public IEnumerable<PessoaDTO> ExecutarDadosCompletos();
-        public IEnumerable<PessoaDTO> ExecutarDadosBreves();
+        public IEnumerable<PessoaDTO> Executar();
         public PessoaDTO? ExecutarRecuperarPorId(Guid id);
         public IEnumerable<PessoaDTO> ExecutarRecuperacaoSemCnh();
     }
