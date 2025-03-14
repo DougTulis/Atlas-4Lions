@@ -14,11 +14,20 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
             Valor = valor;
         }
 
- 
+        private TabelaPreco(Guid id, DateTime dataCriacao, string descricao, decimal valor) : base(id,dataCriacao)
+        {
+            Descricao = descricao;
+            Valor = valor;
+        }
+
 
         public static TabelaPreco Create(string descricao, decimal valor)
         {
             return new TabelaPreco(descricao,valor);
+        }
+        public static TabelaPreco CreateFromDataBase(Guid id, DateTime dataCriacao, string descricao, decimal valor)
+        {
+            return new TabelaPreco(descricao, valor);
         }
 
         //  public TabelaPreco()

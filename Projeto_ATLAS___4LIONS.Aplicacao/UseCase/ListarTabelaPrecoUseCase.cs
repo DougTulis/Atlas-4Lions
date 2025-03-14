@@ -19,8 +19,13 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             try
             {
-                return _tabelaRepositorio.ListarTodos();
-            } catch (MySqlException ex)
+                var listaTabelaPreco = _tabelaRepositorio.ListarTodos();
+                var listaTabelaPrecoDto = listaTabelaPreco.Select(x => new TabelaPrecoDTO(x.Descricao, x.Valor));
+
+                return listaTabelaPrecoDto;
+
+            }
+            catch (MySqlException ex)
             {
                 throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
             }
@@ -30,8 +35,11 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             try
             {
-                return _tabelaRepositorio.RecuperarPorId(id);
-            } catch(MySqlException ex)
+                var tabelaPreco = _tabelaRepositorio.RecuperarPorId(id);
+                var tabelaPrecoDto = new TabelaPrecoDTO(tabelaPreco.Descricao, tabelaPreco.Valor);
+                return tabelaPrecoDto;
+            }
+            catch (MySqlException ex)
             {
                 throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
             }

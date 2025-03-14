@@ -24,18 +24,20 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 conexao.Open();
 
                 string sql = @"
-                INSERT INTO tabela_preco (id,descricao, valor)
-                VALUES (@id, @descricao, @valor)";
-
-                using var cmd = new MySqlCommand(sql, conexao);
-                cmd.Parameters.AddWithValue("@id", tabelaPreco.Id);
-                cmd.Parameters.AddWithValue("@descricao", tabelaPreco.Descricao);
-                cmd.Parameters.AddWithValue("@valor", tabelaPreco.Valor);
-                cmd.ExecuteNonQuery();
+                INSERT INTO tabela_preco (id,data_criacao,descricao, valor)
+                VALUES (@id,@data_criacao, @descricao, @valor)";
+                using (var cmd = new MySqlCommand(sql, conexao))
+                {
+                    cmd.Parameters.AddWithValue("@id", tabelaPreco.Id);
+                    cmd.Parameters.AddWithValue("@descricao", tabelaPreco.Descricao);
+                    cmd.Parameters.AddWithValue("@valor", tabelaPreco.Valor);
+                    cmd.Parameters.AddWithValue("@data_criacao  ", tabelaPreco.DataCriacao);
+                    cmd.ExecuteNonQuery();
+                }
             }
         }
 
-        public void Deletar(TabelaPrecoDTO tabelaPrecoDto)
+        public void Deletar(Guid id)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
@@ -45,15 +47,14 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-
-
-                    cmd.Parameters.AddWithValue("@id", tabelaPrecoDto.Id);
+                    cmd.Parameters.AddWithValue("@id", id);
                     cmd.ExecuteNonQuery();
+
                 }
             }
         }
 
-        public IEnumerable<TabelaPrecoDTO> ListarTodos()
+        public IEnumerable<TabelaPreco> ListarTodos()
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
@@ -64,24 +65,23 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 return PopularLista(dataReader);
             }
         }
-        public IEnumerable<TabelaPrecoDTO> PopularLista(MySqlDataReader dataReader)
+        public IEnumerable<TabelaPreco> PopularLista(MySqlDataReader dataReader)
         {
-            var lista = new List<TabelaPrecoDTO>();
+            var lista = new List<TabelaPreco>();
             while (dataReader.Read())
             {
-                var tabelaPreco = new TabelaPrecoDTO
-                {
-                    Id = Guid.Parse(dataReader["Id"].ToString()),
-                    Descricao = Convert.ToString(dataReader["Descricao"]),
-                    Valor = Convert.ToDecimal(dataReader["Valor"]),
-                };
+                var id = Guid.Parse(dataReader["Id"].ToString());
+                var descricao = Convert.ToString(dataReader["Descricao"]);
+                var valor = Convert.ToDecimal(dataReader["Valor"]);
+                var dataCriacao = Convert.ToDateTime(dataReader["data_criacao"]);
+                var tabelaPreco = TabelaPreco.CreateFromDataBase(id, dataCriacao, descricao, valor);
 
                 lista.Add(tabelaPreco);
             }
 
             return lista;
         }
-        public TabelaPrecoDTO? RecuperarPorId(Guid idPreco)
+        public TabelaPreco? RecuperarPorId(Guid idPreco)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {

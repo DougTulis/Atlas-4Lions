@@ -16,7 +16,20 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         public Guid IdPendenciaFinanceira { get; private set; }
         public EStatusLocacao Status { get; private set; }
 
-        public Locacao(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, decimal valorTotal, Guid idLocatario, Guid idCondutor, Guid idAutomovel, EStatusLocacao status,Guid idPendenciaFinanceira)
+        public Locacao(DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, decimal valorTotal, Guid idLocatario, Guid idCondutor, Guid idAutomovel, EStatusLocacao status,Guid idPendenciaFinanceira) : base()
+        {
+            Saida = saida;
+            Retorno = retorno;
+            TipoLocacao = tipoLocacao;
+            ValorTotal = valorTotal;
+            IdLocatario = idLocatario;
+            IdCondutor = idCondutor;
+            IdAutomovel = idAutomovel;
+            Status = status;
+            IdPendenciaFinanceira = idPendenciaFinanceira;
+        }
+
+        public Locacao(Guid id, DateTime dataCriacao, DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, decimal valorTotal, Guid idLocatario, Guid idCondutor, Guid idAutomovel, EStatusLocacao status, Guid idPendenciaFinanceira) : base(id,dataCriacao)
         {
             Saida = saida;
             Retorno = retorno;
@@ -34,6 +47,13 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         {
             return new Locacao(saida,retorno,tipoLocacao,valorTotal,idLocatario,idCondutor,idAutomovel,status,idPendenciaFinanceira);
         }
+
+        //fabrica from data base
+        public static Locacao CreateFromDataBase(Guid id, DateTime dataCriacao, DateTime saida, DateTime retorno, ETipoLocacao tipoLocacao, decimal valorTotal, Guid idLocatario, Guid idCondutor, Guid idAutomovel, EStatusLocacao status, Guid idPendenciaFinanceira)
+        {
+            return new Locacao(id, dataCriacao, saida, retorno, tipoLocacao, valorTotal, idLocatario, idCondutor, idAutomovel, status, idPendenciaFinanceira);
+        }
+
         public override bool Validacao(out string erros)
         {
             erros = "";
@@ -47,20 +67,6 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
                 return false;
             }
             return true;
-        }
-        public void AtribuirIdPendenciaFinanceira(Guid pendfin)
-        {
-            IdPendenciaFinanceira = pendfin;
-        }
-
-        public void AlterarStatusAndamento()
-        {
-            Status = EStatusLocacao.ANDAMENTO;
-        }
-
-        public void AlterarStatusFinalizado()
-        {
-            Status = EStatusLocacao.FINALIZADA;
         }
 
  

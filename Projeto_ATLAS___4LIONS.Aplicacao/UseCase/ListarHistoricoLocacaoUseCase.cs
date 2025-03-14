@@ -30,19 +30,19 @@ public class ListarHistoricoLocacaoUseCase : IListarHistoricoLocacaoUseCase
             {
                 var locatario = _pessoaRepositorio.RecuperarPorId(locacao.IdLocatario);
                 var condutor = _pessoaRepositorio.RecuperarPorId(locacao.IdCondutor);
-                var pendencia = _pendenciaFinanceiraRepositorio.RecuperarPorId(locacao.PendenciaFinanceiraId);
+                var pendencia = _pendenciaFinanceiraRepositorio.RecuperarPorId(locacao.IdPendenciaFinanceira);
 
              historico.Add(new HistoricoLocacaoDTO
              {
                  Id = locacao.Id,
-                 NomeLocatario = locatario.Nome,
-                 NomeCondutor = condutor.Nome,
                  DataCriacao = locacao.DataCriacao,
                  Saida = locacao.Saida,
                  Retorno = locacao.Retorno,
+                 NomeCondutor = condutor.Nome,
+                 Status = locacao.Status,
+                 NomeLocatario = locatario.Nome,
                  TipoLocacao = locacao.TipoLocacao,
-                 ValorTotal = pendencia.ValorTotal,
-                 Status = locacao.Status
+                 ValorTotal = locacao.ValorTotal,
              });
             }
         }

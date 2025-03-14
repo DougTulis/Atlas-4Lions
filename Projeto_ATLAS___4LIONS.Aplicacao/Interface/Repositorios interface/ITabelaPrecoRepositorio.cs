@@ -11,10 +11,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface
 {
     public interface  ITabelaPrecoRepositorio
     {
-        public IEnumerable<TabelaPrecoDTO> ListarTodos();
-        public IEnumerable<TabelaPrecoDTO> PopularLista(MySqlDataReader dataReader);
+        public IEnumerable<TabelaPreco> ListarTodos();
+        public IEnumerable<TabelaPreco> PopularLista(MySqlDataReader dataReader);
         public void Adicionar(TabelaPreco objeto);
-        public void Deletar(TabelaPrecoDTO objeto);
-        public TabelaPrecoDTO? RecuperarPorId(Guid id);
+        public void Deletar(Guid id);
+        public TabelaPreco? RecuperarPorId(Guid id);
     }
 }

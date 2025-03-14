@@ -24,7 +24,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 conexao.Open();
 
                 string sql = @"
-                        INSERT INTO automovel (id, modelo, placa, cor, status, chassi, renavam, oleo_km, data_criacao, pastilha_freio_Km, id_preco)
+                        INSERT INTO automovel (id, modelo, ano, placa, cor, status, chassi, renavam, oleo_km, data_criacao, pastilha_freio_Km, id_preco)
                         VALUES (@id, @modelo, @placa, @cor, @status, @chassi, @renavam, @oleo_km, @data_criacao, @pastilha_freio_Km, @id_preco)";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
@@ -32,6 +32,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     cmd.Parameters.AddWithValue("@id", automovel.Id);
                     cmd.Parameters.AddWithValue("@modelo", automovel.Modelo);
                     cmd.Parameters.AddWithValue("@placa", automovel.Placa);
+                    cmd.Parameters.AddWithValue("@ano", automovel.Ano);
                     cmd.Parameters.AddWithValue("@cor", automovel.Cor);
                     cmd.Parameters.AddWithValue("@status", automovel.Status);
                     cmd.Parameters.AddWithValue("@chassi", automovel.Chassi);
@@ -76,14 +77,14 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
         }
         public IEnumerable<Automovel> PopularLista(MySqlDataReader dataReader)
         {
-            var lista = new List<AutomovelDTO>();
+            var lista = new List<Automovel>();
 
             while (dataReader.Read())
             {
                 var id = Guid.Parse(dataReader["id"].ToString());
                 var modelo = dataReader["modelo"].ToString();
                 var placa = dataReader["placa"].ToString();
-                var placa = dataReader["placa"].ToString();
+                var ano = dataReader["ano"].ToString();
                 var cor = dataReader["cor"].ToString();
                 var status = Enum.Parse<EStatusVeiculo>(dataReader["status"].ToString());
                 var chassi = !Convert.IsDBNull(dataReader["chassi"]) ? dataReader["chassi"].ToString() : null;
@@ -93,17 +94,13 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 var dataCriacao = Convert.ToDateTime(dataReader["data_criacao"]);
                 var idPreco = Guid.Parse((dataReader["id_preco"].ToString()));
 
-                var automovel = Automovel.CreateFromDataBase(id,dataCriacao,modelo,placa,cor,status,ano,chassi)
-
-                };
+                var automovel = Automovel.CreateFromDataBase(id, dataCriacao, modelo, placa, cor, status, ano, chassi, renavam, oleokm, pastilhaFreioKm, idPreco);
 
                 lista.Add(automovel);
             }
 
             return lista;
         }
-
-
         public void AtualizarStatus(Guid automovelId, EStatusVeiculo novoStatus)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())

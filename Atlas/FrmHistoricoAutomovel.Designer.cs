@@ -50,7 +50,7 @@
             dgvHistoricoAutomovel.Name = "dgvHistoricoAutomovel";
             dgvHistoricoAutomovel.ReadOnly = true;
             dgvHistoricoAutomovel.RowHeadersWidth = 51;
-            dgvHistoricoAutomovel.Size = new Size(853, 432);
+            dgvHistoricoAutomovel.Size = new Size(1038, 432);
             dgvHistoricoAutomovel.TabIndex = 1;
             dgvHistoricoAutomovel.CellContentClick += dgvHistoricoAutomovel_CellContentClick;
             // 

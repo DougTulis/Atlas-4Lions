@@ -25,9 +25,21 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
             Valor = valor;
             IdPendenciaFinanceira = idPendenciaFinanceira;
         }
+        public Parcela(Guid id, DateTime dataCriacao, int sequencia, DateTime dataVencimento, decimal valor, Guid idPendenciaFinanceira) : base(id,dataCriacao)
+        {
+            Sequencia = sequencia;
+            DataVencimento = dataVencimento;
+            Valor = valor;
+            IdPendenciaFinanceira = idPendenciaFinanceira;
+        }
         public static Parcela Create(int sequencia, DateTime dataVencimento, decimal valor, Guid idPendenciaFinanceira)
         {
             return new Parcela(sequencia,dataVencimento,valor,idPendenciaFinanceira);
+        }
+
+        public static Parcela CreateFromDataBase(Guid id,DateTime dataCriacao, int sequencia, DateTime dataVencimento, decimal valor, Guid idPendenciaFinanceira)
+        {
+            return new Parcela(id,dataCriacao, sequencia, dataVencimento, valor, idPendenciaFinanceira);
         }
         public override bool Validacao(out string erros)
         {

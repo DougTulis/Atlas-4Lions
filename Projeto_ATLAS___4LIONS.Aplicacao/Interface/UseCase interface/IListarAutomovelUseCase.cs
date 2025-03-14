@@ -9,9 +9,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface
 {
     public interface IListarAutomovelUseCase
     {
-        public IEnumerable<AutomovelDTO> ExecutarDadosCompletos();
+        public IEnumerable<AutomovelDTO> Executar();
         public AutomovelDTO? ExecutarRecuperarPorId(Guid id);
-        public IEnumerable<AutomovelDTO> ExecutarDadosBreves();
         public IEnumerable<AutomovelDTO> ExecutarStatusGaragem();
     }
 }

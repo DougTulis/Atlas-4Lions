@@ -49,7 +49,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Infra.Repositorios
                 }
             }
         }
-        public ParcelaDTO? RecuperarPorId(Guid id)
+        public Parcela? RecuperarPorId(Guid id)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
@@ -68,62 +68,63 @@ namespace Projeto_ATLAS___4LIONS.Infra.Infra.Repositorios
                 }
             }
         }
-        public IEnumerable<ParcelaDTO> PopularLista(MySqlDataReader dataReader)
+        public IEnumerable<Parcela> PopularLista(MySqlDataReader dataReader)
         {
-            var lista = new List<ParcelaDTO>();
+            var lista = new List<Parcela>();
             while (dataReader.Read())
             {
-                var parcela = new ParcelaDTO
-                {
-                    Id = Guid.Parse(dataReader["id"].ToString()),
-                    Sequencia = Convert.ToInt16(dataReader["sequencia"]),
-                    PendenciaFinanceiraId = Guid.Parse(dataReader["pendencia_financeira_id"].ToString()),
-                    Valor = Convert.ToDecimal(dataReader["valor"]),
-                    DataVencimento = Convert.ToDateTime(dataReader["data_vencimento"]),
-                    DataPagamento = dataReader["data_pagamento"] != DBNull.Value ? Convert.ToDateTime(dataReader["data_pagamento"]) : (DateTime?)null,
-                    ValorPago = dataReader["valor_pago"] != DBNull.Value ? Convert.ToDecimal(dataReader["valor_pago"]) : (decimal?)null,
-                    EspeciePagamento = dataReader["especie_pagamento"] != DBNull.Value ? Enum.Parse<EEspecie>(dataReader["especie_pagamento"].ToString()) : (EEspecie?)null
-                };
-                lista.Add(parcela);
-            }
-            return lista;
-        }
-        public IEnumerable<ParcelaDTO> ListarPorPendencia(Guid pendenciaId)
-        {
-            using (var conexao = _conexaoAdapter.ObterConexao())
-            {
-                conexao.Open();
-                string sql = "SELECT * FROM parcela WHERE pendencia_financeira_id = @pendenciaId";
 
-                using (var cmd = new MySqlCommand(sql, conexao))
+                var id = Guid.Parse(dataReader["id"].ToString());
+                var dataCriacao = Convert.ToDateTime(dataReader["data_criacao"]);
+                var sequencia = Convert.ToInt16(dataReader["sequencia"]);
+                var pendenciaFinanceiraId = Guid.Parse(dataReader["pendencia_financeira_id"].ToString());
+                var valor = Convert.ToDecimal(dataReader["valor"]);
+                var dataVencimento = Convert.ToDateTime(dataReader["data_vencimento"]);
+                var dataPagamento = dataReader["data_pagamento"] != DBNull.Value ? Convert.ToDateTime(dataReader["data_pagamento"]) : (DateTime?)null;
+                var valorPago = dataReader["valor_pago"] != DBNull.Value ? Convert.ToDecimal(dataReader["valor_pago"]) : (decimal?)null;
+                var especiePagamento = dataReader["especie_pagamento"] != DBNull.Value ? Enum.Parse<EEspecie>(dataReader["especie_pagamento"].ToString()) : (EEspecie?)null;
+                var parcela = Parcela.CreateFromDataBase(id, dataCriacao, sequencia, dataVencimento, valor,pendenciaFinanceiraId);
+
+                lista.Add(parcela);
+
+                return lista;
+            }
+            public IEnumerable<Parcela> ListarPorPendencia(Guid pendenciaId)
+            {
+                using (var conexao = _conexaoAdapter.ObterConexao())
                 {
-                    cmd.Parameters.AddWithValue("@pendenciaId", pendenciaId);
-                    using (var dataReader = cmd.ExecuteReader())
+                    conexao.Open();
+                    string sql = "SELECT * FROM parcela WHERE pendencia_financeira_id = @pendenciaId";
+
+                    using (var cmd = new MySqlCommand(sql, conexao))
                     {
-                        return PopularLista(dataReader);
+                        cmd.Parameters.AddWithValue("@pendenciaId", pendenciaId);
+                        using (var dataReader = cmd.ExecuteReader())
+                        {
+                            return PopularLista(dataReader);
+                        }
                     }
                 }
             }
-        }
-        public void AtualizarPagamentoParcela(Guid idPendenciaFinanceira, int sequencia, decimal valorPago, DateTime dataPagamento, EEspecie especiePagamento)
-        {
-            using (var conexao = _conexaoAdapter.ObterConexao())
+            public void AtualizarPagamentoParcela(Guid idPendenciaFinanceira, int sequencia, decimal valorPago, DateTime dataPagamento, EEspecie especiePagamento)
             {
-                conexao.Open();
-                string sql = @"UPDATE parcela SET valor_pago = @valor_pago, data_pagamento = @data_pagamento, especie_pagamento = @especie_pagamento 
+                using (var conexao = _conexaoAdapter.ObterConexao())
+                {
+                    conexao.Open();
+                    string sql = @"UPDATE parcela SET valor_pago = @valor_pago, data_pagamento = @data_pagamento, especie_pagamento = @especie_pagamento 
                                 WHERE pendencia_financeira_id = @pendencia_financeira_id AND sequencia = @sequencia";
 
-                using (var cmd = new MySqlCommand(sql, conexao))
-                {
-                    cmd.Parameters.AddWithValue("@pendencia_financeira_id", idPendenciaFinanceira);
-                    cmd.Parameters.AddWithValue("@sequencia", sequencia);
-                    cmd.Parameters.AddWithValue("@valor_pago", valorPago);
-                    cmd.Parameters.AddWithValue("@data_pagamento", dataPagamento);
-                    cmd.Parameters.AddWithValue("@especie_pagamento", especiePagamento.ToString());
-                    cmd.ExecuteNonQuery();
+                    using (var cmd = new MySqlCommand(sql, conexao))
+                    {
+                        cmd.Parameters.AddWithValue("@pendencia_financeira_id", idPendenciaFinanceira);
+                        cmd.Parameters.AddWithValue("@sequencia", sequencia);
+                        cmd.Parameters.AddWithValue("@valor_pago", valorPago);
+                        cmd.Parameters.AddWithValue("@data_pagamento", dataPagamento);
+                        cmd.Parameters.AddWithValue("@especie_pagamento", especiePagamento.ToString());
+                        cmd.ExecuteNonQuery();
+                    }
                 }
             }
-        }
 
+        }
     }
-}

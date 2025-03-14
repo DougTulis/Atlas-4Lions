@@ -17,11 +17,13 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             this.automovelRepositorio = automovelRepositorio;
         }
 
-        public IEnumerable<AutomovelDTO> ExecutarDadosCompletos()
+        public IEnumerable<AutomovelDTO> Executar()
         {
             try
             {
-                return automovelRepositorio.ListarTodos();
+                var listaAutomoveis = automovelRepositorio.ListarTodos();
+                var listaAutomoveisDto = listaAutomoveis.Select(x => new AutomovelDTO(x.Modelo, x.Placa, x.Cor, x.Status, x.Ano, x.Chassi, x.Renavam, x.Oleokm, x.PastilhaFreioKm, x.IdPreco));
+                return listaAutomoveisDto;
             }
             catch (MySqlException ex)
             {
@@ -33,7 +35,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             try
             {
-                return automovelRepositorio.RecuperarPorId(id);
+                var automovelFiltrado = automovelRepositorio.RecuperarPorId(id);
+                var automovelFiltradoDto = new AutomovelDTO(automovelFiltrado.Modelo, automovelFiltrado.Placa, automovelFiltrado.Cor, automovelFiltrado.Status, automovelFiltrado.Ano, automovelFiltrado.Chassi, automovelFiltrado.Renavam, automovelFiltrado.Oleokm, automovelFiltrado.PastilhaFreioKm, automovelFiltrado.IdPreco);
+
+                return automovelFiltradoDto;
             }
             catch (MySqlException ex)
             {
@@ -42,23 +47,14 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             }
         }
 
-        public IEnumerable<AutomovelDTO> ExecutarDadosBreves()
-        {
-            try
-            {
-                return automovelRepositorio.ListarTodos();
-            }
-            catch (MySqlException ex)
-            {
-                throw new Exception("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
-            }
-        }
 
         public IEnumerable<AutomovelDTO> ExecutarStatusGaragem()
         {
             try
             {
-                return automovelRepositorio.ListarStatusGaragem();
+                var listaAutomoveisGaragem = automovelRepositorio.ListarStatusGaragem();
+                var listaAutomoveisGaragemDto = listaAutomoveisGaragem.Select(x => new AutomovelDTO(x.Modelo, x.Placa, x.Cor, x.Status, x.Ano, x.Chassi, x.Renavam, x.Oleokm, x.PastilhaFreioKm, x.IdPreco));
+                return listaAutomoveisGaragemDto;
             }
             catch (MySqlException ex)
             {

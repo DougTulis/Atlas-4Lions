@@ -88,7 +88,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             }
         }
 
-        public IEnumerable<LocacaoDTO> ListarTodas()
+        public IEnumerable<Locacao> ListarTodas()
         {
             using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
             {
@@ -98,11 +98,11 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 using (var cmd = new MySqlCommand(sql, conexao))
                 using (var dataReader = cmd.ExecuteReader())
                 {
-                    return PopularListaDTO(dataReader);
+                    return PopularLista(dataReader);
                 }
             }
         }
-        public LocacaoDTO? RecuperarPorId(Guid id)
+        public Locacao? RecuperarPorId(Guid id)
         {
             using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
             {
@@ -115,69 +115,71 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
                     using (var dataReader = cmd.ExecuteReader())
                     {
-                        var lista = PopularListaDTO(dataReader);
+                        var lista = PopularLista(dataReader);
                         return lista.FirstOrDefault();
                     }
                 }
             }
         }
-        private IEnumerable<LocacaoDTO> PopularListaDTO(MySqlDataReader dataReader)
+        public IEnumerable<Locacao> PopularLista(MySqlDataReader dataReader)
         {
-            var lista = new List<LocacaoDTO>();
+            var lista = new List<Locacao>();
 
             while (dataReader.Read())
             {
-                var locacaoDto = new LocacaoDTO
-                {
-                    Id = Guid.Parse(dataReader["id"].ToString()),
-                    Saida = Convert.ToDateTime(dataReader["saida"]),
-                    Retorno = Convert.ToDateTime(dataReader["retorno"]),
-                    TipoLocacao = Enum.Parse<ETipoLocacao>(dataReader["tipo_locacao"].ToString().ToUpper()),
-                    IdLocatario = Guid.Parse(dataReader["locatario_id"].ToString()),
-                    IdCondutor = Guid.Parse(dataReader["condutor_id"].ToString()),
-                    IdAutomovel = Guid.Parse(dataReader["automovel_id"].ToString()),
-                    Status = Enum.Parse<EStatusLocacao>(dataReader["status_locacao"].ToString()),
-                    PendenciaFinanceiraId = Guid.Parse(dataReader["pendencia_financeira_id"].ToString()),
-                };
-                lista.Add(locacaoDto);
-            }
+
+                var id = Guid.Parse(dataReader["id"].ToString());
+                var dataCriacao = Convert.ToDateTime(dataReader["data_criacao"]);
+                var saida = Convert.ToDateTime(dataReader["saida"]);
+                var retorno = Convert.ToDateTime(dataReader["retorno"]);
+                var tipoLocacao = Enum.Parse<ETipoLocacao>(dataReader["tipo_locacao"].ToString().ToUpper());
+                var idLocatario = Guid.Parse(dataReader["locatario_id"].ToString());
+                var idCondutor = Guid.Parse(dataReader["condutor_id"].ToString());
+                var valorTotal = decimal.Parse(dataReader["valor_total"].ToString());
+                var idAutomovel = Guid.Parse(dataReader["automovel_id"].ToString());
+                var status = Enum.Parse<EStatusLocacao>(dataReader["status_locacao"].ToString());
+                var pendenciaFinanceiraId = Guid.Parse(dataReader["pendencia_financeira_id"].ToString());
+                var locacao = Locacao.CreateFromDataBase(id, dataCriacao, saida, retorno, tipoLocacao, valorTotal, idLocatario, idCondutor, idAutomovel, status, pendenciaFinanceiraId);
+            
+            lista.Add(locacao);
+        }
 
             return lista;
         }
 
-        public void AtualizarStatusLocacao(Guid locacaoId, EStatusLocacao novoStatus)
+    public void AtualizarStatusLocacao(Guid locacaoId, EStatusLocacao novoStatus)
+    {
+        using (var conexao = _conexaoAdapter.ObterConexao())
         {
-            using (var conexao = _conexaoAdapter.ObterConexao())
-            {
-                conexao.Open();
-                string sql = "UPDATE locacao SET status_locacao = @status WHERE id = @id";
+            conexao.Open();
+            string sql = "UPDATE locacao SET status_locacao = @status WHERE id = @id";
 
-                using (var cmd = new MySqlCommand(sql, conexao))
-                {
-                    cmd.Parameters.AddWithValue("@status",novoStatus);
-                    cmd.Parameters.AddWithValue("@id", locacaoId);
-                    cmd.ExecuteNonQuery();
-                }
+            using (var cmd = new MySqlCommand(sql, conexao))
+            {
+                cmd.Parameters.AddWithValue("@status", novoStatus);
+                cmd.Parameters.AddWithValue("@id", locacaoId);
+                cmd.ExecuteNonQuery();
             }
         }
+    }
 
-        public IEnumerable<LocacaoDTO> ListarStatusAndamento()
+    public IEnumerable<Locacao> ListarStatusAndamento()
+    {
+        using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
         {
-            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+            conexao.Open();
+            string sql = "SELECT * FROM locacao WHERE status_locacao = @status_locacao";
+
+            using (var cmd = new MySqlCommand(sql, conexao))
             {
-                conexao.Open();
-                string sql = "SELECT * FROM locacao WHERE status_locacao = @status_locacao";
+                cmd.Parameters.AddWithValue("@status_locacao", (int)EStatusLocacao.ANDAMENTO);
 
-                using (var cmd = new MySqlCommand(sql, conexao))
+                using (var dataReader = cmd.ExecuteReader())
                 {
-                    cmd.Parameters.AddWithValue("@status_locacao", (int)EStatusLocacao.ANDAMENTO);
-
-                    using (var dataReader = cmd.ExecuteReader())
-                    {
-                        return PopularListaDTO(dataReader);
-                    }
+                    return PopularLista(dataReader);
                 }
             }
         }
     }
+}
 }
