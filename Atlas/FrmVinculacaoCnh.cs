@@ -45,7 +45,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private void AtualizarGridView()
         {
             dgvVinculacaoCnh.AutoGenerateColumns = false;
-             var dados = _listarpessoaUseCase.ExecutarRecuperacaoSemCnh();
+            var dados = _listarpessoaUseCase.ExecutarRecuperacaoSemCnh();
             dgvVinculacaoCnh.DataSource = dados.ToList();
             dgvVinculacaoCnh.Refresh();
         }
@@ -95,6 +95,10 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         }
 
+        private void FrmVinculacaoCnh_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+        }
     }
 }
 

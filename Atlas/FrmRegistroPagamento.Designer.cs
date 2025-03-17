@@ -29,10 +29,9 @@
         private void InitializeComponent()
         {
             dgvHistoricoPendenciaFinanceiras = new DataGridView();
+            lblPendenciasFinanceiras = new Label();
             id = new DataGridViewTextBoxColumn();
             valorTotal = new DataGridViewTextBoxColumn();
-            transacaoId = new DataGridViewTextBoxColumn();
-            lblPendenciasFinanceiras = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvHistoricoPendenciaFinanceiras).BeginInit();
             SuspendLayout();
             // 
@@ -41,16 +40,26 @@
             dgvHistoricoPendenciaFinanceiras.AllowUserToAddRows = false;
             dgvHistoricoPendenciaFinanceiras.AllowUserToDeleteRows = false;
             dgvHistoricoPendenciaFinanceiras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvHistoricoPendenciaFinanceiras.Columns.AddRange(new DataGridViewColumn[] { id, valorTotal, transacaoId });
+            dgvHistoricoPendenciaFinanceiras.Columns.AddRange(new DataGridViewColumn[] { id, valorTotal });
             dgvHistoricoPendenciaFinanceiras.Location = new Point(12, 24);
             dgvHistoricoPendenciaFinanceiras.Name = "dgvHistoricoPendenciaFinanceiras";
             dgvHistoricoPendenciaFinanceiras.ReadOnly = true;
             dgvHistoricoPendenciaFinanceiras.RowHeadersWidth = 51;
-            dgvHistoricoPendenciaFinanceiras.Size = new Size(463, 287);
+            dgvHistoricoPendenciaFinanceiras.Size = new Size(547, 359);
             dgvHistoricoPendenciaFinanceiras.TabIndex = 0;
             dgvHistoricoPendenciaFinanceiras.CellContentClick += dgvHistoricoPendenciaFinanceiras_CellContentClick;
             dgvHistoricoPendenciaFinanceiras.CellMouseClick += dgvHistoricoPendenciaFinanceiras_CellMouseClick;
             dgvHistoricoPendenciaFinanceiras.DoubleClick += dgvHistoricoPendenciaFinanceiras_DoubleClick;
+            // 
+            // lblPendenciasFinanceiras
+            // 
+            lblPendenciasFinanceiras.AutoSize = true;
+            lblPendenciasFinanceiras.Location = new Point(12, 6);
+            lblPendenciasFinanceiras.Name = "lblPendenciasFinanceiras";
+            lblPendenciasFinanceiras.Size = new Size(334, 15);
+            lblPendenciasFinanceiras.TabIndex = 2;
+            lblPendenciasFinanceiras.Text = "Selecione a pendência que você deseja registrar o pagamento:";
+            lblPendenciasFinanceiras.Click += lblPendenciasFinanceiras_Click;
             // 
             // id
             // 
@@ -69,25 +78,6 @@
             valorTotal.Name = "valorTotal";
             valorTotal.ReadOnly = true;
             valorTotal.Width = 125;
-            // 
-            // transacaoId
-            // 
-            transacaoId.DataPropertyName = "TransacaoId";
-            transacaoId.HeaderText = "Código de transação";
-            transacaoId.MinimumWidth = 6;
-            transacaoId.Name = "transacaoId";
-            transacaoId.ReadOnly = true;
-            transacaoId.Width = 125;
-            // 
-            // lblPendenciasFinanceiras
-            // 
-            lblPendenciasFinanceiras.AutoSize = true;
-            lblPendenciasFinanceiras.Location = new Point(12, 6);
-            lblPendenciasFinanceiras.Name = "lblPendenciasFinanceiras";
-            lblPendenciasFinanceiras.Size = new Size(334, 15);
-            lblPendenciasFinanceiras.TabIndex = 2;
-            lblPendenciasFinanceiras.Text = "Selecione a pendência que você deseja registrar o pagamento:";
-            lblPendenciasFinanceiras.Click += lblPendenciasFinanceiras_Click;
             // 
             // FrmRegistroPagamento
             // 
@@ -110,9 +100,8 @@
         #endregion
 
         private DataGridView dgvHistoricoPendenciaFinanceiras;
+        private Label lblPendenciasFinanceiras;
         private DataGridViewTextBoxColumn id;
         private DataGridViewTextBoxColumn valorTotal;
-        private DataGridViewTextBoxColumn transacaoId;
-        private Label lblPendenciasFinanceiras;
     }
 }

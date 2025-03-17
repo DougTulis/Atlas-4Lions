@@ -10,9 +10,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public string Descricao { get; set; }
         public decimal Valor { get; set; }
 
-
-        public TabelaPrecoDTO(string descricao, decimal valor)
+        public TabelaPrecoDTO(Guid id, DateTime dataCriacao, string descricao, decimal valor)
         {
+            Id = id;
+            DataCriacao = dataCriacao;
             Descricao = descricao;
             Valor = valor;
         }

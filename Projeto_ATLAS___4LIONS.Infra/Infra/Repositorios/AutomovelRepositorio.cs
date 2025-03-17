@@ -23,8 +23,9 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 conexao.Open();
 
                 string sql = @"
-                        INSERT INTO automovel (id, modelo, ano, placa, cor, status, chassi, renavam, oleo_km, data_criacao, pastilha_freio_Km, id_preco)
-                        VALUES (@id, @modelo, @placa, @cor, @status, @chassi, @renavam, @oleo_km, @data_criacao, @pastilha_freio_Km, @id_preco)";
+                        INSERT INTO automovel 
+                (id, modelo, ano, placa, cor, status, chassi, renavam, oleo_km, data_criacao, pastilha_freio_Km, id_preco)
+                VALUES (@id, @modelo, @ano, @placa, @cor, @status, @chassi, @renavam, @oleo_km, @data_criacao, @pastilha_freio_Km, @id_preco)";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {

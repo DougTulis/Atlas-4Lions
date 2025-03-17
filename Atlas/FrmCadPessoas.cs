@@ -16,6 +16,15 @@ namespace Projeto_ATLAS___4LIONS.Forms
             CarregarCombos();
         }
 
+        private void FecharFormulario<T>()
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.Close();
+            }
+        }
+
+
         private void cbmTipoPessoa_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -85,17 +94,21 @@ namespace Projeto_ATLAS___4LIONS.Forms
                 NumeroDocumento = txtNumeroDocumento.Text,
             };
 
-     
+
             RespostaPadrao<string> resultado = _cadastrarPessoaUseCase.Executar(pessoaDto);
             MessageBoxIcon icone = resultado.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning;
             MessageBox.Show(resultado.Mensagem, "Cadastro de Pessoa", MessageBoxButtons.OK, icone);
         }
-  
+
         private void CarregarCombos()
         {
             cbmTipoPessoa.DataSource = Enum.GetValues(typeof(ETipoPessoa));
             cbmTipoPessoa.SelectedIndex = -1;
         }
 
+        private void FrmCadPessoas_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+        }
     }
 }

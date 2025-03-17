@@ -39,11 +39,11 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 if (!pessoa.Validacao(out erros))
                 {
                  
-                    return RespostaPadrao<string>.Falha(false, erros, "ERRO");
+                    return RespostaPadrao<string>.Falha(false, "Cadastro de Pessoas", erros);
                 }
                 pessoaRepositorio.Adicionar(pessoa);
 
-                return RespostaPadrao<string>.Sucesso(true, "Pessoa cadastrada com sucesso!", null);
+                return RespostaPadrao<string>.Sucesso(true, "Cadastro de Pessoas ", "Pessoa cadastrada com sucesso!");
             }
             catch (MySqlException ex)
             {

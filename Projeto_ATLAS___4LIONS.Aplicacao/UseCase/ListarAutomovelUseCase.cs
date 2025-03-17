@@ -22,7 +22,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             try
             {
                 var listaAutomoveis = automovelRepositorio.ListarTodos();
-                var listaAutomoveisDto = listaAutomoveis.Select(x => new AutomovelDTO(x.Id,x.Modelo, x.Placa, x.Cor, x.Status, x.Ano, x.Chassi, x.Renavam, x.Oleokm, x.PastilhaFreioKm, x.IdPreco));
+                var listaAutomoveisDto = listaAutomoveis.Select(x => new AutomovelDTO(x.Id,x.Modelo, x.Placa, x.Cor, x.Status, x.Ano, x.Chassi, x.Renavam, x.Oleokm, x.PastilhaFreioKm, x.IdPreco)).ToList();
                 return listaAutomoveisDto;
             }
             catch (MySqlException ex)
@@ -53,7 +53,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             try
             {
                 var listaAutomoveisGaragem = automovelRepositorio.ListarStatusGaragem();
-                var listaAutomoveisGaragemDto = listaAutomoveisGaragem.Select(x => new AutomovelDTO(x.Id,x.Modelo, x.Placa, x.Cor, x.Status, x.Ano, x.Chassi, x.Renavam, x.Oleokm, x.PastilhaFreioKm, x.IdPreco));
+                var listaAutomoveisGaragemDto = listaAutomoveisGaragem.Select(x => new AutomovelDTO(x.Id,x.Modelo, x.Placa, x.Cor, x.Status, x.Ano, x.Chassi, x.Renavam, x.Oleokm, x.PastilhaFreioKm, x.IdPreco)).ToList();
                 return listaAutomoveisGaragemDto;
             }
             catch (MySqlException ex)

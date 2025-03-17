@@ -105,7 +105,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
         }
 
         private void txtAno_TextChanged(object sender, EventArgs e)
-        {
+       {
 
         }
         private void txtModelo_TextChanged(object sender, EventArgs e)
@@ -135,7 +135,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
             };
             RespostaPadrao<string> resposta = _cadastrarVeiculoUseCase.Executar(automovelDto);
             MessageBoxIcon icone = resposta.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning;
-            MessageBox.Show(resposta.Mensagem, "Cadastro de Automóvel", MessageBoxButtons.OK, icone);
+            MessageBox.Show(resposta.Dados, resposta.Mensagem, MessageBoxButtons.OK, icone);
         }
         private void CarregarCombos()
         {
@@ -147,7 +147,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private void FrmCadAutomovel_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
-            this.Hide();
+            this.Dispose();
         }
     }
 }

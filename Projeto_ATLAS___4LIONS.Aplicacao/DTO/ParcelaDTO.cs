@@ -14,11 +14,16 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public decimal? ValorPago { get; set; }
         public EEspecie? EspeciePagamento { get; set; }
 
-        public ParcelaDTO(int sequencia, DateTime dataVencimento, decimal valor)
+        public ParcelaDTO(Guid id, int sequencia, Guid pendenciaFinanceiraId, DateTime dataVencimento, decimal valor, DateTime? dataPagamento, decimal? valorPago, EEspecie? especiePagamento)
         {
+            Id = id;
             Sequencia = sequencia;
+            PendenciaFinanceiraId = pendenciaFinanceiraId;
             DataVencimento = dataVencimento;
             Valor = valor;
+            DataPagamento = dataPagamento;
+            ValorPago = valorPago;
+            EspeciePagamento = especiePagamento;
         }
 
         public ParcelaDTO()

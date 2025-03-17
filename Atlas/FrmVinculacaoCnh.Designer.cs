@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             dgvVinculacaoCnh = new DataGridView();
+            id = new DataGridViewTextBoxColumn();
+            nome = new DataGridViewTextBoxColumn();
+            tipoPessoa = new DataGridViewTextBoxColumn();
+            dataVencimento = new DataGridViewTextBoxColumn();
             bigLblVinculacaoCnh = new ReaLTaiizor.Controls.BigLabel();
             txtPessoa = new TextBox();
             lblPessoa = new Label();
@@ -37,10 +41,6 @@
             txtVencimentoCnh = new TextBox();
             txtNumeroCnh = new TextBox();
             lblNumeroCnh = new Label();
-            id = new DataGridViewTextBoxColumn();
-            nome = new DataGridViewTextBoxColumn();
-            tipoPessoa = new DataGridViewTextBoxColumn();
-            dataVencimento = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvVinculacaoCnh).BeginInit();
             SuspendLayout();
             // 
@@ -50,94 +50,14 @@
             dgvVinculacaoCnh.AllowUserToDeleteRows = false;
             dgvVinculacaoCnh.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvVinculacaoCnh.Columns.AddRange(new DataGridViewColumn[] { id, nome, tipoPessoa, dataVencimento });
-            dgvVinculacaoCnh.Location = new Point(14, 104);
-            dgvVinculacaoCnh.Margin = new Padding(3, 4, 3, 4);
+            dgvVinculacaoCnh.Location = new Point(12, 78);
             dgvVinculacaoCnh.Name = "dgvVinculacaoCnh";
             dgvVinculacaoCnh.ReadOnly = true;
             dgvVinculacaoCnh.RowHeadersWidth = 51;
-            dgvVinculacaoCnh.Size = new Size(720, 404);
+            dgvVinculacaoCnh.Size = new Size(630, 303);
             dgvVinculacaoCnh.TabIndex = 0;
             dgvVinculacaoCnh.CellContentClick += dgvVinculacaoCnh_CellContentClick;
             dgvVinculacaoCnh.CellMouseClick += dgvVinculacaoCnh_CellMouseClick;
-            // 
-            // bigLblVinculacaoCnh
-            // 
-            bigLblVinculacaoCnh.AutoSize = true;
-            bigLblVinculacaoCnh.BackColor = Color.Transparent;
-            bigLblVinculacaoCnh.Font = new Font("Segoe UI", 15F);
-            bigLblVinculacaoCnh.ForeColor = Color.White;
-            bigLblVinculacaoCnh.Location = new Point(127, 63);
-            bigLblVinculacaoCnh.Name = "bigLblVinculacaoCnh";
-            bigLblVinculacaoCnh.Size = new Size(326, 35);
-            bigLblVinculacaoCnh.TabIndex = 1;
-            bigLblVinculacaoCnh.Text = "Pessoas sem CNH vínculada";
-            // 
-            // txtPessoa
-            // 
-            txtPessoa.Location = new Point(755, 137);
-            txtPessoa.Margin = new Padding(3, 4, 3, 4);
-            txtPessoa.Name = "txtPessoa";
-            txtPessoa.ReadOnly = true;
-            txtPessoa.Size = new Size(138, 27);
-            txtPessoa.TabIndex = 2;
-            txtPessoa.TextChanged += txtPessoa_TextChanged;
-            // 
-            // lblPessoa
-            // 
-            lblPessoa.AutoSize = true;
-            lblPessoa.Location = new Point(753, 113);
-            lblPessoa.Name = "lblPessoa";
-            lblPessoa.Size = new Size(367, 20);
-            lblPessoa.TabIndex = 3;
-            lblPessoa.Text = "Informe o ID da pessoa que você quer vincular a CNH:";
-            lblPessoa.Click += lblPessoa_Click;
-            // 
-            // btnSelecionarPessoa
-            // 
-            btnSelecionarPessoa.Location = new Point(753, 336);
-            btnSelecionarPessoa.Margin = new Padding(3, 4, 3, 4);
-            btnSelecionarPessoa.Name = "btnSelecionarPessoa";
-            btnSelecionarPessoa.Size = new Size(141, 31);
-            btnSelecionarPessoa.TabIndex = 4;
-            btnSelecionarPessoa.Text = "Vincular CNH";
-            btnSelecionarPessoa.UseVisualStyleBackColor = true;
-            btnSelecionarPessoa.Click += btnSelecionarPessoa_Click;
-            // 
-            // lblVencimentoCnh
-            // 
-            lblVencimentoCnh.AutoSize = true;
-            lblVencimentoCnh.Location = new Point(753, 185);
-            lblVencimentoCnh.Name = "lblVencimentoCnh";
-            lblVencimentoCnh.Size = new Size(214, 20);
-            lblVencimentoCnh.TabIndex = 5;
-            lblVencimentoCnh.Text = "Informe o vencimento da CNH:";
-            lblVencimentoCnh.Click += lblVencimentoCnh_Click;
-            // 
-            // txtVencimentoCnh
-            // 
-            txtVencimentoCnh.Location = new Point(755, 219);
-            txtVencimentoCnh.Name = "txtVencimentoCnh";
-            txtVencimentoCnh.Size = new Size(138, 27);
-            txtVencimentoCnh.TabIndex = 6;
-            txtVencimentoCnh.TextChanged += txtVencimentoCnh_TextChanged_1;
-            // 
-            // txtNumeroCnh
-            // 
-            txtNumeroCnh.Location = new Point(755, 292);
-            txtNumeroCnh.Name = "txtNumeroCnh";
-            txtNumeroCnh.Size = new Size(138, 27);
-            txtNumeroCnh.TabIndex = 8;
-            txtNumeroCnh.TextChanged += txtNumeroCnh_TextChanged;
-            // 
-            // lblNumeroCnh
-            // 
-            lblNumeroCnh.AutoSize = true;
-            lblNumeroCnh.Location = new Point(753, 259);
-            lblNumeroCnh.Name = "lblNumeroCnh";
-            lblNumeroCnh.Size = new Size(188, 20);
-            lblNumeroCnh.TabIndex = 7;
-            lblNumeroCnh.Text = "Informe o numero da CNH:";
-            lblNumeroCnh.Click += lblNumeroCnh_Click;
             // 
             // id
             // 
@@ -175,12 +95,91 @@
             dataVencimento.ReadOnly = true;
             dataVencimento.Width = 125;
             // 
+            // bigLblVinculacaoCnh
+            // 
+            bigLblVinculacaoCnh.AutoSize = true;
+            bigLblVinculacaoCnh.BackColor = Color.Transparent;
+            bigLblVinculacaoCnh.Font = new Font("Segoe UI", 15F);
+            bigLblVinculacaoCnh.ForeColor = Color.White;
+            bigLblVinculacaoCnh.Location = new Point(111, 47);
+            bigLblVinculacaoCnh.Name = "bigLblVinculacaoCnh";
+            bigLblVinculacaoCnh.Size = new Size(252, 28);
+            bigLblVinculacaoCnh.TabIndex = 1;
+            bigLblVinculacaoCnh.Text = "Pessoas sem CNH vínculada";
+            // 
+            // txtPessoa
+            // 
+            txtPessoa.Location = new Point(661, 103);
+            txtPessoa.Name = "txtPessoa";
+            txtPessoa.ReadOnly = true;
+            txtPessoa.Size = new Size(121, 23);
+            txtPessoa.TabIndex = 2;
+            txtPessoa.TextChanged += txtPessoa_TextChanged;
+            // 
+            // lblPessoa
+            // 
+            lblPessoa.AutoSize = true;
+            lblPessoa.Location = new Point(659, 85);
+            lblPessoa.Name = "lblPessoa";
+            lblPessoa.Size = new Size(292, 15);
+            lblPessoa.TabIndex = 3;
+            lblPessoa.Text = "Informe o ID da pessoa que você quer vincular a CNH:";
+            lblPessoa.Click += lblPessoa_Click;
+            // 
+            // btnSelecionarPessoa
+            // 
+            btnSelecionarPessoa.Location = new Point(659, 252);
+            btnSelecionarPessoa.Name = "btnSelecionarPessoa";
+            btnSelecionarPessoa.Size = new Size(123, 23);
+            btnSelecionarPessoa.TabIndex = 4;
+            btnSelecionarPessoa.Text = "Vincular CNH";
+            btnSelecionarPessoa.UseVisualStyleBackColor = true;
+            btnSelecionarPessoa.Click += btnSelecionarPessoa_Click;
+            // 
+            // lblVencimentoCnh
+            // 
+            lblVencimentoCnh.AutoSize = true;
+            lblVencimentoCnh.Location = new Point(659, 139);
+            lblVencimentoCnh.Name = "lblVencimentoCnh";
+            lblVencimentoCnh.Size = new Size(173, 15);
+            lblVencimentoCnh.TabIndex = 5;
+            lblVencimentoCnh.Text = "Informe o vencimento da CNH:";
+            lblVencimentoCnh.Click += lblVencimentoCnh_Click;
+            // 
+            // txtVencimentoCnh
+            // 
+            txtVencimentoCnh.Location = new Point(661, 164);
+            txtVencimentoCnh.Margin = new Padding(3, 2, 3, 2);
+            txtVencimentoCnh.Name = "txtVencimentoCnh";
+            txtVencimentoCnh.Size = new Size(121, 23);
+            txtVencimentoCnh.TabIndex = 6;
+            txtVencimentoCnh.TextChanged += txtVencimentoCnh_TextChanged_1;
+            // 
+            // txtNumeroCnh
+            // 
+            txtNumeroCnh.Location = new Point(661, 219);
+            txtNumeroCnh.Margin = new Padding(3, 2, 3, 2);
+            txtNumeroCnh.Name = "txtNumeroCnh";
+            txtNumeroCnh.Size = new Size(121, 23);
+            txtNumeroCnh.TabIndex = 8;
+            txtNumeroCnh.TextChanged += txtNumeroCnh_TextChanged;
+            // 
+            // lblNumeroCnh
+            // 
+            lblNumeroCnh.AutoSize = true;
+            lblNumeroCnh.Location = new Point(659, 194);
+            lblNumeroCnh.Name = "lblNumeroCnh";
+            lblNumeroCnh.Size = new Size(152, 15);
+            lblNumeroCnh.TabIndex = 7;
+            lblNumeroCnh.Text = "Informe o numero da CNH:";
+            lblNumeroCnh.Click += lblNumeroCnh_Click;
+            // 
             // FrmVinculacaoCnh
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
-            ClientSize = new Size(1098, 647);
+            ClientSize = new Size(961, 485);
             Controls.Add(txtNumeroCnh);
             Controls.Add(lblNumeroCnh);
             Controls.Add(txtVencimentoCnh);
@@ -191,9 +190,9 @@
             Controls.Add(bigLblVinculacaoCnh);
             Controls.Add(dgvVinculacaoCnh);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(3, 4, 3, 4);
             Name = "FrmVinculacaoCnh";
             Text = "FrmVinculacaoCnh";
+            FormClosing += FrmVinculacaoCnh_FormClosing;
             Load += FrmVinculacaoCnh_Load;
             ((System.ComponentModel.ISupportInitialize)dgvVinculacaoCnh).EndInit();
             ResumeLayout(false);

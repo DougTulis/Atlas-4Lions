@@ -30,8 +30,15 @@ namespace Atlas
 
         private void AbrirFormulario<T>(ref T form) where T : Form
         {
+            foreach (Form f in this.MdiChildren)
+            {
+                f.Close();
+            }
+
             if (form == null || form.IsDisposed)
             {
+              
+
                 form = _serviceProvider.GetRequiredService<T>();
                 form.MdiParent = this;
                 form.WindowState = FormWindowState.Maximized;
@@ -40,10 +47,10 @@ namespace Atlas
             else
             {
                 form.BringToFront();
+
             }
         }
 
-        // 🔹 Eventos corrigidos para os botões
 
         private void FormPrincipal_Load(object sender, EventArgs e) { }
 
@@ -66,7 +73,6 @@ namespace Atlas
         private void Form1_Load(object sender, EventArgs e)
         {
         }
-
 
         private void itmGerenciamentoPessoasCadPessoas_Click(object sender, EventArgs e)
         {

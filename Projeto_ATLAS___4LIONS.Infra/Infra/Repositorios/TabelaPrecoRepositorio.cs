@@ -73,6 +73,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 var descricao = Convert.ToString(dataReader["Descricao"]);
                 var valor = Convert.ToDecimal(dataReader["Valor"]);
                 var dataCriacao = Convert.ToDateTime(dataReader["data_criacao"]);
+
                 var tabelaPreco = TabelaPreco.CreateFromDataBase(id, dataCriacao, descricao, valor);
 
                 lista.Add(tabelaPreco);

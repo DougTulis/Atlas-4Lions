@@ -28,7 +28,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             {
                 var pessoaLista = pessoaRepositorio.ListarTodos();
 
-                var PessoaDtoLista = pessoaLista.Select(pessoa => new PessoaDTO(pessoa.Id, pessoa.DataCriacao, pessoa.Nome, pessoa.Email, pessoa.Contato, pessoa.TipoPessoa, pessoa.NumeroDocumento, pessoa.DataRegistro, pessoa.NumeroCnh, pessoa.VencimentoCnh));
+                var PessoaDtoLista = pessoaLista.Select(pessoa => new PessoaDTO(pessoa.Id, pessoa.DataCriacao, pessoa.Nome, pessoa.Email, pessoa.Contato, pessoa.TipoPessoa, pessoa.NumeroDocumento, pessoa.DataRegistro, pessoa.NumeroCnh, pessoa.VencimentoCnh)).ToList();
 
                 return PessoaDtoLista;
             }
@@ -58,7 +58,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             try
             {
                 var pessoaLista = pessoaRepositorio.ListarSemCNH();
-                var PessoaDtoLista = pessoaLista.Select(pessoa => new PessoaDTO(pessoa.Id, pessoa.DataCriacao, pessoa.Nome, pessoa.Email, pessoa.Contato, pessoa.TipoPessoa, pessoa.NumeroDocumento, pessoa.DataRegistro, pessoa.NumeroCnh, pessoa.VencimentoCnh));
+                var PessoaDtoLista = pessoaLista.Select(pessoa => new PessoaDTO(pessoa.Id, pessoa.DataCriacao, pessoa.Nome, pessoa.Email, pessoa.Contato, pessoa.TipoPessoa, pessoa.NumeroDocumento, pessoa.DataRegistro, pessoa.NumeroCnh, pessoa.VencimentoCnh)).ToList();
 
                 return PessoaDtoLista;
             }

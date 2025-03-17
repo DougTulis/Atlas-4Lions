@@ -27,7 +27,7 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         }
         public static TabelaPreco CreateFromDataBase(Guid id, DateTime dataCriacao, string descricao, decimal valor)
         {
-            return new TabelaPreco(descricao, valor);
+            return new TabelaPreco(id,dataCriacao,descricao, valor);
         }
 
         //  public TabelaPreco()

@@ -20,7 +20,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             try
             {
                 var listaTabelaPreco = _tabelaRepositorio.ListarTodos();
-                var listaTabelaPrecoDto = listaTabelaPreco.Select(x => new TabelaPrecoDTO(x.Descricao, x.Valor));
+                var listaTabelaPrecoDto = listaTabelaPreco.Select(x => new TabelaPrecoDTO(x.Id,x.DataCriacao,x.Descricao, x.Valor)).ToList();
 
                 return listaTabelaPrecoDto;
 
@@ -36,7 +36,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             try
             {
                 var tabelaPreco = _tabelaRepositorio.RecuperarPorId(id);
-                var tabelaPrecoDto = new TabelaPrecoDTO(tabelaPreco.Descricao, tabelaPreco.Valor);
+                var tabelaPrecoDto = new TabelaPrecoDTO(tabelaPreco.Id, tabelaPreco.DataCriacao,tabelaPreco.Descricao, tabelaPreco.Valor);
                 return tabelaPrecoDto;
             }
             catch (MySqlException ex)

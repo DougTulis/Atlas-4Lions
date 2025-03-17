@@ -37,8 +37,6 @@ namespace Projeto_ATLAS___4LIONS.Forms
             Guid.TryParse(txtParcelaSelecionada.Text, out var parcelaId);
            
             var parcelaSelecionada = _listarParcelaUseCase.ExecutarRecuperacaoPorId(parcelaId);
-
-
             parcelaSelecionada.PendenciaFinanceiraId = idPendFin;
             parcelaSelecionada.ValorPago = decimal.TryParse(txtValorPago.Text, out var valorPago) ? valorPago : 0;
             parcelaSelecionada.DataPagamento = DateTime.TryParse(txtDataPagamento.Text, out var dataPagamento) ? dataPagamento : (DateTime?)null;

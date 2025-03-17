@@ -67,7 +67,6 @@ namespace Projeto_ATLAS___4LIONS.Forms
         {
 
         }
-
         private void FrmRegistroPagamento_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;

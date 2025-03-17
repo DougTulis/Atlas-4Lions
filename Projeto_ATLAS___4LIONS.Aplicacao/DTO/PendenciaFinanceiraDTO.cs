@@ -12,8 +12,11 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         public PendenciaFinanceiraDTO()
         {
         }
-        public PendenciaFinanceiraDTO(decimal valorTotal)
+
+        public PendenciaFinanceiraDTO(Guid id, DateTime dataCriacao, decimal valorTotal)
         {
+            Id = id;
+            DataCriacao = dataCriacao;
             ValorTotal = valorTotal;
         }
     }

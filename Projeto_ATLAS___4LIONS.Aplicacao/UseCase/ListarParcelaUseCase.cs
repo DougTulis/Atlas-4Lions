@@ -20,8 +20,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             try
             {
                 var listaParcelasPorPendencia = _parcelaRepositorio.ListarPorPendencia(idPendencia);
-                var listaParcelasPorPendenciaDto = listaParcelasPorPendencia.Select(x => new ParcelaDTO(x.Sequencia,x.DataVencimento,x.Valor));
-
+                var listaParcelasPorPendenciaDto = listaParcelasPorPendencia.Select(x => new ParcelaDTO(x.Id, x.Sequencia, x.IdPendenciaFinanceira, x.DataVencimento, x.Valor, x.DataPagamento, x.ValorPago, x.EspeciePagamento));
                 return listaParcelasPorPendenciaDto;
             }
 
@@ -35,7 +34,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             try
             {
                 var parcelaFiltrada = _parcelaRepositorio.RecuperarPorId(id);
-                var parcelaFiltradaDto = new ParcelaDTO(parcelaFiltrada.Sequencia, parcelaFiltrada.DataVencimento, parcelaFiltrada.Valor);
+                var parcelaFiltradaDto = new ParcelaDTO(parcelaFiltrada.Id, parcelaFiltrada.Sequencia, parcelaFiltrada.IdPendenciaFinanceira, parcelaFiltrada.DataVencimento, parcelaFiltrada.Valor, parcelaFiltrada.DataPagamento, parcelaFiltrada.ValorPago, parcelaFiltrada.EspeciePagamento);
 
                 return parcelaFiltradaDto;
             }
