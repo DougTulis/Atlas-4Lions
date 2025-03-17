@@ -78,5 +78,14 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
 
         }
 
+        public void AlterarStatusParaGaragem()
+        {
+            Status = EStatusVeiculo.GARAGEM;
+        }
+
+        public void AlterarStatusParaAlugado()
+        {
+            Status = EStatusVeiculo.ALUGADO;
+        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.Interface_Adapter;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
@@ -40,7 +39,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             }
         }
 
-        public void Deletar(PendenciaFinanceiraDTO pendenciaDto)
+        public void Deletar(Guid id)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
@@ -49,13 +48,13 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    cmd.Parameters.AddWithValue("@id", pendenciaDto.Id);
+                    cmd.Parameters.AddWithValue("@id", id);
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
-        public IEnumerable<PendenciaFinanceiraDTO> ListarTodos()
+        public IEnumerable<PendenciaFinanceira> ListarTodos()
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {
@@ -71,25 +70,24 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 }
             }
         }
-        public IEnumerable<PendenciaFinanceiraDTO> PopularLista(MySqlDataReader dataReader)
+        public IEnumerable<PendenciaFinanceira> PopularLista(MySqlDataReader dataReader)
         {
-            var lista = new List<PendenciaFinanceiraDTO>();
+            var lista = new List<PendenciaFinanceira>();
 
             while (dataReader.Read())
             {
-                var pendencia = new PendenciaFinanceiraDTO
-                {
-                    Id = Guid.Parse(dataReader["Id"].ToString()),
-                    ValorTotal = Convert.ToDecimal(dataReader["valor_total"]),
-                    DataCriacao = Convert.ToDateTime(dataReader["data_Criacao"]),
-                };
 
+                var id = Guid.Parse(dataReader["Id"].ToString());
+                var valorTotal = Convert.ToDecimal(dataReader["valor_total"]);
+                var dataCriacao = Convert.ToDateTime(dataReader["data_Criacao"]);
+                var pendencia = PendenciaFinanceira.CreateFromDataBase(id, dataCriacao, valorTotal);
                 lista.Add(pendencia);
+
             }
             return lista;
         }
 
-        public PendenciaFinanceiraDTO? RecuperarPorId(Guid id)
+        public PendenciaFinanceira? RecuperarPorId(Guid id)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
             {

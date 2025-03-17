@@ -47,12 +47,11 @@
             dgvHistoricoAutomovelExclusaoAutomovel.AllowUserToDeleteRows = false;
             dgvHistoricoAutomovelExclusaoAutomovel.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvHistoricoAutomovelExclusaoAutomovel.Columns.AddRange(new DataGridViewColumn[] { id, modelo, placa, cor, status, chassi, renavam, OleoKm, pastilhaFreioKm });
-            dgvHistoricoAutomovelExclusaoAutomovel.Location = new Point(12, 11);
-            dgvHistoricoAutomovelExclusaoAutomovel.Margin = new Padding(3, 2, 3, 2);
+            dgvHistoricoAutomovelExclusaoAutomovel.Location = new Point(14, 15);
             dgvHistoricoAutomovelExclusaoAutomovel.Name = "dgvHistoricoAutomovelExclusaoAutomovel";
             dgvHistoricoAutomovelExclusaoAutomovel.ReadOnly = true;
             dgvHistoricoAutomovelExclusaoAutomovel.RowHeadersWidth = 51;
-            dgvHistoricoAutomovelExclusaoAutomovel.Size = new Size(669, 334);
+            dgvHistoricoAutomovelExclusaoAutomovel.Size = new Size(1017, 445);
             dgvHistoricoAutomovelExclusaoAutomovel.TabIndex = 5;
             dgvHistoricoAutomovelExclusaoAutomovel.CellContentClick += dgvHistoricoAutomovelExclusaoAutomovel_CellContentClick;
             dgvHistoricoAutomovelExclusaoAutomovel.CellMouseDoubleClick += dgvHistoricoAutomovelExclusaoAutomovel_CellMouseDoubleClick;
@@ -140,13 +139,12 @@
             // 
             // FrmExclusaoAutomovel
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
-            ClientSize = new Size(961, 485);
+            ClientSize = new Size(1098, 647);
             Controls.Add(dgvHistoricoAutomovelExclusaoAutomovel);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(3, 2, 3, 2);
             Name = "FrmExclusaoAutomovel";
             Text = "FrmExclusaoAutomovel";
             FormClosing += FrmExclusaoAutomovel_FormClosing;

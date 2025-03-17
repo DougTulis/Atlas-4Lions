@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-	  <PackageReference Include="MySql.Data" Version="8.0.31" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Projeto_ATLAS___4LIONS.Aplicacao\Projeto_ATLAS___4LIONS.Aplicacao.csproj" />
     <ProjectReference Include="..\Projeto_ATLAS___4LIONS.Dominio\Projeto_ATLAS___4LIONS.Dominio.csproj" />
   </ItemGroup>
 

@@ -18,7 +18,9 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             try
             {
-                return _pendenciaRepositorio.ListarTodos();
+                var listaPendencias = _pendenciaRepositorio.ListarTodos();
+                var listaPendenciasDto = listaPendencias.Select(x => new PendenciaFinanceiraDTO(x.ValorTotal));
+                return listaPendenciasDto;
             }
             catch (MySqlException ex)
             {
@@ -30,7 +32,9 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             try
             {
-                return _pendenciaRepositorio.RecuperarPorId(id);
+                var pendenciaFiltrada = _pendenciaRepositorio.RecuperarPorId(id);
+                var pendenciaFiltradaDto = new PendenciaFinanceiraDTO(pendenciaFiltrada.ValorTotal);
+                return pendenciaFiltradaDto;
             }
             catch (MySqlException ex)
             {

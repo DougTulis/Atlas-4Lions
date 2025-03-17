@@ -7,7 +7,6 @@ using Projeto_ATLAS___4LIONS.Forms;
 using System;
 using System.Windows.Forms;
 using Atlas;
-using Projeto_ATLAS___4LIONS.Aplicacao.Interface.Servicos;
 using Projeto_ATLAS___4LIONS.Infra.Servicos;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.Interface_Adapter;
 using Projeto_ATLAS___4LIONS.Aplicacao.Servicos;
@@ -47,7 +46,6 @@ namespace Projeto_ATLAS___4LIONS
             services.AddTransient<ICadastrarLocacaoPendFinParcelaUseCase, CadastrarLocacaoPendFinParcelaUseCase>();
             services.AddTransient<IAlterarStatusVeiculoUseCase, AlterarStatusVeiculoUseCase>();
             services.AddTransient<IAlterarStatusLocacaoUseCase, AlterarStatusLocacaoUseCase>();
-            services.AddTransient<IListarLocacoesUseCase, ListarLocacoesUseCase>();
             services.AddTransient<IListarParcelaUseCase, ListarParcelaUseCase>();
             services.AddTransient<IListarPendenciaFinanceiraUseCase, ListarPendenciaFinanceiraUseCase>();
             services.AddTransient<IDeletarAutomovelUseCase, DeletarAutomovelUseCase>();

@@ -1,5 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.Interface_Adapter;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
@@ -73,7 +72,6 @@ namespace Projeto_ATLAS___4LIONS.Infra.Infra.Repositorios
             var lista = new List<Parcela>();
             while (dataReader.Read())
             {
-
                 var id = Guid.Parse(dataReader["id"].ToString());
                 var dataCriacao = Convert.ToDateTime(dataReader["data_criacao"]);
                 var sequencia = Convert.ToInt16(dataReader["sequencia"]);
@@ -83,12 +81,11 @@ namespace Projeto_ATLAS___4LIONS.Infra.Infra.Repositorios
                 var dataPagamento = dataReader["data_pagamento"] != DBNull.Value ? Convert.ToDateTime(dataReader["data_pagamento"]) : (DateTime?)null;
                 var valorPago = dataReader["valor_pago"] != DBNull.Value ? Convert.ToDecimal(dataReader["valor_pago"]) : (decimal?)null;
                 var especiePagamento = dataReader["especie_pagamento"] != DBNull.Value ? Enum.Parse<EEspecie>(dataReader["especie_pagamento"].ToString()) : (EEspecie?)null;
-                var parcela = Parcela.CreateFromDataBase(id, dataCriacao, sequencia, dataVencimento, valor,pendenciaFinanceiraId);
-
+                var parcela = Parcela.CreateFromDataBase(id, dataCriacao, sequencia, dataVencimento, valor, pendenciaFinanceiraId);
                 lista.Add(parcela);
-
-                return lista;
             }
+            return lista;
+        }
             public IEnumerable<Parcela> ListarPorPendencia(Guid pendenciaId)
             {
                 using (var conexao = _conexaoAdapter.ObterConexao())

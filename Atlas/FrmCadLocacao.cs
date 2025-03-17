@@ -1,7 +1,6 @@
 ﻿using Org.BouncyCastle.Ocsp;
 using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
-using Projeto_ATLAS___4LIONS.Aplicacao.Interface.Servicos;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;

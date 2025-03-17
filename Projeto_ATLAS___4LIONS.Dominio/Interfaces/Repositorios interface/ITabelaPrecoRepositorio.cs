@@ -1,5 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using System;
 using System.Collections.Generic;

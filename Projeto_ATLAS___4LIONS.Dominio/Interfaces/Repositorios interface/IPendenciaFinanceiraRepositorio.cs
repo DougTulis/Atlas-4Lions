@@ -1,5 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using System;
 using System.Collections.Generic;
@@ -11,10 +10,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface
 {
     public interface IPendenciaFinanceiraRepositorio
     {
-        public IEnumerable<PendenciaFinanceiraDTO> ListarTodos();
-        public IEnumerable<PendenciaFinanceiraDTO> PopularLista(MySqlDataReader dataReader);
+        public IEnumerable<PendenciaFinanceira> ListarTodos();
+        public IEnumerable<PendenciaFinanceira> PopularLista(MySqlDataReader dataReader);
         public void Adicionar(PendenciaFinanceira objeto);
-        public void Deletar(PendenciaFinanceiraDTO objeto);
-        public PendenciaFinanceiraDTO? RecuperarPorId(Guid id);
+        public void Deletar(Guid id);
+        public PendenciaFinanceira? RecuperarPorId(Guid id);
     }
 }

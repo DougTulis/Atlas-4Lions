@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Projeto_ATLAS___4LIONS.Aplicacao\Projeto_ATLAS___4LIONS.Aplicacao.csproj" />
-    <ProjectReference Include="..\Projeto_ATLAS___4LIONS.Dominio\Projeto_ATLAS___4LIONS.Dominio.csproj" />
     <ProjectReference Include="..\Projeto_ATLAS___4LIONS.Infra\Projeto_ATLAS___4LIONS.Infra.csproj" />
   </ItemGroup>
 

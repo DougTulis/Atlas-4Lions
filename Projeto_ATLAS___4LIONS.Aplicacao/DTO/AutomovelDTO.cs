@@ -23,8 +23,9 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
         {
         }
 
-        public AutomovelDTO(string modelo, string placa, string cor, EStatusVeiculo status,string ano, string? chassi, string? renavam, int? oleokm, int? pastilhaFreioKm, Guid idPreco)
+        public AutomovelDTO(Guid id, string modelo, string placa, string cor, EStatusVeiculo status,string ano, string? chassi, string? renavam, int? oleokm, int? pastilhaFreioKm, Guid idPreco)
         {
+            Id = id;
             Modelo = modelo;
             Placa = placa;
             Cor = cor;

@@ -31,7 +31,7 @@ namespace Projeto_ATLAS_4LIONS.API.Controllers
         public IEnumerable<PessoaDTO> Get()
         {
 
-            var lista = _listarPessoaUseCase.ExecutarDadosCompletos().ToList();
+            var lista = _listarPessoaUseCase.Executar().ToList();
 
 
             return lista;

@@ -14,6 +14,11 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
             ValorTotal = valorTotal;
         }
 
+        public PendenciaFinanceira(Guid id, DateTime dataCriacao, decimal valorTotal) : base(id,dataCriacao)
+        {
+            ValorTotal = valorTotal;
+        }
+
         //public PendenciaFinanceira()
         //{
         //}
@@ -21,6 +26,11 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         public static PendenciaFinanceira Create(decimal valorTotal)
         {
             return new PendenciaFinanceira(valorTotal);
+        }
+
+        public static PendenciaFinanceira CreateFromDataBase(Guid id, DateTime dataCriacao, decimal valorTotal)
+        {
+            return new PendenciaFinanceira(id,dataCriacao, valorTotal);
         }
 
         public void AdicionarParcela(Parcela parcela)
