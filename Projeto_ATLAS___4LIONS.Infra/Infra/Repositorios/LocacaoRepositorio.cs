@@ -139,46 +139,45 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 var status = Enum.Parse<EStatusLocacao>(dataReader["status_locacao"].ToString());
                 var pendenciaFinanceiraId = Guid.Parse(dataReader["pendencia_financeira_id"].ToString());
                 var locacao = Locacao.CreateFromDataBase(id, dataCriacao, saida, retorno, tipoLocacao, valorTotal, idLocatario, idCondutor, idAutomovel, status, pendenciaFinanceiraId);
-            
-            lista.Add(locacao);
-        }
+
+                lista.Add(locacao);
+            }
 
             return lista;
         }
 
-    public void AtualizarStatusLocacao(Guid locacaoId, EStatusLocacao novoStatus)
-    {
-        using (var conexao = _conexaoAdapter.ObterConexao())
+        public void AtualizarStatusLocacao(Guid locacaoId, EStatusLocacao novoStatus)
         {
-            conexao.Open();
-            string sql = "UPDATE locacao SET status_locacao = @status WHERE id = @id";
-
-            using (var cmd = new MySqlCommand(sql, conexao))
+            using (var conexao = _conexaoAdapter.ObterConexao())
             {
-                cmd.Parameters.AddWithValue("@status", novoStatus);
-                cmd.Parameters.AddWithValue("@id", locacaoId);
-                cmd.ExecuteNonQuery();
+                conexao.Open();
+                string sql = "UPDATE locacao SET status_locacao = @status WHERE id = @id";
+
+                using (var cmd = new MySqlCommand(sql, conexao))
+                {
+                    cmd.Parameters.AddWithValue("@status", novoStatus);
+                    cmd.Parameters.AddWithValue("@id", locacaoId);
+                    cmd.ExecuteNonQuery();
+                }
             }
         }
-    }
-
-    public IEnumerable<Locacao> ListarStatusAndamento()
-    {
-        using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
+        public IEnumerable<Locacao> ListarStatusAndamento()
         {
-            conexao.Open();
-            string sql = "SELECT * FROM locacao WHERE status_locacao = @status_locacao";
-
-            using (var cmd = new MySqlCommand(sql, conexao))
+            using (var conexao = new MySqlAdaptadorConexao().ObterConexao())
             {
-                cmd.Parameters.AddWithValue("@status_locacao", (int)EStatusLocacao.ANDAMENTO);
+                conexao.Open();
+                string sql = "SELECT * FROM locacao WHERE status_locacao = @status_locacao";
 
-                using (var dataReader = cmd.ExecuteReader())
+                using (var cmd = new MySqlCommand(sql, conexao))
                 {
-                    return PopularLista(dataReader);
+                    cmd.Parameters.AddWithValue("@status_locacao", (int)EStatusLocacao.ANDAMENTO);
+
+                    using (var dataReader = cmd.ExecuteReader())
+                    {
+                        return PopularLista(dataReader);
+                    }
                 }
             }
         }
     }
-}
 }

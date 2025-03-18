@@ -10,6 +10,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface
     public interface IListarHistoricoLocacaoUseCase
     {
         public List<HistoricoLocacaoDTO> Executar();
+        public List<LocacaoDTO> ExecutarLocacoesAndamento();
+
 
     }
 }

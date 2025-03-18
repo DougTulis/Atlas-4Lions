@@ -32,24 +32,31 @@ public class ListarHistoricoLocacaoUseCase : IListarHistoricoLocacaoUseCase
                 var condutor = _pessoaRepositorio.RecuperarPorId(locacao.IdCondutor);
                 var pendencia = _pendenciaFinanceiraRepositorio.RecuperarPorId(locacao.IdPendenciaFinanceira);
 
-             historico.Add(new HistoricoLocacaoDTO
-             {
-                 Id = locacao.Id,
-                 DataCriacao = locacao.DataCriacao,
-                 Saida = locacao.Saida,
-                 Retorno = locacao.Retorno,
-                 NomeCondutor = condutor.Nome,
-                 Status = locacao.Status,
-                 NomeLocatario = locatario.Nome,
-                 TipoLocacao = locacao.TipoLocacao,
-                 ValorTotal = locacao.ValorTotal,
-             });
+                historico.Add(new HistoricoLocacaoDTO
+                {
+                    Id = locacao.Id,
+                    DataCriacao = locacao.DataCriacao,
+                    Saida = locacao.Saida,
+                    Retorno = locacao.Retorno,
+                    NomeCondutor = condutor.Nome,
+                    Status = locacao.Status,
+                    NomeLocatario = locatario.Nome,
+                    TipoLocacao = locacao.TipoLocacao,
+                    ValorTotal = locacao.ValorTotal,
+                });
             }
+            return historico;
         }
         catch (MySqlException ex)
         {
             throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
         }
-        return historico;
+
+    }
+    public List<LocacaoDTO> ExecutarLocacoesAndamento()
+    {
+        var lista = _locacaoRepositorio.ListarStatusAndamento();
+        var listaDto = lista.Select(x => new LocacaoDTO(x.Id, x.Saida, x.Retorno, x.TipoLocacao, x.IdLocatario, x.IdCondutor, x.IdAutomovel, x.IdPendenciaFinanceira, x.Status)).ToList();
+        return listaDto;
     }
 }

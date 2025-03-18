@@ -23,13 +23,13 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             string erros;
             if (!pessoaCnh.Validacao(out erros))
             {
-                return RespostaPadrao<string>.Falha(false, erros, "ERRO");
+                return RespostaPadrao<string>.Falha(false,"Inclusão de CNH", erros);
             }
             try
             {        
                 _pessoaRepositorio.IncluirCNH(pessoaCnh.Id, numeroCnh, vencimentoCnh);
 
-                return RespostaPadrao<string>.Sucesso(true, "CNH vínculada com sucesso!");
+                return RespostaPadrao<string>.Sucesso(true, "Inclusão de CNH","CNH vínculada com sucesso!");
             }
             catch (MySqlException ex)
             {

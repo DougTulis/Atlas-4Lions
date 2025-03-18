@@ -32,7 +32,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                    return RespostaPadrao<string>.Falha(false, "Exclusão de pessoas", erros);
                 }
                 _pessoaRepositorio.Deletar(id);
-                return RespostaPadrao<string>.Sucesso(true, "Exclusão de pessoas!", "Pessoa excluida com sucesso!");
+                return RespostaPadrao<string>.Sucesso(true, "Exclusão de pessoas", "Pessoa excluida com sucesso!");
             }
 
             catch (MySqlException ex)

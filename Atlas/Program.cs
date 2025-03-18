@@ -23,7 +23,6 @@ namespace Projeto_ATLAS___4LIONS
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
             var mainForm = serviceProvider.GetRequiredService<FrmPrincipal>();
             Application.Run(mainForm);
         }
@@ -31,6 +30,7 @@ namespace Projeto_ATLAS___4LIONS
         private static ServiceProvider ConfigureServices()
         {
             var services = new ServiceCollection();
+
             // Repositrios
             services.AddSingleton<IPessoaRepositorio, PessoaRepositorio>();
             services.AddSingleton<IAutomovelRepositorio, AutomovelRepositorio>();

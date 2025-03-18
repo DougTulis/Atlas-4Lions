@@ -34,7 +34,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             {
                 var pendenciaFiltrada = _pendenciaRepositorio.RecuperarPorId(id);
                 var pendenciaFiltradaDto = new PendenciaFinanceiraDTO(pendenciaFiltrada.Id,pendenciaFiltrada.DataCriacao,pendenciaFiltrada.ValorTotal);
-
                 return pendenciaFiltradaDto;
             }
             catch (MySqlException ex)

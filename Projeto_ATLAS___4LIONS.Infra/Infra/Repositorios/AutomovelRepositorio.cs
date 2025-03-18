@@ -45,7 +45,6 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 }
             }
         }
-
         public void Deletar(Guid id)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
@@ -60,7 +59,6 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 }
             }
         }
-
         public IEnumerable<Automovel> ListarTodos()
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
@@ -95,7 +93,6 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 var idPreco = Guid.Parse((dataReader["id_preco"].ToString()));
 
                 var automovel = Automovel.CreateFromDataBase(id, dataCriacao, modelo, placa, cor, status, ano, chassi, renavam, oleokm, pastilhaFreioKm, idPreco);
-
                 lista.Add(automovel);
             }
 
@@ -116,7 +113,6 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 }
             }
         }
-
         public Automovel? RecuperarPorId(Guid id)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
@@ -136,7 +132,6 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 }
             }
         }
-
         public IEnumerable<Automovel> ListarStatusGaragem()
         {
             using (var conexao = _conexaoAdapter.ObterConexao())

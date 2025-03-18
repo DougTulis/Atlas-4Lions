@@ -50,8 +50,6 @@ namespace Atlas
 
             }
         }
-
-
         private void FormPrincipal_Load(object sender, EventArgs e) { }
 
         private void flp_principal_Paint(object sender, PaintEventArgs e) { }

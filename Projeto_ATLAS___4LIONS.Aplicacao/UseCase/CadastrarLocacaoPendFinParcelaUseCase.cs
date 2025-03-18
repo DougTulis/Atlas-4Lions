@@ -59,19 +59,19 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 string erros;
                 if (!pendencia.Validacao(out erros))
                 {
-                    return RespostaPadrao<string>.Falha(false, "Erros", erros);
+                    return RespostaPadrao<string>.Falha(false, "Cadastro de Locações", erros);
                 }
 
                 if (!locacao.Validacao(out erros))
                 {
-                    return RespostaPadrao<string>.Falha(false, "Erros", erros);
+                    return RespostaPadrao<string>.Falha(false, "Cadastro de Locações", erros);
                 }
                 _pendFinRepositorio.Adicionar(pendencia);
                 _locacaoRepositorio.Adicionar(locacao);
                 _parcelaService.GerarParcelas(pendencia, quantidadeParcelas);
                 _automovelRepositorio.AtualizarStatus(automovelDto.Id, EStatusVeiculo.ALUGADO);
 
-                return RespostaPadrao<string>.Sucesso(true, "Locação cadastrada com sucesso!");
+                return RespostaPadrao<string>.Sucesso(true, "Cadastro de Locações","Locação cadastrada com sucesso!");
             }
             catch (MySqlException ex)
             {

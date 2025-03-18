@@ -45,10 +45,11 @@
             dgvBaixaLocacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvBaixaLocacao.Columns.AddRange(new DataGridViewColumn[] { Id, idAutomovel, saida, retorno, status, tipoLocacao });
             dgvBaixaLocacao.Location = new Point(0, 0);
+            dgvBaixaLocacao.Margin = new Padding(3, 2, 3, 2);
             dgvBaixaLocacao.Name = "dgvBaixaLocacao";
             dgvBaixaLocacao.ReadOnly = true;
             dgvBaixaLocacao.RowHeadersWidth = 51;
-            dgvBaixaLocacao.Size = new Size(823, 477);
+            dgvBaixaLocacao.Size = new Size(720, 358);
             dgvBaixaLocacao.TabIndex = 0;
             dgvBaixaLocacao.CellContentClick += dgvBaixaLocacao_CellContentClick;
             dgvBaixaLocacao.CellDoubleClick += dgvBaixaLocacao_CellDoubleClick;
@@ -70,7 +71,6 @@
             idAutomovel.MinimumWidth = 6;
             idAutomovel.Name = "idAutomovel";
             idAutomovel.ReadOnly = true;
-            idAutomovel.Visible = false;
             idAutomovel.Width = 125;
             // 
             // saida
@@ -111,13 +111,14 @@
             // 
             // FrmBaixaLocacao
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
-            ClientSize = new Size(1098, 647);
+            ClientSize = new Size(961, 485);
             Controls.Add(dgvBaixaLocacao);
             ForeColor = SystemColors.ControlText;
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(3, 2, 3, 2);
             Name = "FrmBaixaLocacao";
             Text = "FrmBaixaLocacao";
             FormClosing += FrmBaixaLocacao_FormClosing;

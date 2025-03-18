@@ -21,7 +21,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             try
             {
                 _automovelRepositorio.Deletar(id);
-                return RespostaPadrao<string>.Sucesso(true, "Automóvel excluído com sucesso!");
+                return RespostaPadrao<string>.Sucesso(true, "Deleção de automóveis", "Automóvel excluído com sucesso!");
             }
 
             catch (MySqlException ex)

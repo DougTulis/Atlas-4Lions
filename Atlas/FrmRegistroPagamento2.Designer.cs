@@ -51,11 +51,11 @@
             dgvParcelasPendFinEscolhida.AllowUserToDeleteRows = false;
             dgvParcelasPendFinEscolhida.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvParcelasPendFinEscolhida.Columns.AddRange(new DataGridViewColumn[] { Id, sequencia, vencimento, valor });
-            dgvParcelasPendFinEscolhida.Location = new Point(3, 1);
+            dgvParcelasPendFinEscolhida.Location = new Point(5, 1);
             dgvParcelasPendFinEscolhida.Name = "dgvParcelasPendFinEscolhida";
             dgvParcelasPendFinEscolhida.ReadOnly = true;
             dgvParcelasPendFinEscolhida.RowHeadersWidth = 51;
-            dgvParcelasPendFinEscolhida.Size = new Size(421, 409);
+            dgvParcelasPendFinEscolhida.Size = new Size(563, 409);
             dgvParcelasPendFinEscolhida.TabIndex = 0;
             dgvParcelasPendFinEscolhida.CellContentClick += dgvParcelasPendFinEscolhida_CellContentClick;
             dgvParcelasPendFinEscolhida.CellMouseClick += dgvParcelasPendFinEscolhida_CellMouseClick;
@@ -99,7 +99,7 @@
             // lblSequenciaParcela
             // 
             lblSequenciaParcela.AutoSize = true;
-            lblSequenciaParcela.Location = new Point(442, 24);
+            lblSequenciaParcela.Location = new Point(605, 52);
             lblSequenciaParcela.Name = "lblSequenciaParcela";
             lblSequenciaParcela.Size = new Size(114, 15);
             lblSequenciaParcela.TabIndex = 1;
@@ -108,7 +108,7 @@
             // 
             // txtParcelaSelecionada
             // 
-            txtParcelaSelecionada.Location = new Point(442, 42);
+            txtParcelaSelecionada.Location = new Point(605, 70);
             txtParcelaSelecionada.Name = "txtParcelaSelecionada";
             txtParcelaSelecionada.ReadOnly = true;
             txtParcelaSelecionada.Size = new Size(126, 23);
@@ -117,7 +117,7 @@
             // 
             // txtValorPago
             // 
-            txtValorPago.Location = new Point(442, 93);
+            txtValorPago.Location = new Point(605, 121);
             txtValorPago.Name = "txtValorPago";
             txtValorPago.Size = new Size(126, 23);
             txtValorPago.TabIndex = 4;
@@ -126,7 +126,7 @@
             // lblValorPago
             // 
             lblValorPago.AutoSize = true;
-            lblValorPago.Location = new Point(442, 75);
+            lblValorPago.Location = new Point(605, 103);
             lblValorPago.Name = "lblValorPago";
             lblValorPago.Size = new Size(121, 15);
             lblValorPago.TabIndex = 3;
@@ -135,7 +135,7 @@
             // 
             // txtDataPagamento
             // 
-            txtDataPagamento.Location = new Point(442, 145);
+            txtDataPagamento.Location = new Point(605, 173);
             txtDataPagamento.Name = "txtDataPagamento";
             txtDataPagamento.Size = new Size(126, 23);
             txtDataPagamento.TabIndex = 6;
@@ -144,7 +144,7 @@
             // lblDataPagamento
             // 
             lblDataPagamento.AutoSize = true;
-            lblDataPagamento.Location = new Point(442, 127);
+            lblDataPagamento.Location = new Point(605, 155);
             lblDataPagamento.Name = "lblDataPagamento";
             lblDataPagamento.Size = new Size(167, 15);
             lblDataPagamento.TabIndex = 5;
@@ -154,7 +154,7 @@
             // lblEspeciePagamento
             // 
             lblEspeciePagamento.AutoSize = true;
-            lblEspeciePagamento.Location = new Point(442, 179);
+            lblEspeciePagamento.Location = new Point(605, 207);
             lblEspeciePagamento.Name = "lblEspeciePagamento";
             lblEspeciePagamento.Size = new Size(111, 15);
             lblEspeciePagamento.TabIndex = 7;
@@ -164,7 +164,7 @@
             // cmbEspeciePagamento
             // 
             cmbEspeciePagamento.FormattingEnabled = true;
-            cmbEspeciePagamento.Location = new Point(442, 197);
+            cmbEspeciePagamento.Location = new Point(605, 225);
             cmbEspeciePagamento.Margin = new Padding(3, 2, 3, 2);
             cmbEspeciePagamento.Name = "cmbEspeciePagamento";
             cmbEspeciePagamento.Size = new Size(126, 23);
@@ -173,7 +173,7 @@
             // 
             // btnRegistrarPagamento
             // 
-            btnRegistrarPagamento.Location = new Point(442, 237);
+            btnRegistrarPagamento.Location = new Point(605, 265);
             btnRegistrarPagamento.Margin = new Padding(3, 2, 3, 2);
             btnRegistrarPagamento.Name = "btnRegistrarPagamento";
             btnRegistrarPagamento.Size = new Size(149, 33);

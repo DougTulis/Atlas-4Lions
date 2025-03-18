@@ -23,7 +23,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 locacaoRepositorio.AtualizarStatusLocacao(locacaoId, EStatusLocacao.ANDAMENTO);
                 return RespostaPadrao<string>.Sucesso(true, "Ok");
             }
-
             catch (MySqlException ex)
             {
                 throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
