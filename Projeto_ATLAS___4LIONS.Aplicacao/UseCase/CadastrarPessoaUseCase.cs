@@ -10,10 +10,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 {
     public class CadastrarPessoaUseCase : ICadastrarPessoaUseCase
     {
-        private readonly IPessoaRepositorio pessoaRepositorio;
+        private readonly IPessoaRepositorio _pessoaRepositorio;
         public CadastrarPessoaUseCase(IPessoaRepositorio pessoaRepositorio)
         {
-            this.pessoaRepositorio = pessoaRepositorio;
+            _pessoaRepositorio = pessoaRepositorio;
         }
 
         public RespostaPadrao<string> Executar(PessoaDTO pessoaDto)
@@ -41,7 +41,13 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                  
                     return RespostaPadrao<string>.Falha(false, "Cadastro de Pessoas", erros);
                 }
-                pessoaRepositorio.Adicionar(pessoa);
+
+                if (_pessoaRepositorio.NumeroDocumentoExiste(pessoa.NumeroDocumento))
+                {
+                    return RespostaPadrao<string>.Falha(false, "Cadastro de Pessoas", "CPF/CNPJ ja cadastrado!");
+                }
+
+                _pessoaRepositorio.Adicionar(pessoa);
 
                 return RespostaPadrao<string>.Sucesso(true, "Cadastro de Pessoas ", "Pessoa cadastrada com sucesso!");
             }

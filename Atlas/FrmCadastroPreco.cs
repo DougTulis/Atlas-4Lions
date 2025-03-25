@@ -19,6 +19,12 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void btnCadastrarPreco_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtDescricao.Text) || string.IsNullOrEmpty(txtValor.Text))
+            {
+                MessageBox.Show("Preencha todos os campos obrigatórios", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             var precoDto = new TabelaPrecoDTO
             {
                 Descricao = txtDescricao.Text,

@@ -45,6 +45,26 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             }
         }
 
+        public bool NumeroDocumentoExiste(string documento)
+        {
+            using (var conexao = _conexaoAdapter.ObterConexao())
+            {
+                conexao.Open();
+
+                string sql = "SELECT count(*) FROM pessoa WHERE numero_documento = @numero_documento";
+                using (var cmd = new MySqlCommand(sql, conexao))
+                {
+                    cmd.Parameters.AddWithValue("@numero_documento", documento);
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (count > 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+        }
+
         public void Deletar(Guid id)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
@@ -169,7 +189,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 var dataRegistro = Convert.ToDateTime(dataReader["data_registro"]);
                 var tipoPessoa = Enum.Parse<ETipoPessoa>(dataReader["tipo_pessoa"].ToString());
                 var numeroDocumento = dataReader["numero_documento"].ToString();
-                var numeroCnh = dataReader["numero_cnh"]!= DBNull.Value ? dataReader["numero_cnh"].ToString() : null;
+                var numeroCnh = dataReader["numero_cnh"] != DBNull.Value ? dataReader["numero_cnh"].ToString() : null;
                 var vencimentoCnh = Convert.ToDateTime(dataReader["vencimento_cnh"] != DBNull.Value ? Convert.ToDateTime(dataReader["vencimento_cnh"]) : null);
 
                 var pessoa = Pessoa.CreateFromDataBase(id, dataCriacao, nome, email, contato, tipoPessoa, numeroDocumento, dataRegistro, numeroCnh, vencimentoCnh);

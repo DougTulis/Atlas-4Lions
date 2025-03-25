@@ -65,18 +65,17 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void btnCadastrarLocacao_Click(object sender, EventArgs e)
         {
+        
+            if (cmbLocatario.SelectedItem == null || cmbCondutor.SelectedItem == null || cmbAutomovel.SelectedItem == null || string.IsNullOrWhiteSpace(txtSaida.Text) || string.IsNullOrWhiteSpace(txtRetorno.Text) || cmbTipoLocacao.SelectedItem == null)
+            {
+                MessageBox.Show("Preencha todos os campos obrigatórios", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+
+            }
 
             var locatarioDto = (PessoaDTO)cmbLocatario.SelectedItem;
             var condutorDto = (PessoaDTO)cmbCondutor.SelectedItem;
             var automovelDto = (AutomovelDTO)cmbAutomovel.SelectedItem;
-
-            if (locatarioDto == null || condutorDto == null || automovelDto == null)
-            {
-
-                MessageBox.Show("Todos os campos são obrigatórios!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-
-            }
 
             int quantidadeParcelas = cmbParcelas.SelectedItem != null ? Convert.ToInt32(cmbParcelas.SelectedItem) : 1;
 
@@ -95,6 +94,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
             var resultado = _cadastrarLocacaoUseCase.Executar(locacaoDto, quantidadeParcelas);
             MessageBoxIcon icone = resultado.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning;
             MessageBox.Show(resultado.Mensagem, "Cadastro de locação", MessageBoxButtons.OK, icone);
+
 
         }
         private void lblDataSaida_Click(object sender, EventArgs e) { }

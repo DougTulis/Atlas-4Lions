@@ -84,6 +84,12 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private void btnCadastrarPessoa_Click(object sender, EventArgs e)
         {
 
+            if (string.IsNullOrWhiteSpace(textNome.Text) || (string.IsNullOrWhiteSpace(txtEmail.Text) || string.IsNullOrWhiteSpace(txtContato.Text) || string.IsNullOrWhiteSpace(txtContato.Text) || string.IsNullOrWhiteSpace(txtDataNascimento.Text) || string.IsNullOrWhiteSpace(txtNumeroDocumento.Text) || cbmTipoPessoa?.SelectedItem == null))
+            {
+                MessageBox.Show("Preencha todos os campos obrigatórios", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             var pessoaDto = new PessoaDTO
             {
                 Nome = textNome.Text,
@@ -97,7 +103,11 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
             RespostaPadrao<string> resultado = _cadastrarPessoaUseCase.Executar(pessoaDto);
             MessageBoxIcon icone = resultado.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning;
-            MessageBox.Show(resultado.Mensagem, "Cadastro de Pessoa", MessageBoxButtons.OK, icone);
+            MessageBox.Show(resultado.Dados, resultado.Mensagem, MessageBoxButtons.OK, icone);
+            if (resultado.Procede)
+            {
+                LimparCampos();
+            }
         }
 
         private void CarregarCombos()
@@ -110,5 +120,15 @@ namespace Projeto_ATLAS___4LIONS.Forms
         {
             e.Cancel = true;
         }
+        private void LimparCampos()
+        {
+            textNome.Clear();
+            txtEmail.Clear();
+            txtContato.Clear();
+            txtDataNascimento.Clear();
+            txtNumeroDocumento.Clear();
+            cbmTipoPessoa.SelectedIndex = -1;
+        }
+
     }
 }

@@ -45,6 +45,27 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 }
             }
         }
+
+        public bool PlacaExiste(string placa)
+        {
+            using (var conexao = _conexaoAdapter.ObterConexao())
+            {
+                conexao.Open();
+
+                string sql = "SELECT count(*) FROM automovel WHERE placa = @placa";
+                using (var cmd = new MySqlCommand(sql, conexao))
+                {
+                    cmd.Parameters.AddWithValue("@placa", placa);
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (count > 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+        }
+
         public void Deletar(Guid id)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())

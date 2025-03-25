@@ -118,6 +118,12 @@ namespace Projeto_ATLAS___4LIONS.Forms
         }
         private void btnCadastrarAutomovel_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtModelo.Text) || string.IsNullOrWhiteSpace(txtAno.Text) || string.IsNullOrWhiteSpace(txtCor.Text) || string.IsNullOrEmpty(txtPlaca.Text) || cbmDescricaoPreco.SelectedItem == null)
+            {
+                MessageBox.Show("Preencha todos os campos obrigatórios", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             var precoSelecionado = (TabelaPrecoDTO)cbmDescricaoPreco.SelectedItem;
             var automovelDto = new AutomovelDTO
             {
@@ -136,6 +142,11 @@ namespace Projeto_ATLAS___4LIONS.Forms
             RespostaPadrao<string> resposta = _cadastrarVeiculoUseCase.Executar(automovelDto);
             MessageBoxIcon icone = resposta.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning;
             MessageBox.Show(resposta.Dados, resposta.Mensagem, MessageBoxButtons.OK, icone);
+            if (resposta.Procede)
+            {
+                LimparCampos();
+            }
+
         }
         private void CarregarCombos()
         {
@@ -144,6 +155,18 @@ namespace Projeto_ATLAS___4LIONS.Forms
             cbmDescricaoPreco.SelectedIndex = -1;
         }
 
+        private void LimparCampos()
+        {
+            txtModelo.Clear();
+            txtAno.Clear();
+            txtCor.Clear();
+            txtPlaca.Clear();
+            txtChassi.Clear();
+            txtRenavam.Clear();
+            txtOleoKm.Clear();
+            txtFreioKm.Clear();
+            cbmDescricaoPreco.SelectedIndex = -1;
+        }
         private void FrmCadAutomovel_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
