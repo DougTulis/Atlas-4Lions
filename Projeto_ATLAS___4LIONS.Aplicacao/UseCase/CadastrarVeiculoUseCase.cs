@@ -33,10 +33,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 {
                     return RespostaPadrao<string>.Falha(false, "Cadastro de automóveis", "Placa já cadastrada");
                 }
-
                 _automovelRepositorio.Adicionar(automovel);
                 return RespostaPadrao<string>.Sucesso(true, "Cadastro de automóveis","Automóvel cadastrado com sucesso!");
-
             }
             catch (MySqlException ex)
             {

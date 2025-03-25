@@ -16,15 +16,6 @@ namespace Projeto_ATLAS___4LIONS.Forms
             CarregarCombos();
         }
 
-        private void FecharFormulario<T>()
-        {
-            if (this.WindowState == FormWindowState.Minimized)
-            {
-                this.Close();
-            }
-        }
-
-
         private void cbmTipoPessoa_SelectedIndexChanged(object sender, EventArgs e)
         {
 

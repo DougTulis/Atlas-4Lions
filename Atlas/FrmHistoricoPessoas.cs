@@ -12,6 +12,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
         {
 
             InitializeComponent();
+            txtBusca.PlaceholderText = "Buscar Pessoa";
             _listarPessoaUseCase = listarPessoaUseCase;
             AtualizarGridView();
         }
@@ -35,6 +36,29 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private void FrmHistoricoPessoas_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
+        }
+
+        private void txtBusca_TextChanged(object sender, EventArgs e)
+        {
+           
+
+            var lista = _listarPessoaUseCase.Executar();
+
+            string busca = txtBusca.Text.Trim().ToLower();
+
+            if (string.IsNullOrWhiteSpace(busca))
+            {
+                AtualizarGridView();
+            }
+            else
+            {
+                var listaFiltrada = lista.Where(a => a.Nome.ToLower().Contains(busca) || a.Contato.ToLower().Contains(busca) || a.Email.ToLower().Contains(busca) ||a.NumeroDocumento.ToLower().Contains(busca)||a.TipoPessoa.ToString().ToLower().Contains(busca)).ToList();
+
+                dgvHistoricoPessoas.DataSource = listaFiltrada;
+              
+            }
+
+
         }
     }
 }

@@ -37,6 +37,7 @@
             renavam = new DataGridViewTextBoxColumn();
             oleoKm = new DataGridViewTextBoxColumn();
             FreioKm = new DataGridViewTextBoxColumn();
+            txtBusca = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvHistoricoAutomovel).BeginInit();
             SuspendLayout();
             // 
@@ -46,11 +47,12 @@
             dgvHistoricoAutomovel.AllowUserToDeleteRows = false;
             dgvHistoricoAutomovel.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvHistoricoAutomovel.Columns.AddRange(new DataGridViewColumn[] { modelo, placa, cor, status, chassi, renavam, oleoKm, FreioKm });
-            dgvHistoricoAutomovel.Location = new Point(12, 24);
+            dgvHistoricoAutomovel.Location = new Point(10, 76);
+            dgvHistoricoAutomovel.Margin = new Padding(3, 2, 3, 2);
             dgvHistoricoAutomovel.Name = "dgvHistoricoAutomovel";
             dgvHistoricoAutomovel.ReadOnly = true;
             dgvHistoricoAutomovel.RowHeadersWidth = 51;
-            dgvHistoricoAutomovel.Size = new Size(1038, 432);
+            dgvHistoricoAutomovel.Size = new Size(939, 388);
             dgvHistoricoAutomovel.TabIndex = 1;
             dgvHistoricoAutomovel.CellContentClick += dgvHistoricoAutomovel_CellContentClick;
             // 
@@ -126,21 +128,30 @@
             FreioKm.ReadOnly = true;
             FreioKm.Width = 125;
             // 
+            // txtBusca
+            // 
+            txtBusca.Location = new Point(10, 38);
+            txtBusca.Name = "txtBusca";
+            txtBusca.Size = new Size(264, 23);
+            txtBusca.TabIndex = 2;
+            txtBusca.TextChanged += txtBusca_TextChanged;
+            // 
             // FrmHistoricoAutomovel
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
-            ClientSize = new Size(1098, 647);
+            ClientSize = new Size(961, 485);
+            Controls.Add(txtBusca);
             Controls.Add(dgvHistoricoAutomovel);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(3, 4, 3, 4);
             Name = "FrmHistoricoAutomovel";
             Text = "FrmHistoricoAutomovel";
             FormClosing += FrmHistoricoAutomovel_FormClosing;
             Load += FrmHistoricoAutomovel_Load;
             ((System.ComponentModel.ISupportInitialize)dgvHistoricoAutomovel).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -154,5 +165,6 @@
         private DataGridViewTextBoxColumn renavam;
         private DataGridViewTextBoxColumn oleoKm;
         private DataGridViewTextBoxColumn FreioKm;
+        private TextBox txtBusca;
     }
 }

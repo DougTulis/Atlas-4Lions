@@ -37,6 +37,7 @@
             numeroDocumento = new DataGridViewTextBoxColumn();
             vencimentoCnh = new DataGridViewTextBoxColumn();
             numeroCnh = new DataGridViewTextBoxColumn();
+            txtBusca = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvHistoricoPessoas).BeginInit();
             SuspendLayout();
             // 
@@ -46,12 +47,12 @@
             dgvHistoricoPessoas.AllowUserToDeleteRows = false;
             dgvHistoricoPessoas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvHistoricoPessoas.Columns.AddRange(new DataGridViewColumn[] { tipoPessoa, pessoaNome, email, contato, dataRegistro, numeroDocumento, vencimentoCnh, numeroCnh });
-            dgvHistoricoPessoas.Location = new Point(2, -1);
+            dgvHistoricoPessoas.Location = new Point(12, 88);
             dgvHistoricoPessoas.Margin = new Padding(3, 2, 3, 2);
             dgvHistoricoPessoas.Name = "dgvHistoricoPessoas";
             dgvHistoricoPessoas.ReadOnly = true;
             dgvHistoricoPessoas.RowHeadersWidth = 51;
-            dgvHistoricoPessoas.Size = new Size(876, 441);
+            dgvHistoricoPessoas.Size = new Size(868, 317);
             dgvHistoricoPessoas.TabIndex = 0;
             dgvHistoricoPessoas.CellContentClick += dgvHistoricoPessoas_CellContentClick;
             // 
@@ -134,12 +135,21 @@
             numeroCnh.ReadOnly = true;
             numeroCnh.Width = 88;
             // 
+            // txtBusca
+            // 
+            txtBusca.Location = new Point(12, 47);
+            txtBusca.Name = "txtBusca";
+            txtBusca.Size = new Size(264, 23);
+            txtBusca.TabIndex = 1;
+            txtBusca.TextChanged += txtBusca_TextChanged;
+            // 
             // FrmHistoricoPessoas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
             ClientSize = new Size(961, 485);
+            Controls.Add(txtBusca);
             Controls.Add(dgvHistoricoPessoas);
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 2, 3, 2);
@@ -149,6 +159,7 @@
             Load += FrmHistoricoPessoas_Load;
             ((System.ComponentModel.ISupportInitialize)dgvHistoricoPessoas).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -162,5 +173,6 @@
         private DataGridViewTextBoxColumn numeroDocumento;
         private DataGridViewTextBoxColumn vencimentoCnh;
         private DataGridViewTextBoxColumn numeroCnh;
+        private TextBox txtBusca;
     }
 }

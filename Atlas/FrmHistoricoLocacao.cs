@@ -40,5 +40,22 @@ namespace Projeto_ATLAS___4LIONS.Forms
             e.Cancel = true;
             this.Hide();
         }
+
+        private void txtBusca_TextChanged(object sender, EventArgs e)
+        {
+            var lista = _listarHistoricoLocacaoUseCase.Executar();
+            string busca = txtBusca.Text.ToLower();
+
+            if (string.IsNullOrWhiteSpace(busca))
+            {
+                AtualizarGridView();
+                return;
+            }
+
+            var listaFiltrada = lista.Where(a => a.NomeCondutor.ToLower().Contains(busca) || a.NomeLocatario.ToLower().Contains(busca) || a.Retorno.ToString().Contains(busca) || a.Saida.ToString().Contains(busca) || a.TipoLocacao.ToString().ToLower().Contains(busca) || a.ValorTotal.ToString().ToLower().Contains(busca) || a.Status.ToString().ToLower().Contains(busca)).ToList();
+            dgvHistoricoLocacao.DataSource = listaFiltrada;
+
+
+        }
     }
 }

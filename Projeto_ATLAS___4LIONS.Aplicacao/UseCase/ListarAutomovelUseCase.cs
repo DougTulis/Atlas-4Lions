@@ -13,10 +13,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 
         public ListarAutomovelUseCase(IAutomovelRepositorio automovelRepositorio)
         {
-
             this.automovelRepositorio = automovelRepositorio;
         }
-
         public IEnumerable<AutomovelDTO> Executar()
         {
             try

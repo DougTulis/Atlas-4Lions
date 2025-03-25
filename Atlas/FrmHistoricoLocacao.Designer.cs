@@ -36,6 +36,7 @@
             Status = new DataGridViewTextBoxColumn();
             condutor = new DataGridViewTextBoxColumn();
             locatario = new DataGridViewTextBoxColumn();
+            txtBusca = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvHistoricoLocacao).BeginInit();
             SuspendLayout();
             // 
@@ -45,11 +46,12 @@
             dgvHistoricoLocacao.AllowUserToDeleteRows = false;
             dgvHistoricoLocacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvHistoricoLocacao.Columns.AddRange(new DataGridViewColumn[] { saida, retorno, tipoLocacao, valorTotal, Status, condutor, locatario });
-            dgvHistoricoLocacao.Location = new Point(1, 9);
+            dgvHistoricoLocacao.Location = new Point(1, 91);
+            dgvHistoricoLocacao.Margin = new Padding(3, 2, 3, 2);
             dgvHistoricoLocacao.Name = "dgvHistoricoLocacao";
             dgvHistoricoLocacao.ReadOnly = true;
             dgvHistoricoLocacao.RowHeadersWidth = 51;
-            dgvHistoricoLocacao.Size = new Size(1017, 581);
+            dgvHistoricoLocacao.Size = new Size(890, 352);
             dgvHistoricoLocacao.TabIndex = 1;
             dgvHistoricoLocacao.CellContentClick += dgvHistoricoLocacao_CellContentClick;
             // 
@@ -116,20 +118,31 @@
             locatario.ReadOnly = true;
             locatario.Width = 125;
             // 
+            // txtBusca
+            // 
+            txtBusca.Location = new Point(12, 49);
+            txtBusca.Name = "txtBusca";
+            txtBusca.Size = new Size(264, 23);
+            txtBusca.TabIndex = 3;
+            txtBusca.TextChanged += txtBusca_TextChanged;
+            // 
             // FrmHistoricoLocacao
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.AppWorkspace;
-            ClientSize = new Size(1098, 647);
+            ClientSize = new Size(961, 485);
+            Controls.Add(txtBusca);
             Controls.Add(dgvHistoricoLocacao);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(3, 2, 3, 2);
             Name = "FrmHistoricoLocacao";
             Text = "FrmHistoricoLocacao";
             FormClosing += FrmHistoricoLocacao_FormClosing;
             Load += FrmHistoricoLocacao_Load;
             ((System.ComponentModel.ISupportInitialize)dgvHistoricoLocacao).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -142,5 +155,6 @@
         private DataGridViewTextBoxColumn Status;
         private DataGridViewTextBoxColumn condutor;
         private DataGridViewTextBoxColumn locatario;
+        private TextBox txtBusca;
     }
 }
