@@ -28,6 +28,21 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             }
 
         }
+
+        public IEnumerable<PendenciaFinanceiraDTO> ExecutarPagamentosPendentes()
+        {
+            try
+            {
+                var listaPendencias = _pendenciaRepositorio.ListarPagamentosPendente();
+                var listaPendenciasDto = listaPendencias.Select(x => new PendenciaFinanceiraDTO(x.Id, x.DataCriacao, x.ValorTotal)).ToList();
+                return listaPendenciasDto;
+            }
+            catch (MySqlException ex)
+            {
+                throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
+            }
+
+        }
         public PendenciaFinanceiraDTO? ExecutarRecuperarPorId(Guid id)
         {
             try
@@ -41,6 +56,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
             }
         }
+
+
 
     }
 }

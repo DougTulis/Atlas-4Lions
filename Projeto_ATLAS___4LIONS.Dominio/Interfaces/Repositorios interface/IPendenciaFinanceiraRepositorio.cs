@@ -12,6 +12,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface
     {
         public IEnumerable<PendenciaFinanceira> ListarTodos();
         public IEnumerable<PendenciaFinanceira> PopularLista(MySqlDataReader dataReader);
+        public IEnumerable<PendenciaFinanceira> ListarPagamentosPendente();
+
         public void Adicionar(PendenciaFinanceira objeto);
         public void Deletar(Guid id);
         public PendenciaFinanceira? RecuperarPorId(Guid id);

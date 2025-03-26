@@ -45,7 +45,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
             cmbLocatario.DisplayMember = "Nome";
             cmbLocatario.SelectedIndex = -1;
 
-            cmbCondutor.DataSource = _listarPessoaUseCase.Executar().ToList();
+            cmbCondutor.DataSource = _listarPessoaUseCase.ExecutarRecuperacaoComCnh().ToList();
             cmbCondutor.DisplayMember = "Nome";
             cmbCondutor.SelectedIndex = -1;
 
@@ -94,7 +94,10 @@ namespace Projeto_ATLAS___4LIONS.Forms
             var resultado = _cadastrarLocacaoUseCase.Executar(locacaoDto, quantidadeParcelas);
             MessageBoxIcon icone = resultado.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning;
             MessageBox.Show(resultado.Mensagem, "Cadastro de locação", MessageBoxButtons.OK, icone);
-
+            if (resultado.Procede)
+            {
+                LimparCampos();
+            }
 
         }
         private void lblDataSaida_Click(object sender, EventArgs e) { }
@@ -129,5 +132,21 @@ namespace Projeto_ATLAS___4LIONS.Forms
             e.Cancel = true;
             this.Hide();
         }
+        private void LimparCampos()
+        {
+            cmbLocatario.SelectedIndex = -1;
+            cmbCondutor.SelectedIndex = -1;
+            cmbAutomovel.SelectedIndex = -1;
+            cmbTipoLocacao.SelectedIndex = -1;
+            cmbParcelas.SelectedIndex = -1;
+
+            txtSaida.Text = "";
+            txtRetorno.Text = "";
+            txtPreco.Text = "";
+
+            lblParcelas.Visible = false;
+            cmbParcelas.Visible = false;
+        }
+
     }
 }

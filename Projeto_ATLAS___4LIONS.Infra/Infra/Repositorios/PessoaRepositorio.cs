@@ -65,6 +65,27 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             }
         }
 
+
+        public bool NumeroCnhExiste(string numeroCnh)
+        {
+            using (var conexao = _conexaoAdapter.ObterConexao())
+            {
+                conexao.Open();
+
+                string sql = "SELECT count(*) FROM pessoa WHERE numero_cnh = @numero_cnh";
+                using (var cmd = new MySqlCommand(sql, conexao))
+                {
+                    cmd.Parameters.AddWithValue("@numero_documento", numeroCnh);
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (count > 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+        }
+
         public void Deletar(Guid id)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
@@ -145,7 +166,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             {
                 conexao.Open();
 
-                string sql = "SELECT * FROM pessoa WHERE vencimento_cnh IS NULL";
+                string sql = "SELECT * FROM pessoa WHERE vencimento_cnh IS NULL and numero_cnh is Null";
 
                 using (var cmd = new MySqlCommand(sql, conexao))
                 {
@@ -156,6 +177,25 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 }
             }
         }
+
+        public IEnumerable<Pessoa> ListarComCNH()
+        {
+            using (var conexao = _conexaoAdapter.ObterConexao())
+            {
+                conexao.Open();
+
+                string sql = "SELECT * FROM pessoa WHERE vencimento_cnh IS not NULL and numero_cnh is not null";
+
+                using (var cmd = new MySqlCommand(sql, conexao))
+                {
+                    using (var dataReader = cmd.ExecuteReader())
+                    {
+                        return PopularLista(dataReader);
+                    }
+                }
+            }
+        }
+
 
         public void IncluirCNH(Guid id, string numeroCnh, DateTime vencimentoCnh)
         {

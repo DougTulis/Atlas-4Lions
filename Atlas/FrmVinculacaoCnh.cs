@@ -49,9 +49,22 @@ namespace Projeto_ATLAS___4LIONS.Forms
             dgvVinculacaoCnh.DataSource = dados.ToList();
             dgvVinculacaoCnh.Refresh();
         }
+        
+        private void LimparCampos()
+        {
+            txtNumeroCnh.Clear();
+            txtVencimentoCnh.Clear();
+        }
 
         private void btnSelecionarPessoa_Click(object sender, EventArgs e)
         {
+
+            if (string.IsNullOrWhiteSpace(txtNumeroCnh.Text) || string.IsNullOrWhiteSpace(txtVencimentoCnh.Text))
+            {
+                MessageBox.Show("Preencha todos os campos obrigatórios", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             Guid.TryParse(txtPessoa.Text, out Guid idPessoa);
 
             var pessoaDto = _listarpessoaUseCase.ExecutarRecuperarPorId(idPessoa);
@@ -59,8 +72,11 @@ namespace Projeto_ATLAS___4LIONS.Forms
             RespostaPadrao<string> resultado = _incluirCnhUseCase.Executar(pessoaDto, txtNumeroCnh.Text, DateTime.Parse(txtVencimentoCnh.Text));
 
             MessageBoxIcon icone = resultado.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning;
-            MessageBox.Show(resultado.Mensagem, "Vinculação de CNH", MessageBoxButtons.OK, icone);
-
+            MessageBox.Show(resultado.Dados, resultado.Mensagem, MessageBoxButtons.OK, icone);
+            if (resultado.Procede)
+            {
+                LimparCampos();
+            }
         }
 
         private void txtVencimentoCnh_TextChanged(object sender, EventArgs e)

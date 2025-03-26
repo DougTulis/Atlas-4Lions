@@ -1,6 +1,7 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.RespostaPadrao;
 
 
 namespace Projeto_ATLAS___4LIONS.Forms
@@ -31,10 +32,18 @@ namespace Projeto_ATLAS___4LIONS.Forms
                 Valor = Convert.ToDecimal(txtValor.Text)
             };
 
-            _cadastrarPreco.Executar(precoDto);
-            MessageBox.Show("Preço cadastrado com sucesooso", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+             RespostaPadrao<string> resultado = _cadastrarPreco.Executar(precoDto);
+            MessageBox.Show(resultado.Dados, resultado.Mensagem, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (resultado.Procede)
+            {
+                LimparCampos();
+            }
+        }
 
-            this.Hide();
+        private void LimparCampos()
+        {
+            txtDescricao.Clear();
+            txtValor.Clear();
         }
 
         private void txtDescricao_TextChanged(object sender, EventArgs e)

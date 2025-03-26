@@ -40,14 +40,14 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 }
 
                 _parcelaRepositorio.AtualizarPagamentoParcela(
-                    parcelaPagamento.Id,
+                    parcelaPagamento.IdPendenciaFinanceira,
                     parcelaPagamento.Sequencia,
                     parcelaPagamento.ValorPago ?? 0,
                     parcelaPagamento.DataPagamento ?? DateTime.Now,
                     parcelaPagamento.EspeciePagamento ?? EEspecie.DINHEIRO
                 );
 
-                return RespostaPadrao<string>.Sucesso(true, "Pagamento registrado com sucesso!");
+                return RespostaPadrao<string>.Sucesso(true, "Pagamento registrado com sucesso!","Pagamento realizado com sucesso!");
             }
             catch (MySqlException ex)
             {

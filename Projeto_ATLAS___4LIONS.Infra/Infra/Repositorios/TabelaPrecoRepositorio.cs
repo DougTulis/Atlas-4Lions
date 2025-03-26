@@ -30,7 +30,7 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                     cmd.Parameters.AddWithValue("@id", tabelaPreco.Id);
                     cmd.Parameters.AddWithValue("@descricao", tabelaPreco.Descricao);
                     cmd.Parameters.AddWithValue("@valor", tabelaPreco.Valor);
-                    cmd.Parameters.AddWithValue("@data_criacao  ", tabelaPreco.DataCriacao);
+                    cmd.Parameters.AddWithValue("@data_criacao", tabelaPreco.DataCriacao);
                     cmd.ExecuteNonQuery();
                 }
             }

@@ -44,7 +44,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
             var resultado = _incluirPagamentoUseCase.Executar(parcelaSelecionada);
 
-            MessageBox.Show(resultado.Mensagem, "Registro de Pagamento", MessageBoxButtons.OK,
+            MessageBox.Show(resultado.Dados, resultado.Mensagem, MessageBoxButtons.OK,
                 resultado.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning);
 
             if (resultado.Procede) this.Close();

@@ -34,7 +34,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
         private void AtualizarGridView()
         {
             dgvHistoricoPendenciaFinanceiras.AutoGenerateColumns = false;
-            dgvHistoricoPendenciaFinanceiras.DataSource = _listarPendFin.Executar().ToList();
+            dgvHistoricoPendenciaFinanceiras.DataSource = _listarPendFin.ExecutarPagamentosPendentes().ToList();
             dgvHistoricoPendenciaFinanceiras.Refresh();
         }
         private void dgvHistoricoPendenciaFinanceiras_DoubleClick(object sender, EventArgs e)

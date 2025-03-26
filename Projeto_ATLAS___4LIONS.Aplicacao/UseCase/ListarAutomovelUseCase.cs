@@ -44,8 +44,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 
             }
         }
-
-
         public IEnumerable<AutomovelDTO> ExecutarStatusGaragem()
         {
             try

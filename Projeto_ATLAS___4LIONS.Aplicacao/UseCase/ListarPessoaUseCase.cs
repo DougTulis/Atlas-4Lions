@@ -67,5 +67,20 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
             }
         }
+
+        public IEnumerable<PessoaDTO> ExecutarRecuperacaoComCnh()
+        {
+            try
+            {
+                var pessoaLista = pessoaRepositorio.ListarComCNH();
+                var PessoaDtoLista = pessoaLista.Select(pessoa => new PessoaDTO(pessoa.Id, pessoa.DataCriacao, pessoa.Nome, pessoa.Email, pessoa.Contato, pessoa.TipoPessoa, pessoa.NumeroDocumento, pessoa.DataRegistro, pessoa.NumeroCnh, pessoa.VencimentoCnh)).ToList();
+
+                return PessoaDtoLista;
+            }
+            catch (MySqlException ex)
+            {
+                throw new BancoDeDadosException("Erro ao acessar o banco de dados. Detalhes: " + ex.Message);
+            }
+        }
     }
 }

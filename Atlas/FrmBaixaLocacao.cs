@@ -31,7 +31,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void dgvBaixaLocacao_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-          
+
         }
 
         private void dgvBaixaLocacao_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -55,7 +55,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
         }
         private void FrmBaixaLocacao_Load(object sender, EventArgs e)
         {
-       
+
         }
         private void FrmBaixaLocacao_FormClosing(object sender, FormClosingEventArgs e) { }
     }

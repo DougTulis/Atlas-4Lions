@@ -5,7 +5,6 @@ using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.RespostaPadrao;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 {
@@ -25,6 +24,13 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             {
                 return RespostaPadrao<string>.Falha(false,"Inclusão de CNH", erros);
             }
+
+            if (_pessoaRepositorio.NumeroCnhExiste(pessoaCnh.NumeroCnh))
+            {
+                return RespostaPadrao<string>.Falha(false, "Inclusão de CNH", "Numero de cnh já existe!");
+
+            }
+
             try
             {        
                 _pessoaRepositorio.IncluirCNH(pessoaCnh.Id, numeroCnh, vencimentoCnh);

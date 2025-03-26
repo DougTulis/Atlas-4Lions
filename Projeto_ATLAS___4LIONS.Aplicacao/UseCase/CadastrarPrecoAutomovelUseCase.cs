@@ -3,6 +3,7 @@ using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Exceções;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.RespostaPadrao;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
@@ -14,7 +15,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
         {
             this.tabelaRepositorio = tabelaRepositorio;
         }
-        public void Executar(TabelaPrecoDTO tabelaPrecoDto)
+        public RespostaPadrao<string> Executar(TabelaPrecoDTO tabelaPrecoDto)
         {
             try
             {
@@ -22,9 +23,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 
                 if (!tabelaPreco.Validacao(out string erros))
                 {
-                    
-                }
+                    return RespostaPadrao<string>.Falha(false, "Cadastro de preço", erros);
 
+                }
+                return RespostaPadrao<string>.Sucesso(true, "Cadastro de preço", "Preço cadastrado com sucesso!");
                 tabelaRepositorio.Adicionar(tabelaPreco);
             }
             catch (MySqlException ex)

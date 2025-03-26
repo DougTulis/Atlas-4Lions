@@ -1,4 +1,5 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.Interface;
+using Projeto_ATLAS___4LIONS.Aplicacao.Validacoes;
 using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 
 namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
@@ -37,7 +38,19 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         public override bool Validacao(out string erros)
         {
             erros = "";
-            return true; // por enquanto
+
+            var contratos = new ContratoValidacoes<TabelaPreco>()
+                .DescricaoIsOk(this.Descricao, "Descrição inválida. Mínimo 3 caracteres.", "Descricao")
+                .ValorDiariaIsOk(this.Valor, "Valor da diária deve ser maior que zero.", "Valor");
+
+            if (!contratos.IsValid())
+            {
+                erros = contratos.CapturadorErros();
+                return false;
+            }
+
+            return true;
         }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
+﻿using Projeto_ATLAS___4LIONS.Aplicacao.Validacoes;
+using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +47,18 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
         public override bool Validacao(out string erros)
         {
             erros = "";
-            return true; // por enquanto
+            var contratos = new ContratoValidacoes<LocacaoPagamento>()
+                .SaidaIsOk(this.Saida, this.Retorno, "Data de saída inválida.", "Saida")
+                .RetornoIsOk(this.Retorno, this.Saida, "Data de retorno inválida", "Retorno")
+                .IdsObrigatoriosLocacao(this.IdLocatario, this.IdCondutor, this.IdAutomovel, this.IdPendenciaFinanceira);
+
+
+            if (!contratos.IsValid())
+            {
+                erros = contratos.CapturadorErros();
+                return false;
+            }
+            return true;
         }
     }
 }

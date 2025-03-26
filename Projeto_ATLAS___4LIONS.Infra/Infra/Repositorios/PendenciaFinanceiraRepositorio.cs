@@ -70,6 +70,23 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
                 }
             }
         }
+
+        public IEnumerable<PendenciaFinanceira> ListarPagamentosPendente()
+        {
+            using (var conexao = _conexaoAdapter.ObterConexao())
+            {
+                conexao.Open();
+                string sql = "SELECT * FROM pendencia_financeira as pendfin INNER JOIN parcela as p ON pendfin.id = p.pendencia_financeira_id WHERE p.data_pagamento is null and valor_pago is null and especie_pagamento is null";
+
+                using (var cmd = new MySqlCommand(sql, conexao))
+                {
+                    using (var dataReader = cmd.ExecuteReader())
+                    {
+                        return PopularLista(dataReader);
+                    }
+                }
+            }
+        }
         public IEnumerable<PendenciaFinanceira> PopularLista(MySqlDataReader dataReader)
         {
             var lista = new List<PendenciaFinanceira>();
