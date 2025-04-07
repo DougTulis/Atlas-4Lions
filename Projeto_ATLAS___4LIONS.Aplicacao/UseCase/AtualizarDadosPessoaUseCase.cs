@@ -57,7 +57,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             }
             _pessoaRepositorio.AtualizarDados(pessoa.Id, campo, dados);
 
-            return RespostaPadrao<string>.Sucesso(true, "Ok deu certo");
+            return RespostaPadrao<string>.Sucesso(true, "Edição de pessoas", $"{campo} atualizado com sucesso!");
         }
 
     }

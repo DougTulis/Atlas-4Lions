@@ -1,4 +1,5 @@
-﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
+﻿using Org.BouncyCastle.Ocsp;
+using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
 using Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface;
 using Projeto_ATLAS___4LIONS.Aplicacao.RespostaPadrao;
 using Projeto_ATLAS___4LIONS.Aplicacao.UseCase;
@@ -24,7 +25,6 @@ namespace Projeto_ATLAS___4LIONS.Forms
             {"Email", "email"},
             {"Data Nascimento", "data_nascimento"},
             {"CPF/CNPJ", "numero_documento"},
-            {"Tipo de Pessoa (Fisica/Juridica)", "tipo_pessoa"},
             {"Numero de contato", "contato"},
 
         };
@@ -64,7 +64,6 @@ namespace Projeto_ATLAS___4LIONS.Forms
             }
 
         }
-
         private void txtNovoValor_TextChanged(object sender, EventArgs e)
         {
 
@@ -91,9 +90,26 @@ namespace Projeto_ATLAS___4LIONS.Forms
             var pessoaSelecionada = (PessoaDTO)cbmPessoa.SelectedItem;
             var campoSelecionado = cbmAtributos.SelectedItem.ToString();
             var campoBanco = listaCampos[campoSelecionado];
-          var valorNovo = txtNovoValor.Text;
-          RespostaPadrao<string> resultado = _atualizarDadosPessoaUseCase.Executar(pessoaSelecionada, campoBanco, valorNovo);
-          MessageBox.Show(resultado.Mensagem);
+            var valorNovo = txtNovoValor.Text;
+            RespostaPadrao<string> resultado = _atualizarDadosPessoaUseCase.Executar(pessoaSelecionada, campoBanco, valorNovo);
+            MessageBoxIcon icone = resultado.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning;
+            MessageBox.Show(resultado.Dados,resultado.Mensagem,MessageBoxButtons.OK ,icone);
+
+            if (resultado.Procede)
+            {
+                LimparCampos();
+                ConfigurarCombos();
+            }
+        }
+
+        private void LimparCampos()
+        {
+            txtNovoValor.Clear();
+            btnAtualizarInformacao.Visible = false;
+            txtNovoValor.Visible = false;
+            lblNovoValor.Visible = false;
+            cbmPessoa.SelectedIndex = -1;
+            cbmAtributos.SelectedIndex = -1;
         }
     }
 }
