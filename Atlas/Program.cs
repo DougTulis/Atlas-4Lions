@@ -58,6 +58,7 @@ namespace Projeto_ATLAS___4LIONS
             services.AddTransient<IListarAutomovelUseCase, ListarAutomovelUseCase>();
             services.AddTransient<IListarTabelaPrecoUseCase, ListarTabelaPrecoUseCase>();
             services.AddTransient<IListarHistoricoLocacaoUseCase, ListarHistoricoLocacaoUseCase>();
+            services.AddTransient<IAtualizarDadosPessoaUseCase, AtualizarDadosPessoaUseCase>();
 
             // Forms
             services.AddScoped<FrmPrincipal>();
@@ -75,6 +76,7 @@ namespace Projeto_ATLAS___4LIONS
             services.AddTransient<FrmBaixaLocacao>();
             services.AddTransient<FrmRegistroPagamento>();
             services.AddTransient<FrmCadastroPreco>();
+            services.AddTransient<FrmEditarPessoa>();
 
 
             services.AddTransient<ICalculoValorLocacaoService, CalculoValorLocacaoService>();

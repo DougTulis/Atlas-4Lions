@@ -38,6 +38,26 @@ public class Pessoa : ModeloAbstrato, IContrato
         NumeroCnh = numeroCnh;
         VencimentoCnh = vencimentoCnh;
     }
+    public void AlterarNome(string novoNome)
+    {
+        Nome = novoNome;
+    }
+
+    public void AlterarEmail(string novoEmail)
+    {
+        Email = novoEmail;
+    }
+
+    public void AlterarContato(string novoContato)
+    {
+        Contato = novoContato;
+    }
+
+    public void AlterarNumeroDocumento(string novoDoc)
+    {
+        NumeroDocumento = novoDoc;
+    }
+
 
     //public Pessoa() não devemos ter pois isso não se trata de dominio rico POIS ESTOU ALIMENTANDO O MODEL LA FORA
     //{

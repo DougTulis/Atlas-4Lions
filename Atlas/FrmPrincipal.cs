@@ -21,6 +21,7 @@ namespace Atlas
         private FrmBaixaLocacao _frmBaixaLocacao;
         private FrmRegistroPagamento _frmRegistroPagamento;
         private FrmCadastroPreco _frmCadastroPreco;
+        private FrmEditarPessoa _frmEditarPessoa;
 
         public FrmPrincipal(IServiceProvider serviceProvider)
         {
@@ -37,7 +38,6 @@ namespace Atlas
 
             if (form == null || form.IsDisposed)
             {
-              
 
                 form = _serviceProvider.GetRequiredService<T>();
                 form.MdiParent = this;
@@ -130,6 +130,11 @@ namespace Atlas
         private void itmGerenciamentoLocacoesRegPagamento_Click(object sender, EventArgs e)
         {
             AbrirFormulario(ref _frmRegistroPagamento);
+        }
+
+        private void itmGerenciamentoPessoasEditPessoas_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(ref _frmEditarPessoa);
         }
     }
 }

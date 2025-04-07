@@ -34,5 +34,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
             NumeroCnh = numeroCnh;
             VencimentoCnh = vencimentoCnh;
         }
+
+        public override string? ToString()
+        {
+            return Nome;
+        }
     }
 }

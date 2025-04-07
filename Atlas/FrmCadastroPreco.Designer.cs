@@ -58,6 +58,7 @@
             txtValor.Name = "txtValor";
             txtValor.Size = new Size(187, 27);
             txtValor.TabIndex = 3;
+            txtValor.Text = "c";
             txtValor.TextChanged += txtValor_TextChanged;
             // 
             // lblValor
@@ -65,9 +66,9 @@
             lblValor.AutoSize = true;
             lblValor.Location = new Point(43, 107);
             lblValor.Name = "lblValor";
-            lblValor.Size = new Size(114, 20);
+            lblValor.Size = new Size(16, 20);
             lblValor.TabIndex = 2;
-            lblValor.Text = "Informe o valor:";
+            lblValor.Text = "c";
             // 
             // btnCadastrarPreco
             // 
@@ -75,7 +76,7 @@
             btnCadastrarPreco.Name = "btnCadastrarPreco";
             btnCadastrarPreco.Size = new Size(201, 66);
             btnCadastrarPreco.TabIndex = 4;
-            btnCadastrarPreco.Text = "Cadastrar";
+            btnCadastrarPreco.Text = "c";
             btnCadastrarPreco.UseVisualStyleBackColor = true;
             btnCadastrarPreco.Click += btnCadastrarPreco_Click;
             // 

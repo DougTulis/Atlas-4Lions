@@ -51,6 +51,7 @@
             itmGerenciamentoLocacoesRegPagamento = new ToolStripMenuItem();
             itmGerenciamentoLocacoesBaixaLocacao = new ToolStripMenuItem();
             timer1 = new System.Windows.Forms.Timer(components);
+            itmGerenciamentoPessoasEditPessoas = new ToolStripMenuItem();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcbAtlas).BeginInit();
             menuStrip1.SuspendLayout();
@@ -143,7 +144,7 @@
             // mnuGerenciamentoPessoas
             // 
             mnuGerenciamentoPessoas.BackColor = SystemColors.AppWorkspace;
-            mnuGerenciamentoPessoas.DropDownItems.AddRange(new ToolStripItem[] { itmGerenciamentoPessoasCadPessoas, itmGerenciamentoPessoasHistPessoas, itmGerenciamentoPessoasExcluirPessoas, itmGerenciamentoPessoasVincularCnh });
+            mnuGerenciamentoPessoas.DropDownItems.AddRange(new ToolStripItem[] { itmGerenciamentoPessoasCadPessoas, itmGerenciamentoPessoasHistPessoas, itmGerenciamentoPessoasExcluirPessoas, itmGerenciamentoPessoasVincularCnh, itmGerenciamentoPessoasEditPessoas });
             mnuGerenciamentoPessoas.Name = "mnuGerenciamentoPessoas";
             mnuGerenciamentoPessoas.Size = new Size(201, 24);
             mnuGerenciamentoPessoas.Text = "Gerenciamento de pessoas";
@@ -251,6 +252,13 @@
             itmGerenciamentoLocacoesBaixaLocacao.Text = "Baixa de locações";
             itmGerenciamentoLocacoesBaixaLocacao.Click += itmGerenciamentoLocacoesBaixaLocacao_Click;
             // 
+            // itmGerenciamentoPessoasEditPessoas
+            // 
+            itmGerenciamentoPessoasEditPessoas.Name = "itmGerenciamentoPessoasEditPessoas";
+            itmGerenciamentoPessoasEditPessoas.Size = new Size(274, 26);
+            itmGerenciamentoPessoasEditPessoas.Text = "Editar dados cadastrais";
+            itmGerenciamentoPessoasEditPessoas.Click += itmGerenciamentoPessoasEditPessoas_Click;
+            // 
             // FrmPrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -305,5 +313,6 @@
         private System.Windows.Forms.Timer timer1;
         private PictureBox pcbAtlas;
         private ToolStripMenuItem itmGerenciamentoVeiculosCadastrarPreco;
+        private ToolStripMenuItem itmGerenciamentoPessoasEditPessoas;
     }
 }

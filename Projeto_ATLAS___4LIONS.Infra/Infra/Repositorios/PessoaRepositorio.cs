@@ -196,6 +196,22 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             }
         }
 
+      public void AtualizarDados<T>(Guid idPessoa, string campo, T valorNovo)
+      {
+          using (var conexao = _conexaoAdapter.ObterConexao())
+          {
+              conexao.Open();
+              string sql = $"UPDATE pessoa SET {campo} = @novo_valor WHERE id = @id";
+              using (var cmd = new MySqlCommand(sql, conexao))
+              {
+                  cmd.Parameters.AddWithValue("@novo_Valor", valorNovo);
+                  cmd.Parameters.AddWithValue("@id", idPessoa);
+                  cmd.ExecuteNonQuery();
+              }
+          }
+    
+      }
+
 
         public void IncluirCNH(Guid id, string numeroCnh, DateTime vencimentoCnh)
         {

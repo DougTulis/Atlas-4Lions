@@ -13,7 +13,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface
         public IEnumerable<Pessoa> ListarTodos();
         public IEnumerable<Pessoa> PopularLista(MySqlDataReader dataReader);
         public void Adicionar(Pessoa objeto);
-
+        public void AtualizarDados<T>(Guid idPessoa, string campo, T valorNovo);
         public bool NumeroCnhExiste(string numeroCnh);
         public bool NumeroDocumentoExiste(string documento);
         public IEnumerable<Pessoa> ListarComCNH();
