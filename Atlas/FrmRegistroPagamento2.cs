@@ -34,9 +34,19 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
         private void btnRegistrarPagamento_Click(object sender, EventArgs e)
         {
+
+            DialogResult dialogResult = MessageBox.Show(
+                "Deseja realmente registrar o pagamento?",
+                "Confirmação",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+
             Guid.TryParse(txtParcelaSelecionada.Text, out var parcelaId);
            
             var parcelaSelecionada = _listarParcelaUseCase.ExecutarRecuperacaoPorId(parcelaId);
+
+
             parcelaSelecionada.PendenciaFinanceiraId = idPendFin;
             parcelaSelecionada.ValorPago = decimal.TryParse(txtValorPago.Text, out var valorPago) ? valorPago : 0;
             parcelaSelecionada.DataPagamento = DateTime.TryParse(txtDataPagamento.Text, out var dataPagamento) ? dataPagamento : (DateTime?)null;
@@ -47,7 +57,13 @@ namespace Projeto_ATLAS___4LIONS.Forms
             MessageBox.Show(resultado.Dados, resultado.Mensagem, MessageBoxButtons.OK,
                 resultado.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning);
 
-            if (resultado.Procede) this.Close();
+            if (resultado.Procede)
+            {
+                LimparCampos();
+
+            }
+            AtualizarGridView();
+
         }
 
         private void AtualizarGridView()
@@ -64,6 +80,32 @@ namespace Projeto_ATLAS___4LIONS.Forms
                 var valor = dgvParcelasPendFinEscolhida.Rows[e.RowIndex].Cells[0].Value;
                 txtParcelaSelecionada.Text = valor.ToString();
             }
+
+
+            string status = dgvParcelasPendFinEscolhida.CurrentRow.Cells["StatusPagamento"].Value.ToString();
+
+            bool mostrarCampos = status != "Pago";
+
+            lblDataPagamento.Visible = mostrarCampos;
+            txtDataPagamento.Visible = mostrarCampos;
+
+            txtParcelaSelecionada.Visible = mostrarCampos;
+            lblSequenciaParcela.Visible = mostrarCampos;
+            lblValorPago.Visible = mostrarCampos;
+            txtValorPago.Visible = mostrarCampos;
+
+            lblEspeciePagamento.Visible = mostrarCampos;
+            cmbEspeciePagamento.Visible = mostrarCampos;
+
+            btnRegistrarPagamento.Visible = mostrarCampos;
+        }
+        private void LimparCampos()
+        {
+            txtParcelaSelecionada.Clear();
+            txtValorPago.Clear();
+            txtDataPagamento.Clear();
+            cmbEspeciePagamento.SelectedIndex = -1;
+
         }
 
         private void dgvParcelasPendFinEscolhida_CellContentClick(object sender, DataGridViewCellEventArgs e) { }

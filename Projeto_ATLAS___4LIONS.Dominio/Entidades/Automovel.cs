@@ -78,6 +78,43 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
 
         }
 
+        public void AlterarModelo(string modelo)
+        {
+            Modelo = modelo;
+        }
+
+
+        public void AlterarPlaca(string placa)
+        {
+            Placa = placa;
+        }
+        public void AlterarAno(string ano)
+        {
+            Ano = ano;
+        }
+        public void AlterarCor(string cor)
+        {
+            Cor = cor;
+        }
+
+        public void AlterarChassi(string chassi)
+        {
+            Chassi = chassi;
+        }
+        public void AlterarOleoKm(int oleoKm)
+        {
+            Oleokm = oleoKm;
+        }
+        public void AlterarRenavam(string renavam)
+        {
+            Renavam = renavam;
+        }
+        public void AlterarPastilhaKm(int pastilhaKm)
+        {
+            PastilhaFreioKm = pastilhaKm;
+        }
+
+
         public void AlterarStatusParaGaragem()
         {
             Status = EStatusVeiculo.GARAGEM;

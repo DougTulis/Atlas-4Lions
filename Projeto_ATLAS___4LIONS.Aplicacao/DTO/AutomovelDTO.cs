@@ -1,4 +1,5 @@
 ﻿
+using Org.BouncyCastle.Crypto.Digests;
 using Projeto_ATLAS___4LIONS.Dominio.Entidades;
 using Projeto_ATLAS___4LIONS.Dominio.ValueObjects.Enums;
 using System.Text;
@@ -38,5 +39,9 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.DTO
             IdPreco = idPreco;
         }
 
+        public override string? ToString()
+        {
+            return Modelo;
+        }
     }
 }

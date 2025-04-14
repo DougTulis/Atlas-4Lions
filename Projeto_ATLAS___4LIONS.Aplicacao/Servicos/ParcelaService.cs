@@ -19,6 +19,7 @@ public class ParcelaService : IParcelaService
 
         DateTime dataVencimento = DateTime.Now.AddMonths(1);
 
+
         for (int i = 1; i <= quantidadeParcelas; i++)
         {
             decimal valorParcela = (i == quantidadeParcelas) ? valorRestante : valorBaseParcela;
@@ -27,6 +28,7 @@ public class ParcelaService : IParcelaService
             pendenciaFinanceira.AdicionarParcela(parcela);
             dataVencimento = dataVencimento.AddMonths(1);
             _parcelaRepositorio.Adicionar(parcela);
+
         }
     }
 }

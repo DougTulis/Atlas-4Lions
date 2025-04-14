@@ -8,7 +8,6 @@ namespace Atlas
     public partial class FrmPrincipal : Form
     {
         private readonly IServiceProvider _serviceProvider;
-
         private FrmCadPessoas _frmCadPessoas;
         private FrmCadAutomovel _frmCadAutomovel;
         private FrmCadLocacao _frmCadLocacao;
@@ -22,7 +21,7 @@ namespace Atlas
         private FrmRegistroPagamento _frmRegistroPagamento;
         private FrmCadastroPreco _frmCadastroPreco;
         private FrmEditarPessoa _frmEditarPessoa;
-
+        private FrmEditarAutomovel frmEditarAutomovel;
         public FrmPrincipal(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
@@ -135,6 +134,11 @@ namespace Atlas
         private void itmGerenciamentoPessoasEditPessoas_Click(object sender, EventArgs e)
         {
             AbrirFormulario(ref _frmEditarPessoa);
+        }
+
+        private void itmGerenciamentoVeiculosEditVeiculo_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(ref frmEditarAutomovel);
         }
     }
 }

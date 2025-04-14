@@ -9,14 +9,12 @@ namespace Projeto_ATLAS___4LIONS.Forms
 {
     public partial class FrmBaixaLocacao : Form
     {
-        private readonly IAlterarStatusLocacaoUseCase _alterarStatusLocacaoUseCase;
-        private readonly IAlterarStatusVeiculoUseCase _alterarStatusAutomovelUseCase;
+        private readonly IDevolverAutomovelEncerrarLocUseCase _devolverAutomovelEncerrarLocUseCase;
         private readonly IListarHistoricoLocacaoUseCase _listarHistoricoLocacaoUseCase;
 
-        public FrmBaixaLocacao(IListarHistoricoLocacaoUseCase listarHistoricoLocacaoUseCase, IAlterarStatusLocacaoUseCase alterarStatusLocacaoUseCase, IAlterarStatusVeiculoUseCase alterarStatusAutomovelUseCase)
+        public FrmBaixaLocacao(IDevolverAutomovelEncerrarLocUseCase devolverAutomovelEncerrarLocUseCase, IListarHistoricoLocacaoUseCase listarHistoricoLocacaoUseCase)
         {
-            _alterarStatusLocacaoUseCase = alterarStatusLocacaoUseCase;
-            _alterarStatusAutomovelUseCase = alterarStatusAutomovelUseCase;
+            _devolverAutomovelEncerrarLocUseCase = devolverAutomovelEncerrarLocUseCase;
             _listarHistoricoLocacaoUseCase = listarHistoricoLocacaoUseCase;
             InitializeComponent();
             AtualizarGridView();
@@ -44,13 +42,10 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
             var automovelId = Guid.Parse(dgvBaixaLocacao.Rows[e.RowIndex].Cells[1].Value.ToString());
 
-            var resultadoLocacao = _alterarStatusLocacaoUseCase.ExecutarParaFinalizada(locacaoId);
+            var resposta = _devolverAutomovelEncerrarLocUseCase.ExecutarDevolucaoAutomovel(automovelId, locacaoId);
 
-            var resultadoAutomovel = _alterarStatusAutomovelUseCase.ExecutarParaGaragem(automovelId);
-
-            var mensagem = $"{resultadoLocacao.Mensagem}\n{resultadoAutomovel.Mensagem}";
-            MessageBox.Show(mensagem, "Baixa de Locação", MessageBoxButtons.OK,
-                resultadoLocacao.Procede && resultadoAutomovel.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning);
+            MessageBoxIcon icone = resposta.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning;
+            MessageBox.Show(resposta.Dados, resposta.Mensagem, MessageBoxButtons.OK,icone);
             AtualizarGridView();
         }
         private void FrmBaixaLocacao_Load(object sender, EventArgs e)

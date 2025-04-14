@@ -40,18 +40,19 @@
             itmGerenciamentoPessoasHistPessoas = new ToolStripMenuItem();
             itmGerenciamentoPessoasExcluirPessoas = new ToolStripMenuItem();
             itmGerenciamentoPessoasVincularCnh = new ToolStripMenuItem();
+            itmGerenciamentoPessoasEditPessoas = new ToolStripMenuItem();
             mnuGerenciamentoVeiculos = new ToolStripMenuItem();
             itmGerenciamentoVeiculosCadVeiculo = new ToolStripMenuItem();
             itmGerenciamentoVeiculosHistVeiculo = new ToolStripMenuItem();
             itmGerenciamentoVeiculosExcluirVeiculo = new ToolStripMenuItem();
             itmGerenciamentoVeiculosCadastrarPreco = new ToolStripMenuItem();
+            itmGerenciamentoVeiculosEditVeiculo = new ToolStripMenuItem();
             mnuGerenciamentoLocacoes = new ToolStripMenuItem();
             itmGerenciamentoLocacoesCadLocacoes = new ToolStripMenuItem();
             itmGerenciamentoLocacoesHistLocacoes = new ToolStripMenuItem();
             itmGerenciamentoLocacoesRegPagamento = new ToolStripMenuItem();
             itmGerenciamentoLocacoesBaixaLocacao = new ToolStripMenuItem();
             timer1 = new System.Windows.Forms.Timer(components);
-            itmGerenciamentoPessoasEditPessoas = new ToolStripMenuItem();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcbAtlas).BeginInit();
             menuStrip1.SuspendLayout();
@@ -178,10 +179,17 @@
             itmGerenciamentoPessoasVincularCnh.Text = "Vincular CNH";
             itmGerenciamentoPessoasVincularCnh.Click += itmGerenciamentoPessoasVincularCnh_Click;
             // 
+            // itmGerenciamentoPessoasEditPessoas
+            // 
+            itmGerenciamentoPessoasEditPessoas.Name = "itmGerenciamentoPessoasEditPessoas";
+            itmGerenciamentoPessoasEditPessoas.Size = new Size(274, 26);
+            itmGerenciamentoPessoasEditPessoas.Text = "Editar dados cadastrais";
+            itmGerenciamentoPessoasEditPessoas.Click += itmGerenciamentoPessoasEditPessoas_Click;
+            // 
             // mnuGerenciamentoVeiculos
             // 
             mnuGerenciamentoVeiculos.BackColor = SystemColors.AppWorkspace;
-            mnuGerenciamentoVeiculos.DropDownItems.AddRange(new ToolStripItem[] { itmGerenciamentoVeiculosCadVeiculo, itmGerenciamentoVeiculosHistVeiculo, itmGerenciamentoVeiculosExcluirVeiculo, itmGerenciamentoVeiculosCadastrarPreco });
+            mnuGerenciamentoVeiculos.DropDownItems.AddRange(new ToolStripItem[] { itmGerenciamentoVeiculosCadVeiculo, itmGerenciamentoVeiculosHistVeiculo, itmGerenciamentoVeiculosExcluirVeiculo, itmGerenciamentoVeiculosCadastrarPreco, itmGerenciamentoVeiculosEditVeiculo });
             mnuGerenciamentoVeiculos.Name = "mnuGerenciamentoVeiculos";
             mnuGerenciamentoVeiculos.Size = new Size(202, 24);
             mnuGerenciamentoVeiculos.Text = "Gerenciamento de veículos";
@@ -190,30 +198,37 @@
             // itmGerenciamentoVeiculosCadVeiculo
             // 
             itmGerenciamentoVeiculosCadVeiculo.Name = "itmGerenciamentoVeiculosCadVeiculo";
-            itmGerenciamentoVeiculosCadVeiculo.Size = new Size(230, 26);
+            itmGerenciamentoVeiculosCadVeiculo.Size = new Size(250, 26);
             itmGerenciamentoVeiculosCadVeiculo.Text = "Cadastrar veículo";
             itmGerenciamentoVeiculosCadVeiculo.Click += itmGerenciamentoVeiculosCadVeiculo_Click;
             // 
             // itmGerenciamentoVeiculosHistVeiculo
             // 
             itmGerenciamentoVeiculosHistVeiculo.Name = "itmGerenciamentoVeiculosHistVeiculo";
-            itmGerenciamentoVeiculosHistVeiculo.Size = new Size(230, 26);
+            itmGerenciamentoVeiculosHistVeiculo.Size = new Size(250, 26);
             itmGerenciamentoVeiculosHistVeiculo.Text = "Histórico de veículos";
             itmGerenciamentoVeiculosHistVeiculo.Click += itmGerenciamentoVeiculosHistVeiculo_Click;
             // 
             // itmGerenciamentoVeiculosExcluirVeiculo
             // 
             itmGerenciamentoVeiculosExcluirVeiculo.Name = "itmGerenciamentoVeiculosExcluirVeiculo";
-            itmGerenciamentoVeiculosExcluirVeiculo.Size = new Size(230, 26);
+            itmGerenciamentoVeiculosExcluirVeiculo.Size = new Size(250, 26);
             itmGerenciamentoVeiculosExcluirVeiculo.Text = "Excluir veículo";
             itmGerenciamentoVeiculosExcluirVeiculo.Click += itmGerenciamentoVeiculosExcluirVeiculo_Click;
             // 
             // itmGerenciamentoVeiculosCadastrarPreco
             // 
             itmGerenciamentoVeiculosCadastrarPreco.Name = "itmGerenciamentoVeiculosCadastrarPreco";
-            itmGerenciamentoVeiculosCadastrarPreco.Size = new Size(230, 26);
+            itmGerenciamentoVeiculosCadastrarPreco.Size = new Size(250, 26);
             itmGerenciamentoVeiculosCadastrarPreco.Text = "Cadastrar Preco ";
             itmGerenciamentoVeiculosCadastrarPreco.Click += itmGerenciamentoVeiculosCadastrarPreco_Click;
+            // 
+            // itmGerenciamentoVeiculosEditVeiculo
+            // 
+            itmGerenciamentoVeiculosEditVeiculo.Name = "itmGerenciamentoVeiculosEditVeiculo";
+            itmGerenciamentoVeiculosEditVeiculo.Size = new Size(250, 26);
+            itmGerenciamentoVeiculosEditVeiculo.Text = "Editar Dados Cadastrais";
+            itmGerenciamentoVeiculosEditVeiculo.Click += itmGerenciamentoVeiculosEditVeiculo_Click;
             // 
             // mnuGerenciamentoLocacoes
             // 
@@ -227,37 +242,30 @@
             // itmGerenciamentoLocacoesCadLocacoes
             // 
             itmGerenciamentoLocacoesCadLocacoes.Name = "itmGerenciamentoLocacoesCadLocacoes";
-            itmGerenciamentoLocacoesCadLocacoes.Size = new Size(235, 26);
+            itmGerenciamentoLocacoesCadLocacoes.Size = new Size(241, 26);
             itmGerenciamentoLocacoesCadLocacoes.Text = "Cadastrar Locação";
             itmGerenciamentoLocacoesCadLocacoes.Click += itmGerenciamentoLocacoesCadLocacoes_Click;
             // 
             // itmGerenciamentoLocacoesHistLocacoes
             // 
             itmGerenciamentoLocacoesHistLocacoes.Name = "itmGerenciamentoLocacoesHistLocacoes";
-            itmGerenciamentoLocacoesHistLocacoes.Size = new Size(235, 26);
+            itmGerenciamentoLocacoesHistLocacoes.Size = new Size(241, 26);
             itmGerenciamentoLocacoesHistLocacoes.Text = "Histórico de locações";
             itmGerenciamentoLocacoesHistLocacoes.Click += itmGerenciamentoLocacoesHistLocacoes_Click;
             // 
             // itmGerenciamentoLocacoesRegPagamento
             // 
             itmGerenciamentoLocacoesRegPagamento.Name = "itmGerenciamentoLocacoesRegPagamento";
-            itmGerenciamentoLocacoesRegPagamento.Size = new Size(235, 26);
+            itmGerenciamentoLocacoesRegPagamento.Size = new Size(241, 26);
             itmGerenciamentoLocacoesRegPagamento.Text = "Registrar pagamento";
             itmGerenciamentoLocacoesRegPagamento.Click += itmGerenciamentoLocacoesRegPagamento_Click;
             // 
             // itmGerenciamentoLocacoesBaixaLocacao
             // 
             itmGerenciamentoLocacoesBaixaLocacao.Name = "itmGerenciamentoLocacoesBaixaLocacao";
-            itmGerenciamentoLocacoesBaixaLocacao.Size = new Size(235, 26);
-            itmGerenciamentoLocacoesBaixaLocacao.Text = "Baixa de locações";
+            itmGerenciamentoLocacoesBaixaLocacao.Size = new Size(241, 26);
+            itmGerenciamentoLocacoesBaixaLocacao.Text = "Devolução de veículos";
             itmGerenciamentoLocacoesBaixaLocacao.Click += itmGerenciamentoLocacoesBaixaLocacao_Click;
-            // 
-            // itmGerenciamentoPessoasEditPessoas
-            // 
-            itmGerenciamentoPessoasEditPessoas.Name = "itmGerenciamentoPessoasEditPessoas";
-            itmGerenciamentoPessoasEditPessoas.Size = new Size(274, 26);
-            itmGerenciamentoPessoasEditPessoas.Text = "Editar dados cadastrais";
-            itmGerenciamentoPessoasEditPessoas.Click += itmGerenciamentoPessoasEditPessoas_Click;
             // 
             // FrmPrincipal
             // 
@@ -314,5 +322,6 @@
         private PictureBox pcbAtlas;
         private ToolStripMenuItem itmGerenciamentoVeiculosCadastrarPreco;
         private ToolStripMenuItem itmGerenciamentoPessoasEditPessoas;
+        private ToolStripMenuItem itmGerenciamentoVeiculosEditVeiculo;
     }
 }

@@ -104,9 +104,9 @@
             lblModelo.AutoSize = true;
             lblModelo.Location = new Point(86, 29);
             lblModelo.Name = "lblModelo";
-            lblModelo.Size = new Size(213, 20);
+            lblModelo.Size = new Size(217, 20);
             lblModelo.TabIndex = 18;
-            lblModelo.Text = "Insira o modelo do automóvel:";
+            lblModelo.Text = "Insira o modelo do automóvel :";
             lblModelo.Click += lblModelo_Click;
             // 
             // txtOleoKm

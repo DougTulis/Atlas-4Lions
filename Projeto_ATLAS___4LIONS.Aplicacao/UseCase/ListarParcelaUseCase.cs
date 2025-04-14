@@ -15,12 +15,20 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             _parcelaRepositorio = parcelaRepositorio;
         }
 
-        public IEnumerable<ParcelaDTO> ExecutarRecuperacaoPorPendFin(Guid idPendencia)
+        public IEnumerable<ParcelaRegistroPagamentoDTO> ExecutarRecuperacaoPorPendFin(Guid idPendencia)
         {
             try
             {
                 var listaParcelasPorPendencia = _parcelaRepositorio.ListarPorPendencia(idPendencia);
-                var listaParcelasPorPendenciaDto = listaParcelasPorPendencia.Select(x => new ParcelaDTO(x.Id, x.Sequencia, x.IdPendenciaFinanceira, x.DataVencimento, x.Valor, x.DataPagamento, x.ValorPago, x.EspeciePagamento));
+                var listaParcelasPorPendenciaDto = listaParcelasPorPendencia.Select(x => new ParcelaRegistroPagamentoDTO
+                {
+                    Sequencia = Convert.ToInt32(x[0]),
+                    Vencimento = Convert.ToDateTime(x[1]),
+                    Valor = Convert.ToDecimal(x[2]),
+                    Status = x[3].ToString(),
+                    Id = Guid.Parse(x[4].ToString()),
+                }).ToList();
+
                 return listaParcelasPorPendenciaDto;
             }
 

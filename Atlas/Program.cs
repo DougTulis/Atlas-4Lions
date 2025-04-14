@@ -49,6 +49,7 @@ namespace Projeto_ATLAS___4LIONS
             services.AddTransient<IListarParcelaUseCase, ListarParcelaUseCase>();
             services.AddTransient<IListarPendenciaFinanceiraUseCase, ListarPendenciaFinanceiraUseCase>();
             services.AddTransient<IDeletarAutomovelUseCase, DeletarAutomovelUseCase>();
+            services.AddTransient<IAlterarDadosAutomovelUseCase, AlterarDadosAutomovelUseCase>();
             services.AddTransient<IIncluirCnhUseCase, IncluirCnhUseCase>();
             services.AddTransient<IDeletarPessoaUseCase, DeletarPessoaUseCase> ();
             services.AddTransient<IListarPessoaUseCase, ListarPessoaUseCase>();
@@ -59,6 +60,7 @@ namespace Projeto_ATLAS___4LIONS
             services.AddTransient<IListarTabelaPrecoUseCase, ListarTabelaPrecoUseCase>();
             services.AddTransient<IListarHistoricoLocacaoUseCase, ListarHistoricoLocacaoUseCase>();
             services.AddTransient<IAtualizarDadosPessoaUseCase, AtualizarDadosPessoaUseCase>();
+            services.AddTransient<IDevolverAutomovelEncerrarLocUseCase, DevolverAutomovelEncerrarlLocUseCase>();
 
             // Forms
             services.AddScoped<FrmPrincipal>();
@@ -77,6 +79,7 @@ namespace Projeto_ATLAS___4LIONS
             services.AddTransient<FrmRegistroPagamento>();
             services.AddTransient<FrmCadastroPreco>();
             services.AddTransient<FrmEditarPessoa>();
+            services.AddTransient<FrmEditarAutomovel>();
 
 
             services.AddTransient<ICalculoValorLocacaoService, CalculoValorLocacaoService>();

@@ -21,7 +21,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
             _pessoaRepositorio = pessoaRepositorio;
         }
 
-        public RespostaPadrao<string> Executar<T>(PessoaDTO pessoaDto, string campo, T dados)
+        public RespostaPadrao<string> Executar<T>(PessoaDTO pessoaDto, string campoBanco,string campoSelecionado, T dados)
         {
 
             var pessoa = Pessoa.CreateFromDataBase(pessoaDto.Id,
@@ -35,29 +35,39 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 pessoaDto.NumeroCnh,
                 pessoaDto.VencimentoCnh);
 
-            switch (campo)
+            switch (campoBanco)
             {
                 case "nome":
                     pessoa.AlterarNome(dados.ToString());
                     break;
                 case "email":
                     pessoa.AlterarEmail(dados.ToString());
+                    if (_pessoaRepositorio.EmailExiste(pessoa.Email))
+                    {
+                        return RespostaPadrao<string>.Falha(false, "Cadastro de Pessoas", "Email ja cadastrado!");
+                    }
+
                     break;
                 case "contato":
                     pessoa.AlterarContato(dados.ToString());
                     break;
                 case "numero_documento":
                     pessoa.AlterarNumeroDocumento(dados.ToString());
+
+                    if (_pessoaRepositorio.NumeroDocumentoExiste(pessoa.NumeroDocumento))
+                    {
+                        return RespostaPadrao<string>.Falha(false, "Cadastro de Pessoas", "CPF/CNPJ ja cadastrado!");
+                    }
+
                     break;
             }
-
-            if(!pessoa.Validacao(out string erros))
+            if (!pessoa.Validacao(out string erros))
             {
                 return RespostaPadrao<string>.Falha(false, "Edição de pessoas", erros);
             }
-            _pessoaRepositorio.AtualizarDados(pessoa.Id, campo, dados);
+            _pessoaRepositorio.AtualizarDados(pessoa.Id, campoBanco, dados);
 
-            return RespostaPadrao<string>.Sucesso(true, "Edição de pessoas", $"{campo} atualizado com sucesso!");
+            return RespostaPadrao<string>.Sucesso(true, "Edição de pessoas", $"{campoSelecionado} atualizado com sucesso!");
         }
 
     }

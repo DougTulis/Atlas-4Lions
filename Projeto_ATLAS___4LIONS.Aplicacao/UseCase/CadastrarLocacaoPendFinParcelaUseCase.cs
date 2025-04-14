@@ -50,7 +50,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 
                 var precoDto = _tabelaPrecoRepositorio.RecuperarPorId(automovelDto.IdPreco);
 
-                var valorTotal = _calculoValorLocacaoService.CalcularValorTotal(locacaoDto.Saida, locacaoDto.Retorno, precoDto.Valor);
+                var valorTotal = _calculoValorLocacaoService.CalcularValorTotal(locacaoDto.Saida, locacaoDto.Retorno, precoDto.Valor,locacaoDto.TipoLocacao,quantidadeParcelas);
 
                 var pendencia = _pendenciaFinanceiraService.CriarPendencia(valorTotal);
 

@@ -38,7 +38,6 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 string erros;
                 if (!pessoa.Validacao(out erros))
                 {
-                 
                     return RespostaPadrao<string>.Falha(false, "Cadastro de Pessoas", erros);
                 }
 
@@ -46,7 +45,10 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                 {
                     return RespostaPadrao<string>.Falha(false, "Cadastro de Pessoas", "CPF/CNPJ ja cadastrado!");
                 }
-
+                if (_pessoaRepositorio.EmailExiste(pessoa.Email))
+                {
+                    return RespostaPadrao<string>.Falha(false, "Cadastro de Pessoas", "Email ja cadastrado!");
+                }
                 _pessoaRepositorio.Adicionar(pessoa);
 
                 return RespostaPadrao<string>.Sucesso(true, "Cadastro de Pessoas ", "Pessoa cadastrada com sucesso!");

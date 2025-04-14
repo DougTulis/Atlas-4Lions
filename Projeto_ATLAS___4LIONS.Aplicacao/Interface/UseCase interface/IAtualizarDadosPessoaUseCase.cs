@@ -11,7 +11,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface
 {
     public interface IAtualizarDadosPessoaUseCase
     {
-        public RespostaPadrao<string> Executar<T>(PessoaDTO pessoa, string campo, T dados);
+        public RespostaPadrao<string> Executar<T>(PessoaDTO pessoa, string campoBanco,string campoSelecionado, T dados);
 
     }
 }

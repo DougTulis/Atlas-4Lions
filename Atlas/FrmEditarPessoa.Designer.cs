@@ -57,6 +57,7 @@
             // 
             // cbmAtributos
             // 
+            cbmAtributos.DropDownStyle = ComboBoxStyle.DropDownList;
             cbmAtributos.FormattingEnabled = true;
             cbmAtributos.Location = new Point(76, 158);
             cbmAtributos.Name = "cbmAtributos";

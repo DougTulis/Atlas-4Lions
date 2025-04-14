@@ -44,9 +44,9 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
                     parcelaPagamento.Sequencia,
                     parcelaPagamento.ValorPago ?? 0,
                     parcelaPagamento.DataPagamento ?? DateTime.Now,
-                    parcelaPagamento.EspeciePagamento ?? EEspecie.DINHEIRO
+                    parcelaPagamento.EspeciePagamento ?? EEspecie.DINHEIRO,
+                    parcelaPagamento.Valor
                 );
-
                 return RespostaPadrao<string>.Sucesso(true, "Pagamento registrado com sucesso!","Pagamento realizado com sucesso!");
             }
             catch (MySqlException ex)

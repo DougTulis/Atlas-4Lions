@@ -36,6 +36,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
             dgvHistoricoPendenciaFinanceiras.AutoGenerateColumns = false;
             dgvHistoricoPendenciaFinanceiras.DataSource = _listarPendFin.ExecutarPagamentosPendentes().ToList();
             dgvHistoricoPendenciaFinanceiras.Refresh();
+
         }
         private void dgvHistoricoPendenciaFinanceiras_DoubleClick(object sender, EventArgs e)
         {
@@ -48,9 +49,15 @@ namespace Projeto_ATLAS___4LIONS.Forms
                 DataGridViewRow row = dgvHistoricoPendenciaFinanceiras.Rows[e.RowIndex];
                 var idSelecionado = (Guid)dgvHistoricoPendenciaFinanceiras.Rows[e.RowIndex].Cells[0].Value;
 
+                string status = dgvHistoricoPendenciaFinanceiras.CurrentRow.Cells["StatusPagamento"].Value.ToString();
+
+                if (status == "Quitado")
+                {
+                    MessageBox.Show("essa locação já foi totalmente quitada.");
+                    return;
+                }
                 var frmRegistroPagamento2 = new FrmRegistroPagamento2(idSelecionado, _incluirPagamentoUseCase, _listparcelaUseCase);
-                frmRegistroPagamento2.ShowDialog(); 
-                this.Close(); 
+                frmRegistroPagamento2.ShowDialog();
             }
         }
 

@@ -91,7 +91,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
             var campoSelecionado = cbmAtributos.SelectedItem.ToString();
             var campoBanco = listaCampos[campoSelecionado];
             var valorNovo = txtNovoValor.Text;
-            RespostaPadrao<string> resultado = _atualizarDadosPessoaUseCase.Executar(pessoaSelecionada, campoBanco, valorNovo);
+            RespostaPadrao<string> resultado = _atualizarDadosPessoaUseCase.Executar(pessoaSelecionada, campoBanco,campoSelecionado, valorNovo);
             MessageBoxIcon icone = resultado.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning;
             MessageBox.Show(resultado.Dados,resultado.Mensagem,MessageBoxButtons.OK ,icone);
 

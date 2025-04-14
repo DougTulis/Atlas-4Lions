@@ -16,6 +16,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface
         public void AtualizarDados<T>(Guid idPessoa, string campo, T valorNovo);
         public bool NumeroCnhExiste(string numeroCnh);
         public bool NumeroDocumentoExiste(string documento);
+        public bool EmailExiste(string email);
         public IEnumerable<Pessoa> ListarComCNH();
         public void Deletar(Guid id);
         public bool TemLocacaoVinculada(Guid id);

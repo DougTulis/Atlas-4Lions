@@ -19,20 +19,22 @@ namespace Projeto_ATLAS___4LIONS.Dominio.Entidades
        // public Parcela()
        // {
         //}
-        public Parcela(int sequencia, DateTime dataVencimento, decimal valor,Guid idPendenciaFinanceira) : base()
+        private Parcela(int sequencia, DateTime dataVencimento, decimal valor,Guid idPendenciaFinanceira) : base()
         {
             Sequencia = sequencia;
             DataVencimento = dataVencimento;
             Valor = valor;
             IdPendenciaFinanceira = idPendenciaFinanceira;
         }
-        public Parcela(Guid id, DateTime dataCriacao, int sequencia, DateTime dataVencimento, decimal valor, Guid idPendenciaFinanceira) : base(id,dataCriacao)
+
+        private Parcela(Guid id, DateTime dataCriacao, int sequencia, DateTime dataVencimento, decimal valor, Guid idPendenciaFinanceira) : base(id,dataCriacao)
         {
             Sequencia = sequencia;
             DataVencimento = dataVencimento;
             Valor = valor;
             IdPendenciaFinanceira = idPendenciaFinanceira;
         }
+
         public static Parcela Create(int sequencia, DateTime dataVencimento, decimal valor, Guid idPendenciaFinanceira)
         {
             return new Parcela(sequencia,dataVencimento,valor,idPendenciaFinanceira);

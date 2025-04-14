@@ -29,13 +29,21 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.UseCase
 
         }
 
-        public IEnumerable<PendenciaFinanceiraDTO> ExecutarPagamentosPendentes()
+        public IEnumerable<RegistroPagamentoDTO> ExecutarPagamentosPendentes()
         {
             try
             {
                 var listaPendencias = _pendenciaRepositorio.ListarPagamentosPendente();
-                var listaPendenciasDto = listaPendencias.Select(x => new PendenciaFinanceiraDTO(x.Id, x.DataCriacao, x.ValorTotal)).ToList();
-                return listaPendenciasDto;
+                var listaDto = listaPendencias.Select(linha => new RegistroPagamentoDTO
+                {
+                    Nome = linha[0].ToString(),
+                    ValorTotal = (decimal)linha[1],
+                    QuantidadeParcelas = Convert.ToInt16(linha[2]),
+                    Status = linha[3].ToString(),
+                    Id = Guid.Parse(linha[4].ToString())
+                }).ToList();
+
+                return listaDto;
             }
             catch (MySqlException ex)
             {

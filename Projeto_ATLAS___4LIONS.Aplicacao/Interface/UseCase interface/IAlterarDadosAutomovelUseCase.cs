@@ -1,4 +1,5 @@
 ﻿using Projeto_ATLAS___4LIONS.Aplicacao.DTO;
+using Projeto_ATLAS___4LIONS.Aplicacao.RespostaPadrao;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface.UseCase_interface
 {
-    public interface IListarParcelaUseCase
+    public interface IAlterarDadosAutomovelUseCase
     {
 
-        public IEnumerable<ParcelaRegistroPagamentoDTO> ExecutarRecuperacaoPorPendFin(Guid idPendencia);
-        public ParcelaDTO? ExecutarRecuperacaoPorId(Guid id);
+
+        public RespostaPadrao<string> Executar<T>(AutomovelDTO automovelDto, string campoBanco, string campoSelecionado, T dados);
+
     }
 }

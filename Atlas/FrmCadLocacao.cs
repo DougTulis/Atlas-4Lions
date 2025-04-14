@@ -93,7 +93,7 @@ namespace Projeto_ATLAS___4LIONS.Forms
 
             var resultado = _cadastrarLocacaoUseCase.Executar(locacaoDto, quantidadeParcelas);
             MessageBoxIcon icone = resultado.Procede ? MessageBoxIcon.Information : MessageBoxIcon.Warning;
-            MessageBox.Show(resultado.Mensagem, "Cadastro de locação", MessageBoxButtons.OK, icone);
+            MessageBox.Show(resultado.Dados, resultado.Mensagem, MessageBoxButtons.OK, icone);
             if (resultado.Procede)
             {
                 LimparCampos();

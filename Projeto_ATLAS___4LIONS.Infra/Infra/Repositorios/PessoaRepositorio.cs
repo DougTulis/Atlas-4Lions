@@ -86,6 +86,26 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
             }
         }
 
+        public bool EmailExiste(string email)
+        {
+            using (var conexao = _conexaoAdapter.ObterConexao())
+            {
+                conexao.Open();
+
+                string sql = "SELECT count(*) FROM pessoa WHERE email = @email";
+                using (var cmd = new MySqlCommand(sql, conexao))
+                {
+                    cmd.Parameters.AddWithValue("@email", email);
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (count > 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+        }
+
         public void Deletar(Guid id)
         {
             using (var conexao = _conexaoAdapter.ObterConexao())
@@ -200,11 +220,14 @@ namespace Projeto_ATLAS___4LIONS.Infra.Repositorios
       {
           using (var conexao = _conexaoAdapter.ObterConexao())
           {
+
               conexao.Open();
-              string sql = $"UPDATE pessoa SET {campo} = @novo_valor WHERE id = @id";
+
+               
+                string sql = $"UPDATE pessoa SET {campo} = @novo_valor WHERE id = @id";
               using (var cmd = new MySqlCommand(sql, conexao))
               {
-                  cmd.Parameters.AddWithValue("@novo_Valor", valorNovo);
+                    cmd.Parameters.AddWithValue("@novo_Valor", valorNovo);
                   cmd.Parameters.AddWithValue("@id", idPessoa);
                   cmd.ExecuteNonQuery();
               }

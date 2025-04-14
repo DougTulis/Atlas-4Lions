@@ -13,8 +13,8 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface
     {
         void Adicionar(Parcela parcela);
         Parcela? RecuperarPorId(Guid id);
-        IEnumerable<Parcela> ListarPorPendencia(Guid pendenciaId);
+        IList<object[]> ListarPorPendencia(Guid pendenciaId);
         IEnumerable<Parcela> PopularLista(MySqlDataReader dataReader);
-        void AtualizarPagamentoParcela(Guid idPendenciaFinanceira, int sequencia, decimal valorPago, DateTime dataPagamento, EEspecie especiePagamento);
+        void AtualizarPagamentoParcela(Guid idPendenciaFinanceira, int sequencia, decimal valorPago, DateTime dataPagamento, EEspecie especiePagamento, decimal valorOriginal);
     }
 }

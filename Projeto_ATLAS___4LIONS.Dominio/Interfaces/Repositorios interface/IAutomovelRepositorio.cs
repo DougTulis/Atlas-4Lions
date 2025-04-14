@@ -15,6 +15,7 @@ namespace Projeto_ATLAS___4LIONS.Aplicacao.Interface
         public IEnumerable<Automovel> ListarTodos();
         public IEnumerable<Automovel> PopularLista(MySqlDataReader dataReader);
         public void Adicionar(Automovel objeto);
+        public void AtualizarDados<T>(Guid idAutomovel, string campo, T valorNovo);
         public bool PlacaExiste(string placa);
         public void Deletar(Guid id);
         public Automovel? RecuperarPorId(Guid id);
